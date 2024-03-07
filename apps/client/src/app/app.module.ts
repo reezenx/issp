@@ -25,6 +25,7 @@ import { FilterPipe } from './pipe/filter.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
+import { SyncfusionModule } from './syncfusion.module';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -40,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    SyncfusionModule,
     TablerIconsModule.pick(TablerIcons),
     TranslateModule.forRoot({
       loader: {

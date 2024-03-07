@@ -42,6 +42,48 @@ export const navItems: NavItem[] = [
     iconName: 'list-details',
     route: '/datatable/projects',
   },
+  {
+    navCap: 'Auth',
+  },
+  {
+    displayName: 'Login',
+    iconName: 'lock',
+    route: '/authentication/boxed-login',
+  },
+  {
+    displayName: 'Register',
+    iconName: 'lock',
+    route: '/authentication/boxed-register',
+  },
+  {
+    displayName: 'Forgot Password',
+    iconName: 'lock',
+    route: '/authentication/boxed-forgot-pwd',
+  },
+  {
+    displayName: 'Two Steps',
+    iconName: 'lock',
+    route: '/authentication/boxed-two-steps',
+  },
+  {
+    displayName: 'Roll Base Access',
+    iconName: 'lock-access',
+    route: 'apps/permission',
+  },
+  {
+    navCap: 'Function',
+  },
+  {
+    displayName: 'Document Editor',
+    iconName: 'list',
+    route: 'apps/contacts',
+  },
+  {
+    displayName: 'Diagram',
+    iconName: 'square',
+    route: 'apps/notes',
+  },
+
   // {
   //   displayName: 'Analytical',
   //   iconName: 'aperture',
@@ -450,29 +492,6 @@ export const navItems: NavItem[] = [
   //     },
   //   ],
   // },
-  {
-    navCap: 'Auth',
-  },
-  {
-    displayName: 'Login',
-    iconName: 'lock',
-    route: '/authentication/boxed-login',
-  },
-  {
-    displayName: 'Register',
-    iconName: 'lock',
-    route: '/authentication/boxed-register',
-  },
-  {
-    displayName: 'Forgot Password',
-    iconName: 'lock',
-    route: '/authentication/boxed-forgot-pwd',
-  },
-  {
-    displayName: 'Two Steps',
-    iconName: 'lock',
-    route: '/authentication/boxed-two-steps',
-  },
   // {
   //   displayName: 'Login',
   //   iconName: 'login',

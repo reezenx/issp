@@ -24,6 +24,9 @@ export class UserEntity implements User {
   @ApiProperty()
   updatedAt: Date;
 
+  @ApiProperty()
+  agencyId: string;
+
   @Exclude()
   password: string;
 }

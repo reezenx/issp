@@ -49,17 +49,25 @@ model Profile {
 
 model User {
   id        String      @id @default(uuid())
-  name      String?
+  name      String
   email     String      @unique
   password  String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   articles  Article[]
   projects  Project[]
+  agency    Agency?     @relation(fields: [agencyId], references: [id])
+  agencyId  String?
   // projects  Project[]   @relation("AuthorEvaluators", fields: [id], references: [authorId])
   role      Role        @default(USER)
   status    User_Status @default(ACTIVE)
   profile   Profile?
+}
+
+model Agency {
+  id    String @id @default(uuid())
+  name  String
+  users User[]
 }
 
 enum Role {
@@ -69,6 +77,7 @@ enum Role {
   ENDORSER
   APPROVER
   ADMIN
+  ROOT
 }
 
 enum Project_Status {

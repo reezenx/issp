@@ -16,9 +16,9 @@
           [(ngModel)]="currentRole"
           (change)="onPermissionChange()"
         >
-          <mat-button-toggle value="ADMIN">Admin</mat-button-toggle>
-          <mat-button-toggle value="MANAGER">Manager</mat-button-toggle>
-          <mat-button-toggle value="GUEST">Guest</mat-button-toggle>
+          @for(item of permissionsOfRole | keyvalue; track item.key ) {
+            <mat-button-toggle [value]="item.key" >{{item.key}}</mat-button-toggle>
+          }
         </mat-button-toggle-group>
 
         <p class="mat-body-1 m-t-24">
