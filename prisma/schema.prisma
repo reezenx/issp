@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id          Int      @id @default(autoincrement())
+  title       String   @unique
+  description String?
+  body        String
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updateAt    DateTime @updatedAt
+  author      User?    @relation(fields: [authorId], references: [id])
+  authorId    String?
+}
+
+model Project {
+  id          Int            @id @default(autoincrement())
+  title       String         @unique
+  description String?
+  body        String
+  published   Boolean        @default(false)
+  createdAt   DateTime       @default(now())
+  updateAt    DateTime       @updatedAt
+  authorId    String?        @unique
+  author      User?          @relation(fields: [authorId], references: [id])
+  // author      User?          @relation("AuthorEvaluators")
+  // evaluators  User[]         @relation("AuthorEvaluators")
+  status      Project_Status @default(NOT_STARTED)
+}
+
+model Profile {
+  id     Int    @id @default(autoincrement())
+  bio    String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+model User {
+  id        String      @id @default(uuid())
+  name      String?
+  email     String      @unique
+  password  String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  articles  Article[]
+  projects  Project[]
+  // projects  Project[]   @relation("AuthorEvaluators", fields: [id], references: [authorId])
+  role      Role        @default(USER)
+  status    User_Status @default(ACTIVE)
+  profile   Profile?
+}
+
+enum Role {
+  USER
+  VIEWER
+  EVALUATOR
+  ENDORSER
+  APPROVER
+  ADMIN
+}
+
+enum Project_Status {
+  NOT_STARTED
+  UNDER_REVIEW
+  FOR_VALIDATION
+  FOR_ENDORSEMENT
+  APPROVED
+}
+
+enum User_Status {
+  ACTIVE
+  INACTIVE
+  DELETED
+}
