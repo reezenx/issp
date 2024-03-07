@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
-    "dev": "nx run-many --target=serve --projects=client,api; npx prisma studio",
+    "dev": "npm run serve & npm run db",
+    "serve": "nx run-many --target=serve --projects=client,api",
     "build": "nx run-many --target=build --projects=client,api",
+    "db": "npx prisma studio",
     "test": "nx test"
   },
   "private": true,
@@ -34,6 +35,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "@nx/angular": "18.0.7",
     "@prisma/client": "^5.10.2",
+    "@syncfusion/ej2-angular-diagrams": "^24.2.9",
     "@syncfusion/ej2-angular-richtexteditor": "^24.2.9",
     "@syncfusion/ej2-base": "^24.2.8",
     "angular-calendar": "^0.29.0",

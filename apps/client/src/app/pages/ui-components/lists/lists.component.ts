@@ -10,8 +10,6 @@ export interface Section {
   templateUrl: './lists.component.html',
 })
 export class AppListsComponent {
-  constructor() {}
-
   typesOfShoes: string[] = ['Loafers', 'Sneakers'];
 
   folders: Section[] = [

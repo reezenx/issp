@@ -19,6 +19,8 @@ import { AppInvoiceViewComponent } from './invoice/invoice-view/invoice-view.com
 import { AppEditInvoiceComponent } from './invoice/edit-invoice/edit-invoice.component';
 import { AppBlogsComponent } from './blogs/blogs.component';
 import { AppBlogDetailsComponent } from './blogs/details/details.component';
+import { DocumentEditorComponent } from './document-editor/document-editor.component';
+import { DiagramComponent } from './diagram/diagram.component';
 
 export const AppsRoutes: Routes = [
   {
@@ -190,6 +192,20 @@ export const AppsRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboards/dashboard1' },
             { title: 'User' },
           ],
+        },
+      },
+      {
+        path: 'document-editor',
+        component: DocumentEditorComponent,
+        data: {
+          title: 'Document',
+        },
+      },
+      {
+        path: 'diagram',
+        component: DiagramComponent,
+        data: {
+          title: 'Diagram',
         },
       },
       {

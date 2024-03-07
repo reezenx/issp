@@ -76,12 +76,12 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Document Editor',
     iconName: 'list',
-    route: 'apps/contacts',
+    route: 'apps/document-editor',
   },
   {
     displayName: 'Diagram',
-    iconName: 'square',
-    route: 'apps/notes',
+    iconName: 'playstation-square',
+    route: 'apps/diagram',
   },
 
   // {

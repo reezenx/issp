@@ -14,7 +14,8 @@ comes with a LSP for Vim users.
 
 ```bash
 # development
-$ npx prisma migrate dev --name "init" - Migrate DB Schema
+$ npx prisma migrate - Run All Migration
+$ npx prisma migrate dev --name "init" - Create new Migration
 $ npx prisma db seed - Populate DB with seed data
 $ npm run start - Nest App
 $ docker-compose up - PostgreSql Docker
@@ -31,6 +32,11 @@ Run `nx run-many --target=serve --projects=client,api`  to start the development
 ## Build for production
 
 Run `nx run-many --target=build --projects=client,api` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
+
+## Icons
+```
+https://tabler.io/icons
+```
 
 ## Running tasks
 

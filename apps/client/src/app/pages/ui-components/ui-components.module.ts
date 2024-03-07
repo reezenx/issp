@@ -44,7 +44,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   declarations: [
     AppBadgeComponent,
