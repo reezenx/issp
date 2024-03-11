@@ -4,6 +4,6 @@
   "projectType": "application",
   "sourceRoot": "apps/client-e2e/src",
   "targets": {},
-  "tags": [],
+  "tags": ["scope:client", "type:app"],
   "implicitDependencies": ["client"]
 }

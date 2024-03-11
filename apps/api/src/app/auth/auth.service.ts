@@ -1,4 +1,5 @@
 import {
+  Inject,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -6,18 +7,23 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { AuthEntity } from './entity/auth.entity';
 import * as bcrypt from 'bcrypt';
-import { PrismaService } from 'nestjs-prisma';
+import { CustomPrismaService } from 'nestjs-prisma';
+import { DATA } from '@issp/shared/constant';
+import { PrismaClient } from '@issp/prisma/main';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private prisma: PrismaService,
-    private jwtService: JwtService,
+    @Inject(DATA.DB.PRISMA_SERVICE_MAIN)
+    private prisma: CustomPrismaService<PrismaClient>,
+    private jwtService: JwtService
   ) {}
 
   async login(email: string, password: string): Promise<AuthEntity> {
     // Step 1: Fetch a user with the given email
-    const user = await this.prisma.user.findUnique({ where: { email: email } });
+    const user = await this.prisma.client.user.findUnique({
+      where: { email: email },
+    });
 
     // If no user is found, throw an error
     if (!user) {

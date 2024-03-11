@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from '@prisma/client';
+import { Role } from '@issp/prisma/main';
 import { NgxRolesService, NgxPermissionsService } from 'ngx-permissions';
 import { Subject } from 'rxjs';
 

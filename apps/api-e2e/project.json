@@ -12,5 +12,6 @@
         "passWithNoTests": true
       }
     }
-  }
+  },
+  "tags": ["scope:api", "type:app"]
 }

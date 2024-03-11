@@ -1,0 +1,8 @@
+{
+  "name": "client-data-access-account",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/data-access/account/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:client", "type:data-access"]
+}

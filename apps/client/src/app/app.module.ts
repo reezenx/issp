@@ -18,7 +18,7 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Import Layouts
 import { FullComponent } from './layouts/full/full.component';
-// import { BlankComponent } from './layouts/blank/blank.component';
+import { BlankComponent } from './layouts/blank/blank.component';
 
 import { FilterPipe } from './pipe/filter.pipe';
 
@@ -32,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient): any {
 }
 
 @NgModule({
-  declarations: [AppComponent, FilterPipe],
+  declarations: [AppComponent, BlankComponent, FilterPipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
