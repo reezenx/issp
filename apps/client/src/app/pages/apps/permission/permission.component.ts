@@ -14,7 +14,7 @@ export class AppPermissionComponent implements OnInit {
   currentPermissions!: string[];
 
   permissionsOfRole: { [key in Role]: string[] } = {
-    ROOT: ['canAdd', 'canDelete', 'canEdit', 'canRead', 'canComment'],
+    SUPER_ADMIN: ['canAdd', 'canDelete', 'canEdit', 'canRead', 'canComment'],
     ADMIN: ['canAdd', 'canEdit', 'canRead', 'canComment'],
     EVALUATOR: ['canRead', 'canComment'],
     VIEWER: ['canRead'],
