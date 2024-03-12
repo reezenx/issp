@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "npm run db-docker & npm run migrate & npm run serve & npm run db-studio",
+    "dev": "concurrently \"npm run db-docker\" \"npm run migrate\" \"npm run serve\" \"npm run db-studio\"",
     "serve": "nx run-many --target=serve --projects=api,client",
     "build": "nx run-many --target=build --projects=api,client",
     "db-studio": "npx prisma studio",
@@ -108,6 +108,7 @@
     "@typescript-eslint/parser": "^6.13.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "concurrently": "^8.2.2",
     "cypress": "^13.6.6",
     "eslint": "~8.48.0",
     "eslint-config-prettier": "^9.0.0",
