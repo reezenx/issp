@@ -83,5 +83,7 @@
         "scripts": []
       }
     }
-  }
+  },
+  "tags": ["scope:client", "type:app"]
+
 }

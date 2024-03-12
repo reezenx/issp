@@ -1,39 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
-import { PrismaService } from 'nestjs-prisma';
+import { CustomPrismaService } from 'nestjs-prisma';
+import { DATA } from '@issp/shared/constant';
+import { PrismaClient } from '@issp/prisma/main';
 
 @Injectable()
 export class ArticlesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @Inject(DATA.DB.PRISMA_SERVICE_MAIN)
+    private prisma: CustomPrismaService<PrismaClient>
+  ) {}
 
   create(createArticleDto: CreateArticleDto) {
-    return this.prisma.article.create({ data: createArticleDto });
+    return this.prisma.client.article.create({ data: createArticleDto });
   }
 
   findAll() {
-    return this.prisma.article.findMany({ where: { published: true } });
+    return this.prisma.client.article.findMany({ where: { published: true } });
   }
 
   findOne(id: number) {
-    return this.prisma.article.findUnique({
+    return this.prisma.client.article.findUnique({
       where: { id },
       include: { author: true },
     });
   }
 
   findDrafts() {
-    return this.prisma.article.findMany({ where: { published: false } });
+    return this.prisma.client.article.findMany({ where: { published: false } });
   }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {
-    return this.prisma.article.update({
+    return this.prisma.client.article.update({
       where: { id },
       data: updateArticleDto,
     });
   }
 
   remove(id: number) {
-    return this.prisma.article.delete({ where: { id } });
+    return this.prisma.client.article.delete({ where: { id } });
   }
 }

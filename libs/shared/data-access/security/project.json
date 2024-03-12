@@ -1,0 +1,8 @@
+{
+  "name": "shared-data-access-security",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/data-access/security/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:shared", "type:data-access"]
+}

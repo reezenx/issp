@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "dev": "concurrently \"npm run serve\" \"npm run db\"",
-    "serve": "nx run-many --target=serve --projects=client,api",
-    "build": "nx run-many --target=build --projects=client,api",
-    "db": "npx prisma studio",
+    "concurrently \"npm run db-docker\" \"npm run migrate\" \"npm run serve\" \"npm run db-studio\"",
+    "serve": "nx run-many --target=serve --projects=api,client",
+    "build": "nx run-many --target=build --projects=api,client",
+    "db-studio": "npx prisma studio",
+    "db-docker": "docker-compose up",
+    "migrate": "npx prisma migrate dev",
     "test": "nx test"
   },
   "private": true,
@@ -35,8 +37,17 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "@nx/angular": "18.0.7",
     "@prisma/client": "^5.10.2",
+    "@syncfusion/ej2-angular-buttons": "^24.2.7",
     "@syncfusion/ej2-angular-diagrams": "^24.2.9",
+    "@syncfusion/ej2-angular-documenteditor": "^24.2.9",
+    "@syncfusion/ej2-angular-dropdowns": "^24.2.9",
+    "@syncfusion/ej2-angular-grids": "^24.2.9",
+    "@syncfusion/ej2-angular-inputs": "^24.2.9",
+    "@syncfusion/ej2-angular-lists": "^24.2.8",
+    "@syncfusion/ej2-angular-navigations": "^24.2.8",
+    "@syncfusion/ej2-angular-popups": "^24.2.10",
     "@syncfusion/ej2-angular-richtexteditor": "^24.2.9",
+    "@syncfusion/ej2-angular-splitbuttons": "^24.2.7",
     "@syncfusion/ej2-base": "^24.2.8",
     "angular-calendar": "^0.29.0",
     "angular-tabler-icons": "^2.7.0",
@@ -73,7 +84,7 @@
     "@angular/language-service": "~17.1.0",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
-    "@nx/cypress": "18.0.7",
+    "@nx/cypress": "^18.0.7",
     "@nx/eslint": "18.0.7",
     "@nx/eslint-plugin": "18.0.7",
     "@nx/jest": "18.0.7",
@@ -116,6 +127,7 @@
     "webpack-cli": "^5.1.4"
   },
   "prisma": {
-    "seed": "ts-node ./prisma/seed.ts"
+    "seed": "ts-node ./libs/shared/prisma-schema-main/prisma/seed.ts",
+    "schema": "libs/shared/prisma-schema-main/prisma/schema.prisma"
   }
 }

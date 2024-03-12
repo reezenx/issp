@@ -1,0 +1,8 @@
+{
+  "name": "admin-data-access-users",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/admin/data-access/users/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:admin", "type:data-access"]
+}

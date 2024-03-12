@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from '@prisma/client';
+import { Role } from '@issp/prisma/main';
 import { NgxRolesService, NgxPermissionsService } from 'ngx-permissions';
 import { Subject } from 'rxjs';
 
@@ -14,7 +14,7 @@ export class AppPermissionComponent implements OnInit {
   currentPermissions!: string[];
 
   permissionsOfRole: { [key in Role]: string[] } = {
-    ROOT: ['canAdd', 'canDelete', 'canEdit', 'canRead', 'canComment'],
+    SUPER_ADMIN: ['canAdd', 'canDelete', 'canEdit', 'canRead', 'canComment'],
     ADMIN: ['canAdd', 'canEdit', 'canRead', 'canComment'],
     EVALUATOR: ['canRead', 'canComment'],
     VIEWER: ['canRead'],
