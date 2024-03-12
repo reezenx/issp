@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "concurrently \"npm run db-docker\" \"npm run migrate\" \"npm run serve\" \"npm run db-studio\"",
+    "dev": "concurrently \"npm run db-docker\" \"npm run migrate\" \"npm run serve\" \"npm run db-studio\"",
     "serve": "nx run-many --target=serve --projects=api,client",
     "build": "nx run-many --target=build --projects=api,client",
     "db-studio": "npx prisma studio",
