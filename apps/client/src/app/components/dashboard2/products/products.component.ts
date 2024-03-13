@@ -10,7 +10,7 @@ import {
   ApexMarkers,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 export interface productChart {
   series: ApexAxisChartSeries;

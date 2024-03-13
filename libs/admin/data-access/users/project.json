@@ -1,5 +1,5 @@
 {
-  "name": "admin-data-access-users",
+  "name": "data-access-users",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/admin/data-access/users/src",
   "projectType": "library",

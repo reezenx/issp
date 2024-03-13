@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { MaterialModule } from '../../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { CommonModule } from '@angular/common';
 
 // option group

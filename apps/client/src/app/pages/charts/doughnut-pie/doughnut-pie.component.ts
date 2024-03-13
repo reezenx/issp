@@ -14,7 +14,7 @@ import {
   ApexFill,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -78,8 +78,8 @@ export class AppDoughnutpieChartComponent {
       },
     };
 
-     //pie chart.
-     this.pieChartOptions = {
+    //pie chart.
+    this.pieChartOptions = {
       series: [45, 15, 27, 18, 35],
       chart: {
         id: 'pie-chart',

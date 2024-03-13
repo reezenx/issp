@@ -11,8 +11,8 @@ import {
   ApexResponsive,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 export interface customerChart {
   series: ApexAxisChartSeries;

@@ -1,5 +1,5 @@
 {
-  "name": "shared-data-access-security",
+  "name": "data-access-security",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/data-access/security/src",
   "projectType": "library",

@@ -1,5 +1,5 @@
 {
-  "name": "shared-data-access-profile",
+  "name": "data-access-profile",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/data-access/profile/src",
   "projectType": "library",

@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 @Component({
   selector: 'app-form-wizard',

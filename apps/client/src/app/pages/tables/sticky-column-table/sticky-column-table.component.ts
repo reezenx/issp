@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { CommonModule } from '@angular/common';
 
 export interface PeriodicElement {

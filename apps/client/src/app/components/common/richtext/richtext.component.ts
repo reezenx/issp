@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { SyncfusionModule } from '../../../syncfusion.module';
+import { SyncfusionModule } from '@issp/shared/ui/libraries';
 import {
   HtmlEditorService,
   ImageService,
   LinkService,
+  TableService,
   ToolbarService,
 } from '@syncfusion/ej2-angular-richtexteditor';
 
@@ -12,7 +13,13 @@ import {
   standalone: true,
   imports: [SyncfusionModule],
   templateUrl: './richtext.component.html',
-  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService],
+  providers: [
+    ToolbarService,
+    LinkService,
+    ImageService,
+    HtmlEditorService,
+    TableService,
+  ],
 })
 export class RichtextComponent {
   public tools: object = {
@@ -47,6 +54,7 @@ export class RichtextComponent {
       '|',
       'CreateLink',
       'Image',
+      'CreateTable',
       '|',
       'ClearFormat',
       'Print',

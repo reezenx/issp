@@ -1,5 +1,5 @@
 {
-  "name": "shared-data-access-auth",
+  "name": "data-access-auth",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/data-access/auth/src",
   "projectType": "library",

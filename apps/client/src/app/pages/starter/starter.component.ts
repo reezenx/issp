@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MaterialModule } from '../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 @Component({
   selector: 'app-starter',
   standalone: true,
-  imports:[MaterialModule],
+  imports: [MaterialModule],
   templateUrl: './starter.component.html',
   styleUrls: ['./starter.component.scss'],
   encapsulation: ViewEncapsulation.None,

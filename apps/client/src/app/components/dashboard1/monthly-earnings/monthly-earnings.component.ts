@@ -11,7 +11,7 @@ import {
   ApexResponsive,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 export interface monthlyChart {
@@ -28,7 +28,7 @@ export interface monthlyChart {
 @Component({
   selector: 'app-monthly-earnings',
   standalone: true,
-  imports:[NgApexchartsModule, MaterialModule, TablerIconsModule],
+  imports: [NgApexchartsModule, MaterialModule, TablerIconsModule],
   templateUrl: './monthly-earnings.component.html',
 })
 export class AppMonthlyEarningsComponent {

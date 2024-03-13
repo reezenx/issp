@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { $Enums, User } from '@issp/prisma/main';
+import { $Enums, User } from '@prisma/client/main';
 import { Exclude } from 'class-transformer';
 
 export class UserEntity implements User {

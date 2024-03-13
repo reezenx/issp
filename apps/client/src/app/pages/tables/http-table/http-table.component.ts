@@ -4,19 +4,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { CommonModule } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({
   selector: 'app-http-table',
   standalone: true,
-  imports:[MaterialModule, CommonModule, TablerIconsModule],
+  imports: [MaterialModule, CommonModule, TablerIconsModule],
   templateUrl: './http-table.component.html',
-  styleUrls: ['./http-table.component.scss']
+  styleUrls: ['./http-table.component.scss'],
 })
 export class AppHttpTableComponent {
-
   displayedColumns: string[] = ['created', 'state', 'number', 'title'];
   exampleDatabase: ExampleHttpDatabase | null = null;
   data: GithubIssue[] = [];
@@ -45,7 +44,7 @@ export class AppHttpTableComponent {
           return this.exampleDatabase!.getRepoIssues(
             this.sort.active,
             this.sort.direction,
-            this.paginator.pageIndex,
+            this.paginator.pageIndex
           );
         }),
         map((data) => {
@@ -61,13 +60,11 @@ export class AppHttpTableComponent {
           // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
           return observableOf([]);
-        }),
+        })
       )
       .subscribe((data) => (this.data = data));
   }
-
 }
-
 
 export interface GithubApi {
   items: GithubIssue[];
@@ -86,7 +83,11 @@ export class ExampleHttpDatabase {
   // tslint:disable-next-line - Disables all
   constructor(private _httpClient: HttpClient) {}
 
-  getRepoIssues(sort: string, order: string, page: number): Observable<GithubApi> {
+  getRepoIssues(
+    sort: string,
+    order: string,
+    page: number
+  ): Observable<GithubApi> {
     const href = 'https://api.github.com/search/issues';
     const requestUrl = `${href}?q=repo:angular/components&sort=${sort}&order=${order}&page=${
       page + 1

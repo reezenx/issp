@@ -14,7 +14,7 @@ import {
   ApexFill,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -40,7 +40,6 @@ export type ChartOptions = {
   imports: [NgApexchartsModule, MaterialModule],
   templateUrl: './column.component.html',
 })
-
 export class AppColumnChartComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
   public columnChartOptions: Partial<ChartOptions> | any;

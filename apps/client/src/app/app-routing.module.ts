@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FullComponent } from './layouts/full/full.component';
-import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from '@issp/shared/ui/layouts';
+import { BlankComponent } from '@issp/shared/ui/layouts';
 
 const routes: Routes = [
   {

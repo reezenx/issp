@@ -1,5 +1,10 @@
 import { Component, Injectable, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import {
   MatDateRangeSelectionStrategy,
@@ -8,7 +13,7 @@ import {
 } from '@angular/material/datepicker';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MaterialModule } from '../../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { CommonModule } from '@angular/common';
 const today = new Date();
 const month = today.getMonth();

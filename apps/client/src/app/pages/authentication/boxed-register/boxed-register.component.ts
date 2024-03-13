@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { MaterialModule } from '../../../material.module';
-import { CoreService } from '../../../services/core.service';
+import { MaterialModule } from '@issp/shared/ui/libraries';
+import { CoreService } from '@issp/shared/client/services';
 
 @Component({
   selector: 'app-boxed-register',

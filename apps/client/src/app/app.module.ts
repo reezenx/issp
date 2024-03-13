@@ -14,20 +14,20 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 //Import all material modules
-import { MaterialModule } from './material.module';
+import { SyncfusionModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 //Import Layouts
-import { FullComponent } from './layouts/full/full.component';
-import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from '@issp/shared/ui/layouts';
+import { BlankComponent } from '@issp/shared/ui/layouts';
 
 import { FilterPipe } from './pipe/filter.pipe';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { RouterModule } from '@angular/router';
-import { SyncfusionModule } from './syncfusion.module';
 
-export function HttpLoaderFactory(http: HttpClient): any {
+export function HttpLoaderFactory(http: HttpClient): unknown {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 

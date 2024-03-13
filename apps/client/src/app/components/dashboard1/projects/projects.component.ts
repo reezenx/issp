@@ -11,7 +11,7 @@ import {
   ApexYAxis,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 export interface projectsChart {
@@ -27,7 +27,7 @@ export interface projectsChart {
 
 @Component({
   selector: 'app-projects',
-  standalone: true, 
+  standalone: true,
   imports: [NgApexchartsModule, MaterialModule, TablerIconsModule],
   templateUrl: './projects.component.html',
 })

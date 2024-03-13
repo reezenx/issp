@@ -3,15 +3,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { CustomPrismaService } from 'nestjs-prisma';
-import { PrismaClient } from '@issp/prisma/main';
-import { DATA } from '@issp/shared/constant';
+import { PrismaClient } from '@prisma/client/main';
+import { DB } from '@issp/shared/constant';
 
 export const roundsOfHashing = 10;
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(DATA.DB.PRISMA_SERVICE_MAIN)
+    @Inject(DB.PRISMA_SERVICE_MAIN)
     private prisma: CustomPrismaService<PrismaClient>
   ) {}
 

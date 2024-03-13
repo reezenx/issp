@@ -27,6 +27,9 @@
       "@iisp/client/data-access/account": [
         "libs/client/data-access/account/src/index.ts"
       ],
+      "@issp/shared/client/services": [
+        "libs/shared/client/services/src/index.ts"
+      ],
       "@issp/shared/constant": ["libs/shared/constant/src/index.ts"],
       "@issp/shared/data-access/auth": [
         "libs/shared/data-access/auth/src/index.ts"
@@ -45,7 +48,9 @@
       ],
       "@issp/shared/prisma-schema-main": [
         "libs/prisma-schema-main/src/index.ts"
-      ]
+      ],
+      "@issp/shared/ui/layouts": ["libs/shared/ui/layouts/src/index.ts"],
+      "@issp/shared/ui/libraries": ["libs/shared/ui/libraries/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

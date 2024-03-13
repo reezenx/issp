@@ -105,7 +105,6 @@ interface activities {
   styleUrls: ['./cards.component.scss'],
 })
 export class AppCardsComponent {
-  constructor() {}
   // card 1
   topcards: topcards[] = [
     {

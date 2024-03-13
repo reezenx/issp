@@ -12,7 +12,7 @@ import {
   ApexYAxis,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 export interface employeeChart {
@@ -35,6 +35,7 @@ export interface employeeChart {
 })
 export class AppEmployeeSalaryComponent {
   @ViewChild('chart') chart: ChartComponent = Object.create(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public employeeChart!: Partial<employeeChart> | any;
 
   constructor() {

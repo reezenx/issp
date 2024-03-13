@@ -6,7 +6,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { CommonModule } from '@angular/common';
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -113,7 +113,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-expand-table',
   standalone: true,
-  imports:[MaterialModule, CommonModule],
+  imports: [MaterialModule, CommonModule],
   templateUrl: './expand-table.component.html',
   styleUrls: ['./expand-table.component.scss'],
   animations: [

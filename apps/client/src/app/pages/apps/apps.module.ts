@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 import { NgxPaginationModule } from 'ngx-pagination';

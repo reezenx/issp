@@ -9,7 +9,7 @@ import {
   ApexStroke,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 export interface weeklyCart {

@@ -2,13 +2,13 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { CustomPrismaService } from 'nestjs-prisma';
-import { DATA } from '@issp/shared/constant';
-import { PrismaClient } from '@issp/prisma/main';
+import { DB } from '@issp/shared/constant';
+import { PrismaClient } from '@prisma/client/main';
 
 @Injectable()
 export class ArticlesService {
   constructor(
-    @Inject(DATA.DB.PRISMA_SERVICE_MAIN)
+    @Inject(DB.PRISMA_SERVICE_MAIN)
     private prisma: CustomPrismaService<PrismaClient>
   ) {}
 

@@ -1,8 +1,9 @@
-import { DATA } from '@issp/shared/constant';
+import { DB } from '@issp/shared/constant';
+
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { CustomPrismaModule, PrismaService } from 'nestjs-prisma';
-import { PrismaClient } from '@issp/prisma/main';
+import { PrismaClient } from '@prisma/client/main';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -15,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     CustomPrismaModule.forRoot({
-      name: DATA.DB.PRISMA_SERVICE_MAIN,
+      name: DB.PRISMA_SERVICE_MAIN,
       client: new PrismaClient(),
       // isGlobal: true,
       // prismaServiceOptions: {

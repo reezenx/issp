@@ -13,7 +13,7 @@ import {
   ApexYAxis,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '../../../material.module';
+import { MaterialModule } from '@issp/shared/ui/libraries';
 
 export interface totalEarnChart {
   series: ApexAxisChartSeries;

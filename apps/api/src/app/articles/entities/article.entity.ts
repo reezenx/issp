@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Article } from '@issp/prisma/main';
+import { Article } from '@prisma/client/main';
 import { UserEntity } from '../../users/entities/user.entity';
 
 export class ArticleEntity implements Article {

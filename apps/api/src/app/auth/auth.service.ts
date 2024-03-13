@@ -8,13 +8,13 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthEntity } from './entity/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { CustomPrismaService } from 'nestjs-prisma';
-import { DATA } from '@issp/shared/constant';
-import { PrismaClient } from '@issp/prisma/main';
+import { DB } from '@issp/shared/constant';
+import { PrismaClient } from '@prisma/client/main';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject(DATA.DB.PRISMA_SERVICE_MAIN)
+    @Inject(DB.PRISMA_SERVICE_MAIN)
     private prisma: CustomPrismaService<PrismaClient>,
     private jwtService: JwtService
   ) {}
