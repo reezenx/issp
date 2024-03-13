@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { CustomPrismaModule } from 'nestjs-prisma';
-import { PrismaClient } from '@prisma/client/main';
+import { PrismaClient } from '@prisma/client';
 import { DB } from '@issp/shared/constant';
 
 @Module({

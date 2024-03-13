@@ -3,7 +3,7 @@ import { DB } from '@issp/shared/constant';
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { CustomPrismaModule, PrismaService } from 'nestjs-prisma';
-import { PrismaClient } from '@prisma/client/main';
+import { PrismaClient } from '@prisma/client';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

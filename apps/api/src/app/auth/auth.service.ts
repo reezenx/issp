@@ -9,7 +9,7 @@ import { AuthEntity } from './entity/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { CustomPrismaService } from 'nestjs-prisma';
 import { DB } from '@issp/shared/constant';
-import { PrismaClient } from '@prisma/client/main';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class AuthService {

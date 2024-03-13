@@ -7,7 +7,7 @@ import { JwtStrategy } from './jwt.strategy';
 import { CustomPrismaModule } from 'nestjs-prisma';
 import { UsersModule } from '../users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PrismaClient } from '@prisma/client/main';
+import { PrismaClient } from '@prisma/client';
 import { DB } from '@issp/shared/constant';
 
 @Module({

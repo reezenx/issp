@@ -3,7 +3,7 @@ import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { CustomPrismaService } from 'nestjs-prisma';
 import { DB } from '@issp/shared/constant';
-import { PrismaClient } from '@prisma/client/main';
+import { PrismaClient } from '@prisma/client';
 
 @Injectable()
 export class ArticlesService {

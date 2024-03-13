@@ -14,7 +14,6 @@ import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { PrismaClientExceptionFilter, PrismaService } from 'nestjs-prisma';
 import helmet from 'helmet';
-// import * as csurf from 'csurf';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,7 +21,6 @@ async function bootstrap() {
 
   // security
   app.use(helmet());
-  // app.use(csurf());
   app.enableCors();
 
   app.setGlobalPrefix(globalPrefix);
