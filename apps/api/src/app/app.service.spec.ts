@@ -14,8 +14,8 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Hello API"', () => {
-      expect(service.getData()).toEqual({ message: 'Hello API' });
+    it('should return "ISSP API"', () => {
+      expect(service.getData()).toEqual({ message: 'ISSP API' });
     });
   });
 });

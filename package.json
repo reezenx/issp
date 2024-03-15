@@ -9,7 +9,8 @@
     "db-studio": "npx prisma studio",
     "db-docker": "docker-compose up",
     "migrate": "npx prisma migrate dev",
-    "test": "nx test"
+    "test": "nx test",
+    "graph": "nx graph"
   },
   "private": true,
   "dependencies": {
@@ -49,6 +50,9 @@
     "@syncfusion/ej2-angular-richtexteditor": "^24.2.9",
     "@syncfusion/ej2-angular-splitbuttons": "^24.2.7",
     "@syncfusion/ej2-base": "^24.2.8",
+    "@syncfusion/ej2-diagrams": "^24.2.9",
+    "@syncfusion/ej2-inputs": "^24.2.9",
+    "@syncfusion/ej2-navigations": "^24.2.8",
     "angular-calendar": "^0.29.0",
     "angular-tabler-icons": "^2.7.0",
     "apexcharts": "^3.40.0",
@@ -130,4 +134,3 @@
     "schema": "libs/shared/prisma-schema-main/prisma/schema.prisma"
   }
 }
-

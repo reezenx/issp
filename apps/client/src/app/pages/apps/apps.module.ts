@@ -119,7 +119,7 @@ import { AppBlogDetailsComponent } from './blogs/details/details.component';
     AppContactComponent,
     AppContactDialogContentComponent,
     AppCoursesComponent,
-    AppCourseDetailComponent,
+    // AppCourseDetailComponent,
     AppEmployeeComponent,
     AppEmployeeDialogContentComponent,
     AppAddEmployeeComponent,

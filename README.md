@@ -1,14 +1,16 @@
 # Issp
 
 ## Installation
+```
 A. Lark - https://www.larksuite.com/product/rooms-downloads
 B. VS Code - https://code.visualstudio.com/download
 - Install NX Console [Nx Console](https://nx.dev/nx-console) Plugin
 C. Nodejs - https://nodejs.org/en/
 D. Git Bash - https://git-scm.com/downloads
 E. Docker - https://www.docker.com/products/docker-desktop/
-
+```
 ## Source Code & Environment
+```
 A. Angular Template
 - git clone https://github.com/reezenx/abcisspxyz-0.git
 - npm install
@@ -19,7 +21,7 @@ B. Main Project
 - docker-compose up
 - npx prisma migrate
 - npm run dev
-
+```
 ## Running the app
 
 ```bash

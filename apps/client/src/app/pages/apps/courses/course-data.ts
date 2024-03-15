@@ -4,10 +4,10 @@ export const courseList: course[] = [
   {
     Id: 1,
     courseType: 'primary',
-    courseFramework: 'Web',
-    Time: '30 min',
-    courseName: 'Html Crash Course',
-    Update: 'Updated 21 Jan 2020',
+    courseFramework: 'DILG',
+    Time: '2018-2020',
+    courseName: 'ISSP 2018-2020',
+    Update: 'Updated 14 Mar 2024',
   },
   {
     Id: 2,

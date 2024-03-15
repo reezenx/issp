@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RichtextComponent } from '../../../components/common/richtext/richtext.component';
+import { RichtextComponent } from '@issp/shared/ui/components';
 import { MaterialModule } from '@issp/shared/ui/libraries';
 
 @Component({

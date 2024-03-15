@@ -49,6 +49,7 @@
       "@issp/shared/prisma-schema-main": [
         "libs/prisma-schema-main/src/index.ts"
       ],
+      "@issp/shared/ui/components": ["libs/shared/ui/components/src/index.ts"],
       "@issp/shared/ui/layouts": ["libs/shared/ui/layouts/src/index.ts"],
       "@issp/shared/ui/libraries": ["libs/shared/ui/libraries/src/index.ts"]
     }

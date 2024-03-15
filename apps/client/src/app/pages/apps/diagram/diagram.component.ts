@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DiagramSimpleComponent } from '../../../components/common/diagram/diagram.component';
+import { DiagramSimpleComponent } from '@issp/shared/ui/components';
 import { MaterialModule } from '@issp/shared/ui/libraries';
 
 @Component({

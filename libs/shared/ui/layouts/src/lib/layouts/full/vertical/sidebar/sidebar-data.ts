@@ -10,14 +10,14 @@ export const navItems: NavItem[] = [
     route: 'theme-pages/account-setting',
   },
   {
+    displayName: 'ISSP',
+    iconName: 'certificate',
+    route: 'apps/courses',
+  },
+  {
     displayName: 'Calendar',
     iconName: 'calendar-event',
     route: 'apps/calendar',
-  },
-  {
-    displayName: 'Training',
-    iconName: 'certificate',
-    route: 'apps/courses',
   },
   {
     displayName: 'Chat',
