@@ -15,35 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@iisp/admin/data-access/dashboard": [
-        "libs/admin/data-access/dashboard/src/index.ts"
-      ],
-      "@iisp/admin/data-access/projects": [
-        "libs/admin/data-access/projects/src/index.ts"
-      ],
-      "@iisp/admin/data-access/users": [
-        "libs/admin/data-access/users/src/index.ts"
-      ],
-      "@iisp/client/data-access/account": [
-        "libs/client/data-access/account/src/index.ts"
-      ],
-      "@issp/shared/client/services": [
-        "libs/shared/client/services/src/index.ts"
+      "@issp/shared/utils/services": [
+        "libs/shared/utils/services/src/index.ts"
       ],
       "@issp/shared/constant": ["libs/shared/constant/src/index.ts"],
-      "@issp/shared/data-access/auth": [
-        "libs/shared/data-access/auth/src/index.ts"
-      ],
-      "@issp/shared/data-access/profile": [
-        "libs/shared/data-access/profile/src/index.ts"
-      ],
-      "@issp/shared/data-access/security": [
-        "libs/shared/data-access/security/src/index.ts"
-      ],
-      "@issp/shared/data-access/settings": [
-        "libs/shared/data-access/settings/src/index.ts"
-      ],
-      "@issp/shared/forms//validators": [
+      "@issp/shared/forms/validators": [
         "libs/shared/forms/validators/src/index.ts"
       ],
       "@issp/shared/forms/controls": [

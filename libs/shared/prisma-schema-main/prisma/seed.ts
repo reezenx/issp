@@ -33,50 +33,11 @@ async function main() {
     },
   });
 
-  const post1 = await prisma.article.upsert({
-    where: { title: 'Prisma Adds Support for MongoDB' },
-    update: {
-      authorId: user1.id,
-    },
-    create: {
-      title: 'Prisma Adds Support for MongoDB',
-      body: 'Support for mongodb has bee one of the most requested feature since the initial release',
-      description:
-        "We are excited to share the today's Prisma ORM release add the stable support for mongodb",
-      published: true,
-      authorId: user1.id,
-    },
-  });
-
-  const post2 = await prisma.article.upsert({
-    where: { title: "What's new in Prisma? (Q1/22)" },
-    update: {
-      authorId: user2.id,
-    },
-    create: {
-      title: "What's new in Prisma? (Q1/22)",
-      body: 'Our engineers have been working hard, issuing new releases with many improvements...',
-      description:
-        'Learn about everything in the Prisma ecosystem and community from January to March 2022.',
-      published: true,
-      authorId: user2.id,
-    },
-  });
-
-  const post3 = await prisma.article.upsert({
-    where: { title: 'Prisma Client Just Became a Lot More Flexible' },
-    update: {},
-    create: {
-      title: 'Prisma Client Just Became a Lot More Flexible',
-      body: 'Prisma Client extensions provide a powerful new way to add functionality to Prisma in a type-safe manner...',
-      description:
-        'This article will explore various ways you can use Prisma Client extensions to add custom functionality to Prisma Client..',
-      published: true,
-    },
-  });
-
-  console.log({ user1, user2, post1, post2, post3 });
 }
+
+// async function createAgencies() {}
+// async function createUsers() {}
+// async function createISSP() {}
 
 main()
   .catch((e) => {

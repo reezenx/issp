@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavService } from '@issp/shared/client/services';
+import { NavService } from '@issp/shared/utils/services';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';

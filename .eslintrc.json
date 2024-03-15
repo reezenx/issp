@@ -22,8 +22,8 @@
                 "onlyDependOnLibsWithTags": ["scope:shared", "scope:admin"]
               },
               {
-                "sourceTag": "scope:client",
-                "onlyDependOnLibsWithTags": ["scope:shared", "scope:client"],
+                "sourceTag": "scope:user",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:user"],
                 "bannedExternalImports": ["@nest/*"]
               },
               {
@@ -53,8 +53,8 @@
                 "bannedExternalImports": ["@nest/*"]
               },
               {
-                "sourceTag": "type:db-client",
-                "onlyDependOnLibsWithTags": ["type:db-client"],
+                "sourceTag": "type:db-user",
+                "onlyDependOnLibsWithTags": ["type:db-user"],
                 "bannedExternalImports": ["@angular/*"]
               },
               {

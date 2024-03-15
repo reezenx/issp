@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '@issp/shared/ui/libraries';
-import { CoreService } from '@issp/shared/client/services';
+import { CoreService } from '@issp/shared/utils/services';
 
 @Component({
   selector: 'app-boxed-register',

@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppSettings } from '@issp/shared/constant';
 import { MaterialModule } from '@issp/shared/ui/libraries';
-import { CoreService } from '@issp/shared/client/services';
+import { CoreService } from '@issp/shared/utils/services';
 
 @Component({
   selector: 'app-customizer',

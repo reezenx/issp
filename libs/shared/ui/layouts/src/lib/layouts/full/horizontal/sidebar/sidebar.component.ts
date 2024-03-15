@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { navItems } from './sidebar-data';
 import { Router } from '@angular/router';
-import { NavService } from '@issp/shared/client/services';
+import { NavService } from '@issp/shared/utils/services';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppHorizontalNavItemComponent } from './nav-item/nav-item.component';
 import { CommonModule } from '@angular/common';

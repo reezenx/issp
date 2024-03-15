@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { CoreService } from '@issp/shared/client/services';
+import { CoreService } from '@issp/shared/utils/services';
 import { MaterialModule } from '@issp/shared/ui/libraries';
 
 interface notifications {

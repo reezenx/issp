@@ -18,7 +18,7 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
-import { NavService } from '@issp/shared/client/services';
+import { NavService } from '@issp/shared/utils/services';
 import { MaterialModule } from '@issp/shared/ui/libraries';
 
 @Component({

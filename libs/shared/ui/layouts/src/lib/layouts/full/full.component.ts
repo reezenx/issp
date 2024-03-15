@@ -6,7 +6,7 @@ import { AppSettings } from '@issp/shared/constant';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { CoreService } from '@issp/shared/client/services';
+import { CoreService } from '@issp/shared/utils/services';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
 import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './vertical/header/header.component';

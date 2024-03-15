@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoreService } from '@issp/shared/client/services';
+import { CoreService } from '@issp/shared/utils/services';
 import { AppSettings } from '@issp/shared/constant';
 
 @Component({
