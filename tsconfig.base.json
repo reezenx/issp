@@ -43,6 +43,12 @@
       "@issp/shared/data-access/settings": [
         "libs/shared/data-access/settings/src/index.ts"
       ],
+      "@issp/shared/forms//validators": [
+        "libs/shared/forms/validators/src/index.ts"
+      ],
+      "@issp/shared/forms/controls": [
+        "libs/shared/forms/controls/src/index.ts"
+      ],
       "@issp/shared/prisma-client-main": [
         "libs/shared/prisma-client-main/src/index.ts"
       ],

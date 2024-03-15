@@ -1,0 +1,9 @@
+{
+  "name": "validators",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/forms/validators/src",
+  "prefix": "issp",
+  "tags": ["scope:shared", "type:ui"],
+  "projectType": "library",
+  "targets": {}
+}
