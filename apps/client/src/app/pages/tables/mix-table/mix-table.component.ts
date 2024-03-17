@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 
 /** Constants used to fill up our data base. */
 const COLORS = [

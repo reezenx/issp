@@ -3,14 +3,23 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
+    "start": "nx serve client",
+    "start:api": "nx serve api",
+    "e2e:portal": "nx e2e client-e2e --ui",
+    "e2e:api": "nx e2e api-e2e",
     "dev": "concurrently \"npm run db-docker\" \"npm run migrate\" \"npm run serve\" \"npm run db-studio\"",
     "serve": "nx run-many --target=serve --projects=api,client",
     "build": "nx run-many --target=build --projects=api,client",
-    "db-studio": "npx prisma studio",
+    "prisma:studio": "prisma studio --schema apps/api/prisma/schema.prisma",
     "db-docker": "docker-compose up",
+    "prod:portal": "nx build client --prod",
+    "prod:api": "nx build api --prod",
     "migrate": "npx prisma migrate dev",
-    "test": "nx test",
-    "graph": "nx graph"
+    "graph": "nx graph",
+    "test": "nx run-many -t test",
+    "lint": "nx run-many -t lint",
+    "format": "nx format:write --all",
+    "commit": "cz-cust"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +46,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@nx/angular": "18.0.8",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "^5.10.2",
     "@syncfusion/ej2-angular-buttons": "^24.2.7",
     "@syncfusion/ej2-angular-diagrams": "^24.2.9",
@@ -85,6 +95,7 @@
     "@angular/cli": "~17.1.0",
     "@angular/compiler-cli": "~17.1.0",
     "@angular/language-service": "~17.1.0",
+    "@faker-js/faker": "^8.4.1",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
     "@nx/cypress": "18.0.8",
@@ -104,6 +115,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/date-fns": "^2.6.0",
     "@types/jest": "^29.4.0",
+    "@types/luxon": "^3.4.2",
     "@types/node": "^18.16.9",
     "@types/passport-jwt": "^4.0.1",
     "@types/supertest": "^6.0.2",
@@ -113,6 +125,7 @@
     "class-validator": "^0.14.1",
     "concurrently": "^8.2.2",
     "cypress": "^13.6.6",
+    "cz-customizable": "^7.0.0",
     "eslint": "~8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-cypress": "^2.13.4",
@@ -121,16 +134,23 @@
     "jest-environment-node": "^29.4.1",
     "jest-preset-angular": "~13.1.4",
     "jsonc-eslint-parser": "^2.1.0",
+    "luxon": "^3.4.4",
     "nx": "18.0.8",
     "prettier": "^2.6.2",
     "prisma": "^5.10.2",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "tsx": "^4.7.1",
     "typescript": "~5.3.2",
     "webpack-cli": "^5.1.4"
   },
   "prisma": {
-    "seed": "ts-node ./libs/shared/prisma-schema-main/prisma/seed.ts",
-    "schema": "libs/shared/prisma-schema-main/prisma/schema.prisma"
+    "seed": "tsx ./apps/api/prisma/seed.ts",
+    "schema": "apps/api/prisma/schema.prisma"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
   }
 }

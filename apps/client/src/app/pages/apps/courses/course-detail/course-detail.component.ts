@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { course } from '../course';
 import { CourseService } from '../course.service';
-import { RichtextComponent } from '@issp/shared/ui/components';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { RichtextComponent } from '@issp/components';
+import { MaterialModule } from '@issp/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({

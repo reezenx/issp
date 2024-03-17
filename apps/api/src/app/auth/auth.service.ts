@@ -8,7 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthEntity } from './entity/auth.entity';
 import * as bcrypt from 'bcrypt';
 import { CustomPrismaService } from 'nestjs-prisma';
-import { DB } from '@issp/shared/constant';
+import { DB } from '@issp/common';
 import { PrismaClient } from '@prisma/client';
 
 @Injectable()

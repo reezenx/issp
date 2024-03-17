@@ -13,7 +13,7 @@ import {
 } from '@angular/material/datepicker';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 import { CommonModule } from '@angular/common';
 const today = new Date();
 const month = today.getMonth();

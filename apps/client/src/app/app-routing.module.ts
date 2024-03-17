@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FullComponent } from '@issp/shared/ui/layouts';
-import { BlankComponent } from '@issp/shared/ui/layouts';
+import { FullComponent } from '@issp/components';
+import { BlankComponent } from '@issp/components';
 
 const routes: Routes = [
   {
@@ -78,11 +78,9 @@ const routes: Routes = [
     component: BlankComponent,
     children: [
       {
-        path: 'authentication',
+        path: 'auth',
         loadChildren: () =>
-          import('./pages/authentication/authentication.module').then(
-            (m) => m.AuthenticationModule
-          ),
+          import('@issp/auth').then((m) => m.FeatureAuthModule),
       },
       {
         path: 'landingpage',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '@issp/shared/ui/libraries';
-import { CoreService } from '@issp/shared/utils/services';
+import { MaterialModule } from '@issp/common';
+import { CoreService } from '@issp/common';
 
 @Component({
   selector: 'app-side-two-steps',

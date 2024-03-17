@@ -1,9 +1,0 @@
-{
-  "name": "ui-libraries",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/ui/libraries/src",
-  "prefix": "issp",
-  "tags": ["scope:shared", "type:ui"],
-  "projectType": "library",
-  "targets": {}
-}

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
-import { CoreService } from '@issp/shared/utils/services';
+import { CoreService } from '@issp/common';
 
 interface apps {
   id: number;

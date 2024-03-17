@@ -12,7 +12,7 @@ import {
   NgApexchartsModule,
 } from 'ng-apexcharts';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 
 export interface customerChart {
   series: ApexAxisChartSeries;

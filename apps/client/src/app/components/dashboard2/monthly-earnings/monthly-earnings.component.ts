@@ -11,7 +11,7 @@ import {
   ApexResponsive,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 export interface monthlytwoChart {

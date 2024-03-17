@@ -15,25 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@issp/shared/utils/services": [
-        "libs/shared/utils/services/src/index.ts"
-      ],
-      "@issp/shared/constant": ["libs/shared/constant/src/index.ts"],
-      "@issp/shared/forms/validators": [
-        "libs/shared/forms/validators/src/index.ts"
-      ],
-      "@issp/shared/forms/controls": [
-        "libs/shared/forms/controls/src/index.ts"
-      ],
-      "@issp/shared/prisma-client-main": [
-        "libs/shared/prisma-client-main/src/index.ts"
-      ],
-      "@issp/shared/prisma-schema-main": [
-        "libs/prisma-schema-main/src/index.ts"
-      ],
-      "@issp/shared/ui/components": ["libs/shared/ui/components/src/index.ts"],
-      "@issp/shared/ui/layouts": ["libs/shared/ui/layouts/src/index.ts"],
-      "@issp/shared/ui/libraries": ["libs/shared/ui/libraries/src/index.ts"]
+      "@issp/auth": ["libs/auth/src/index.ts"],
+      "@issp/common": ["libs/common/src/index.ts"],
+      "@issp/components": ["libs/components/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

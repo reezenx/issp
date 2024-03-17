@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RichtextComponent } from '@issp/shared/ui/components';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { RichtextComponent } from '@issp/components';
+import { MaterialModule } from '@issp/common';
 
 @Component({
   selector: 'app-document-editor',

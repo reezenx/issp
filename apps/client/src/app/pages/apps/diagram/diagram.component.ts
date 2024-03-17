@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DiagramSimpleComponent } from '@issp/shared/ui/components';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { DiagramSimpleComponent } from '@issp/components';
+import { MaterialModule } from '@issp/common';
 
 @Component({
   selector: 'app-diagram',

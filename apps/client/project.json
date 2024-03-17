@@ -84,6 +84,6 @@
       }
     }
   },
-  "tags": ["scope:client", "type:app"]
-
+  "tags": ["scope:client", "type:app"],
+  "implicitDependencies": ["api"]
 }

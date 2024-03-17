@@ -1,4 +1,4 @@
-import { DB } from '@issp/shared/constant';
+import { DB } from '@issp/common';
 
 import { Module } from '@nestjs/common';
 import { ThrottlerModule } from '@nestjs/throttler';
@@ -17,26 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     CustomPrismaModule.forRoot({
       name: DB.PRISMA_SERVICE_MAIN,
       client: new PrismaClient(),
-      // isGlobal: true,
-      // prismaServiceOptions: {
-      //   middlewares: [
-      //     loggingMiddleware({
-      //       logger: new Logger('PrismaMiddleware'),
-      //       logLevel: 'log', // default is `debug`
-      //       logMessage: (query: QueryInfo) =>
-      //         `[Prisma Query] ${query.model}.${query.action} - ${query.executionTime}ms`,
-      //     }),
-      //   ],
-      //   explicitConnect: true,
-      //   prismaOptions: {
-      //     log: [
-      //       {
-      //         emit: 'event',
-      //         level: 'query',
-      //       },
-      //     ],
-      //   },
-      // },
+      isGlobal: true,
     }),
     ThrottlerModule.forRoot([
       {

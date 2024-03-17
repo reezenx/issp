@@ -14,7 +14,7 @@ import {
   ApexFill,
   NgApexchartsModule,
 } from 'ng-apexcharts';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;

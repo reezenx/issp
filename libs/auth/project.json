@@ -1,0 +1,9 @@
+{
+  "name": "@issp/auth",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/auth/feature-auth/src",
+  "prefix": "issp",
+  "tags": ["scope:share", "type:feature"],
+  "projectType": "library",
+  "targets": {}
+}

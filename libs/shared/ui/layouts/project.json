@@ -1,9 +1,0 @@
-{
-  "name": "ui-layouts",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/ui/layouts/src",
-  "prefix": "app",
-  "tags": ["scope:shared", "type:ui"],
-  "projectType": "library",
-  "targets": {}
-}

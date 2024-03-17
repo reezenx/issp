@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StarterComponent } from './starter/starter.component';
 import { PagesRoutes } from './pages.routing.module';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

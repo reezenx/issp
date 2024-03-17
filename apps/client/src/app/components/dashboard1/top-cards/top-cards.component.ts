@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 
 interface topcards {
   id: number;

@@ -18,7 +18,7 @@ export class AppPermissionComponent implements OnInit {
     ADMIN: ['canAdd', 'canEdit', 'canRead', 'canComment'],
     EVALUATOR: ['canRead', 'canComment'],
     VIEWER: ['canRead'],
-    USER: ['canAdd', 'canEdit', 'canRead'],
+    PLANNER: ['canAdd', 'canEdit', 'canRead'],
     ENDORSER: ['canComment'],
     APPROVER: ['canComment'],
   };

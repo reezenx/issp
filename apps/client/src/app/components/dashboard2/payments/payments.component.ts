@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from '@issp/shared/ui/libraries';
+import { MaterialModule } from '@issp/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({

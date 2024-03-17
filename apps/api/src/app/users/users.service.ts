@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { CustomPrismaService } from 'nestjs-prisma';
 import { PrismaClient } from '@prisma/client';
-import { DB } from '@issp/shared/constant';
+import { DB } from '@issp/common';
 
 export const roundsOfHashing = 10;
 

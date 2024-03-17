@@ -1,0 +1,9 @@
+{
+  "name": "@issp/components",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/components/src",
+  "prefix": "app",
+  "tags": ["scope:shared", "type:ui"],
+  "projectType": "library",
+  "targets": {}
+}
