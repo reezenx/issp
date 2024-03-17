@@ -8,7 +8,7 @@
     }
   },
   "sourceRoot": "apps/client/src",
-  "prefix": "app",
+  "prefix": "issp",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -32,13 +32,13 @@
         "production": {
           "budgets": [{
               "type": "initial",
-              "maximumWarning": "12mb",
-              "maximumError": "12mb"
+              "maximumWarning": "13mb",
+              "maximumError": "13mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "12mb",
-              "maximumError": "12mb"
+              "maximumWarning": "13mb",
+              "maximumError": "13mb"
             }
           ],
           "outputHashing": "all"

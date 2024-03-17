@@ -1,13 +1,13 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { navItems } from './sidebar-data';
 import { Router } from '@angular/router';
-import { NavService } from '@issp/common';
+import { NavService } from '@issp/common/ui/services';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AppHorizontalNavItemComponent } from './nav-item/nav-item.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-horizontal-sidebar',
+  selector: 'issp-horizontal-sidebar',
   standalone: true,
   imports: [AppHorizontalNavItemComponent, CommonModule],
   templateUrl: './sidebar.component.html',

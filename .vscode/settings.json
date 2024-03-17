@@ -9,6 +9,7 @@
     "DILG",
     "documenteditor",
     "issp",
+    "issps",
     "kolkov",
     "luxon",
     "matero",
@@ -16,8 +17,12 @@
     "nestjs",
     "paralleldrive",
     "richtexteditor",
+    "sparkline",
+    "sparklines",
     "splitbuttons",
     "syncfusion",
-    "Tabler"
+    "Tabler",
+    "xaxis",
+    "yaxis"
   ]
 }

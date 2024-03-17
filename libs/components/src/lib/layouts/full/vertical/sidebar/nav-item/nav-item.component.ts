@@ -18,11 +18,11 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
-import { NavService } from '@issp/common';
-import { MaterialModule } from '@issp/common';
+import { NavService } from '@issp/common/ui/services';
+import { MaterialModule } from '@issp/common/ui/libraries';
 
 @Component({
-  selector: 'app-nav-item',
+  selector: 'issp-nav-item',
   standalone: true,
   imports: [TranslateModule, TablerIconsModule, MaterialModule, CommonModule],
   templateUrl: './nav-item.component.html',

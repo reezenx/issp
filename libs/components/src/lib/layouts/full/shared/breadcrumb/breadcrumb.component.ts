@@ -6,7 +6,7 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({
-  selector: 'app-breadcrumb',
+  selector: 'issp-breadcrumb',
   standalone: true,
   imports: [RouterModule, TablerIconsModule],
   templateUrl: './breadcrumb.component.html',

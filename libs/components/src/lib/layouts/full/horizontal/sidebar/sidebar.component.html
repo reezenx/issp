@@ -4,14 +4,14 @@
     <div>
       <div class="horizontal-navbar hstack align-items-center">
         @for(item of navItems; track item) {
-        <app-horizontal-nav-item
+        <issp-horizontal-nav-item
           [item]="item"
           class="parentBox {{ item.ddType }}"
           [ngClass]="{
             pactive: item.route === parentActive ? 'pactive' : ''
           }"
         >
-        </app-horizontal-nav-item>
+        </issp-horizontal-nav-item>
         }
       </div>
     </div>

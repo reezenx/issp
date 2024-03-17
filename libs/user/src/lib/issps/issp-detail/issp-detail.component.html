@@ -1,0 +1,677 @@
+<mat-card class="cardWithShadow overflow-hidden">
+  <mat-card-content class="bg-{{ courseDetail.courseType }} text-white p-y-10">
+    <mat-card-title class="d-flex align-items-center">
+      <a routerLink="/apps/courses" mat-icon-button class="text-white d-flex justify-content-center m-r-10">
+        <i-tabler name="chevron-left" class="icon-18 d-flex"></i-tabler>
+      </a>
+      {{ courseDetail.courseName }}
+    </mat-card-title>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-vertical-stepper #stepper>
+
+      <!-- PART I. ORGANIZATIONAL PROFILE -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <strong>
+            <h2>PART I. ORGANIZATIONAL PROFILE</h2>
+          </strong>
+        </ng-template>
+
+        <mat-accordion multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT</h3>
+
+              </mat-panel-title>
+              <mat-panel-description>*Required Fields</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <h4>A.1. Mandate</h4>
+              <ul>
+                <li>Legal Bases</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+                <li>Function</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+              </ul>
+              <h4>A.2. Vision Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.3. Mission Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.4. Major Final Outputs</h4>
+              <issp-richtext></issp-richtext>
+              <small>
+                <strong>Fill-in Instructions:</strong>
+                <p class="m-0">
+                  A.1 - State the legal basis for the creation of the organization and should likewise describe the major
+                  functions as indicated/mandated in the legal basis.
+                </p>
+                <p class="m-0">
+                  A.2 - State the wishful projection of the organization into the future; a statement of what your
+                  organization wants to become; an intuitive picture of an end state.
+                </p>
+                <p class="m-0">
+                  A.3 - State the organization’s scope and operations that assert its basic purpose, specify its principal
+                  products/services that set it apart/distinguish it from others.
+                </p>
+                <p class="m-0">
+                  A.4 - Enumerate the MFOs as prescribed in the Organizational Performance Indicator Framework(OPIF). An
+                  MFO
+                  is a good or service that a department/agency is
+                  mandated to deliver to external clients through the implementation of programs, activities and projects.
+                  Emphasis should be on the MFOs that are aligned with
+                  the Philippine Development Plan’s Key Result Areas and the critical indicators and results presented in
+                  the
+                  PDP Results Matrices.
+                </p>
+              </small>
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  B. DEPARTMENT/AGENCY PROFILE
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  TABLE B-1 (FOR DEPARTMENT-WIDE ORGANIZATIONS ONLY)
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  C. THE DEPARTMENT/AGENCY AND ITS ENVIRONMENT (FUNCTIONAL INTERFACE CHART)
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(5)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  D. PRESENT ICT SITUATION (STRATEGIC CHALLENGES)
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  E. STRATEGIC CONCERNS FOR ICT USE
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <div class="m-t-30">
+          <button mat-flat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <!-- PART II. INFORMATION SYSTEMS STRATEGY -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <strong>
+            <h2>PART II. INFORMATION SYSTEMS STRATEGY</h2>
+          </strong>
+        </ng-template>
+
+        <mat-accordion multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  A. CONCEPTUAL FRAMEWORK FOR INFORMATION SYSTEMS (DIAGRAM OF IS INTERFACE)
+                </h3>
+              </mat-panel-title>
+              <mat-panel-description>*Required Fields</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <h4>A.1. Mandate</h4>
+              <ul>
+                <li>Legal Bases</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+                <li>Function</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+              </ul>
+              <h4>A.2. Vision Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.3. Mission Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.4. Major Final Outputs</h4>
+              <issp-richtext></issp-richtext>
+              <small>
+                <strong>Fill-in Instructions:</strong>
+                <p class="m-0">
+                  A.1 - State the legal basis for the creation of the organization and should likewise describe the major
+                  functions as indicated/mandated in the legal basis.
+                </p>
+                <p class="m-0">
+                  A.2 - State the wishful projection of the organization into the future; a statement of what your
+                  organization wants to become; an intuitive picture of an end state.
+                </p>
+                <p class="m-0">
+                  A.3 - State the organization’s scope and operations that assert its basic purpose, specify its principal
+                  products/services that set it apart/distinguish it from others.
+                </p>
+                <p class="m-0">
+                  A.4 - Enumerate the MFOs as prescribed in the Organizational Performance Indicator Framework(OPIF). An
+                  MFO
+                  is a good or service that a department/agency is
+                  mandated to deliver to external clients through the implementation of programs, activities and projects.
+                  Emphasis should be on the MFOs that are aligned with
+                  the Philippine Development Plan’s Key Result Areas and the critical indicators and results presented in
+                  the
+                  PDP Results Matrices.
+                </p>
+              </small>
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  B. DETAILED DESCRIPTION OF PROPOSED INFORMATION SYSTEMS
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  C. DATABASES REQUIRED
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  D. NETWORK LAYOUT
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <div class="m-t-30">
+          <button mat-flat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" matStepperNext class="m-l-10">Next</button>
+        </div>
+      </mat-step>
+
+      <!-- PART III. DETAILED DESCRIPTION OF ICT PROJECTS -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <strong>
+            <h2>PART III. DETAILED DESCRIPTION OF ICT PROJECTS</h2>
+          </strong>
+        </ng-template>
+
+        <mat-accordion multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  A. INTERNAL ICT PROJECTS
+                </h3>
+              </mat-panel-title>
+              <mat-panel-description>*Required Fields</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <h4>A.1. Mandate</h4>
+              <ul>
+                <li>Legal Bases</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+                <li>Function</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+              </ul>
+              <h4>A.2. Vision Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.3. Mission Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.4. Major Final Outputs</h4>
+              <issp-richtext></issp-richtext>
+              <small>
+                <strong>Fill-in Instructions:</strong>
+                <p class="m-0">
+                  A.1 - State the legal basis for the creation of the organization and should likewise describe the major
+                  functions as indicated/mandated in the legal basis.
+                </p>
+                <p class="m-0">
+                  A.2 - State the wishful projection of the organization into the future; a statement of what your
+                  organization wants to become; an intuitive picture of an end state.
+                </p>
+                <p class="m-0">
+                  A.3 - State the organization’s scope and operations that assert its basic purpose, specify its principal
+                  products/services that set it apart/distinguish it from others.
+                </p>
+                <p class="m-0">
+                  A.4 - Enumerate the MFOs as prescribed in the Organizational Performance Indicator Framework(OPIF). An
+                  MFO
+                  is a good or service that a department/agency is
+                  mandated to deliver to external clients through the implementation of programs, activities and projects.
+                  Emphasis should be on the MFOs that are aligned with
+                  the Philippine Development Plan’s Key Result Areas and the critical indicators and results presented in
+                  the
+                  PDP Results Matrices.
+                </p>
+              </small>
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  B. CROSS-AGENCY ICT PROJECTS
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  C. PERFORMANCE MEASUREMENT FRAMEWORK
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()" class="m-l-10">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+
+        </mat-accordion>
+
+        <div class="m-t-30">
+          <button mat-flat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <!-- PART IV. RESOURCE REQUIREMENTS -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <strong>
+            <h2>PART IV. RESOURCE REQUIREMENTS</h2>
+          </strong>
+        </ng-template>
+
+        <mat-accordion multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  A. DEPLOYMENT OF ICT EQUIPMENT AND SERVICES
+                </h3>
+              </mat-panel-title>
+              <mat-panel-description>*Required Fields</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <h4>A.1. Mandate</h4>
+              <ul>
+                <li>Legal Bases</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+                <li>Function</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+              </ul>
+              <h4>A.2. Vision Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.3. Mission Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.4. Major Final Outputs</h4>
+              <issp-richtext></issp-richtext>
+              <small>
+                <strong>Fill-in Instructions:</strong>
+                <p class="m-0">
+                  A.1 - State the legal basis for the creation of the organization and should likewise describe the major
+                  functions as indicated/mandated in the legal basis.
+                </p>
+                <p class="m-0">
+                  A.2 - State the wishful projection of the organization into the future; a statement of what your
+                  organization wants to become; an intuitive picture of an end state.
+                </p>
+                <p class="m-0">
+                  A.3 - State the organization’s scope and operations that assert its basic purpose, specify its principal
+                  products/services that set it apart/distinguish it from others.
+                </p>
+                <p class="m-0">
+                  A.4 - Enumerate the MFOs as prescribed in the Organizational Performance Indicator Framework(OPIF). An
+                  MFO
+                  is a good or service that a department/agency is
+                  mandated to deliver to external clients through the implementation of programs, activities and projects.
+                  Emphasis should be on the MFOs that are aligned with
+                  the Philippine Development Plan’s Key Result Areas and the critical indicators and results presented in
+                  the
+                  PDP Results Matrices.
+                </p>
+              </small>
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  B. ICT ORGANIZATIONAL STRUCTURE
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()" class="m-l-10">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+        </mat-accordion>
+
+        <div class="m-t-30">
+          <button mat-flat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" matStepperNext class="m-l-10">Next</button>
+        </div>
+      </mat-step>
+
+      <!-- PART V. DEVELOPMENT AND INVESTMENT PROGRAM -->
+      <mat-step>
+        <ng-template matStepLabel>
+          <strong>
+            <h2>PART V. DEVELOPMENT AND INVESTMENT PROGRAM</h2>
+          </strong>
+        </ng-template>
+
+        <mat-accordion multi>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  A. ICT PROJECTS IMPLEMENTATION SCHEDULE
+                </h3>
+              </mat-panel-title>
+              <mat-panel-description>*Required Fields</mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <h4>A.1. Mandate</h4>
+              <ul>
+                <li>Legal Bases</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+                <li>Function</li>
+                <mat-form-field appearance="outline" class="w-100">
+                  <textarea rows="3" matInput
+                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."></textarea>
+                </mat-form-field>
+              </ul>
+              <h4>A.2. Vision Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.3. Mission Statement</h4>
+              <issp-richtext></issp-richtext>
+              <h4>A.4. Major Final Outputs</h4>
+              <issp-richtext></issp-richtext>
+              <small>
+                <strong>Fill-in Instructions:</strong>
+                <p class="m-0">
+                  A.1 - State the legal basis for the creation of the organization and should likewise describe the major
+                  functions as indicated/mandated in the legal basis.
+                </p>
+                <p class="m-0">
+                  A.2 - State the wishful projection of the organization into the future; a statement of what your
+                  organization wants to become; an intuitive picture of an end state.
+                </p>
+                <p class="m-0">
+                  A.3 - State the organization’s scope and operations that assert its basic purpose, specify its principal
+                  products/services that set it apart/distinguish it from others.
+                </p>
+                <p class="m-0">
+                  A.4 - Enumerate the MFOs as prescribed in the Organizational Performance Indicator Framework(OPIF). An
+                  MFO
+                  is a good or service that a department/agency is
+                  mandated to deliver to external clients through the implementation of programs, activities and projects.
+                  Emphasis should be on the MFOs that are aligned with
+                  the Philippine Development Plan’s Key Result Areas and the critical indicators and results presented in
+                  the
+                  PDP Results Matrices.
+                </p>
+              </small>
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  B. INFORMATION SYSTEMS (IS) IMPLEMENTATION SCHEDULE
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  C. SUMMARY OF INVESTMENTS
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>
+                  D. YEAR 1 COST BREAKDOWN
+                </h3>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+            </ng-template>
+
+            <mat-action-row>
+              <button mat-flat-button color="warn" (click)="prevStep()">Previous</button>
+              <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="m-t-30">
+          <button mat-flat-button color="warn" matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" matStepperNext class="m-l-10">Next</button>
+        </div>
+      </mat-step>
+
+    </mat-vertical-stepper>
+  </mat-card-content>
+</mat-card>

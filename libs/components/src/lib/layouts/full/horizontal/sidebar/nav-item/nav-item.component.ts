@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavService } from '@issp/common';
+import { NavService } from '@issp/common/ui/services';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-horizontal-nav-item',
+  selector: 'issp-horizontal-nav-item',
   standalone: true,
   imports: [TablerIconsModule, CommonModule, MatIconModule],
   templateUrl: './nav-item.component.html',

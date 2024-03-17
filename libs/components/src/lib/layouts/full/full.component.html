@@ -18,12 +18,12 @@
       [opened]="options.navPos === 'side' && options.sidenavOpened && !isOver && !resView"
       (openedChange)="onSidenavOpenedChange($event)" (closedStart)="onSidenavClosedStart()" class="sidebarNav">
       <div class="flex-layout">
-        <app-sidebar (toggleMobileNav)="sidenav.toggle()" [showToggle]="isOver"></app-sidebar>
+        <issp-sidebar (toggleMobileNav)="sidenav.toggle()" [showToggle]="isOver"></issp-sidebar>
         <ng-scrollbar class="position-relative" style="height: 100%">
           <mat-nav-list class="sidebar-list">
             @for(item of navItems; track item) {
-            <app-nav-item [item]="item" (notify)="sidenav.toggle()">
-            </app-nav-item>
+            <issp-nav-item [item]="item" (notify)="sidenav.toggle()">
+            </issp-nav-item>
             }
           </mat-nav-list>
         </ng-scrollbar>
@@ -51,11 +51,11 @@
     @if (resView) {
     <mat-sidenav #leftsidenav [mode]="'over'" [opened]="options.sidenavOpened && !isTablet"
       (openedChange)="onSidenavOpenedChange($event)" (closedStart)="onSidenavClosedStart()" class="sidebarNav">
-      <app-sidebar> </app-sidebar>
+      <issp-sidebar> </issp-sidebar>
       <ng-scrollbar class="position-relative" style="height: 100%">
         <mat-nav-list class="sidebar-list">
           @for(item of navItems; track item) {
-          <app-nav-item [item]="item" (notify)="sidenav.toggle()"> </app-nav-item>
+          <issp-nav-item [item]="item" (notify)="sidenav.toggle()"> </issp-nav-item>
           }
         </mat-nav-list>
       </ng-scrollbar>
@@ -84,20 +84,20 @@
       <!-- VerticalHeader -->
       <!-- ============================================================== -->
       @if (!options.horizontal) {
-      <app-header [showToggle]="!isOver" (toggleCollapsed)="toggleCollapsed()" (toggleMobileNav)="sidenav.toggle()"
-        (toggleMobileFilterNav)="filterNavRight.toggle()"></app-header>
+      <issp-header [showToggle]="!isOver" (toggleCollapsed)="toggleCollapsed()" (toggleMobileNav)="sidenav.toggle()"
+        (toggleMobileFilterNav)="filterNavRight.toggle()"></issp-header>
       } @else {
       <!-- horizontal header -->
-      <app-horizontal-header (toggleMobileNav)="sidenav.toggle()"
-        (toggleMobileFilterNav)="filterNavRight.toggle()"></app-horizontal-header>
+      <issp-horizontal-header (toggleMobileNav)="sidenav.toggle()"
+        (toggleMobileFilterNav)="filterNavRight.toggle()"></issp-horizontal-header>
       } @if(options.horizontal) {
-      <app-horizontal-sidebar></app-horizontal-sidebar>
+      <issp-horizontal-sidebar></issp-horizontal-sidebar>
       }
 
       <main class="pageWrapper" [ngClass]="{
         maxWidth: options.boxed
       }">
-        <app-breadcrumb class="d-none"></app-breadcrumb>
+        <issp-breadcrumb class="d-none"></issp-breadcrumb>
         <!-- ============================================================== -->
         <!-- Outlet -->
         <!-- ============================================================== -->
@@ -119,7 +119,7 @@
       </div>
       <mat-divider></mat-divider>
 
-      <app-customizer (optionsChange)="receiveOptions($event)"></app-customizer>
+      <issp-customizer (optionsChange)="receiveOptions($event)"></issp-customizer>
     </mat-sidenav>
   </mat-sidenav-container>
 

@@ -7,8 +7,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { MaterialModule } from '@issp/common';
-import { CoreService } from '@issp/common';
+import { MaterialModule } from '@issp/common/ui/libraries';
+import { CoreService } from '@issp/common/ui/services';
 
 @Component({
   selector: 'issp-boxed-forgot-password',

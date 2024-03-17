@@ -9,11 +9,11 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AppSettings } from '@issp/common';
-import { MaterialModule } from '@issp/common';
-import { CoreService } from '@issp/common';
+import { MaterialModule } from '@issp/common/ui/libraries';
+import { CoreService } from '@issp/common/ui/services';
 
 @Component({
-  selector: 'app-customizer',
+  selector: 'issp-customizer',
   standalone: true,
   imports: [
     BrandingComponent,

@@ -6,11 +6,11 @@ import { AppSettings } from '@issp/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { CoreService } from '@issp/common';
+import { CoreService } from '@issp/common/ui/services';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
 import { filter } from 'rxjs/operators';
 import { HeaderComponent } from './vertical/header/header.component';
-import { MaterialModule } from '@issp/common';
+import { MaterialModule } from '@issp/common/ui/libraries';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 import { navItems } from './vertical/sidebar/sidebar-data';
@@ -41,7 +41,7 @@ interface quicklinks {
 }
 
 @Component({
-  selector: 'app-full',
+  selector: 'issp-full',
   standalone: true,
   imports: [
     RouterModule,

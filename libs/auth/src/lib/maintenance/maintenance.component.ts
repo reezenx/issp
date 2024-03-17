@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '@issp/common';
+import { MaterialModule } from '@issp/common/ui/libraries';
 
 @Component({
   selector: 'issp-maintenance',

@@ -1,6 +1,6 @@
 export interface AppSettings {
   dir: 'ltr' | 'rtl';
-  theme: string;
+  theme: 'light' | 'dark';
   sidenavOpened: boolean;
   sidenavCollapsed: boolean;
   boxed: boolean;
@@ -13,7 +13,7 @@ export interface AppSettings {
 
 export const defaults: AppSettings = {
   dir: 'ltr',
-  theme: 'light',
+  theme: 'dark',
   sidenavOpened: false,
   sidenavCollapsed: false,
   boxed: false,

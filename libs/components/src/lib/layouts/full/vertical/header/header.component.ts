@@ -13,8 +13,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { CoreService } from '@issp/common';
-import { MaterialModule } from '@issp/common';
+import { CoreService } from '@issp/common/ui/services';
+import { MaterialModule } from '@issp/common/ui/libraries';
 
 interface notifications {
   id: number;
@@ -46,7 +46,7 @@ interface quicklinks {
 }
 
 @Component({
-  selector: 'app-header',
+  selector: 'issp-header',
   standalone: true,
   imports: [
     RouterModule,
@@ -280,7 +280,7 @@ export class HeaderComponent {
 }
 
 @Component({
-  selector: 'app-search-dialog',
+  selector: 'issp-search-dialog',
   standalone: true,
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
   templateUrl: 'search-dialog.component.html',

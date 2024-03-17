@@ -9,67 +9,12 @@ const routes: Routes = [
     component: FullComponent,
     children: [
       {
-        path: '',
-        redirectTo: '/dashboards/dashboard1',
-        pathMatch: 'full',
+        path: 'user',
+        loadChildren: () => import('@issp/user').then((m) => m.UserModule),
       },
       {
-        path: 'starter',
-        loadChildren: () =>
-          import('./pages/pages.module').then((m) => m.PagesModule),
-      },
-      {
-        path: 'dashboards',
-        loadChildren: () =>
-          import('./pages/dashboards/dashboards.module').then(
-            (m) => m.DashboardsModule
-          ),
-      },
-      {
-        path: 'ui-components',
-        loadChildren: () =>
-          import('./pages/ui-components/ui-components.module').then(
-            (m) => m.UicomponentsModule
-          ),
-      },
-      {
-        path: 'forms',
-        loadChildren: () =>
-          import('./pages/forms/forms.module').then((m) => m.FormModule),
-      },
-      {
-        path: 'charts',
-        loadChildren: () =>
-          import('./pages/charts/charts.module').then((m) => m.ChartsModule),
-      },
-      {
-        path: 'apps',
-        loadChildren: () =>
-          import('./pages/apps/apps.module').then((m) => m.AppsModule),
-      },
-      {
-        path: 'widgets',
-        loadChildren: () =>
-          import('./pages/widgets/widgets.module').then((m) => m.WidgetsModule),
-      },
-      {
-        path: 'tables',
-        loadChildren: () =>
-          import('./pages/tables/tables.module').then((m) => m.TablesModule),
-      },
-      {
-        path: 'datatable',
-        loadChildren: () =>
-          import('./pages/datatable/datatable.module').then(
-            (m) => m.DatatableModule
-          ),
-      },
-      {
-        path: 'theme-pages',
-        loadChildren: () =>
-          import('./pages/theme-pages/theme-pages.module').then(
-            (m) => m.ThemePagesModule
-          ),
+        path: 'admin',
+        loadChildren: () => import('@issp/admin').then((m) => m.AdminModule),
       },
     ],
   },
@@ -79,21 +24,13 @@ const routes: Routes = [
     children: [
       {
         path: 'auth',
-        loadChildren: () =>
-          import('@issp/auth').then((m) => m.FeatureAuthModule),
-      },
-      {
-        path: 'landingpage',
-        loadChildren: () =>
-          import('./pages/theme-pages/landingpage/landingpage.module').then(
-            (m) => m.LandingPageModule
-          ),
+        loadChildren: () => import('@issp/auth').then((m) => m.AuthModule),
       },
     ],
   },
   {
     path: '**',
-    redirectTo: 'authentication/error',
+    redirectTo: 'auth/error',
   },
 ];
 

@@ -7,7 +7,7 @@ import { IsspTwoStepsComponent } from './two-steps/two-steps.component';
 import { IsspErrorComponent } from './error/error.component';
 import { IsspMaintenanceComponent } from './maintenance/maintenance.component';
 
-export const FeatureAuthRoutes: Routes = [
+export const AuthRoutes: Routes = [
   {
     path: '',
     children: [

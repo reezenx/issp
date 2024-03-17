@@ -1,0 +1,9 @@
+{
+  "name": "@issp/admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/admin/src",
+  "prefix": "issp",
+  "tags": ["scope:shared", "type:ui"],
+  "projectType": "library",
+  "targets": {}
+}

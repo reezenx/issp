@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { BrandingComponent } from '../../vertical/sidebar/branding.component';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@issp/common';
+import { MaterialModule } from '@issp/common/ui/libraries';
 
 interface notifications {
   id: number;
@@ -38,7 +38,7 @@ interface quicklinks {
 }
 
 @Component({
-  selector: 'app-horizontal-header',
+  selector: 'issp-horizontal-header',
   standalone: true,
   imports: [RouterModule, TablerIconsModule, MaterialModule, BrandingComponent],
   templateUrl: './header.component.html',
@@ -261,7 +261,7 @@ export class AppHorizontalHeaderComponent {
 }
 
 @Component({
-  selector: 'app-search-dialog',
+  selector: 'issp-search-dialog',
   standalone: true,
   imports: [RouterModule, MaterialModule, TablerIconsModule, FormsModule],
   templateUrl: 'search-dialog.component.html',

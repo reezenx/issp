@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CoreService } from '@issp/common';
+import { CoreService } from '@issp/common/ui/services';
 import { AppSettings } from '@issp/common';
 
 @Component({
-  selector: 'app-blank',
+  selector: 'issp-blank',
   templateUrl: './blank.component.html',
   styleUrls: [],
 })

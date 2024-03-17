@@ -17,7 +17,12 @@
     "paths": {
       "@issp/auth": ["libs/auth/src/index.ts"],
       "@issp/common": ["libs/common/src/index.ts"],
+      "@issp/common/ui/libraries": ["libs/common/src/lib/ui/libraries/index.ts"],
+      "@issp/common/ui/services": ["libs/common/src/lib/ui/services/index.ts"],
       "@issp/components": ["libs/components/src/index.ts"],
+      "@issp/components/dashboard": ["libs/components/src/lib/dashboard/index.ts"],
+      "@issp/user": ["libs/user/src/index.ts"],
+      "@issp/admin": ["libs/admin/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

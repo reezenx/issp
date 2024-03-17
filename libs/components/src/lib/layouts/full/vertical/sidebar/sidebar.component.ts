@@ -8,10 +8,10 @@ import {
 } from '@angular/core';
 import { BrandingComponent } from './branding.component';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { MaterialModule } from '@issp/common';
+import { MaterialModule } from '@issp/common/ui/libraries';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'issp-sidebar',
   standalone: true,
   imports: [BrandingComponent, TablerIconsModule, MaterialModule],
   templateUrl: './sidebar.component.html',

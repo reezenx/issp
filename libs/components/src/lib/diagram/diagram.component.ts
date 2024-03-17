@@ -67,7 +67,7 @@ import { AsyncSettingsModel } from '@syncfusion/ej2-inputs';
 Diagram.Inject(UndoRedo);
 
 @Component({
-  selector: 'app-diagram-simple',
+  selector: 'issp-diagram-simple',
   standalone: true,
   imports: [
     DiagramAllModule,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SyncfusionModule } from '@issp/common';
+import { SyncfusionModule } from '@issp/common/ui/libraries';
 import {
   HtmlEditorService,
   ImageService,
@@ -9,7 +9,7 @@ import {
 } from '@syncfusion/ej2-angular-richtexteditor';
 
 @Component({
-  selector: 'app-richtext',
+  selector: 'issp-richtext',
   standalone: true,
   imports: [SyncfusionModule],
   templateUrl: './richtext.component.html',

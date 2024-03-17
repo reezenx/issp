@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoreService } from '@issp/common';
+import { CoreService } from '@issp/common/ui/services';
 
 @Component({
   selector: 'app-branding',
