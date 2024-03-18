@@ -20,13 +20,21 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/client/src/favicon.ico", "apps/client/src/assets"],
+        "assets": [
+          "apps/client/src/favicon.ico",
+          "apps/client/src/assets",
+          "apps/client/src/worker",
+          "apps/client/src/ngsw-worker.js",
+          "apps/client/src/manifest.webmanifest"
+        ],
         "styles": [
           "apps/client/src/styles.scss",
           "apps/client/src/assets/scss/style.scss",
           "node_modules/angular-calendar/css/angular-calendar.css"
         ],
-        "scripts": []
+        "scripts": [],
+        "serviceWorker": false,
+        "ngswConfigPath": "apps/client/src/ngsw-config.json"
       },
       "configurations": {
         "production": {

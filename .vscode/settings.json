@@ -1,8 +1,13 @@
 {
   "vsicons.presets.angular": true,
   "angular.enable-strict-mode-prompt": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
     "apexcharts",
+    "autobind",
     "cust",
     "customizer",
     "devkit",
@@ -15,6 +20,8 @@
     "matero",
     "navigations",
     "nestjs",
+    "ngsw",
+    "Opps",
     "paralleldrive",
     "richtexteditor",
     "sparkline",
@@ -22,6 +29,7 @@
     "splitbuttons",
     "syncfusion",
     "Tabler",
+    "webp",
     "xaxis",
     "yaxis"
   ]

@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { IsspForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { IsspLoginComponent } from './components/login/login.component';
-import { IsspRegisterComponent } from './components/register/register.component';
-import { IsspTwoStepsComponent } from './components/two-steps/two-steps.component';
-import { IsspErrorComponent } from './components/error/error.component';
-import { IsspMaintenanceComponent } from './components/maintenance/maintenance.component';
+import { IsspForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { IsspLoginComponent } from './login/login.component';
+import { IsspRegisterComponent } from './register/register.component';
+import { IsspTwoStepsComponent } from './two-steps/two-steps.component';
+import { IsspErrorComponent } from './error/error.component';
+import { IsspMaintenanceComponent } from './maintenance/maintenance.component';
 
-export const AuthRoutes: Routes = [
+export const AuthComponentsRoutes: Routes = [
   {
     path: '',
     children: [

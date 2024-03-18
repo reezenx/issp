@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FullComponent } from '@issp/components';
 import { BlankComponent } from '@issp/components';
+import { AuthRoutes } from '@issp/auth';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'user/account', pathMatch: 'full' },
   {
     path: '',
     component: FullComponent,
@@ -24,7 +26,7 @@ const routes: Routes = [
     children: [
       {
         path: 'auth',
-        loadChildren: () => import('@issp/auth').then((m) => m.AuthModule),
+        children: [...AuthRoutes],
       },
     ],
   },

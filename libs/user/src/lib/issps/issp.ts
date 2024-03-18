@@ -1,9 +1,9 @@
 // tslint:disable-next-line: class-name
 export class ISSP {
   Id = -1;
-  courseType = '';
-  courseFramework = '';
+  isspType = '';
+  isspFramework = '';
   Time = '';
-  courseName = '';
+  isspName = '';
   Update = '';
 }

@@ -15,7 +15,10 @@ module.exports = {
       value: 'perf',
       name: 'perf:      A code change that improves performance',
     },
-    { value: 'test', name: 'test:      Adding missing tests or correcting existing tests' },
+    {
+      value: 'test',
+      name: 'test:      Adding missing tests or correcting existing tests',
+    },
     { value: 'build', name: 'build:     Changes that affect the build system' },
     {
       value: 'chore',
@@ -25,11 +28,15 @@ module.exports = {
 
   scopes: [
     { name: 'api' },
+    { name: 'client' },
+    { name: 'admin' },
+    { name: 'user' },
+    { name: 'components' },
+    { name: 'common' },
     { name: 'auth' },
     { name: 'issp' },
     { name: 'deps' },
     { name: 'nx' },
-    { name: 'client' },
     { name: 'prisma' },
   ],
   allowCustomScopes: true,

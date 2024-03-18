@@ -13,14 +13,14 @@ import { TablerIconsModule } from 'angular-tabler-icons';
   styleUrls: ['./issp-detail.component.scss'],
   imports: [MaterialModule, RichtextComponent, TablerIconsModule],
 })
-export class AppCourseDetailComponent {
-  id: any;
+export class IsspDetailComponent {
+  id: string;
   isspDetail: ISSP;
 
   constructor(activatedRouter: ActivatedRoute, isspService: IsspService) {
     this.id = activatedRouter?.snapshot?.paramMap?.get('id');
     this.isspDetail = isspService
-      .getCourse()
+      .getIssps()
       .filter((x) => x?.Id === +this.id)[0];
   }
 

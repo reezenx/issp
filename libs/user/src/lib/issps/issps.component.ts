@@ -3,41 +3,39 @@ import { IsspService } from './issp.service';
 import { ISSP } from './issp';
 
 @Component({
-  selector: 'issp-courses',
+  selector: 'issp-issps',
   templateUrl: './issps.component.html',
   styleUrls: ['./issps.component.scss'],
 })
-export class IsspCoursesComponent {
-  courseList: ISSP[] = [];
+export class IsspIsspsComponent {
+  isspList: ISSP[] = [];
   selectedCategory = 'All';
 
-  constructor(private courseService: IsspService) {
-    this.courseList = this.courseService.getCourse();
+  constructor(private isspService: IsspService) {
+    this.isspList = this.isspService.getIssps();
   }
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.courseList = this.filter(filterValue);
+    this.isspList = this.filter(filterValue);
   }
 
   filter(v: string): ISSP[] {
-    return this.courseService
-      .getCourse()
-      .filter(
-        (x) => x.courseName.toLowerCase().indexOf(v.toLowerCase()) !== -1
-      );
+    return this.isspService
+      .getIssps()
+      .filter((x) => x.isspName.toLowerCase().indexOf(v.toLowerCase()) !== -1);
   }
 
   ddlChange(ob: any): void {
     const filterValue = ob.value;
     if (filterValue === 'All') {
-      this.courseList = this.courseService.getCourse();
+      this.isspList = this.isspService.getIssps();
     } else {
-      this.courseList = this.courseService
-        .getCourse()
+      this.isspList = this.isspService
+        .getIssps()
         // tslint:disable-next-line: no-shadowed-variable
-        .filter((course) => course.courseFramework === filterValue);
+        .filter((issp) => issp.isspFramework === filterValue);
     }
-    // this.todos.filter(course => course.courseType==filterValue);
+    // this.todos.filter(issp => issp.isspType==filterValue);
   }
 }

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ISSP } from './issp';
-import { courseList } from './issp-data';
+import { isspList } from './issp-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IsspService {
-  public course = courseList;
-  public getCourse(): ISSP[] {
-    return this.course;
+  public issp = isspList;
+  public getIssps(): ISSP[] {
+    return this.issp;
   }
 }
