@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
+    "composite": true,
     "target": "es2022",
     "types": ["jest", "node"]
   },

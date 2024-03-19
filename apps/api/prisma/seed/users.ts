@@ -15,14 +15,12 @@ export async function createUsers(prisma: PrismaClient) {
 
   // base users
   const baseUsers: User[] = [];
-  Object.entries(USERS).forEach(([key, value]) => {
+  Object.entries(USERS).forEach(([key, { id, email, role }]) => {
     baseUsers.push({
-      id: value.id,
-      email: value.email,
-      role: value.role,
-      password: value.role.includes(Role.SUPER_ADMIN)
-        ? superPassword
-        : userPassword,
+      id,
+      email,
+      role,
+      password: role.includes(Role.SUPER_ADMIN) ? superPassword : userPassword,
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
       phone: faker.helpers.fromRegExp('09[0-9]{9}'),
@@ -32,6 +30,7 @@ export async function createUsers(prisma: PrismaClient) {
       updatedAt: DateTime.now().toJSDate(),
       createdBy: 'System',
       updatedBy: 'System',
+      tags: ['new'],
     });
   });
 

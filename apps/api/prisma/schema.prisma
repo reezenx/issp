@@ -36,6 +36,8 @@ model Agency {
   updatedBy  String?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime? @updatedAt
+  issps      ISSP[]
+  tags       String[]
 
   @@map("agencies")
 }
@@ -54,25 +56,23 @@ model Category {
 }
 
 model User {
-  id             String      @id @default(cuid())
-  firstName      String
-  lastName       String
-  email          String      @unique
-  phone          String
-  password       String
-  createdBy      String
-  updatedBy      String?
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime?   @updatedAt
-  agency         Agency?     @relation(fields: [agencyId], references: [id])
-  agencyId       String?
-  role           Role[]      @default([VIEWER])
-  status         User_Status @default(INACTIVE)
-  profile        Profile?
-  authoredISSPs  ISSP[]      @relation("AuthoredISSPs")
-  evaluatedISSPs ISSP[]      @relation("EvaluatedISSPs")
-  endorsedISSPs  ISSP[]      @relation("EndorsedISSPs")
-  approvedISSPs  ISSP[]      @relation("ApprovedISSPs")
+  id        String      @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String      @unique
+  phone     String
+  password  String
+  createdBy String
+  updatedBy String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime?   @updatedAt
+  agency    Agency?     @relation(fields: [agencyId], references: [id])
+  agencyId  String?
+  role      Role[]      @default([VIEWER])
+  status    User_Status @default(INACTIVE)
+  profile   Profile?
+  issps     ISSP[]
+  tags      String[]
 
   @@map("users")
 }
@@ -82,14 +82,13 @@ model ISSP {
   title       String      @unique
   description String?
   createdAt   DateTime    @default(now())
-  authorId    String?
   status      ISSP_Status @default(NOT_STARTED)
   yearStart   String
   yearEnd     String
-  authors     User[]      @relation("AuthoredISSPs")
-  evaluators  User[]      @relation("EvaluatedISSPs")
-  endorsers   User[]      @relation("EndorsedISSPs")
-  approvers   User[]      @relation("ApprovedISSPs")
+  tags        String[]
+  users       User[]
+  agency      Agency      @relation(fields: [agencyId], references: [id])
+  agencyId    String
   createdBy   String
   updatedBy   String?
   updatedAt   DateTime?   @updatedAt

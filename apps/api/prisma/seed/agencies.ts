@@ -6,18 +6,19 @@ import { DateTime } from 'luxon';
 export async function createAgencies(prisma: PrismaClient) {
   const baseAgencies: Agency[] = [];
 
-  Object.entries(AGENCIES).forEach(([key, value]) => {
+  Object.entries(AGENCIES).forEach(([key, { id, name, code, email }]) => {
     baseAgencies.push({
-      id: value.id,
-      name: value.name,
-      code: value.code,
-      email: value.email,
+      id,
+      name,
+      code,
+      email,
       phone: faker.helpers.fromRegExp('09[0-9]{9}'),
       categoryId: CATEGORIES['EDS'].id,
       createdAt: DateTime.now().toJSDate(),
       updatedAt: DateTime.now().toJSDate(),
       createdBy: 'System',
       updatedBy: 'System',
+      tags: ['new'],
     });
   });
 

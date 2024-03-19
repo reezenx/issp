@@ -5,11 +5,11 @@ import { DateTime } from 'luxon';
 export async function createCategories(prisma: PrismaClient) {
   const baseCategories: Category[] = [];
 
-  Object.entries(CATEGORIES).forEach(([key, value]) => {
+  Object.entries(CATEGORIES).forEach(([key, { id, name, code }]) => {
     baseCategories.push({
-      id: value.id,
-      name: value.name,
-      code: value.code,
+      id,
+      name,
+      code,
       createdAt: DateTime.now().toJSDate(),
       updatedAt: DateTime.now().toJSDate(),
       createdBy: 'System',

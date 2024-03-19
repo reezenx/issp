@@ -1,5 +1,5 @@
 import { createId } from '@paralleldrive/cuid2';
-import { Role, User, Agency, Category } from '@prisma/client';
+import { Role, User, Agency, Category, ISSP } from '@prisma/client';
 
 export const DEFAULT = {
   PW: 'ChangeM3!',
@@ -129,4 +129,37 @@ export const USERS: {
   },
 };
 
-export const ISSP = {};
+export const ISSPS: {
+  [key: string]: Pick<ISSP, 'id' | 'title' | 'yearStart' | 'yearEnd'>;
+} = {
+  DICT_ISSP: {
+    id: createId(),
+    title: 'DICT Information System Strategic Plan 2018-2020 ',
+    yearStart: '2018',
+    yearEnd: '2020',
+  },
+  DILG_ISSP: {
+    id: createId(),
+    title: 'DILG Information System Strategic Plan 2018-2020 ',
+    yearStart: '2020',
+    yearEnd: '2023',
+  },
+  DAR_ISSP: {
+    id: createId(),
+    title: 'DAR Information System Strategic Plan 2018-2020 ',
+    yearStart: '2017',
+    yearEnd: '2019',
+  },
+  DE_ISSP: {
+    id: createId(),
+    title: 'DE Information System Strategic Plan 2018-2020 ',
+    yearStart: '2019',
+    yearEnd: '2021',
+  },
+  DA_ISSP: {
+    id: createId(),
+    title: 'DA Information System Strategic Plan 2018-2020 ',
+    yearStart: '2005',
+    yearEnd: '2007',
+  },
+};
