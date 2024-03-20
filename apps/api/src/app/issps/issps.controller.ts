@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { IsspService } from './issp.service';
+import { IsspService } from './issps.service';
 import { CreateIsspDto } from './dto/create-issp.dto';
 import { UpdateIsspDto } from './dto/update-issp.dto';
 import { ApiTags, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';

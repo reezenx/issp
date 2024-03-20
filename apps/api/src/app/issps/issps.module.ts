@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { IsspService } from './issp.service';
-import { IsspController } from './issp.controller';
+import { IsspService } from './issps.service';
+import { IsspController } from './issps.controller';
 
 @Module({
   controllers: [IsspController],

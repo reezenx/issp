@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { IsspController } from './issp.controller';
-import { IsspService } from './issp.service';
+import { IsspController } from './issps.controller';
+import { IsspService } from './issps.service';
 
 describe('IsspController', () => {
   let controller: IsspController;
