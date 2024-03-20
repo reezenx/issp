@@ -65,6 +65,7 @@ CREATE TABLE "users" (
     "role" "Role"[] DEFAULT ARRAY['VIEWER']::"Role"[],
     "status" "User_Status" NOT NULL DEFAULT 'INACTIVE',
     "tags" TEXT[],
+    "authoredIsspIds" TEXT[],
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -80,6 +81,8 @@ CREATE TABLE "issps" (
     "yearEnd" TEXT NOT NULL,
     "tags" TEXT[],
     "agencyId" TEXT NOT NULL,
+    "authorId" TEXT NOT NULL,
+    "version" INTEGER NOT NULL,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "updatedAt" TIMESTAMP(3),
@@ -88,7 +91,7 @@ CREATE TABLE "issps" (
 );
 
 -- CreateTable
-CREATE TABLE "_ISSPToUser" (
+CREATE TABLE "_ISSPUsers" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
 );
@@ -103,10 +106,10 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "issps_title_key" ON "issps"("title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_ISSPToUser_AB_unique" ON "_ISSPToUser"("A", "B");
+CREATE UNIQUE INDEX "_ISSPUsers_AB_unique" ON "_ISSPUsers"("A", "B");
 
 -- CreateIndex
-CREATE INDEX "_ISSPToUser_B_index" ON "_ISSPToUser"("B");
+CREATE INDEX "_ISSPUsers_B_index" ON "_ISSPUsers"("B");
 
 -- AddForeignKey
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -121,7 +124,10 @@ ALTER TABLE "users" ADD CONSTRAINT "users_agencyId_fkey" FOREIGN KEY ("agencyId"
 ALTER TABLE "issps" ADD CONSTRAINT "issps_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ISSPToUser" ADD CONSTRAINT "_ISSPToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "issps"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "issps" ADD CONSTRAINT "issps_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_ISSPToUser" ADD CONSTRAINT "_ISSPToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_ISSPUsers" ADD CONSTRAINT "_ISSPUsers_A_fkey" FOREIGN KEY ("A") REFERENCES "issps"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ISSPUsers" ADD CONSTRAINT "_ISSPUsers_B_fkey" FOREIGN KEY ("B") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

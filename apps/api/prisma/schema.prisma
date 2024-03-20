@@ -5,8 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  // output   = "../../../../node_modules/@prisma/client"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -56,23 +56,25 @@ model Category {
 }
 
 model User {
-  id        String      @id @default(cuid())
-  firstName String
-  lastName  String
-  email     String      @unique
-  phone     String
-  password  String
-  createdBy String
-  updatedBy String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime?   @updatedAt
-  agency    Agency?     @relation(fields: [agencyId], references: [id])
-  agencyId  String?
-  role      Role[]      @default([VIEWER])
-  status    User_Status @default(INACTIVE)
-  profile   Profile?
-  issps     ISSP[]
-  tags      String[]
+  id              String      @id @default(cuid())
+  firstName       String
+  lastName        String
+  email           String      @unique
+  phone           String
+  password        String
+  createdBy       String
+  updatedBy       String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime?   @updatedAt
+  agency          Agency      @relation(fields: [agencyId], references: [id])
+  agencyId        String
+  role            Role[]      @default([VIEWER])
+  status          User_Status @default(INACTIVE)
+  profile         Profile?
+  issps           ISSP[]      @relation("ISSPUsers")
+  tags            String[]
+  authoredIssps   ISSP[]      @relation(name: "ISSPAuthor")
+  authoredIsspIds String[]
 
   @@map("users")
 }
@@ -86,9 +88,12 @@ model ISSP {
   yearStart   String
   yearEnd     String
   tags        String[]
-  users       User[]
+  users       User[]      @relation("ISSPUsers")
   agency      Agency      @relation(fields: [agencyId], references: [id])
   agencyId    String
+  author      User        @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
+  authorId    String
+  version     Int
   createdBy   String
   updatedBy   String?
   updatedAt   DateTime?   @updatedAt

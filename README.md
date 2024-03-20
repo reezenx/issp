@@ -25,6 +25,8 @@ Prisma Studio - http://localhost:5555/
 NX Console
 Prisma
 Prettier
+Angular Language Service
+Angular 17 Snippets/Angular Essentials (Version 17)
 
 ## Setup Github SSH
 

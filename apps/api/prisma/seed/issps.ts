@@ -1,11 +1,12 @@
 import { ISSP, ISSP_Status, PrismaClient } from '@prisma/client';
-import { AGENCIES, ISSPS } from './constant';
+import { AGENCIES, ISSPS, USERS } from './constant';
 import { DateTime } from 'luxon';
 import { faker } from '@faker-js/faker';
 
 export async function createISSPs(prisma: PrismaClient) {
   const baseAgencies: ISSP[] = [];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(ISSPS).forEach(([key, { id, title, yearStart, yearEnd }]) => {
     baseAgencies.push({
       id,
@@ -20,16 +21,12 @@ export async function createISSPs(prisma: PrismaClient) {
       updatedBy: 'System',
       tags: ['new', 'dict'],
       agencyId: AGENCIES.DICT.id,
+      authorId: USERS.PLANNER.id,
+      version: 1,
     });
   });
 
   await prisma.iSSP.createMany({
     data: baseAgencies,
   });
-
-  // await prisma.iSSP.updateMany({
-  //   where: {
-
-  //   }
-  // });
 }

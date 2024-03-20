@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 export async function createAgencies(prisma: PrismaClient) {
   const baseAgencies: Agency[] = [];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(AGENCIES).forEach(([key, { id, name, code, email }]) => {
     baseAgencies.push({
       id,
