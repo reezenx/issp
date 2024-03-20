@@ -22,7 +22,7 @@ import {
   IsspCalendarComponent,
 } from './calendar/calendar.component';
 import { CalendarFormDialogComponent } from './calendar/calendar-form-dialog/calendar-form-dialog.component';
-import { IsspIsspsComponent } from './issps/issps.component';
+import { IsspIsspsComponent } from './issp/issps.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({

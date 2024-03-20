@@ -8,13 +8,22 @@ export const AdminRoutes: Routes = [
   {
     path: 'dashboard',
     component: IsspDashboardComponent,
+    data: {
+      title: 'Dashboard',
+    },
   },
   {
     path: 'users',
     component: IsspUsersComponent,
+    data: {
+      title: 'Users',
+    },
   },
   {
     path: 'projects',
     component: IsspProjectsComponent,
+    data: {
+      title: 'Projects',
+    },
   },
 ];

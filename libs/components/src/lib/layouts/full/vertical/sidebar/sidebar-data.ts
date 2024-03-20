@@ -12,7 +12,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'ISSP',
     iconName: 'certificate',
-    route: 'user/issp',
+    route: 'user/issps',
   },
   {
     displayName: 'Calendar',

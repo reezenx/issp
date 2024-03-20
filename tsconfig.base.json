@@ -27,6 +27,7 @@
       ],
       "@issp/common/ui/services": ["libs/common/src/lib/ui/services/index.ts"],
       "@issp/components": ["libs/components/src/index.ts"],
+      "@issp/issp": ["libs/issp/src/index.ts"],
       "@issp/user": ["libs/user/src/index.ts"]
     }
   },

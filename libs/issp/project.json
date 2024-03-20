@@ -1,7 +1,7 @@
 {
-  "name": "@issp/user",
+  "name": "@issp/issp",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/user/src",
+  "sourceRoot": "libs/issp/src",
   "prefix": "issp",
   "tags": ["scope:shared", "type:feature"],
   "projectType": "library",
