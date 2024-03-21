@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@issp/common/ui/libraries';
+import { MaterialModule, SyncfusionModule } from '@issp/common/ui/libraries';
 
 import { isspRoutes } from './lib.routes';
 
@@ -19,6 +19,7 @@ import { IsspItemsShellComponent } from './issp-items-shell/issp-items-shell.com
     CommonModule,
     RouterModule.forChild(isspRoutes),
     MaterialModule,
+    SyncfusionModule,
     FormsModule,
     ReactiveFormsModule,
   ],

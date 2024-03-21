@@ -11,11 +11,56 @@ export class IsspService {
   }
 
   findAll() {
-    return this.prisma.iSSP.findMany();
+    return this.prisma.iSSP.findMany({
+      include: {
+        author: {
+          select: {
+            firstName: true,
+            lastName: true,
+            id: true,
+          },
+        },
+        agency: {
+          select: {
+            name: true,
+          },
+        },
+        users: {
+          select: {
+            firstName: true,
+            lastName: true,
+            id: true,
+          },
+        },
+      },
+    });
   }
 
   findOne(id: string) {
-    return this.prisma.iSSP.findUnique({ where: { id } });
+    return this.prisma.iSSP.findUnique({
+      where: { id },
+      include: {
+        author: {
+          select: {
+            firstName: true,
+            lastName: true,
+            id: true,
+          },
+        },
+        agency: {
+          select: {
+            name: true,
+          },
+        },
+        users: {
+          select: {
+            firstName: true,
+            lastName: true,
+            id: true,
+          },
+        },
+      },
+    });
   }
 
   update(id: string, updateIsspDto: UpdateIsspDto) {

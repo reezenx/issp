@@ -32,21 +32,19 @@
           "apps/client/src/assets/scss/style.scss",
           "node_modules/angular-calendar/css/angular-calendar.css"
         ],
-        "scripts": [],
-        "serviceWorker": false,
-        "ngswConfigPath": "apps/client/src/ngsw-config.json"
+        "scripts": []
       },
       "configurations": {
         "production": {
           "budgets": [{
               "type": "initial",
-              "maximumWarning": "13mb",
-              "maximumError": "13mb"
+              "maximumWarning": "15mb",
+              "maximumError": "15mb"
             },
             {
               "type": "anyComponentStyle",
-              "maximumWarning": "13mb",
-              "maximumError": "13mb"
+              "maximumWarning": "15mb",
+              "maximumError": "15mb"
             }
           ],
           "outputHashing": "all"
@@ -69,10 +67,13 @@
           "buildTarget": "client:build:production"
         },
         "development": {
-          "buildTarget": "client:build:development"
+          "buildTarget": "client:build:development",
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/client/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

@@ -1,1 +1,55 @@
-<p>issp-items works!</p>
+<mat-card class="cardWithShadow">
+  <mat-card-content class="p-0">
+    <ejs-grid
+      #itemsGrid
+      [allowExcelExport]="true"
+      [allowFiltering]="true"
+      [allowPaging]="true"
+      [allowPdfExport]="true"
+      [allowResizing]="true"
+      [allowSorting]="true"
+      [allowTextWrap]="true"
+      [autoFit]="true"
+      data-test="items-grid"
+      [showColumnChooser]="true"
+      [showColumnMenu]="true"
+      (toolbarClick)="toolbarClick($event)"
+      [dataSource]="gridData"
+      [filterSettings]="filterSettings"
+      [groupSettings]="groupOptions"
+      [id]="gridId"
+      [loadingIndicator]="loadingIndicator"
+      [pageSettings]="gridPageSettings"
+      [toolbar]="toolbar"
+    >
+      <e-columns>
+        <e-column headerText="Title" field="title">
+          <ng-template #template let-data>
+            <a
+              data-test="item-link"
+              [routerLink]="['/', 'user', 'issps', data.id]"
+            >
+              {{ data.title }}
+            </a>
+          </ng-template>
+        </e-column>
+        <e-column headerText="Description" field="description"></e-column>
+        <e-column headerText="Year Start" field="yearStart"></e-column>
+        <e-column headerText="Year End" field="yearEnd"></e-column>
+        <e-column headerText="Status" field="status"></e-column>
+        <e-column headerText="Version" field="version"></e-column>
+
+        <e-column headerText="Author" field="author">
+          <ng-template #template let-data>
+            {{ data.author.firstName }} {{ data.author.lastName }}
+          </ng-template>
+        </e-column>
+        <e-column headerText="Agency" field="agency">
+          <ng-template #template let-data>
+            {{ data.agency.name }}
+          </ng-template>
+        </e-column>
+      </e-columns>
+    </ejs-grid>
+  </mat-card-content>
+</mat-card>

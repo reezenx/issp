@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppSettings, defaults } from '../../config';
+import { AppSettings, defaults } from '../ui.config';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({

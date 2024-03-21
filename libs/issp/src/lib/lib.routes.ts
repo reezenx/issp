@@ -6,6 +6,10 @@ import { IsspItemComponent } from './issp-item/issp-item.component';
 import { IsspItemEditMetadataComponent } from './issp-item-edit-metadata/issp-item-edit-metadata.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
 import { IsspItemEditPreviewComponent } from './issp-item-edit-preview/issp-item-edit-preview.component';
+import { inject } from '@angular/core';
+import { IsspService } from './services/issps.service';
+import { isspsResolver } from './resolvers/issps.resolver';
+import { isspResolver } from './resolvers/issp.resolver';
 
 export const isspRoutes: Route[] = [
   {
@@ -23,7 +27,9 @@ export const isspRoutes: Route[] = [
         data: {
           breadcrumbSkipNode: true,
         },
-        resolve: {},
+        resolve: {
+          issps: isspsResolver,
+        },
       },
       {
         path: 'new',
@@ -40,7 +46,9 @@ export const isspRoutes: Route[] = [
           // breadcrumbRouteDataProperty: 'xform.name',
         },
         component: IsspItemComponent,
-        resolve: {},
+        resolve: {
+          issp: isspResolver,
+        },
         children: [
           {
             path: '',
