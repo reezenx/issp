@@ -67,42 +67,7 @@ export class HeaderComponent {
 
   showFiller = false;
 
-  public selectedLanguage: any = {
-    language: 'English',
-    code: 'en',
-    type: 'US',
-    icon: '/assets/images/flag/icon-flag-en.svg',
-  };
-
-  public languages: any[] = [
-    {
-      language: 'English',
-      code: 'en',
-      type: 'US',
-      icon: '/assets/images/flag/icon-flag-en.svg',
-    },
-    {
-      language: 'Español',
-      code: 'es',
-      icon: '/assets/images/flag/icon-flag-es.svg',
-    },
-    {
-      language: 'Français',
-      code: 'fr',
-      icon: '/assets/images/flag/icon-flag-fr.svg',
-    },
-    {
-      language: 'German',
-      code: 'de',
-      icon: '/assets/images/flag/icon-flag-de.svg',
-    },
-  ];
-
-  constructor(
-    private vsidenav: CoreService,
-    public dialog: MatDialog,
-    private translate: TranslateService
-  ) {
+  constructor(public dialog: MatDialog, private translate: TranslateService) {
     translate.setDefaultLang('en');
   }
 
@@ -112,11 +77,6 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
-  }
-
-  changeLanguage(lang: any): void {
-    this.translate.use(lang.code);
-    this.selectedLanguage = lang;
   }
 
   notifications: notifications[] = [
