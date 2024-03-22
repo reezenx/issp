@@ -25,6 +25,11 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
+  agencyId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
   createdBy: string;
 
   @IsString()

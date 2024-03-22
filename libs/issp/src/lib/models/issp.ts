@@ -48,6 +48,7 @@ export class ISSPDetails extends Assign implements ISSP {
   createdBy: string;
   updatedBy: string;
   updatedAt: Date;
+
   author: {
     firstName: string;
     lastName: string;
