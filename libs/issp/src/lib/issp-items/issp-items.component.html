@@ -1,5 +1,5 @@
 <mat-card class="cardWithShadow">
-  <mat-card-content class="p-0">
+  <mat-card-content class="p-20">
     <ejs-grid
       #itemsGrid
       [allowExcelExport]="true"
@@ -9,6 +9,7 @@
       [allowResizing]="true"
       [allowSorting]="true"
       [allowTextWrap]="true"
+      [allowGrouping]="true"
       [autoFit]="true"
       data-test="items-grid"
       [showColumnChooser]="true"
@@ -38,17 +39,8 @@
         <e-column headerText="Year End" field="yearEnd"></e-column>
         <e-column headerText="Status" field="status"></e-column>
         <e-column headerText="Version" field="version"></e-column>
-
-        <e-column headerText="Author" field="author">
-          <ng-template #template let-data>
-            {{ data.author.firstName }} {{ data.author.lastName }}
-          </ng-template>
-        </e-column>
-        <e-column headerText="Agency" field="agency">
-          <ng-template #template let-data>
-            {{ data.agency.name }}
-          </ng-template>
-        </e-column>
+        <e-column headerText="Author" field="authorName"></e-column>
+        <e-column headerText="Agency" field="agencyName"> </e-column>
       </e-columns>
     </ejs-grid>
   </mat-card-content>

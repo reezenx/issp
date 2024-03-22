@@ -13,6 +13,7 @@ import {
   ToolbarItems,
 } from '@syncfusion/ej2-angular-grids';
 import { ISSPDetails } from '../models/issp';
+import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -50,19 +51,19 @@ export class IsspItemsComponent implements OnInit {
     });
   }
 
-  toolbarClick(args: any) {
+  toolbarClick(args: ClickEventArgs) {
     if (args.item) {
-      if (args.item.id === this.grid + '_excelexport') {
-        const excelExportProperties: ExcelExportProperties = {
-          includeHiddenColumn: true,
-        };
-        this.grid.excelExport(excelExportProperties);
+      if (args.item.id === this.gridId + '_excelexport') {
+        (this.grid as GridComponent).excelExport();
       }
-      if (args.item.id === this.grid + '_pdfexport') {
+      if (args.item.id === this.gridId + '_pdfexport') {
         const pdfExportProperties: PdfExportProperties = {
-          includeHiddenColumn: true,
+          exportType: 'CurrentPage',
+          allowHorizontalOverflow: true,
+          pageOrientation:
+            'Landscape' as PdfExportProperties['pageOrientation'],
         };
-        this.grid.pdfExport(pdfExportProperties);
+        (this.grid as GridComponent).pdfExport(pdfExportProperties);
       }
     }
   }

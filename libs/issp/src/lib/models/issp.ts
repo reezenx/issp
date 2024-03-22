@@ -48,6 +48,21 @@ export class ISSPDetails extends Assign implements ISSP {
   createdBy: string;
   updatedBy: string;
   updatedAt: Date;
+  author: {
+    firstName: string;
+    lastName: string;
+  };
+  agency: {
+    name: string;
+  };
+
+  get authorName() {
+    return `${this.author.firstName} ${this.author.lastName}`;
+  }
+
+  get agencyName() {
+    return this.agency.name;
+  }
 
   private _createdAt: Date = new Date('0001-01-01T00:00:00Z');
   private _updatedAt: Date = new Date('0001-01-01T00:00:00Z');
