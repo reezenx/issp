@@ -8,9 +8,10 @@
     "e2e:portal": "nx e2e client-e2e --ui",
     "e2e:api": "nx e2e api-e2e",
     "serve": "nx run-many --target=serve --projects=api,client",
-    "build": "nx run-many --target=build --projects=api,client",
+    "build": "nx run-many --target=build --projects=api,client ",
     "db:studio": "prisma studio --schema apps/api/prisma/schema.prisma",
     "db:migrate": "npx prisma migrate dev",
+    "db:reset": "npx prisma migrate reset",
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
     "docker:up": "docker-compose up",
@@ -159,6 +160,12 @@
     "tsx": "^4.7.1",
     "typescript": "~5.3.2",
     "webpack-cli": "^5.1.4"
+  },
+  "optionalDependencies": {
+    "@nx/nx-darwin-arm64": "18.0.4",
+    "@nx/nx-darwin-x64": "18.0.4",
+    "@nx/nx-linux-x64-gnu": "18.0.4",
+    "@nx/nx-win32-x64-msvc": "18.0.4"
   },
   "prisma": {
     "seed": "tsx ./apps/api/prisma/seed.ts",
