@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { IsspItemsShellComponent } from './issp-items-shell/issp-items-shell.component';
 import { IsspItemsComponent } from './issp-items/issp-items.component';
-import { IsspItemNewComponent } from './issp-item-new/issp-item-new.component';
+import { IsspItemAddComponent } from './issp-item-add/issp-item-add.component';
 import { IsspItemComponent } from './issp-item/issp-item.component';
 import { IsspItemEditMetadataComponent } from './issp-item-edit-metadata/issp-item-edit-metadata.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
@@ -33,7 +33,7 @@ export const isspRoutes: Route[] = [
       {
         path: 'new',
         title: 'New ISSP',
-        component: IsspItemNewComponent,
+        component: IsspItemAddComponent,
         data: {
           breadcrumb: 'New',
         },
@@ -75,7 +75,7 @@ export const isspRoutes: Route[] = [
           },
           {
             path: 'history',
-            title: 'IsSSP History',
+            title: 'ISSP History',
             data: {
               breadcrumb: 'History',
             },

@@ -12,7 +12,7 @@ import { isspRoutes } from './lib.routes';
 import { IsspItemComponent } from './issp-item/issp-item.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
 import { IsspItemEditMetadataComponent } from './issp-item-edit-metadata/issp-item-edit-metadata.component';
-import { IsspItemNewComponent } from './issp-item-new/issp-item-new.component';
+import { IsspItemAddComponent } from './issp-item-add/issp-item-add.component';
 import { IsspItemEditPreviewComponent } from './issp-item-edit-history/issp-item-edit-history.component';
 import { IsspItemsComponent } from './issp-items/issp-items.component';
 import { IsspItemsShellComponent } from './issp-items-shell/issp-items-shell.component';
@@ -39,7 +39,7 @@ import { PipesModule } from '@issp/common';
     IsspItemEditDetailsComponent,
     IsspItemEditMetadataComponent,
     IsspItemEditPreviewComponent,
-    IsspItemNewComponent,
+    IsspItemAddComponent,
     IsspItemsComponent,
     IsspItemsShellComponent,
   ],

@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridDefaults } from '@issp/common/ui/libraries';
-import { ISSPDetails } from '../models/issp-details';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ActionHistory } from '../models/action-history';
@@ -36,7 +35,7 @@ export class IsspItemEditPreviewComponent implements OnInit {
   gridPageSettings: PageSettingsModel = new GridDefaults();
   resizeSettings: ResizeSettingsModel = { mode: 'Normal' };
   filterSettings: FilterSettingsModel = { type: 'Excel' };
-  sortOptions = { columns: [{ field: 'title', direction: 'Ascending' }] };
+  sortSettings = { columns: [{ field: 'createdAt', direction: 'Descending' }] };
   toolbar: ToolbarItems[] = [
     'Print',
     'Search',
