@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IsspItemAddComponent } from './issp-item-add.component';
+import { IsspItemsShellComponent } from './issp-items-shell.component';
 
-describe('IsspItemNewComponent', () => {
-  let component: IsspItemAddComponent;
-  let fixture: ComponentFixture<IsspItemAddComponent>;
+describe('IsspItemsShellComponent', () => {
+  let component: IsspItemsShellComponent;
+  let fixture: ComponentFixture<IsspItemsShellComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IsspItemAddComponent],
+      imports: [IsspItemsShellComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(IsspItemAddComponent);
+    fixture = TestBed.createComponent(IsspItemsShellComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

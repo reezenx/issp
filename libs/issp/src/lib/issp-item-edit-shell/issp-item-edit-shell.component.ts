@@ -7,10 +7,9 @@ import { Subscription } from 'rxjs';
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
   selector: 'issp-item',
-  templateUrl: './issp-item.component.html',
-  styleUrl: './issp-item.component.scss',
+  templateUrl: './issp-item-edit-shell.component.html',
 })
-export class IsspItemComponent implements OnInit {
+export class IsspItemEditShellComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
   issp: ISSPDetails;
   subs: Subscription[] = [];

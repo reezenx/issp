@@ -24,11 +24,11 @@ import {
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-item-add',
-  templateUrl: './issp-item-add.component.html',
-  styleUrl: './issp-item-add.component.scss',
+  selector: 'issp-item-new',
+  templateUrl: './issp-item-new.component.html',
+  styleUrl: './issp-item-new.component.scss',
 })
-export class IsspItemAddComponent implements OnInit {
+export class IsspItemNewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
