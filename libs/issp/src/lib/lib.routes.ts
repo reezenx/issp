@@ -6,8 +6,6 @@ import { IsspItemComponent } from './issp-item/issp-item.component';
 import { IsspItemEditMetadataComponent } from './issp-item-edit-metadata/issp-item-edit-metadata.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
 import { IsspItemEditPreviewComponent as IsspItemEditHistoryComponent } from './issp-item-edit-history/issp-item-edit-history.component';
-import { inject } from '@angular/core';
-import { IsspService } from './services/issps.service';
 import { isspsResolver } from './resolvers/issps.resolver';
 import { isspResolver } from './resolvers/issp.resolver';
 

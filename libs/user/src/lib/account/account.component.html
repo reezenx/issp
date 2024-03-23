@@ -9,7 +9,7 @@
               <i-tabler name="dashboard" class="icon-20 m-r-8"></i-tabler>
             </mat-icon>
           </div>
-          Dashboard
+          <strong> Dashboard </strong>
         </ng-template>
         <mat-card-content class="p-y-24 b-t-1">
           <div class="row">
@@ -128,11 +128,7 @@
                         class="w-100"
                         color="primary"
                       >
-                        <input
-                          matInput
-                          type="email"
-                          value="info@issp.com"
-                        />
+                        <input matInput type="email" value="info@issp.com" />
                       </mat-form-field>
                     </div>
                     <div class="col-sm-6">
@@ -157,7 +153,9 @@
                         color="primary"
                       >
                         <mat-select value="ph">
-                          <mat-option value="ph">Philippine Peso (₱)</mat-option>
+                          <mat-option value="ph"
+                            >Philippine Peso (₱)</mat-option
+                          >
                           <mat-option value="us">Us Dollar ($)</mat-option>
                           <mat-option value="uk"
                             >United Kingdom(Pound)</mat-option
@@ -206,10 +204,13 @@
         <ng-template mat-tab-label>
           <div class="d-flex align-items-center">
             <mat-icon>
-              <i-tabler name="device-heart-monitor" class="icon-20 m-r-8"></i-tabler>
+              <i-tabler
+                name="device-heart-monitor"
+                class="icon-20 m-r-8"
+              ></i-tabler>
             </mat-icon>
           </div>
-          Monitoring
+          <strong>Monitoring</strong>
         </ng-template>
         <mat-card-content class="p-y-24 b-t-1">
           <div class="row justify-content-center">
@@ -384,7 +385,7 @@
               <i-tabler name="apps-filled" class="icon-20 m-r-8"></i-tabler>
             </mat-icon>
           </div>
-          Application
+          <strong>Application</strong>
         </ng-template>
         <mat-card-content class="p-y-24 b-t-1">
           <div class="row">
@@ -490,7 +491,13 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                   </div>
-                  <button mat-stroked-button color="primary" class="m-t-16 w-100">Need Help?</button>
+                  <button
+                    mat-stroked-button
+                    color="primary"
+                    class="m-t-16 w-100"
+                  >
+                    Need Help?
+                  </button>
                 </mat-card-content>
               </mat-card>
             </div>
@@ -505,7 +512,7 @@
               <i-tabler name="replace-filled" class="icon-20 m-r-8"></i-tabler>
             </mat-icon>
           </div>
-          Amendment
+          <strong>Amendment</strong>
         </ng-template>
         <mat-card-content class="p-y-24 b-t-1">
           <div class="row">
@@ -611,7 +618,13 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                   </div>
-                  <button mat-stroked-button color="primary" class="m-t-16 w-100">Need Help?</button>
+                  <button
+                    mat-stroked-button
+                    color="primary"
+                    class="m-t-16 w-100"
+                  >
+                    Need Help?
+                  </button>
                 </mat-card-content>
               </mat-card>
             </div>
@@ -619,14 +632,14 @@
         </mat-card-content>
       </mat-tab>
       <!-- ITRA -->
-      <mat-tab>
+      <!-- <mat-tab class="d-none">
         <ng-template mat-tab-label>
           <div class="d-flex align-items-center">
             <mat-icon>
               <i-tabler name="topology-star-3" class="icon-20 m-r-8"></i-tabler>
             </mat-icon>
           </div>
-          ITRA
+          <strong>ITRA</strong>
         </ng-template>
         <mat-card-content class="p-y-24 b-t-1">
           <div class="row">
@@ -732,15 +745,20 @@
                       <mat-icon>more_vert</mat-icon>
                     </button>
                   </div>
-                  <button mat-stroked-button color="primary" class="m-t-16 w-100">Need Help?</button>
+                  <button
+                    mat-stroked-button
+                    color="primary"
+                    class="m-t-16 w-100"
+                  >
+                    Need Help?
+                  </button>
                 </mat-card-content>
               </mat-card>
             </div>
           </div>
         </mat-card-content>
       </mat-tab>
-      <!-- Security -->
-      <!-- <mat-tab>
+      <mat-tab>
         <ng-template mat-tab-label>
           <div class="d-flex align-items-center">
             <mat-icon>

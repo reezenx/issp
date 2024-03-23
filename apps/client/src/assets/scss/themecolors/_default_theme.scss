@@ -1,7 +1,7 @@
 $mat-primary: (
   100: white,
-  500: #0040E6,
-  700: #0040E6,
+  500: #0040e6,
+  700: #013dd5,
   contrast: (
     100: white,
     500: white,
@@ -20,9 +20,9 @@ $mat-secondary: (
 );
 
 $mat-warn: (
-  100: #FDEDE8,
-  500: #F19101,
-  700: #F19101,
+  100: #fdede8,
+  500: #f19101,
+  700: #d27f01,
   contrast: (
     100: white,
     500: white,
@@ -43,7 +43,7 @@ $bluetheme: mat.define-light-theme(
     ),
     typography:
       mat.define-typography-config(
-        $font-family: "Plus Jakarta Sans",
+        $font-family: 'Plus Jakarta Sans',
         $subtitle-2: mat.define-typography-level(14px, 14px, 400),
         $subtitle-1: mat.define-typography-level(21px, 26px, 500),
         $headline-6: mat.define-typography-level(18px, 26px, 600),
@@ -64,7 +64,7 @@ $darkbluetheme: mat.define-dark-theme(
     ),
     typography:
       mat.define-typography-config(
-        $font-family: "Plus Jakarta Sans",
+        $font-family: 'Plus Jakarta Sans',
         $subtitle-2: mat.define-typography-level(14px, 14px, 400),
         $subtitle-1: mat.define-typography-level(21px, 26px, 500),
         $headline-6: mat.define-typography-level(18px, 26px, 600),
@@ -89,8 +89,6 @@ $darkbluetheme: mat.define-dark-theme(
 .activeMenu {
   background-color: mat.get-color-from-palette($theme-primary, 500) !important;
 }
-
-
 
 .mat-mdc-outlined-button {
   &.mat-primary {

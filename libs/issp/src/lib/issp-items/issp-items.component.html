@@ -2,7 +2,7 @@
   <mat-card-content>
     <div class="d-flex align-items-center">
       <mat-card-title class="m-b-0"
-        >Information System Strategic Plan</mat-card-title
+        >Information System Strategic Plans</mat-card-title
       >
       <div class="m-l-auto">
         <button mat-flat-button color="primary" (click)="addNew()">
@@ -13,7 +13,7 @@
   </mat-card-content>
 </mat-card>
 <mat-card class="cardWithShadow">
-  <mat-card-content class="p-20">
+  <mat-card-content class="p-0">
     <ejs-grid
       #itemsGrid
       [allowExcelExport]="true"
@@ -48,11 +48,7 @@
             </a>
           </ng-template>
         </e-column>
-        <e-column
-          headerText="Description"
-          field="description"
-          [visible]="false"
-        ></e-column>
+        <e-column headerText="Description" field="description"></e-column>
         <e-column headerText="Year Start" field="startYear"></e-column>
         <e-column headerText="Year End" field="endYear"></e-column>
         <e-column headerText="Status" field="status">

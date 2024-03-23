@@ -38,7 +38,7 @@ export class IsspItemComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.parent.data.subscribe(({ issp }) => {
+    const routeSub = this.route.data.subscribe(({ issp }) => {
       this.issp = issp;
     });
     this.subs.push(routeSub);
