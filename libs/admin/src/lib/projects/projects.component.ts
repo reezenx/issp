@@ -132,7 +132,7 @@ const employees = [
 @Component({
   templateUrl: './projects.component.html',
 })
-export class IsspProjectsComponent implements AfterViewInit {
+export class ProjectsComponent implements AfterViewInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> =
     Object.create(null);
   searchText: any;

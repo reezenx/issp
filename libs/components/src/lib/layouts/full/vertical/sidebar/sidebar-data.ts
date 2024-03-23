@@ -53,6 +53,11 @@ export const navItems: NavItem[] = [
     route: 'admin/projects',
   },
   {
+    displayName: 'Pivot Table',
+    iconName: 'table-plus',
+    route: 'admin/pivot',
+  },
+  {
     navCap: 'Auth',
   },
   {

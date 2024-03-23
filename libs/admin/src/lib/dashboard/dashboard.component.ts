@@ -35,6 +35,6 @@ import { ProductPerformanceComponent } from '@issp/components';
   ],
   templateUrl: './dashboard.component.html',
 })
-export class IsspDashboardComponent {
+export class DashboardComponent {
   // constructor() {}
 }

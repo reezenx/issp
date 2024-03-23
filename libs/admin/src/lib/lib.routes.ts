@@ -1,29 +1,37 @@
 import { Routes } from '@angular/router';
-import { IsspDashboardComponent } from './dashboard/dashboard.component';
-import { IsspUsersComponent } from './users/users.component';
-import { IsspProjectsComponent } from './projects/projects.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsersComponent } from './users/users.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
-    component: IsspDashboardComponent,
+    component: DashboardComponent,
     data: {
       title: 'Dashboard',
     },
   },
   {
     path: 'users',
-    component: IsspUsersComponent,
+    component: UsersComponent,
     data: {
       title: 'Users',
     },
   },
   {
     path: 'projects',
-    component: IsspProjectsComponent,
+    component: ProjectsComponent,
     data: {
       title: 'Projects',
+    },
+  },
+  {
+    path: 'pivot',
+    component: PivotTableAdvComponent,
+    data: {
+      title: 'Pivot Table',
     },
   },
 ];

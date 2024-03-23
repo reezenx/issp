@@ -14,17 +14,19 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { AdminRoutes } from './lib.routes';
-import { IsspDashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import {
-  IsspUsersComponent,
+  UsersComponent,
   UserDialogContentComponent,
 } from './users/users.component';
 import { AddEmployeeComponent } from './users/add/add-user.component';
 import { AddProjectComponent } from './projects/add/add.component';
 import {
-  IsspProjectsComponent,
+  ProjectsComponent,
   ProjectDialogContentComponent,
 } from './projects/projects.component';
+import { PivotTableComponent } from '@issp/components';
+import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
 
 @NgModule({
   imports: [
@@ -35,21 +37,23 @@ import {
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     AngularEditorModule,
+    PivotTableComponent,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
     MatNativeDateModule,
     NgScrollbarModule,
-    IsspDashboardComponent,
+    DashboardComponent,
   ],
   declarations: [
-    IsspUsersComponent,
-    IsspProjectsComponent,
+    UsersComponent,
+    ProjectsComponent,
     AddEmployeeComponent,
     AddProjectComponent,
     ProjectDialogContentComponent,
     UserDialogContentComponent,
+    PivotTableAdvComponent,
   ],
   providers: [DatePipe],
 })
