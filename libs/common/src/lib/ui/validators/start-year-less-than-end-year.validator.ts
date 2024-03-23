@@ -8,9 +8,9 @@ import {
 export const startYearMustBeLessThanEndYearValidator: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
-  if (control.dirty) {
-    const startYear = control.get('startYear') as FormControl<number | Date>;
-    const endYear = control.get('endYear') as FormControl<number | Date>;
+  const startYear = control.get('startYear') as FormControl<number | Date>;
+  const endYear = control.get('endYear') as FormControl<number | Date>;
+  if (control.dirty && startYear.value && endYear.value) {
     const startYearValue =
       typeof startYear.value === 'number'
         ? startYear.value

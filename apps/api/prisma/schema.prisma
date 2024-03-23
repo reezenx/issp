@@ -81,7 +81,7 @@ model User {
 
 model ISSP {
   id          String      @id @default(cuid())
-  title       String      @unique
+  title       String
   description String?
   createdAt   DateTime    @default(now())
   status      ISSP_Status @default(NOT_STARTED)
@@ -93,7 +93,7 @@ model ISSP {
   agencyId    String
   author      User        @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
   authorId    String
-  version     Int
+  version     Int?        @default(1)
   readOnly    Boolean     @default(true)
   createdBy   String
   updatedBy   String?
@@ -105,7 +105,7 @@ model ISSP {
 model History {
   id      String      @id @default(cuid())
   userId  String
-  action ISSP_Action
+  action  ISSP_Action
   modules String[]
 }
 

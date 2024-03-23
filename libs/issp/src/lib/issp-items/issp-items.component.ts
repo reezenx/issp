@@ -1,6 +1,6 @@
 import { GridDefaults } from '@issp/common/ui/libraries';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import {
   ExcelExportProperties,
@@ -23,7 +23,10 @@ import { Subscription } from 'rxjs';
   styleUrl: './issp-items.component.scss',
 })
 export class IsspItemsComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
+  ) {}
 
   // Grid
   @ViewChild('itemsGrid', { static: true })
@@ -74,5 +77,9 @@ export class IsspItemsComponent implements OnInit {
         (this.grid as GridComponent).pdfExport(pdfExportProperties);
       }
     }
+  }
+
+  addNew() {
+    this.router.navigate(['./new'], { relativeTo: this.route });
   }
 }

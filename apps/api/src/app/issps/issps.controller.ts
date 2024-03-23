@@ -25,7 +25,7 @@ export class IsspController {
   constructor(private readonly isspService: IsspService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   async create(@Body() createIsspDto: CreateIsspDto) {

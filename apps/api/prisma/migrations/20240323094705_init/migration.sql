@@ -85,7 +85,7 @@ CREATE TABLE "issps" (
     "tags" TEXT[],
     "agencyId" TEXT NOT NULL,
     "authorId" TEXT NOT NULL,
-    "version" INTEGER NOT NULL,
+    "version" INTEGER DEFAULT 1,
     "readOnly" BOOLEAN NOT NULL DEFAULT true,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
@@ -115,9 +115,6 @@ CREATE UNIQUE INDEX "profiles_userId_key" ON "profiles"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "issps_title_key" ON "issps"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_ISSPUsers_AB_unique" ON "_ISSPUsers"("A", "B");

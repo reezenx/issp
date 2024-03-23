@@ -50,7 +50,6 @@ export class CreateIsspDto {
   version: number;
 
   @IsArray()
-  @IsNotEmpty()
   @ApiProperty()
   tags: string[];
 

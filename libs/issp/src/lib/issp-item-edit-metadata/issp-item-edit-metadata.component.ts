@@ -30,12 +30,12 @@ import {
 })
 export class IsspItemEditMetadataComponent implements OnInit {
   constructor(
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly isspService: IsspService,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private readonly snackBar: MatSnackBar,
+    private readonly dialog: MatDialog
   ) {}
 
   form: FormGroup;
