@@ -2,20 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ISSPDetails } from '../models/issp';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { Subscription } from 'rxjs';
 
-@UntilDestroy({ checkProperties: true })
+@UntilDestroy({ arrayName: 'subs' })
 @Component({
   selector: 'issp-item',
   templateUrl: './issp-item.component.html',
   styleUrl: './issp-item.component.scss',
 })
 export class IsspItemComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {}
   issp: ISSPDetails;
+  subs: Subscription[] = [];
+
+  views = [
+    {
+      name: 'Metadata',
+      route: './metadata',
+      iconName: 'list',
+    },
+    {
+      name: 'Details',
+      route: './edit',
+      iconName: 'list-details',
+    },
+    {
+      name: 'History',
+      route: './history',
+      iconName: 'history',
+    },
+  ];
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ issp }) => {
+    this.initSubs();
+  }
+
+  initSubs() {
+    const routeSub = this.route.parent.data.subscribe(({ issp }) => {
       this.issp = issp;
     });
+    this.subs.push(routeSub);
   }
 }

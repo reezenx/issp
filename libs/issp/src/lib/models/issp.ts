@@ -32,22 +32,33 @@ export class ISSPDetails extends Assign implements ISSP {
           : new Date(val);
       },
     });
+
+    Object.defineProperty(this, 'authorName', {
+      get: () => `${this.author.firstName} ${this.author.lastName}`,
+      enumerable: true,
+    });
+
+    Object.defineProperty(this, 'agencyName', {
+      get: () => this.agency.name,
+      enumerable: true,
+    });
   }
 
-  id: string;
-  title: string;
-  description: string;
-  createdAt: Date;
-  status: $Enums.ISSP_Status;
-  yearStart: string;
-  yearEnd: string;
-  tags: string[];
   agencyId: string;
   authorId: string;
-  version: number;
+  createdAt: Date;
   createdBy: string;
-  updatedBy: string;
+  description: string;
+  endYear: number;
+  id: string;
+  readOnly: boolean;
+  startYear: number;
+  status: $Enums.ISSP_Status;
+  tags: string[];
+  title: string;
   updatedAt: Date;
+  updatedBy: string;
+  version: number;
 
   author: {
     firstName: string;
@@ -56,14 +67,6 @@ export class ISSPDetails extends Assign implements ISSP {
   agency: {
     name: string;
   };
-
-  get authorName() {
-    return `${this.author.firstName} ${this.author.lastName}`;
-  }
-
-  get agencyName() {
-    return this.agency.name;
-  }
 
   private _createdAt: Date = new Date('0001-01-01T00:00:00Z');
   private _updatedAt: Date = new Date('0001-01-01T00:00:00Z');

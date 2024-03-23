@@ -24,15 +24,15 @@ export class CreateIsspDto {
   @ApiProperty()
   status: ISSP_Status;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   @ApiProperty()
-  yearStart: string;
+  startYear: number;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   @ApiProperty()
-  yearEnd: string;
+  endYear: number;
 
   @IsString()
   @IsNotEmpty()

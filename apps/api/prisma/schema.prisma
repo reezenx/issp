@@ -85,8 +85,8 @@ model ISSP {
   description String?
   createdAt   DateTime    @default(now())
   status      ISSP_Status @default(NOT_STARTED)
-  yearStart   String
-  yearEnd     String
+  startYear   Int
+  endYear     Int
   tags        String[]
   users       User[]      @relation("ISSPUsers")
   agency      Agency      @relation(fields: [agencyId], references: [id])
@@ -94,11 +94,19 @@ model ISSP {
   author      User        @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
   authorId    String
   version     Int
+  readOnly    Boolean     @default(true)
   createdBy   String
   updatedBy   String?
   updatedAt   DateTime?   @updatedAt
 
   @@map("issps")
+}
+
+model History {
+  id      String      @id @default(cuid())
+  userId  String
+  action ISSP_Action
+  modules String[]
 }
 
 enum Role {
@@ -132,4 +140,15 @@ enum Agency_Code {
   DA
   DBM
   DE
+}
+
+enum ISSP_Action {
+  VIEW
+  CREATE
+  AMEND
+  INSERT
+  ASSIGN
+  UPDATE
+  ENDORSED
+  APPROVE
 }

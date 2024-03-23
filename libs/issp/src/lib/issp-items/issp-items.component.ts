@@ -14,15 +14,16 @@ import {
 } from '@syncfusion/ej2-angular-grids';
 import { ISSPDetails } from '../models/issp';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
+import { Subscription } from 'rxjs';
 
-@UntilDestroy({ checkProperties: true })
+@UntilDestroy({ arrayName: 'subs' })
 @Component({
   selector: 'issp-items',
   templateUrl: './issp-items.component.html',
   styleUrl: './issp-items.component.scss',
 })
 export class IsspItemsComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {}
 
   // Grid
   @ViewChild('itemsGrid', { static: true })
@@ -45,10 +46,17 @@ export class IsspItemsComponent implements OnInit {
   };
   loadingIndicator = { indicatorType: 'Shimmer' };
 
+  subs: Subscription[] = [];
+
   ngOnInit() {
-    this.activatedRoute.data.subscribe(({ issps }) => {
+    this.initSubs();
+  }
+
+  initSubs() {
+    const routeSub = this.route.data.subscribe(({ issps }) => {
       this.gridData = issps;
     });
+    this.subs.push(routeSub);
   }
 
   toolbarClick(args: ClickEventArgs) {

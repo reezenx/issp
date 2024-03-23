@@ -1,5 +1,4 @@
-export * from './lib/richtext/richtext.component';
-export * from './lib/diagram/diagram.component';
-
-export * from './lib/layouts';
+export * from './lib/components';
+export * from './lib/controls';
 export * from './lib/dashboard';
+export * from './lib/layouts';

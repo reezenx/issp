@@ -13,7 +13,12 @@
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "allowedCommonJsDependencies": ["apexcharts", "bezier-easing", "@prisma/client"],
+        "allowedCommonJsDependencies": [
+          "apexcharts",
+          "bezier-easing",
+          "@prisma/client",
+          "moment"
+        ],
         "outputPath": "dist/apps/client",
         "index": "apps/client/src/index.html",
         "main": "apps/client/src/main.ts",
@@ -36,7 +41,8 @@
       },
       "configurations": {
         "production": {
-          "budgets": [{
+          "budgets": [
+            {
               "type": "initial",
               "maximumWarning": "15mb",
               "maximumError": "15mb"
@@ -67,7 +73,7 @@
           "buildTarget": "client:build:production"
         },
         "development": {
-          "buildTarget": "client:build:development",
+          "buildTarget": "client:build:development"
         }
       },
       "defaultConfiguration": "development",

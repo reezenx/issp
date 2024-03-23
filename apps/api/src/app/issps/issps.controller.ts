@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { IsspService } from './issps.service';
 import { CreateIsspDto } from './dto/create-issp.dto';
@@ -48,8 +49,8 @@ export class IsspController {
     return new IsspEntity(await this.isspService.findOne(id));
   }
 
-  @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   async update(@Param('id') id: string, @Body() updateIsspDto: UpdateIsspDto) {

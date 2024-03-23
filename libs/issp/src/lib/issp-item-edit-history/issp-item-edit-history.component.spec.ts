@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IsspItemEditPreviewComponent } from './issp-item-edit-preview.component';
+import { IsspItemEditPreviewComponent } from './issp-item-edit-history.component';
 
 describe('IsspItemEditPreviewComponent', () => {
   let component: IsspItemEditPreviewComponent;

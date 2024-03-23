@@ -34,9 +34,13 @@
             </a>
           </ng-template>
         </e-column>
-        <e-column headerText="Description" field="description"></e-column>
-        <e-column headerText="Year Start" field="yearStart"></e-column>
-        <e-column headerText="Year End" field="yearEnd"></e-column>
+        <e-column
+          headerText="Description"
+          field="description"
+          [visible]="false"
+        ></e-column>
+        <e-column headerText="Year Start" field="startYear"></e-column>
+        <e-column headerText="Year End" field="endYear"></e-column>
         <e-column headerText="Status" field="status"></e-column>
         <e-column headerText="Version" field="version"></e-column>
         <e-column headerText="Author" field="authorName"></e-column>

@@ -7,6 +7,9 @@ export class IsspEntity implements ISSP {
   }
 
   @ApiProperty()
+  readOnly: boolean;
+
+  @ApiProperty()
   id: string;
 
   @ApiProperty()
@@ -22,10 +25,10 @@ export class IsspEntity implements ISSP {
   status: $Enums.ISSP_Status;
 
   @ApiProperty()
-  yearStart: string;
+  startYear: number;
 
   @ApiProperty()
-  yearEnd: string;
+  endYear: number;
 
   @ApiProperty()
   tags: string[];

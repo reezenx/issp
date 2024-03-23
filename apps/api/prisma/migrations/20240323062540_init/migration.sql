@@ -10,6 +10,9 @@ CREATE TYPE "User_Status" AS ENUM ('ACTIVE', 'INACTIVE', 'DELETED');
 -- CreateEnum
 CREATE TYPE "Agency_Code" AS ENUM ('DICT', 'DILG', 'DAR', 'DA', 'DBM', 'DE');
 
+-- CreateEnum
+CREATE TYPE "ISSP_Action" AS ENUM ('VIEW', 'CREATE', 'AMEND', 'INSERT', 'ASSIGN', 'UPDATE', 'ENDORSED', 'APPROVE');
+
 -- CreateTable
 CREATE TABLE "profiles" (
     "id" TEXT NOT NULL,
@@ -61,7 +64,7 @@ CREATE TABLE "users" (
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
-    "agencyId" TEXT,
+    "agencyId" TEXT NOT NULL,
     "role" "Role"[] DEFAULT ARRAY['VIEWER']::"Role"[],
     "status" "User_Status" NOT NULL DEFAULT 'INACTIVE',
     "tags" TEXT[],
@@ -77,17 +80,28 @@ CREATE TABLE "issps" (
     "description" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" "ISSP_Status" NOT NULL DEFAULT 'NOT_STARTED',
-    "yearStart" TEXT NOT NULL,
-    "yearEnd" TEXT NOT NULL,
+    "startYear" INTEGER NOT NULL,
+    "endYear" INTEGER NOT NULL,
     "tags" TEXT[],
     "agencyId" TEXT NOT NULL,
     "authorId" TEXT NOT NULL,
     "version" INTEGER NOT NULL,
+    "readOnly" BOOLEAN NOT NULL DEFAULT true,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "updatedAt" TIMESTAMP(3),
 
     CONSTRAINT "issps_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "History" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "action" "ISSP_Action" NOT NULL,
+    "modules" TEXT[],
+
+    CONSTRAINT "History_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -118,7 +132,7 @@ ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userI
 ALTER TABLE "agencies" ADD CONSTRAINT "agencies_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "users" ADD CONSTRAINT "users_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "users" ADD CONSTRAINT "users_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "issps" ADD CONSTRAINT "issps_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

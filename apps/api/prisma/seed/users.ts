@@ -2,7 +2,6 @@ import { PrismaClient, Role, User, User_Status } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { faker } from '@faker-js/faker';
 import { AGENCIES, DEFAULT, USERS } from './constant';
-import { createId } from '@paralleldrive/cuid2';
 import { DateTime } from 'luxon';
 
 export async function createUsers(prisma: PrismaClient) {
@@ -15,6 +14,7 @@ export async function createUsers(prisma: PrismaClient) {
 
   // base users
   const baseUsers: User[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(USERS).forEach(([key, { id, email, role }]) => {
     baseUsers.push({
       id,
@@ -31,6 +31,7 @@ export async function createUsers(prisma: PrismaClient) {
       createdBy: 'System',
       updatedBy: 'System',
       tags: ['new'],
+      authoredIsspIds: [],
     });
   });
 

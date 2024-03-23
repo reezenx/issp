@@ -58,4 +58,20 @@ export class IsspService {
       })
     );
   }
+
+  updateOne(issp: ISSPDetails): Observable<ISSP> {
+    const uri = `${this.route}/${issp.id}`;
+    issp.startYear = new Date(issp.startYear).getFullYear();
+    issp.endYear = new Date(issp.endYear).getFullYear();
+    return this.http.put<ISSP>(uri, issp).pipe(
+      map((e) => {
+        const entity = new ISSPDetails();
+        entity.assign(e);
+        return entity;
+      }),
+      tap((data) => {
+        this.#emitLastUpdatedItem.next(data);
+      })
+    );
+  }
 }

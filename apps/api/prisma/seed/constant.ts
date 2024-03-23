@@ -130,36 +130,36 @@ export const USERS: {
 };
 
 export const ISSPS: {
-  [key: string]: Pick<ISSP, 'id' | 'title' | 'yearStart' | 'yearEnd'>;
+  [key: string]: Pick<ISSP, 'id' | 'title' | 'startYear' | 'endYear'>;
 } = {
   DICT_ISSP: {
     id: createId(),
     title: 'DICT Information System Strategic Plan 2018-2020 ',
-    yearStart: '2018',
-    yearEnd: '2020',
+    startYear: 2018,
+    endYear: 2020,
   },
   DILG_ISSP: {
     id: createId(),
     title: 'DILG Information System Strategic Plan 2018-2020 ',
-    yearStart: '2020',
-    yearEnd: '2023',
+    startYear: 2020,
+    endYear: 2023,
   },
   DAR_ISSP: {
     id: createId(),
     title: 'DAR Information System Strategic Plan 2018-2020 ',
-    yearStart: '2017',
-    yearEnd: '2019',
+    startYear: 2017,
+    endYear: 2019,
   },
   DE_ISSP: {
     id: createId(),
     title: 'DE Information System Strategic Plan 2018-2020 ',
-    yearStart: '2019',
-    yearEnd: '2021',
+    startYear: 2019,
+    endYear: 2021,
   },
   DA_ISSP: {
     id: createId(),
     title: 'DA Information System Strategic Plan 2018-2020 ',
-    yearStart: '2005',
-    yearEnd: '2007',
+    startYear: 2005,
+    endYear: 2007,
   },
 };

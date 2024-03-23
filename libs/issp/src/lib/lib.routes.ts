@@ -5,7 +5,7 @@ import { IsspItemNewComponent } from './issp-item-new/issp-item-new.component';
 import { IsspItemComponent } from './issp-item/issp-item.component';
 import { IsspItemEditMetadataComponent } from './issp-item-edit-metadata/issp-item-edit-metadata.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
-import { IsspItemEditPreviewComponent } from './issp-item-edit-preview/issp-item-edit-preview.component';
+import { IsspItemEditPreviewComponent as IsspItemEditHistoryComponent } from './issp-item-edit-history/issp-item-edit-history.component';
 import { inject } from '@angular/core';
 import { IsspService } from './services/issps.service';
 import { isspsResolver } from './resolvers/issps.resolver';
@@ -75,12 +75,12 @@ export const isspRoutes: Route[] = [
             component: IsspItemEditDetailsComponent,
           },
           {
-            path: 'preview',
-            title: 'ISSP Preview',
+            path: 'history',
+            title: 'IsSSP History',
             data: {
-              breadcrumb: 'Preview',
+              breadcrumb: 'History',
             },
-            component: IsspItemEditPreviewComponent,
+            component: IsspItemEditHistoryComponent,
           },
         ],
       },

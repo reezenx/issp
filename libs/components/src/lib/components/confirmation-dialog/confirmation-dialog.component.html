@@ -1,0 +1,44 @@
+<h2 data-test="dialog-title" mat-dialog-title>
+  {{ data.title || 'Confirmation required' }}
+</h2>
+<mat-dialog-content>
+  <p data-test="dialog-text-message" *ngIf="data.messageIsHtml !== true">
+    {{ data.message || 'Please confirm taking this action.' }}
+  </p>
+  <div
+    data-test="dialog-html-message"
+    *ngIf="data.messageIsHtml === true"
+    [innerHtml]="data.message"
+  ></div>
+  <div data-test="dialog-input" *ngIf="data.showInputConfirmation === true">
+    <mat-form-field class="max-input-width">
+      <mat-label>{{ data.inputConfirmationText }}</mat-label>
+      <input class="w-100" matInput [(ngModel)]="data.inputValue" />
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="mt-2 d-flex justify-content-end flex-row flex-fill">
+    <button
+      mat-stroked-button
+      color="primary"
+      data-test="dialog-confirm"
+      (click)="onConfirm()"
+      cdkFocusInitial
+      [disabled]="
+        data.showInputConfirmation === true &&
+        data.inputValue !== data.inputValidationValue
+      "
+    >
+      {{ data.okBtnText || 'Ok' }}
+    </button>
+    <button
+      data-test="dialog-cancel"
+      *ngIf="data.okOnly !== true"
+      mat-stroked-button
+      (click)="onCancel()"
+    >
+      {{ data.cancelBtnText || 'Cancel' }}
+    </button>
+  </div>
+</mat-dialog-actions>

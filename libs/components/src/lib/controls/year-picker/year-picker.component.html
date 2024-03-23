@@ -1,0 +1,21 @@
+<mat-form-field appearance="outline" class="w-100" [ngClass]="customClass">
+  <mat-label class="f-w-600">{{ label }}</mat-label>
+  <input
+    matInput
+    (click)="_openDatepickerOnClick(datepicker)"
+    (keydown.arrowdown)="_openDatepickerOnClick(datepicker)"
+    (keydown.enter)="_openDatepickerOnClick(datepicker)"
+    [formControl]="_inputCtrl"
+    [matDatepicker]="datepicker"
+    [max]="_max"
+    [min]="_min"
+    readonly
+  />
+</mat-form-field>
+<mat-datepicker
+  #datepicker
+  (yearSelected)="_yearSelectedHandler($event, datepicker)"
+  [touchUi]="touchUi"
+  startView="multi-year"
+>
+</mat-datepicker>
