@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { IsspModule } from './issps/issps.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/guard/roles.guard';
+import { ActionHistoryModule } from './action-history/action-history.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { RolesGuard } from './auth/guard/roles.guard';
     UsersModule,
     AuthModule,
     IsspModule,
+    ActionHistoryModule,
   ],
   controllers: [AppController],
   providers: [

@@ -8,6 +8,7 @@ import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item
 import { IsspItemEditPreviewComponent as IsspItemEditHistoryComponent } from './issp-item-edit-history/issp-item-edit-history.component';
 import { isspsResolver } from './resolvers/issps.resolver';
 import { isspResolver } from './resolvers/issp.resolver';
+import { actionHistoryResolver } from './resolvers/action.history.resolver';
 
 export const isspRoutes: Route[] = [
   {
@@ -77,6 +78,9 @@ export const isspRoutes: Route[] = [
             title: 'IsSSP History',
             data: {
               breadcrumb: 'History',
+            },
+            resolve: {
+              actionHistory: actionHistoryResolver,
             },
             component: IsspItemEditHistoryComponent,
           },

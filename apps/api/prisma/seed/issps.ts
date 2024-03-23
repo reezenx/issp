@@ -23,6 +23,8 @@ export async function createISSPs(prisma: PrismaClient) {
       agencyId: AGENCIES.DICT.id,
       authorId: USERS.PLANNER.id,
       version: 1,
+      readOnly: false,
+      // history: []
     });
   });
 

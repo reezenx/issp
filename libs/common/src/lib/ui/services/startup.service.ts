@@ -2,8 +2,6 @@ import { take } from 'rxjs/operators';
 import { Subscription, zip } from 'rxjs';
 import { Injectable } from '@angular/core';
 // import { UsersService } from "../../shared/services/users.service";
-// import { ErrorsService } from './errors.service';
-// import { Unsubscribe } from "../../decorators/unsubscribe";
 
 // @Unsubscribe()
 @Injectable({

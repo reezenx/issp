@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { IsspService } from '../services/issps.service';
+import { IsspsService } from '../services/issps.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -33,7 +33,7 @@ export class IsspItemNewComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly isspService: IsspService,
+    private readonly isspService: IsspsService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
@@ -65,8 +65,8 @@ export class IsspItemNewComponent implements OnInit {
         tags: new FormControl<string[]>([]),
         createdBy: new FormControl<string>('System'),
         updatedBy: new FormControl<string>('System'),
-        agencyId: new FormControl<string>('oqrklah6tdm88szxxgnbjog6'),
-        authorId: new FormControl<string>('cuocfb23hlkhdbkpxjmnf106'),
+        agencyId: new FormControl<string>('y5w93vwal49inqe9wb2lr6yx'),
+        authorId: new FormControl<string>('q41jy6v1s8jbl95wez13wo9m'),
       },
       { validator: startYearMustBeLessThanEndYearValidator }
     );
@@ -77,12 +77,12 @@ export class IsspItemNewComponent implements OnInit {
       this.isspService
         .createOne(this.form.value)
         .pipe(take(1))
-        .subscribe(() => {
+        .subscribe((data) => {
           this.snackBar.open('ISSP Metadata successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
           });
-          this.navigateToList();
+          this.navigateToEdit(data.id);
         });
     }
   }
@@ -110,5 +110,9 @@ export class IsspItemNewComponent implements OnInit {
 
   navigateToList() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  navigateToEdit(id: string) {
+    this.router.navigate(['../', id, 'metadata'], { relativeTo: this.route });
   }
 }

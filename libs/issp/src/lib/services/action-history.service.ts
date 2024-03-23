@@ -1,39 +1,37 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ISSP } from '@prisma/client';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ISSPDetails } from '../models/issp-details';
+import { ActionHistory } from '../models/action-history';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
-export class IsspsService {
-  route = `api/v1/issps`;
+export class ActionHistoryService {
+  route = `api/v1/action-history`;
 
   constructor(private http: HttpClient) {}
 
-  #emitAllItems: BehaviorSubject<Array<ISSP>> = new BehaviorSubject<
-    Array<ISSP>
-  >(new Array<ISSP>());
+  #emitAllItems: BehaviorSubject<Array<ActionHistory>> = new BehaviorSubject<
+    Array<ActionHistory>
+  >(new Array<ActionHistory>());
   allItems$ = this.#emitAllItems.asObservable();
 
-  #emitCurrentContextItem = new Subject<ISSP>();
+  #emitCurrentContextItem = new Subject<ActionHistory>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
 
-  #emitLastAddedItem = new Subject<ISSP>();
+  #emitLastAddedItem = new Subject<ActionHistory>();
   lastAddedItem$ = this.#emitLastAddedItem.asObservable();
 
-  #emitLastUpdatedItem = new Subject<ISSP>();
-  lastUpdatedItem$ = this.#emitLastUpdatedItem.asObservable();
-
-  findAll() {
-    return this.http.get<ISSP[]>(this.route).pipe(
+  findAll(isspId: string) {
+    const uri = `${this.route}/${isspId}`;
+    return this.http.get<ActionHistory[]>(uri).pipe(
       map((data) => {
-        let list = new Array<ISSPDetails>();
+        let list = new Array<ActionHistory>();
         list = data.map((e) => {
-          const entity = new ISSPDetails();
+          const entity = new ActionHistory();
           entity.assign(e);
           return entity;
         });
@@ -45,11 +43,11 @@ export class IsspsService {
     );
   }
 
-  findOne(id: string): Observable<ISSP> {
+  findOne(id: string): Observable<ActionHistory> {
     const uri = `${this.route}/${id}`;
-    return this.http.get<ISSP>(uri).pipe(
+    return this.http.get<ActionHistory>(uri).pipe(
       map((e) => {
-        const entity = new ISSPDetails();
+        const entity = new ActionHistory();
         entity.assign(e);
         return entity;
       }),
@@ -59,28 +57,13 @@ export class IsspsService {
     );
   }
 
-  updateOne(issp: ISSPDetails): Observable<ISSP> {
-    const uri = `${this.route}/${issp.id}`;
-    issp.startYear = new Date(issp.startYear).getFullYear();
-    issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.put<ISSP>(uri, issp).pipe(
-      map((e) => {
-        const entity = new ISSPDetails();
-        entity.assign(e);
-        return entity;
-      }),
-      tap((data) => {
-        this.#emitLastUpdatedItem.next(data);
-      })
-    );
-  }
-  createOne(issp: ISSPDetails): Observable<ISSP> {
+  createOne(issp: ISSPDetails): Observable<ActionHistory> {
     const uri = `${this.route}`;
     issp.startYear = new Date(issp.startYear).getFullYear();
     issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.post<ISSP>(uri, issp).pipe(
+    return this.http.post<ActionHistory>(uri, issp).pipe(
       map((e) => {
-        const entity = new ISSPDetails();
+        const entity = new ActionHistory();
         entity.assign(e);
         return entity;
       }),

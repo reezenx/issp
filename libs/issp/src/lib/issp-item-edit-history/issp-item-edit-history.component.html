@@ -1,30 +1,41 @@
-<mat-card class="cardWithShadow">
-  <mat-card-content>
-    <mat-card-title>Recent Activities</mat-card-title>
-
-    <div class="timeline m-t-24">
-      @for(stat of stats; track stat.title) {
-      <div class="timeline-item d-flex overflow-hidden">
-        <div class="time text-right mat-subtitle-1 f-s-14">{{ stat.time }}</div>
-        <div class="point d-flex align-items-center">
-          <span class="timeline-badge border-{{ stat.color }} m-y-8"></span>
-          <span class="timline-border d-block"></span>
-        </div>
-        <div class="desc">
-          @if(stat.subtext) {
-          <span class="mat-subtitle-1 f-s-14 lh-20">{{ stat.subtext }}</span>
-          } @if(stat.title) {
-          <span class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block">{{
-            stat.title
-          }}</span>
-          } @if(stat.link) {
-          <a href="#" class="text-primary text-decoration-none mat-body-1"
-            >#ML-3467</a
-          >
-          }
-        </div>
-      </div>
-      }
-    </div>
+<mat-card class="cardWithShadow m-0">
+  <mat-card-content class="p-0">
+    <ejs-grid
+      #itemsGrid
+      [allowExcelExport]="true"
+      [allowFiltering]="true"
+      [allowPaging]="true"
+      [allowPdfExport]="true"
+      [allowResizing]="true"
+      [allowSorting]="true"
+      [allowTextWrap]="true"
+      [allowGrouping]="true"
+      [autoFit]="true"
+      data-test="items-grid"
+      [showColumnChooser]="true"
+      [showColumnMenu]="true"
+      (toolbarClick)="toolbarClick($event)"
+      [dataSource]="gridData"
+      [filterSettings]="filterSettings"
+      [groupSettings]="groupOptions"
+      [id]="gridId"
+      [loadingIndicator]="loadingIndicator"
+      [pageSettings]="gridPageSettings"
+      [toolbar]="toolbar"
+    >
+      <e-columns>
+        <e-column headerText="Date" field="createdAt"></e-column>
+        <e-column headerText="User" field="userName"></e-column>
+        <e-column headerText="Action" field="action">
+          <ng-template #template let-data>{{
+            data.action | sentenceCase
+          }}</ng-template>
+        </e-column>
+        <e-column headerText="User Role" field="userRole"></e-column>
+        <e-column headerText="Version" field="isspVersion"></e-column>
+        <e-column headerText="Parent Module" field="parentModule"></e-column>
+        <e-column headerText="Child Module" field="childModule"></e-column>
+      </e-columns>
+    </ejs-grid>
   </mat-card-content>
 </mat-card>

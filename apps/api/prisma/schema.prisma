@@ -56,57 +56,68 @@ model Category {
 }
 
 model User {
-  id              String      @id @default(cuid())
+  id              String           @id @default(cuid())
   firstName       String
   lastName        String
-  email           String      @unique
+  email           String           @unique
   phone           String
   password        String
   createdBy       String
   updatedBy       String?
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime?   @updatedAt
-  agency          Agency      @relation(fields: [agencyId], references: [id])
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime?        @updatedAt
+  agency          Agency           @relation(fields: [agencyId], references: [id])
   agencyId        String
-  role            Role[]      @default([VIEWER])
-  status          User_Status @default(INACTIVE)
+  role            Role[]           @default([VIEWER])
+  status          User_Status      @default(INACTIVE)
   profile         Profile?
-  issps           ISSP[]      @relation("ISSPUsers")
+  issps           ISSP[]           @relation("ISSPUsers")
   tags            String[]
-  authoredIssps   ISSP[]      @relation(name: "ISSPAuthor")
+  authoredIssps   ISSP[]           @relation(name: "ISSPAuthor")
   authoredIsspIds String[]
+  history         Action_History[]
 
   @@map("users")
 }
 
 model ISSP {
-  id          String      @id @default(cuid())
+  id          String           @id @default(cuid())
   title       String
   description String?
-  createdAt   DateTime    @default(now())
-  status      ISSP_Status @default(NOT_STARTED)
+  status      ISSP_Status      @default(NOT_STARTED)
   startYear   Int
   endYear     Int
   tags        String[]
-  users       User[]      @relation("ISSPUsers")
-  agency      Agency      @relation(fields: [agencyId], references: [id])
+  users       User[]           @relation("ISSPUsers")
+  agency      Agency           @relation(fields: [agencyId], references: [id])
   agencyId    String
-  author      User        @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
+  author      User             @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
   authorId    String
-  version     Int?        @default(1)
-  readOnly    Boolean     @default(true)
+  version     Int?             @default(1)
+  readOnly    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
   createdBy   String
   updatedBy   String?
-  updatedAt   DateTime?   @updatedAt
+  updatedAt   DateTime?        @updatedAt
+  history     Action_History[]
 
   @@map("issps")
 }
 
-model History {
-  id      String      @id @default(cuid())
-  userId  String
-  action  ISSP_Action
-  modules String[]
+model Action_History {
+  id           String      @id @default(cuid())
+  user         User        @relation(fields: [userId], references: [id])
+  userId       String
+  issp         ISSP        @relation(fields: [isspId], references: [id])
+  isspId       String
+  isspVersion  Int
+  action       ISSP_Action
+  changes      String[]
+  parentModule String
+  childModule  String
+  tags         String[]
+  createdAt    DateTime    @default(now())
+  createdBy    String
 }
 
 enum Role {

@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { IsspService } from '../services/issps.service';
+import { IsspsService } from '../services/issps.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -33,7 +33,7 @@ export class IsspItemEditMetadataComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly isspService: IsspService,
+    private readonly isspService: IsspsService,
     private readonly snackBar: MatSnackBar,
     private readonly dialog: MatDialog
   ) {}

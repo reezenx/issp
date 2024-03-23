@@ -32,6 +32,7 @@ export async function createUsers(prisma: PrismaClient) {
       updatedBy: 'System',
       tags: ['new'],
       authoredIsspIds: [],
+      // history: [],
     });
   });
 

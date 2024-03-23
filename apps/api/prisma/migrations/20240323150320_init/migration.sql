@@ -78,7 +78,6 @@ CREATE TABLE "issps" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "status" "ISSP_Status" NOT NULL DEFAULT 'NOT_STARTED',
     "startYear" INTEGER NOT NULL,
     "endYear" INTEGER NOT NULL,
@@ -87,6 +86,7 @@ CREATE TABLE "issps" (
     "authorId" TEXT NOT NULL,
     "version" INTEGER DEFAULT 1,
     "readOnly" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "updatedAt" TIMESTAMP(3),
@@ -95,13 +95,20 @@ CREATE TABLE "issps" (
 );
 
 -- CreateTable
-CREATE TABLE "History" (
+CREATE TABLE "Action_History" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "isspId" TEXT NOT NULL,
+    "isspVersion" INTEGER NOT NULL,
     "action" "ISSP_Action" NOT NULL,
-    "modules" TEXT[],
+    "changes" TEXT[],
+    "parentModule" TEXT NOT NULL,
+    "childModule" TEXT NOT NULL,
+    "tags" TEXT[],
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdBy" TEXT NOT NULL,
 
-    CONSTRAINT "History_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Action_History_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -136,6 +143,12 @@ ALTER TABLE "issps" ADD CONSTRAINT "issps_agencyId_fkey" FOREIGN KEY ("agencyId"
 
 -- AddForeignKey
 ALTER TABLE "issps" ADD CONSTRAINT "issps_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Action_History" ADD CONSTRAINT "Action_History_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Action_History" ADD CONSTRAINT "Action_History_isspId_fkey" FOREIGN KEY ("isspId") REFERENCES "issps"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ISSPUsers" ADD CONSTRAINT "_ISSPUsers_A_fkey" FOREIGN KEY ("A") REFERENCES "issps"("id") ON DELETE CASCADE ON UPDATE CASCADE;

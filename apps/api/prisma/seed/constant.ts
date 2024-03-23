@@ -1,5 +1,13 @@
 import { createId } from '@paralleldrive/cuid2';
-import { Role, User, Agency, Category, ISSP } from '@prisma/client';
+import {
+  Role,
+  User,
+  Agency,
+  Category,
+  ISSP,
+  Action_History,
+  ISSP_Action,
+} from '@prisma/client';
 
 export const DEFAULT = {
   PW: 'ChangeM3!',
@@ -161,5 +169,64 @@ export const ISSPS: {
     title: 'DA Information System Strategic Plan 2018-2020 ',
     startYear: 2005,
     endYear: 2007,
+  },
+};
+
+export const ACTION_HISTORY: {
+  [key: string]: Pick<
+    Action_History,
+    | 'id'
+    | 'userId'
+    | 'parentModule'
+    | 'childModule'
+    | 'changes'
+    | 'action'
+    | 'isspVersion'
+  >;
+} = {
+  DICT_ISSP_1: {
+    id: createId(),
+    userId: USERS.PLANNER.id,
+    action: ISSP_Action.CREATE,
+    parentModule: 'PART I. ORGANIZATIONAL PROFILE',
+    childModule: 'A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT',
+    changes: ['Updated agency vision and mission statement'],
+    isspVersion: 1,
+  },
+  DICT_ISSP_2: {
+    id: createId(),
+    userId: USERS.ADMIN.id,
+    action: ISSP_Action.INSERT,
+    parentModule: 'PART I. ORGANIZATIONAL PROFILE',
+    childModule: 'B. DEPARTMENT/AGENCY PROFILE',
+    changes: ['Inserted agency vision and mission statement'],
+    isspVersion: 2,
+  },
+  DICT_ISSP_3: {
+    id: createId(),
+    userId: USERS.ENDORSER.id,
+    action: ISSP_Action.ENDORSED,
+    parentModule: 'PART III. DETAILED DESCRIPTION OF ICT PROJECTS',
+    childModule: 'A. INTERNAL ICT PROJECTS',
+    changes: ['Endorsed internal ICT projects'],
+    isspVersion: 3,
+  },
+  DICT_ISSP_4: {
+    id: createId(),
+    userId: USERS.EVALUATOR.id,
+    action: ISSP_Action.AMEND,
+    parentModule: 'PART V. DEVELOPMENT AND INVESTMENT PROGRAM',
+    childModule: 'A. ICT PROJECTS IMPLEMENTATION SCHEDULE',
+    changes: ['Amend project schedule'],
+    isspVersion: 4,
+  },
+  DICT_ISSP_5: {
+    id: createId(),
+    userId: USERS.APPROVER.id,
+    action: ISSP_Action.ASSIGN,
+    parentModule: 'PART IV. RESOURCE REQUIREMENTS',
+    childModule: 'A. DEPLOYMENT OF ICT EQUIPMENT AND SERVICES',
+    changes: ['Assigned ICT equipments and services'],
+    isspVersion: 5,
   },
 };
