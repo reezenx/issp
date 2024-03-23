@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ISSP } from '@prisma/client';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ISSPDetails } from '../models/issp';
+import { ISSPDetails } from '../models/issp-details';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({

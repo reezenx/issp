@@ -18,7 +18,6 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 //Import all material modules
-import { SyncfusionModule } from '@issp/common/ui/libraries';
 import { MaterialModule } from '@issp/common/ui/libraries';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -58,7 +57,6 @@ const initialize = (authService: AuthService) => async () => {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    SyncfusionModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: true,
       registrationStrategy: 'registerWhenStable:30000',

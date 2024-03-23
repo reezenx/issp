@@ -1,12 +1,4 @@
 import { NgModule } from '@angular/core';
-
-// Syncfusion
-import {
-  // ResizeService,
-  // ToolbarService,
-  RichTextEditorModule,
-} from '@syncfusion/ej2-angular-richtexteditor';
-import { DocumentEditorModule } from '@syncfusion/ej2-angular-documenteditor';
 import {
   ColumnChooserService,
   ColumnMenuService,
@@ -25,7 +17,7 @@ import {
 
 @NgModule({
   declarations: [],
-  exports: [RichTextEditorModule, DocumentEditorModule, GridModule],
+  exports: [GridModule],
   providers: [
     ColumnChooserService,
     ColumnMenuService,
@@ -41,4 +33,4 @@ import {
     ToolbarService,
   ],
 })
-export class SyncfusionModule {}
+export class SyncfusionGridModule {}

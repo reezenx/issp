@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule, SyncfusionModule } from '@issp/common/ui/libraries';
+import {
+  MaterialModule,
+  SyncfusionGridModule,
+} from '@issp/common/ui/libraries';
 
 import { isspRoutes } from './lib.routes';
 
@@ -25,7 +28,7 @@ import { PipesModule } from '@issp/common';
     TablerIconsModule.pick(TablerIcons),
     ControlsModule,
     MaterialModule,
-    SyncfusionModule,
+    SyncfusionGridModule,
     PipesModule,
     FormsModule,
     ReactiveFormsModule,

@@ -1,9 +1,4 @@
-import { GridDefaults } from '@issp/common/ui/libraries';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UntilDestroy } from '@ngneat/until-destroy';
 import {
-  ExcelExportProperties,
   FilterSettingsModel,
   GridComponent,
   GroupSettingsModel,
@@ -12,9 +7,13 @@ import {
   ResizeSettingsModel,
   ToolbarItems,
 } from '@syncfusion/ej2-angular-grids';
-import { ISSPDetails } from '../models/issp';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { GridDefaults } from '@issp/common/ui/libraries';
+import { ISSPDetails } from '../models/issp-details';
 import { Subscription } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({

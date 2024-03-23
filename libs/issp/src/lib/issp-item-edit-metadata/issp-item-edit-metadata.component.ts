@@ -1,7 +1,7 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISSPDetails } from '../models/issp';
+import { ISSPDetails } from '../models/issp-details';
 import {
   FormGroup,
   FormBuilder,
