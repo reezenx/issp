@@ -69,7 +69,7 @@ model User {
   agency          Agency           @relation(fields: [agencyId], references: [id])
   agencyId        String
   role            Role[]           @default([VIEWER])
-  status          User_Status      @default(INACTIVE)
+  status          User_Status
   profile         Profile?
   issps           ISSP[]           @relation("ISSPUsers")
   tags            String[]

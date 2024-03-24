@@ -1,4 +1,4 @@
-import { Subscription, take } from 'rxjs';
+import { map, Observable, startWith, Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDetails } from '../models/user-details';
@@ -16,8 +16,10 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { User_Status } from '@prisma/client';
-import { User_Statuses } from '@issp/common';
+import { User_Status, Role } from '@prisma/client';
+import { User_Roles, User_Statuses } from '@issp/common';
+import { AgencyDropdown } from '../../agencies/models/agency-dropdown';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -35,15 +37,29 @@ export class UserAdminNewComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
+  agenciesDropdown: AgencyDropdown[] = [];
+  agenciesFilteredOptions$: Observable<AgencyDropdown[]>;
   form: FormGroup;
   issp: UserDetails;
-  subs: Subscription[] = [];
+  rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
-  titleMinLength = 6;
-  titleMaxLength = 100;
+  subs: Subscription[] = [];
 
   ngOnInit(): void {
     this.initForm();
+    this.initSubs();
+  }
+
+  initSubs() {
+    const routeSub = this.route.data.subscribe(({ agenciesDropdown }) => {
+      this.agenciesDropdown = agenciesDropdown;
+    });
+    this.subs.push(routeSub);
+
+    this.agenciesFilteredOptions$ = this.form.controls.agency.valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this.searchFilterAgencies(value || ''))
+    );
   }
 
   initForm() {
@@ -52,15 +68,39 @@ export class UserAdminNewComponent implements OnInit {
       lastName: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
       password: new FormControl<string>('ChangeM3!', [Validators.required]),
-      email: new FormControl<string>('', [Validators.required]),
+      email: new FormControl<string>('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      agency: new FormControl<AgencyDropdown>(null, [Validators.required]),
       agencyId: new FormControl<string>('', [Validators.required]),
       status: new FormControl<User_Status>(User_Status.ACTIVE, [
         Validators.required,
       ]),
+      role: new FormControl<Role[]>([Role.VIEWER], [Validators.required]),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
     });
+  }
+
+  private searchFilterAgencies(value: string): AgencyDropdown[] {
+    const searchFilterValue = value.toLowerCase();
+
+    return this.agenciesDropdown.filter(
+      (searchOption) =>
+        searchOption.name.toLowerCase().includes(searchFilterValue) ||
+        searchOption.code.toLowerCase().includes(searchFilterValue)
+    );
+  }
+
+  displayFn(agency: AgencyDropdown): string {
+    return agency && agency.name ? `${agency.name} (${agency.code})` : '';
+  }
+
+  onOptionSelected(event: MatAutocompleteSelectedEvent) {
+    const agency = event.option.value as AgencyDropdown;
+    this.form.controls['agencyId'].patchValue(agency.id);
   }
 
   save() {
@@ -72,6 +112,7 @@ export class UserAdminNewComponent implements OnInit {
           this.snackBar.open('User successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
+            duration: 5000,
           });
           this.navigateToEdit(data.id);
         });

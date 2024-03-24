@@ -66,7 +66,7 @@ CREATE TABLE "users" (
     "updatedAt" TIMESTAMP(3),
     "agencyId" TEXT NOT NULL,
     "role" "Role"[] DEFAULT ARRAY['VIEWER']::"Role"[],
-    "status" "User_Status" NOT NULL DEFAULT 'INACTIVE',
+    "status" "User_Status" NOT NULL,
     "tags" TEXT[],
     "authoredIsspIds" TEXT[],
 

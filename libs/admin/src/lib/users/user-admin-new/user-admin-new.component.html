@@ -6,29 +6,31 @@
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-20"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">First Name</mat-label>
             <input #firstNam matInput type="text" formControlName="firstName" />
           </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-20"
-            color="primary"
-          >
-            <mat-label class="mat-subtitle-2 f-w-600">Last Name</mat-label>
-            <input #lastName matInput type="text" formControlName="lastName" />
-          </mat-form-field>
-        </div>
-        <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Agency</mat-label>
-            <input #agency matInput type="text" formControlName="agencyId" />
+            <input
+              type="text"
+              placeholder="Search & Select Agency"
+              matInput
+              formControlName="agency"
+              [matAutocomplete]="agencyAutoComplete"
+            />
+            <mat-autocomplete
+              #agencyAutoComplete="matAutocomplete"
+              [displayWith]="displayFn"
+              (optionSelected)="onOptionSelected($event)"
+            >
+              @for(option of agenciesFilteredOptions$ | async; track option.id)
+              {
+              <mat-option [value]="option">
+                {{ option.name }} ({{ option.code }})
+              </mat-option>
+              }
+            </mat-autocomplete>
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Status</mat-label>
@@ -38,8 +40,20 @@
               }
             </mat-select>
           </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-label class="mat-subtitle-2 f-w-600">Roles</mat-label>
+            <mat-select formControlName="role" multiple>
+              @for (item of rolesList; track item) {
+              <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
         </div>
         <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-label class="mat-subtitle-2 f-w-600">Last Name</mat-label>
+            <input #lastName matInput type="text" formControlName="lastName" />
+          </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Phone</mat-label>
             <input #phone matInput type="text" formControlName="phone" />

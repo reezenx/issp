@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
@@ -13,6 +12,7 @@ import { CreateAgencyDto } from './dto/create-agency.dto';
 import { UpdateAgencyDto } from './dto/update-agency.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AgencyEntity } from './entities/agency.entity';
+import { AgencyEntityDropdown } from './entities/agency-dropdown.entity';
 
 // @Roles(Role.ADMIN)
 @ApiTags('admin/agencies')
@@ -34,8 +34,17 @@ export class AgenciesController {
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
   async findAll() {
-    const users = await this.agenciesService.findAll();
-    return users.map((item) => new AgencyEntity(item));
+    const items = await this.agenciesService.findAll();
+    return items.map((item) => new AgencyEntity(item));
+  }
+
+  @Get('dropdown')
+  // @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
+  async findAllDropdown() {
+    const items = await this.agenciesService.findAllDropdown();
+    return items.map((item) => new AgencyEntityDropdown(item));
   }
 
   @Get(':id')

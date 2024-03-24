@@ -8,6 +8,7 @@ import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.com
 import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
 import { usersResolver } from './users/resolvers/users.resolver';
 import { userResolver } from './users/resolvers/user.resolver';
+import { agencyDropdownResolver } from './agencies/resolvers/agency-dropdown.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -48,6 +49,9 @@ export const AdminRoutes: Routes = [
         path: 'new',
         title: 'New User',
         component: UserAdminNewComponent,
+        resolve: {
+          agenciesDropdown: agencyDropdownResolver,
+        },
       },
       {
         path: ':id',

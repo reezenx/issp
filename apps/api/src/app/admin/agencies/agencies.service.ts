@@ -21,6 +21,16 @@ export class AgenciesService {
     return this.prisma.agency.findMany();
   }
 
+  findAllDropdown() {
+    return this.prisma.agency.findMany({
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+    });
+  }
+
   findOne(id: string) {
     return this.prisma.agency.findUnique({ where: { id } });
   }
