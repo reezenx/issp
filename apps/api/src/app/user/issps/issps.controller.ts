@@ -14,7 +14,7 @@ import { CreateIsspDto } from './dto/create-issp.dto';
 import { UpdateIsspDto } from './dto/update-issp.dto';
 import { ApiTags, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { IsspEntity } from './entities/issp.entity';
-import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 // import { Roles } from '../auth/decorators/roles.decorator';
 // import { Role } from '@prisma/client';
 

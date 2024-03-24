@@ -5,12 +5,12 @@ import { PrismaModule, PrismaService } from 'nestjs-prisma';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
-import { IsspModule } from './issps/issps.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/guard/roles.guard';
 import { ActionHistoryModule } from './action-history/action-history.module';
+import { UserModule } from './user/user.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -22,9 +22,9 @@ import { ActionHistoryModule } from './action-history/action-history.module';
         limit: 10,
       },
     ]),
-    UsersModule,
     AuthModule,
-    IsspModule,
+    AdminModule,
+    UserModule,
     ActionHistoryModule,
   ],
   controllers: [AppController],

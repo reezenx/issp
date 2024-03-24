@@ -6,4 +6,4 @@ import { IsspController } from './issps.controller';
   controllers: [IsspController],
   providers: [IsspService],
 })
-export class IsspModule {}
+export class IsspsModule {}
