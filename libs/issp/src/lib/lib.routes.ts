@@ -75,7 +75,7 @@ export const isspRoutes: Route[] = [
           },
           {
             path: 'history',
-            title: 'IsSSP History',
+            title: 'ISSP History',
             data: {
               breadcrumb: 'History',
             },

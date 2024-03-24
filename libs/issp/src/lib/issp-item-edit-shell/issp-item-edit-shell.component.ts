@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ISSPDetails } from '../models/issp-details';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
+import { IsspsService } from '../services/issps.service';
+import { ActivatedRoute } from '@angular/router';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -10,7 +11,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './issp-item-edit-shell.component.html',
 })
 export class IsspItemEditShellComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private isspsService: IsspsService,
+    private route: ActivatedRoute
+  ) {}
   issp: ISSPDetails;
   subs: Subscription[] = [];
 
@@ -41,5 +45,12 @@ export class IsspItemEditShellComponent implements OnInit {
       this.issp = issp;
     });
     this.subs.push(routeSub);
+
+    const currentIsspSub = this.isspsService.currentContextItem$.subscribe(
+      (data) => {
+        this.issp = data;
+      }
+    );
+    this.subs.push(currentIsspSub);
   }
 }

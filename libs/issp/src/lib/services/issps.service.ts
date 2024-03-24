@@ -14,22 +14,22 @@ export class IsspsService {
 
   constructor(private http: HttpClient) {}
 
-  #emitAllItems: BehaviorSubject<Array<ISSP>> = new BehaviorSubject<
-    Array<ISSP>
-  >(new Array<ISSP>());
+  #emitAllItems: BehaviorSubject<Array<ISSPDetails>> = new BehaviorSubject<
+    Array<ISSPDetails>
+  >(new Array<ISSPDetails>());
   allItems$ = this.#emitAllItems.asObservable();
 
-  #emitCurrentContextItem = new Subject<ISSP>();
+  #emitCurrentContextItem = new Subject<ISSPDetails>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
 
-  #emitLastAddedItem = new Subject<ISSP>();
+  #emitLastAddedItem = new Subject<ISSPDetails>();
   lastAddedItem$ = this.#emitLastAddedItem.asObservable();
 
-  #emitLastUpdatedItem = new Subject<ISSP>();
+  #emitLastUpdatedItem = new Subject<ISSPDetails>();
   lastUpdatedItem$ = this.#emitLastUpdatedItem.asObservable();
 
   findAll() {
-    return this.http.get<ISSP[]>(this.route).pipe(
+    return this.http.get<ISSPDetails[]>(this.route).pipe(
       map((data) => {
         let list = new Array<ISSPDetails>();
         list = data.map((e) => {
@@ -45,9 +45,9 @@ export class IsspsService {
     );
   }
 
-  findOne(id: string): Observable<ISSP> {
+  findOne(id: string): Observable<ISSPDetails> {
     const uri = `${this.route}/${id}`;
-    return this.http.get<ISSP>(uri).pipe(
+    return this.http.get<ISSPDetails>(uri).pipe(
       map((e) => {
         const entity = new ISSPDetails();
         entity.assign(e);
@@ -59,11 +59,11 @@ export class IsspsService {
     );
   }
 
-  updateOne(issp: ISSPDetails): Observable<ISSP> {
+  updateOne(issp: ISSPDetails): Observable<ISSPDetails> {
     const uri = `${this.route}/${issp.id}`;
     issp.startYear = new Date(issp.startYear).getFullYear();
     issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.put<ISSP>(uri, issp).pipe(
+    return this.http.put<ISSPDetails>(uri, issp).pipe(
       map((e) => {
         const entity = new ISSPDetails();
         entity.assign(e);
@@ -71,14 +71,15 @@ export class IsspsService {
       }),
       tap((data) => {
         this.#emitLastUpdatedItem.next(data);
+        this.#emitCurrentContextItem.next(data);
       })
     );
   }
-  createOne(issp: ISSPDetails): Observable<ISSP> {
+  createOne(issp: ISSPDetails): Observable<ISSPDetails> {
     const uri = `${this.route}`;
     issp.startYear = new Date(issp.startYear).getFullYear();
     issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.post<ISSP>(uri, issp).pipe(
+    return this.http.post<ISSPDetails>(uri, issp).pipe(
       map((e) => {
         const entity = new ISSPDetails();
         entity.assign(e);

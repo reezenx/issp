@@ -2,6 +2,7 @@
   <mat-card-content class="p-0">
     <ejs-grid
       #itemsGrid
+      data-test="items-grid"
       [allowExcelExport]="true"
       [allowFiltering]="true"
       [allowPaging]="true"
@@ -11,20 +12,25 @@
       [allowTextWrap]="true"
       [allowGrouping]="true"
       [autoFit]="true"
-      data-test="items-grid"
       [showColumnChooser]="true"
       [showColumnMenu]="true"
-      (toolbarClick)="toolbarClick($event)"
       [dataSource]="gridData"
       [filterSettings]="filterSettings"
-      [groupSettings]="groupOptions"
+      [groupSettings]="groupSettings"
+      [sortSettings]="sortSettings"
       [id]="gridId"
       [loadingIndicator]="loadingIndicator"
       [pageSettings]="gridPageSettings"
       [toolbar]="toolbar"
+      (toolbarClick)="toolbarClick($event)"
+      (created)="created()"
     >
       <e-columns>
-        <e-column headerText="Date" field="createdAt"></e-column>
+        <e-column headerText="Date" field="createdAt">
+          <ng-template #template let-data>
+            {{ data.createdAt | date : 'medium' }}
+          </ng-template>
+        </e-column>
         <e-column headerText="User" field="userName"></e-column>
         <e-column headerText="Action" field="action">
           <ng-template #template let-data>{{

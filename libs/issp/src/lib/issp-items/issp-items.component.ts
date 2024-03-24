@@ -35,7 +35,7 @@ export class IsspItemsComponent implements OnInit {
   gridPageSettings: PageSettingsModel = new GridDefaults();
   resizeSettings: ResizeSettingsModel = { mode: 'Normal' };
   filterSettings: FilterSettingsModel = { type: 'Excel' };
-  sortOptions = { columns: [{ field: 'title', direction: 'Ascending' }] };
+  sortSettings = { columns: [{ field: 'createdAt', direction: 'Descending' }] };
   toolbar: ToolbarItems[] = [
     'Print',
     'Search',
@@ -43,7 +43,7 @@ export class IsspItemsComponent implements OnInit {
     'PdfExport',
     'ColumnChooser',
   ];
-  groupOptions: GroupSettingsModel = {
+  groupSettings: GroupSettingsModel = {
     showDropArea: false,
   };
   loadingIndicator = { indicatorType: 'Shimmer' };
@@ -80,5 +80,15 @@ export class IsspItemsComponent implements OnInit {
 
   addNew() {
     this.router.navigate(['./new'], { relativeTo: this.route });
+  }
+
+  created(): void {
+    (
+      document.getElementById(this.gridId + '_searchbar') as Element
+    ).addEventListener('keyup', () => {
+      (this.grid as GridComponent).search(
+        ((event as MouseEvent).target as HTMLInputElement).value
+      );
+    });
   }
 }
