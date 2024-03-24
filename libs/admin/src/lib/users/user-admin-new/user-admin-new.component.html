@@ -10,28 +10,12 @@
             <mat-label class="mat-subtitle-2 f-w-600">First Name</mat-label>
             <input #firstNam matInput type="text" formControlName="firstName" />
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Agency</mat-label>
-            <input
-              type="text"
-              placeholder="Search & Select Agency"
-              matInput
-              formControlName="agency"
-              [matAutocomplete]="agencyAutoComplete"
-            />
-            <mat-autocomplete
-              #agencyAutoComplete="matAutocomplete"
-              [displayWith]="displayFn"
-              (optionSelected)="onOptionSelected($event)"
-            >
-              @for(option of agenciesFilteredOptions$ | async; track option.id)
-              {
-              <mat-option [value]="option">
-                {{ option.name }} ({{ option.code }})
-              </mat-option>
-              }
-            </mat-autocomplete>
-          </mat-form-field>
+          <issp-agency-picker-control
+            placeholder="Search & Select Agency"
+            formControlName="agencyId"
+            fieldName="Agency"
+            [agenciesDropdown]="agenciesDropdown"
+          ></issp-agency-picker-control>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Status</mat-label>
             <mat-select #status matInput formControlName="status">

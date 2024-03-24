@@ -23,7 +23,7 @@ import {
   ProjectsComponent,
   ProjectDialogContentComponent,
 } from './projects/projects.component';
-import { PivotTableComponent } from '@issp/components';
+import { ControlsModule, PivotTableComponent } from '@issp/components';
 import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
 import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-shell.component';
 import { UsersAdminComponent } from './users/users-admin/users-admin.component';
@@ -39,6 +39,7 @@ import { PipesModule } from '@issp/common';
     SyncfusionGridModule,
     PipesModule,
     FormsModule,
+    ControlsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
     AngularEditorModule,

@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AgencyDetails } from '../models/agency-details';
-import { API } from '@issp/common';
-import { AgencyDropdown } from '../models/agency-dropdown';
+import { AgencyDropdown, API } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -95,6 +94,7 @@ export class AgenciesService {
       })
     );
   }
+
   createOne(item: AgencyDetails): Observable<AgencyDetails> {
     const uri = `${this.route}`;
     return this.http.post<AgencyDetails>(uri, item).pipe(

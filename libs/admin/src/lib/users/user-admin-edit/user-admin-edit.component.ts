@@ -17,7 +17,7 @@ import {
   ConfirmationDialogComponentData,
 } from '@issp/components';
 import { Role, User_Status } from '@prisma/client';
-import { User_Roles, User_Statuses } from '@issp/common';
+import { AgencyDropdown, User_Roles, User_Statuses } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -37,6 +37,7 @@ export class UserAdminEditComponent implements OnInit {
 
   form: FormGroup;
   item: UserDetails;
+  agenciesDropdown: AgencyDropdown[] = [];
   rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
   subs: Subscription[] = [];
@@ -47,8 +48,9 @@ export class UserAdminEditComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ user }) => {
+    const routeSub = this.route.data.subscribe(({ user, agenciesDropdown }) => {
       this.item = user;
+      this.agenciesDropdown = agenciesDropdown;
       this.form.patchValue(this.item);
     });
     this.subs.push(routeSub);
@@ -71,7 +73,7 @@ export class UserAdminEditComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      agencyName: new FormControl<string>({ value: '', disabled: true }),
+      agencyId: new FormControl<string>('', [Validators.required]),
       status: new FormControl<User_Status>(null),
       role: new FormControl<Role[]>(null, [Validators.required]),
     });

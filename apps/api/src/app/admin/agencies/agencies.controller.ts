@@ -20,7 +20,6 @@ import { AgencyEntityDropdown } from './entities/agency-dropdown.entity';
 export class AgenciesController {
   constructor(private readonly agenciesService: AgenciesService) {}
 
-  @Post()
   // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
@@ -29,36 +28,36 @@ export class AgenciesController {
     return new AgencyEntity(await this.agenciesService.create(createAgencyDto));
   }
 
-  @Get()
   // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
+  @Get()
   async findAll() {
     const items = await this.agenciesService.findAll();
     return items.map((item) => new AgencyEntity(item));
   }
 
-  @Get('dropdown')
   // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
+  @Get('dropdown')
   async findAllDropdown() {
     const items = await this.agenciesService.findAllDropdown();
     return items.map((item) => new AgencyEntityDropdown(item));
   }
 
-  @Get(':id')
   // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
+  @Get(':id')
   async findOne(@Param('id') id: string) {
     return new AgencyEntity(await this.agenciesService.findOne(id));
   }
 
-  @Put(':id')
   // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
+  @Put(':id')
   async update(
     @Param('id') id: string,
     @Body() updateAgencyDto: UpdateAgencyDto
@@ -68,10 +67,10 @@ export class AgenciesController {
     );
   }
 
-  @Delete(':id')
   // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
+  @Delete(':id')
   async remove(@Param('id') id: string) {
     return new AgencyEntity(await this.agenciesService.remove(id));
   }

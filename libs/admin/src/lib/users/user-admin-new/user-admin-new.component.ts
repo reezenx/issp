@@ -1,4 +1,4 @@
-import { map, Observable, startWith, Subscription, take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDetails } from '../models/user-details';
@@ -17,9 +17,7 @@ import {
   ConfirmationDialogComponentData,
 } from '@issp/components';
 import { User_Status, Role } from '@prisma/client';
-import { User_Roles, User_Statuses } from '@issp/common';
-import { AgencyDropdown } from '../../agencies/models/agency-dropdown';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { AgencyDropdown, User_Roles, User_Statuses } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -38,7 +36,6 @@ export class UserAdminNewComponent implements OnInit {
   ) {}
 
   agenciesDropdown: AgencyDropdown[] = [];
-  agenciesFilteredOptions$: Observable<AgencyDropdown[]>;
   form: FormGroup;
   issp: UserDetails;
   rolesList = Object.entries(User_Roles).map(([key]) => key);
@@ -55,11 +52,6 @@ export class UserAdminNewComponent implements OnInit {
       this.agenciesDropdown = agenciesDropdown;
     });
     this.subs.push(routeSub);
-
-    this.agenciesFilteredOptions$ = this.form.controls.agency.valueChanges.pipe(
-      startWith(''),
-      map((value: string) => this.searchFilterAgencies(value || ''))
-    );
   }
 
   initForm() {
@@ -72,7 +64,6 @@ export class UserAdminNewComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      agency: new FormControl<AgencyDropdown>(null, [Validators.required]),
       agencyId: new FormControl<string>('', [Validators.required]),
       status: new FormControl<User_Status>(User_Status.ACTIVE, [
         Validators.required,
@@ -83,26 +74,6 @@ export class UserAdminNewComponent implements OnInit {
       updatedBy: new FormControl<string>('System'),
     });
   }
-
-  private searchFilterAgencies(value: string): AgencyDropdown[] {
-    const searchFilterValue = value.toLowerCase();
-
-    return this.agenciesDropdown.filter(
-      (searchOption) =>
-        searchOption.name.toLowerCase().includes(searchFilterValue) ||
-        searchOption.code.toLowerCase().includes(searchFilterValue)
-    );
-  }
-
-  displayFn(agency: AgencyDropdown): string {
-    return agency && agency.name ? `${agency.name} (${agency.code})` : '';
-  }
-
-  onOptionSelected(event: MatAutocompleteSelectedEvent) {
-    const agency = event.option.value as AgencyDropdown;
-    this.form.controls['agencyId'].patchValue(agency.id);
-  }
-
   save() {
     if (this.form.valid && this.form.dirty) {
       this.usersService

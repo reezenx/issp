@@ -59,6 +59,7 @@ export const AdminRoutes: Routes = [
         component: UserAdminEditComponent,
         resolve: {
           user: userResolver,
+          agenciesDropdown: agencyDropdownResolver,
         },
       },
     ],
