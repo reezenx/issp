@@ -14,6 +14,7 @@ import { GridDefaults } from '@issp/common/ui/libraries';
 import { UserDetails } from '../models/user-details';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { User_Status } from '@prisma/client';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -48,6 +49,7 @@ export class UsersAdminComponent implements OnInit {
   };
   loadingIndicator = { indicatorType: 'Shimmer' };
 
+  STATUS = User_Status;
   subs: Subscription[] = [];
 
   ngOnInit() {
@@ -90,5 +92,9 @@ export class UsersAdminComponent implements OnInit {
         ((event as MouseEvent).target as HTMLInputElement).value
       );
     });
+  }
+
+  editItem(id: string) {
+    this.router.navigate(['./', id], { relativeTo: this.route });
   }
 }

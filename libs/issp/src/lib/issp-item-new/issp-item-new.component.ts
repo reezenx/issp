@@ -81,6 +81,7 @@ export class IsspItemNewComponent implements OnInit {
           this.snackBar.open('ISSP successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
+            duration: 5000,
           });
           this.navigateToEdit(data.id);
         });

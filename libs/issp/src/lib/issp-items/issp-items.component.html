@@ -50,7 +50,11 @@
             </a>
           </ng-template>
         </e-column>
-        <e-column headerText="Description" field="description"></e-column>
+        <e-column
+          headerText="Description"
+          field="description"
+          [visible]="false"
+        ></e-column>
         <e-column headerText="Year Start" field="startYear"></e-column>
         <e-column headerText="Year End" field="endYear"></e-column>
         <e-column headerText="Status" field="status">
@@ -73,6 +77,36 @@
         <e-column headerText="Updated At" field="updatedAt" [visible]="false">
           <ng-template #template let-data>
             {{ data.updatedAt | date : 'medium' }}
+          </ng-template>
+        </e-column>
+        <e-column headerText="Actions" field="actions" textAlign="center">
+          <ng-template #template let-data>
+            <ng-container *ngIf="data.readOnly; else notReadOnly">
+              <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                matTooltip="ISSP is readonly"
+              >
+                <mat-icon matSuffix>
+                  <i-tabler name="lock" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </ng-container>
+            <ng-template #notReadOnly>
+              <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                *ngIf="!data.workPackageId"
+                (click)="editItem(data.id)"
+                matTooltip="Edit ISSP"
+              >
+                <mat-icon matSuffix>
+                  <i-tabler name="pencil" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </ng-template>
           </ng-template>
         </e-column>
       </e-columns>

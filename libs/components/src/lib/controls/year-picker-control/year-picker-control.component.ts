@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  forwardRef,
-  Input,
-  ViewChild,
-} from '@angular/core';
+import { Component, forwardRef, Input, ViewChild } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -33,9 +27,9 @@ export const YEAR_MODE_FORMATS = {
 };
 
 @Component({
-  selector: 'issp-year-picker',
-  templateUrl: './year-picker.component.html',
-  styleUrl: './year-picker.component.scss',
+  selector: 'issp-year-picker-control',
+  templateUrl: './year-picker-control.component.html',
+  styleUrl: './year-picker-control.component.scss',
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en' },
     {
@@ -46,12 +40,12 @@ export const YEAR_MODE_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: YEAR_MODE_FORMATS },
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => IsspYearPickerComponent),
+      useExisting: forwardRef(() => YearPickerControlComponent),
       multi: true,
     },
   ],
 })
-export class IsspYearPickerComponent implements ControlValueAccessor {
+export class YearPickerControlComponent implements ControlValueAccessor {
   @Input() customClass = '';
 
   @Input() label = 'Year';

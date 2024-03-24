@@ -13,26 +13,10 @@
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-20"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">First Name</mat-label>
             <input #firstNam matInput type="text" formControlName="firstName" />
           </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-20"
-            color="primary"
-          >
-            <mat-label class="mat-subtitle-2 f-w-600">Last Name</mat-label>
-            <input #lastName matInput type="text" formControlName="lastName" />
-          </mat-form-field>
-        </div>
-        <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Agency Name</mat-label>
             <input
@@ -51,16 +35,19 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Created At</mat-label>
-            <input
-              #createdAt
-              matInput
-              type="text"
-              formControlName="createdAt"
-            />
+            <mat-label class="mat-subtitle-2 f-w-600">Roles</mat-label>
+            <mat-select formControlName="role" multiple>
+              @for (item of rolesList; track item) {
+              <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
         </div>
         <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-label class="mat-subtitle-2 f-w-600">Last Name</mat-label>
+            <input #lastName matInput type="text" formControlName="lastName" />
+          </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Phone</mat-label>
             <input #phone matInput type="text" formControlName="phone" />
@@ -68,15 +55,6 @@
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Email</mat-label>
             <input #email matInput type="text" formControlName="email" />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Updated At</mat-label>
-            <input
-              #updatedAt
-              matInput
-              type="text"
-              formControlName="updatedAt"
-            />
           </mat-form-field>
         </div>
       </div>

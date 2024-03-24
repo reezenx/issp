@@ -93,6 +93,7 @@ export class IsspItemEditMetadataComponent implements OnInit {
           this.snackBar.open('ISSP Metadata successfully updated!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
+            duration: 5000,
           });
         });
     }

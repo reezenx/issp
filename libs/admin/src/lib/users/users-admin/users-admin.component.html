@@ -71,6 +71,38 @@
             {{ data.updatedAt | date : 'medium' }}
           </ng-template>
         </e-column>
+        <e-column headerText="Actions" field="actions" textAlign="center">
+          <ng-template #template let-data>
+            <ng-container
+              *ngIf="data.status === STATUS.ACTIVE; else notReadOnly"
+            >
+              <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                *ngIf="!data.workPackageId"
+                (click)="editItem(data.id)"
+                matTooltip="Edit User"
+              >
+                <mat-icon matSuffix>
+                  <i-tabler name="pencil" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </ng-container>
+            <ng-template #notReadOnly>
+              <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                matTooltip="User is readonly"
+              >
+                <mat-icon matSuffix>
+                  <i-tabler name="lock" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </ng-template>
+          </ng-template>
+        </e-column>
       </e-columns>
     </ejs-grid>
   </mat-card-content>

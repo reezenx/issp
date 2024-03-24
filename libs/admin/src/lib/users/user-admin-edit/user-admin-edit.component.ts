@@ -16,8 +16,8 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { User_Status } from '@prisma/client';
-import { User_Statuses } from '@issp/common';
+import { Role, User_Status } from '@prisma/client';
+import { User_Roles, User_Statuses } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -37,10 +37,9 @@ export class UserAdminEditComponent implements OnInit {
 
   form: FormGroup;
   item: UserDetails;
-  subs: Subscription[] = [];
+  rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
-  nameMinLength = 6;
-  nameMaxLength = 100;
+  subs: Subscription[] = [];
 
   ngOnInit(): void {
     this.initForm();
@@ -68,15 +67,13 @@ export class UserAdminEditComponent implements OnInit {
       firstName: new FormControl<string>('', [Validators.required]),
       lastName: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
-      password: new FormControl<string>('ChangeM3!', [Validators.required]),
-      email: new FormControl<string>({ value: '', disabled: true }),
+      email: new FormControl<string>('', [
+        Validators.required,
+        Validators.email,
+      ]),
       agencyName: new FormControl<string>({ value: '', disabled: true }),
-      status: new FormControl<User_Status>({
-        value: User_Status.ACTIVE,
-        disabled: true,
-      }),
-      createdAt: new FormControl<Date>({ value: null, disabled: true }),
-      updatedAt: new FormControl<Date>({ value: null, disabled: true }),
+      status: new FormControl<User_Status>(null),
+      role: new FormControl<Role[]>(null, [Validators.required]),
     });
   }
 
@@ -89,6 +86,7 @@ export class UserAdminEditComponent implements OnInit {
           this.snackBar.open('User successfully updated!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
+            duration: 5000,
           });
         });
     }
@@ -116,6 +114,6 @@ export class UserAdminEditComponent implements OnInit {
   }
 
   navigateToList() {
-    this.router.navigate(['../../'], { relativeTo: this.route });
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }

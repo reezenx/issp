@@ -92,4 +92,8 @@ export class IsspItemsComponent implements OnInit {
       );
     });
   }
+
+  editItem(id: string) {
+    this.router.navigate(['./', id, 'metadata'], { relativeTo: this.route });
+  }
 }

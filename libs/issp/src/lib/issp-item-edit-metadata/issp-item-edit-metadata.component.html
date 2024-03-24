@@ -25,20 +25,20 @@
           </mat-form-field>
         </div>
         <div class="col-lg-6">
-          <issp-year-picker
+          <issp-year-picker-control
             #startYear
             formControlName="startYear"
             label="Start Year"
             [invalid]="form.errors?.startYearMustBeGreaterThanEndYear !== null"
-          ></issp-year-picker>
+          ></issp-year-picker-control>
         </div>
         <div class="col-lg-6">
-          <issp-year-picker
+          <issp-year-picker-control
             #endYear
             formControlName="endYear"
             label="End Year"
             [invalid]="form.errors?.startYearMustBeGreaterThanEndYear !== null"
-          ></issp-year-picker>
+          ></issp-year-picker-control>
         </div>
         @if(form.errors?.startYearMustBeGreaterThanEndYear) {
         <div class="col-lg-12 m-b-20">
