@@ -2,38 +2,38 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ISSPDetails } from '../models/issp-details';
+import { UserDetails } from '../models/user-details';
 import { API } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
-export class IsspsService {
-  route = `${API.BASE}${API.USER.ISSPS}`;
+export class UsersService {
+  route = `${API.BASE}${API.ADMIN.USERS}`;
 
   constructor(private http: HttpClient) {}
 
-  #emitAllItems: BehaviorSubject<Array<ISSPDetails>> = new BehaviorSubject<
-    Array<ISSPDetails>
-  >(new Array<ISSPDetails>());
+  #emitAllItems: BehaviorSubject<Array<UserDetails>> = new BehaviorSubject<
+    Array<UserDetails>
+  >(new Array<UserDetails>());
   allItems$ = this.#emitAllItems.asObservable();
 
-  #emitCurrentContextItem = new Subject<ISSPDetails>();
+  #emitCurrentContextItem = new Subject<UserDetails>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
 
-  #emitLastAddedItem = new Subject<ISSPDetails>();
+  #emitLastAddedItem = new Subject<UserDetails>();
   lastAddedItem$ = this.#emitLastAddedItem.asObservable();
 
-  #emitLastUpdatedItem = new Subject<ISSPDetails>();
+  #emitLastUpdatedItem = new Subject<UserDetails>();
   lastUpdatedItem$ = this.#emitLastUpdatedItem.asObservable();
 
   findAll() {
-    return this.http.get<ISSPDetails[]>(this.route).pipe(
+    return this.http.get<UserDetails[]>(this.route).pipe(
       map((data) => {
-        let list = new Array<ISSPDetails>();
+        let list = new Array<UserDetails>();
         list = data.map((e) => {
-          const entity = new ISSPDetails();
+          const entity = new UserDetails();
           entity.assign(e);
           return entity;
         });
@@ -45,11 +45,11 @@ export class IsspsService {
     );
   }
 
-  findOne(id: string): Observable<ISSPDetails> {
+  findOne(id: string): Observable<UserDetails> {
     const uri = `${this.route}/${id}`;
-    return this.http.get<ISSPDetails>(uri).pipe(
+    return this.http.get<UserDetails>(uri).pipe(
       map((e) => {
-        const entity = new ISSPDetails();
+        const entity = new UserDetails();
         entity.assign(e);
         return entity;
       }),
@@ -59,13 +59,11 @@ export class IsspsService {
     );
   }
 
-  updateOne(issp: ISSPDetails): Observable<ISSPDetails> {
-    const uri = `${this.route}/${issp.id}`;
-    issp.startYear = new Date(issp.startYear).getFullYear();
-    issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.put<ISSPDetails>(uri, issp).pipe(
+  updateOne(item: UserDetails): Observable<UserDetails> {
+    const uri = `${this.route}/${item.id}`;
+    return this.http.put<UserDetails>(uri, item).pipe(
       map((e) => {
-        const entity = new ISSPDetails();
+        const entity = new UserDetails();
         entity.assign(e);
         return entity;
       }),
@@ -75,13 +73,11 @@ export class IsspsService {
       })
     );
   }
-  createOne(issp: ISSPDetails): Observable<ISSPDetails> {
+  createOne(item: UserDetails): Observable<UserDetails> {
     const uri = `${this.route}`;
-    issp.startYear = new Date(issp.startYear).getFullYear();
-    issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.post<ISSPDetails>(uri, issp).pipe(
+    return this.http.post<UserDetails>(uri, item).pipe(
       map((e) => {
-        const entity = new ISSPDetails();
+        const entity = new UserDetails();
         entity.assign(e);
         return entity;
       }),

@@ -15,12 +15,12 @@ import { UpdateIsspDto } from './dto/update-issp.dto';
 import { ApiTags, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { IsspEntity } from './entities/issp.entity';
 import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
-// import { Roles } from '../auth/decorators/roles.decorator';
-// import { Role } from '@prisma/client';
+import { Roles } from '../../auth/decorators/roles.decorator';
+import { Role } from '@prisma/client';
 
-@ApiTags('issps')
-// @Roles(Role.ADMIN)
-@Controller('issps')
+// @Roles(Role.PLANNER)
+@ApiTags('user/issps')
+@Controller('user/issps')
 export class IsspController {
   constructor(private readonly isspService: IsspService) {}
 

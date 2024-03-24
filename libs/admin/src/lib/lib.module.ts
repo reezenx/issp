@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@issp/common/ui/libraries';
+import {
+  MaterialModule,
+  SyncfusionGridModule,
+} from '@issp/common/ui/libraries';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -15,24 +18,26 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { AdminRoutes } from './lib.routes';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {
-  UsersComponent,
-  UserDialogContentComponent,
-} from './users/users.component';
-import { AddEmployeeComponent } from './users/add/add-user.component';
-import { AddProjectComponent } from './projects/add/add.component';
+
 import {
   ProjectsComponent,
   ProjectDialogContentComponent,
 } from './projects/projects.component';
 import { PivotTableComponent } from '@issp/components';
 import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
+import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-shell.component';
+import { UsersAdminComponent } from './users/users-admin/users-admin.component';
+import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.component';
+import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
+import { PipesModule } from '@issp/common';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminRoutes),
     MaterialModule,
+    SyncfusionGridModule,
+    PipesModule,
     FormsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
@@ -47,13 +52,13 @@ import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
     DashboardComponent,
   ],
   declarations: [
-    UsersComponent,
     ProjectsComponent,
-    AddEmployeeComponent,
-    AddProjectComponent,
     ProjectDialogContentComponent,
-    UserDialogContentComponent,
     PivotTableAdvComponent,
+    UsersAdminShellComponent,
+    UsersAdminComponent,
+    UserAdminNewComponent,
+    UserAdminEditComponent,
   ],
   providers: [DatePipe],
 })

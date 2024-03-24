@@ -1,7 +1,7 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISSPDetails } from '../models/issp-details';
+import { UserDetails } from '../models/user-details';
 import {
   FormGroup,
   FormBuilder,
@@ -9,39 +9,36 @@ import {
   Validators,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { IsspsService } from '../services/issps.service';
+import { UsersService } from '../services/users.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { ISSP_Status } from '@prisma/client';
-import {
-  ISSP_Statuses,
-  startYearMustBeLessThanEndYearValidator,
-} from '@issp/common';
+import { User_Status } from '@prisma/client';
+import { User_Statuses } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-item-new',
-  templateUrl: './issp-item-new.component.html',
-  styleUrl: './issp-item-new.component.scss',
+  selector: 'issp-user-admin-new',
+  templateUrl: './user-admin-new.component.html',
+  styleUrl: './user-admin-new.component.scss',
 })
-export class IsspItemNewComponent implements OnInit {
+export class UserAdminNewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly isspService: IsspsService,
+    private readonly usersService: UsersService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
   form: FormGroup;
-  issp: ISSPDetails;
+  issp: UserDetails;
   subs: Subscription[] = [];
-  statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
+  statusList = Object.entries(User_Statuses).map(([key]) => key);
   titleMinLength = 6;
   titleMaxLength = 100;
 
@@ -50,35 +47,29 @@ export class IsspItemNewComponent implements OnInit {
   }
 
   initForm() {
-    this.form = this.formBuilder.group(
-      {
-        title: new FormControl<string>('', [
-          Validators.required,
-          Validators.minLength(this.titleMinLength),
-          Validators.maxLength(this.titleMaxLength),
-        ]),
-        description: new FormControl<string>('', [Validators.required]),
-        endYear: new FormControl<number>(null, [Validators.required]),
-        startYear: new FormControl<number>(null, [Validators.required]),
-        status: new FormControl<ISSP_Status>(ISSP_Statuses.NOT_STARTED),
-        version: new FormControl<number>(1),
-        tags: new FormControl<string[]>([]),
-        createdBy: new FormControl<string>('System'),
-        updatedBy: new FormControl<string>('System'),
-        agencyId: new FormControl<string>('y5w93vwal49inqe9wb2lr6yx'),
-        authorId: new FormControl<string>('q41jy6v1s8jbl95wez13wo9m'),
-      },
-      { validator: startYearMustBeLessThanEndYearValidator }
-    );
+    this.form = this.formBuilder.group({
+      firstName: new FormControl<string>('', [Validators.required]),
+      lastName: new FormControl<string>('', [Validators.required]),
+      phone: new FormControl<string>('', [Validators.required]),
+      password: new FormControl<string>('ChangeM3!', [Validators.required]),
+      email: new FormControl<string>('', [Validators.required]),
+      agencyId: new FormControl<string>('', [Validators.required]),
+      status: new FormControl<User_Status>(User_Status.ACTIVE, [
+        Validators.required,
+      ]),
+      tags: new FormControl<string[]>([]),
+      createdBy: new FormControl<string>('System'),
+      updatedBy: new FormControl<string>('System'),
+    });
   }
 
   save() {
     if (this.form.valid && this.form.dirty) {
-      this.isspService
+      this.usersService
         .createOne(this.form.value)
         .pipe(take(1))
         .subscribe((data) => {
-          this.snackBar.open('ISSP successfully created!', 'Ok', {
+          this.snackBar.open('User successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
           });
@@ -113,6 +104,6 @@ export class IsspItemNewComponent implements OnInit {
   }
 
   navigateToEdit(id: string) {
-    this.router.navigate(['../', id, 'metadata'], { relativeTo: this.route });
+    this.router.navigate(['../', id], { relativeTo: this.route });
   }
 }

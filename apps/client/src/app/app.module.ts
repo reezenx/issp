@@ -31,20 +31,19 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { AuthService, ErrorDialogInterceptor } from '@issp/auth';
 import { AuthTokenInterceptor } from '@issp/auth';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function HttpLoaderFactory(http: HttpClient): unknown {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const initialize = (authService: AuthService) => async () => {
-  if (authService.getAccessToken()) {
-    try {
-      await authService.getProfile().toPromise();
-    } catch {
-      /* empty */
-    }
-  }
+  // if (authService.getAccessToken()) {
+  //   try {
+  //     await authService.getProfile().toPromise();
+  //   } catch {
+  //     /* empty */
+  //   }
+  // }
 };
 
 @NgModule({
@@ -57,10 +56,6 @@ const initialize = (authService: AuthService) => async () => {
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: true,
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
     TablerIconsModule.pick(TablerIcons),
     TranslateModule.forRoot({
       loader: {

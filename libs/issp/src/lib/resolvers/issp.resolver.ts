@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { IsspsService } from '../services/issps.service';
-import { ISSP } from '@prisma/client';
+import { ISSPDetails } from '../models/issp-details';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const isspResolver: ResolveFn<ISSP> = (route, state) => {
+export const isspResolver: ResolveFn<ISSPDetails> = (route, state) => {
   const id = route.params.id;
   return inject(IsspsService).findOne(id);
 };

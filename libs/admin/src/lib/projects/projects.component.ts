@@ -13,7 +13,6 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
-import { AddProjectComponent } from './add/add.component';
 
 export interface Employee {
   id: number;
@@ -190,7 +189,7 @@ export class ProjectsComponent implements AfterViewInit {
       Projects: row_obj.Projects,
       imagePath: row_obj.imagePath,
     });
-    this.dialog.open(AddProjectComponent);
+    // this.dialog.open(AddProjectComponent);
     this.table.renderRows();
   }
 

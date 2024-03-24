@@ -11,17 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridDefaults } from '@issp/common/ui/libraries';
-import { ISSPDetails } from '../models/issp-details';
+import { UserDetails } from '../models/user-details';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-items',
-  templateUrl: './issp-items.component.html',
-  styleUrl: './issp-items.component.scss',
+  selector: 'issp-users-admin',
+  templateUrl: './users-admin.component.html',
+  styleUrl: './users-admin.component.scss',
 })
-export class IsspItemsComponent implements OnInit {
+export class UsersAdminComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router
@@ -31,7 +31,7 @@ export class IsspItemsComponent implements OnInit {
   @ViewChild('itemsGrid', { static: true })
   grid: GridComponent;
   gridId = 'itemsGrid';
-  gridData: Array<ISSPDetails> = new Array<ISSPDetails>();
+  gridData: Array<UserDetails> = new Array<UserDetails>();
   gridPageSettings: PageSettingsModel = new GridDefaults();
   resizeSettings: ResizeSettingsModel = { mode: 'Normal' };
   filterSettings: FilterSettingsModel = { type: 'Excel' };
@@ -46,18 +46,17 @@ export class IsspItemsComponent implements OnInit {
   groupSettings: GroupSettingsModel = {
     showDropArea: false,
   };
-  loadingIndicator: object;
+  loadingIndicator = { indicatorType: 'Shimmer' };
 
   subs: Subscription[] = [];
 
   ngOnInit() {
     this.initSubs();
-    this.loadingIndicator = { indicatorType: 'Shimmer' };
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ issps }) => {
-      this.gridData = issps;
+    const routeSub = this.route.data.subscribe(({ users }) => {
+      this.gridData = users;
     });
     this.subs.push(routeSub);
   }

@@ -40,21 +40,19 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private subscriptionService: SubscriptionService,
+    private router: Router // private subscriptionService: SubscriptionService
   ) {}
 
   login(user: Partial<User>) {
     return this.http
       .post<TokenResponse>(`${api}/auth/login`, user)
-      .pipe(mergeMap(response => this.setTokens(response)));
+      .pipe(mergeMap((response) => this.setTokens(response)));
   }
-
 
   register(user: Partial<User>) {
     return this.http
       .post<TokenResponse>(`${api}/auth/register`, user)
-      .pipe(mergeMap(response => this.setTokens(response)));
+      .pipe(mergeMap((response) => this.setTokens(response)));
   }
 
   getProfile() {
@@ -64,7 +62,7 @@ export class AuthService {
           [ErrorDialogInterceptor.skipHeader]: 'true',
         },
       })
-      .pipe(tap(user => this.user$.next(user)));
+      .pipe(tap((user) => this.user$.next(user)));
   }
 
   loginWithRefreshToken() {
@@ -78,17 +76,17 @@ export class AuthService {
           headers: {
             [AuthTokenInterceptor.skipHeader]: 'true',
           },
-        },
+        }
       )
-      .pipe(mergeMap(response => this.setTokens(response)));
+      .pipe(mergeMap((response) => this.setTokens(response)));
   }
 
   logoutFromAllDevices() {
     return this.http
       .delete<TokenResponse>(`${api}/auth/logout-from-all-devices`)
       .pipe(
-        mergeMap(tokens => this.setTokens(tokens)),
-        tap(() => this.subscriptionService.requestSubscription()),
+        mergeMap((tokens) => this.setTokens(tokens))
+        // tap(() => this.subscriptionService.requestSubscription())
       );
   }
 
@@ -143,9 +141,9 @@ export class AuthService {
       this.user$.next(null);
     };
 
-    this.subscriptionService
-      .delete()
-      .pipe(take(1))
-      .subscribe(callback, callback);
+    // this.subscriptionService
+    //   .delete()
+    //   .pipe(take(1))
+    //   .subscribe(callback, callback);
   }
 }
