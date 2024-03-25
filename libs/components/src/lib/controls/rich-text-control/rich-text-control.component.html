@@ -1,0 +1,39 @@
+<div
+  role="group"
+  class="richtext-input-container"
+  [formGroup]="form"
+  (focusin)="onFocusIn($event)"
+  (focusout)="onFocusOut($event)"
+  (keydown)="onEsc($event)"
+  #rteCnt
+>
+  <!-- The contol is only rendered when clicked - this improves the performance of the control when there are multiple controls on the page -->
+  <ng-container *ngIf="displayEditor === true || keepEditorOpen !== false">
+    <ejs-richtexteditor
+      data-test="rich-text-editor"
+      class="mt-3"
+      #cnt
+      formControlName="cnt"
+      [toolbarSettings]="tools"
+      [format]="formats"
+      [fontFamily]="fontFamily"
+      editorMode="HTML"
+      autoSaveOnIdle="true"
+      [saveInterval]="autoSaveInterval"
+    >
+    </ejs-richtexteditor>
+  </ng-container>
+  <ng-container *ngIf="displayEditor !== true && keepEditorOpen === false">
+    <div class="value-container d-flex align-items-start flex-fill">
+      <div [innerHtml]="value" class="flex-grow-1"></div>
+      <mat-icon
+        fontSet="fa-solid"
+        fontIcon="fa-pen-to-square"
+        class="d-flex flex-grow-0"
+      ></mat-icon>
+      <div class="control">
+        <input #cnt formControlName="cnt" />
+      </div>
+    </div>
+  </ng-container>
+</div>

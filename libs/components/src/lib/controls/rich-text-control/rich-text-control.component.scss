@@ -1,0 +1,39 @@
+.richtext-input-container {
+  display: flex;
+
+  .value-container {
+    min-height: 1.5rem;
+    min-width: 3rem;
+
+    .control {
+      visibility: hidden;
+
+      > input {
+        width: 1px;
+        height: 1px;
+      }
+    }
+  }
+
+  .value-container:hover {
+    cursor: pointer;
+  }
+}
+
+.richtext-input-element {
+  border: none;
+  background: none;
+  padding: 0;
+  outline: none;
+  font: inherit;
+  text-align: center;
+}
+
+.richtext-input-spacer {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+:host.richtext-floating .richtext-input-spacer {
+  opacity: 1;
+}
