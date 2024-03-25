@@ -11,6 +11,7 @@ import { RolesGuard } from './auth/guard/roles.guard';
 import { ActionHistoryModule } from './action-history/action-history.module';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
+import { CategoriesModule } from './admin/categories/categories.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AdminModule } from './admin/admin.module';
     AdminModule,
     UserModule,
     ActionHistoryModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [
