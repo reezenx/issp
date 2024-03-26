@@ -1,5 +1,5 @@
 import { ISSP, ISSP_Status, PrismaClient } from '@prisma/client';
-import { AGENCIES, ISSPS, USERS } from './constant';
+import { AGENCIES, ISSPS, USERS } from './dev-data';
 import { DateTime } from 'luxon';
 import { faker } from '@faker-js/faker';
 

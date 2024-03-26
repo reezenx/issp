@@ -1,0 +1,54 @@
+// model User {
+//   id              String           @id @default(cuid())
+//   firstName       String
+//   lastName        String
+//   email           String           @unique
+//   phone           String
+//   password        String
+//   createdBy       String
+//   updatedBy       String?
+//   createdAt       DateTime         @default(now())
+//   updatedAt       DateTime?        @updatedAt
+//   agency          Agency           @relation(fields: [agencyId], references: [id])
+//   agencyId        String
+//   status          User_Status
+//   profile         Profile?
+//   issps           ISSP[]           @relation("ISSPUsers")
+//   tags            String[]
+//   authoredIssps   ISSP[]           @relation(name: "ISSPAuthor")
+//   authoredIsspIds String[]
+//   history         Action_History[]
+//   roles           User_Role[]
+
+//   @@map("users")
+// }
+
+// model User_Role {
+//   id         String       @id @default(cuid())
+//   name       Role
+//   createdBy  String
+//   createdAt  DateTime     @default(now())
+//   updatedBy  String?
+//   updatedAt  DateTime?    @updatedAt()
+//   Permission Permission[]
+//   User       User[]
+
+//   @@map("roles")
+// }
+
+// model Permission {
+//   id         String    @id @default(cuid())
+//   role       User_Role @relation(fields: [roleId], references: [id])
+//   roleId     String
+//   action     String
+//   subject    String
+//   inverted   Boolean   @default(false)
+//   conditions Json?
+//   reason     String?
+//   createdBy  String
+//   updatedBy  String?
+//   createdAt  DateTime  @default(now())
+//   updatedAt  DateTime? @updatedAt()
+
+//   @@map("permissions")
+// }

@@ -2,7 +2,7 @@ import { Category, PrismaClient } from '@prisma/client';
 import { CATEGORIES } from './dev-data';
 import { DateTime } from 'luxon';
 
-export async function createCategories(prisma: PrismaClient) {
+export async function createPermissions(prisma: PrismaClient) {
   const baseItems: Category[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

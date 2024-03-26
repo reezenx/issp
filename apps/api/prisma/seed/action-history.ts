@@ -1,9 +1,9 @@
 import { Action_History, PrismaClient } from '@prisma/client';
-import { ACTION_HISTORY, ISSPS } from './constant';
+import { ACTION_HISTORY, ISSPS } from './dev-data';
 import { DateTime } from 'luxon';
 
 export async function createActionHistory(prisma: PrismaClient) {
-  const baseActionHistory: Action_History[] = [];
+  const baseItems: Action_History[] = [];
 
   Object.entries(ACTION_HISTORY).forEach(
     ([
@@ -11,7 +11,7 @@ export async function createActionHistory(prisma: PrismaClient) {
       key,
       { id, userId, parentModule, childModule, changes, isspVersion, action },
     ]) => {
-      baseActionHistory.push({
+      baseItems.push({
         id,
         userId,
         action,
@@ -28,6 +28,6 @@ export async function createActionHistory(prisma: PrismaClient) {
   );
 
   await prisma.action_History.createMany({
-    data: baseActionHistory,
+    data: baseItems,
   });
 }
