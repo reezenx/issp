@@ -30,6 +30,8 @@ import { UsersAdminComponent } from './users/users-admin/users-admin.component';
 import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.component';
 import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
 import { PipesModule } from '@issp/common';
+import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
+import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
 
 @NgModule({
   imports: [
@@ -60,6 +62,8 @@ import { PipesModule } from '@issp/common';
     UsersAdminComponent,
     UserAdminNewComponent,
     UserAdminEditComponent,
+    CategoriesAdminComponent,
+    CategoriesAdminShellComponent,
   ],
   providers: [DatePipe],
 })

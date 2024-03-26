@@ -9,6 +9,9 @@ import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.
 import { usersResolver } from './users/resolvers/users.resolver';
 import { userResolver } from './users/resolvers/user.resolver';
 import { agencyDropdownResolver } from './agencies/resolvers/agency-dropdown.resolver';
+import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
+import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
+import { categoriesResolver } from './categories/resolvers/categories.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -62,6 +65,20 @@ export const AdminRoutes: Routes = [
           agenciesDropdown: agencyDropdownResolver,
         },
       },
+    ],
+  },
+  {
+    path: 'categories',
+    component: CategoriesAdminShellComponent,
+    children: [
+      {
+        path: '',
+        title: 'Categories',
+        component: CategoriesAdminComponent,
+        resolve: {
+          categories: categoriesResolver,
+        },
+      }
     ],
   },
 ];

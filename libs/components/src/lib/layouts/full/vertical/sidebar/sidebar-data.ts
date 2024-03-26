@@ -48,6 +48,11 @@ export const navItems: NavItem[] = [
     route: 'admin/users',
   },
   {
+    displayName: 'Categories',
+    iconName: 'category',
+    route: 'admin/categories',
+  },
+  {
     displayName: 'Projects',
     iconName: 'list-details',
     route: 'admin/projects',
