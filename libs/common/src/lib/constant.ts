@@ -24,4 +24,6 @@ export const User_Roles: {
   APPROVER: 'APPROVER',
   ADMIN: 'ADMIN',
   SUPER_ADMIN: 'VIEWER',
+  VALIDATOR: 'VALIDATOR',
+  ASSIGNER: 'ASSIGNER',
 };

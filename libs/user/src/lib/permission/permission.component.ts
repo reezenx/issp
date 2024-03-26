@@ -24,8 +24,10 @@ export class IsspPermissionComponent implements OnInit {
     EVALUATOR: ['canRead', 'canComment'],
     VIEWER: ['canRead'],
     PLANNER: ['canAdd', 'canEdit', 'canRead'],
+    VALIDATOR: ['canAdd', 'canEdit', 'canRead'],
     ENDORSER: ['canComment'],
     APPROVER: ['canComment'],
+    ASSIGNER: ['canComment'],
   };
 
   private readonly _destroy$ = new Subject<void>();

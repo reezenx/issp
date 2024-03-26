@@ -7,6 +7,7 @@ import {
   ISSP,
   Action_History,
   ISSP_Action,
+  User_Role,
 } from '@prisma/client';
 
 export const DEFAULT = {
@@ -90,8 +91,45 @@ export const AGENCIES: {
   },
 };
 
+export const ROLES: {
+  [key: string]: Pick<User_Role, 'id' | 'name'>;
+} = {
+  SUPER_ADMIN: {
+    id: createId(),
+    name: Role.SUPER_ADMIN,
+  },
+  ADMIN: {
+    id: createId(),
+    name: Role.ADMIN,
+  },
+  ASSIGNER: {
+    id: createId(),
+    name: Role.ASSIGNER,
+  },
+  PLANNER: {
+    id: createId(),
+    name: Role.PLANNER,
+  },
+  EVALUATOR: {
+    id: createId(),
+    name: Role.EVALUATOR,
+  },
+  VALIDATOR: {
+    id: createId(),
+    name: Role.VALIDATOR,
+  },
+  APPROVER: {
+    id: createId(),
+    name: Role.APPROVER,
+  },
+};
+
+// export const PERMISSIONS: {
+//   [key: string]: Pick<Permission, 'id' | 'roleId'>;
+// } = {};
+
 export const USERS: {
-  [key in Role]: Pick<User, 'id' | 'email' | 'password' | 'role'>;
+  [key: string]: Pick<User, 'id' | 'email' | 'password' | 'role'>;
 } = {
   SUPER_ADMIN: {
     id: createId(),

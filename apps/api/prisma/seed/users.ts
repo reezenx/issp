@@ -1,7 +1,7 @@
 import { PrismaClient, Role, User, User_Status } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { faker } from '@faker-js/faker';
-import { AGENCIES, DEFAULT, USERS } from './constant';
+import { AGENCIES, DEFAULT, USERS } from './dev-data';
 import { DateTime } from 'luxon';
 
 export async function createUsers(prisma: PrismaClient) {

@@ -1,14 +1,14 @@
 import { Agency, PrismaClient } from '@prisma/client';
-import { AGENCIES, CATEGORIES } from './constant';
+import { AGENCIES, CATEGORIES } from './dev-data';
 import { faker } from '@faker-js/faker';
 import { DateTime } from 'luxon';
 
 export async function createAgencies(prisma: PrismaClient) {
-  const baseAgencies: Agency[] = [];
+  const baseItems: Agency[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(AGENCIES).forEach(([key, { id, name, code, email }]) => {
-    baseAgencies.push({
+    baseItems.push({
       id,
       name,
       code,
@@ -24,6 +24,6 @@ export async function createAgencies(prisma: PrismaClient) {
   });
 
   await prisma.agency.createMany({
-    data: baseAgencies,
+    data: baseItems,
   });
 }
