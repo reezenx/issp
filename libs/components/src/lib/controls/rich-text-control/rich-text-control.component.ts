@@ -1,9 +1,14 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   Component,
   ElementRef,
   forwardRef,
+  Inject,
   Input,
+  OnDestroy,
+  Optional,
+  Self,
   ViewChild,
 } from '@angular/core';
 import {
@@ -11,41 +16,47 @@ import {
   ControlValueAccessor,
   UntypedFormBuilder,
   UntypedFormGroup,
+  NgControl,
   Validators,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import {
-  FontFamilyModel,
-  FormatModel,
-} from '@syncfusion/ej2-angular-richtexteditor';
+  MAT_FORM_FIELD,
+  MatFormField,
+  MatFormFieldControl,
+} from '@angular/material/form-field';
+import { FormatModel } from '@syncfusion/ej2-angular-richtexteditor';
 import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const RICH_TEXT_FORM_CONTROL_VALUE_ACCESSOR: any = {
-  provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => RichTextControlComponent),
-  multi: true,
-};
 
 // See https://material.angular.io/guide/creating-a-custom-form-field-control for documentation / guidance
 @Component({
   selector: 'issp-rich-text-control',
   templateUrl: './rich-text-control.component.html',
   styleUrls: ['./rich-text-control.component.scss'],
-  providers: [RICH_TEXT_FORM_CONTROL_VALUE_ACCESSOR],
+  providers: [
+    { provide: MatFormFieldControl, useExisting: RichTextControlComponent },
+  ],
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     '[class.richtext-floating]': 'shouldLabelFloat',
     '[id]': 'id',
   },
 })
-export class RichTextControlComponent implements ControlValueAccessor {
+export class RichTextControlComponent
+  implements ControlValueAccessor, MatFormFieldControl<string>, OnDestroy
+{
   static nextId = 0;
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_required: BooleanInput;
 
-  constructor(formBuilder: UntypedFormBuilder) {
+  constructor(
+    formBuilder: UntypedFormBuilder,
+    private _focusMonitor: FocusMonitor,
+    private _elementRef: ElementRef<HTMLElement>,
+    @Optional() @Inject(MAT_FORM_FIELD) public _formField: MatFormField,
+    @Optional() @Self() public ngControl: NgControl
+  ) {
     this.form = formBuilder.group({
       cnt: [null, [Validators.required, Validators.maxLength(this.maxLength)]],
     });
@@ -55,6 +66,10 @@ export class RichTextControlComponent implements ControlValueAccessor {
     ].valueChanges.subscribe((value) => {
       this.onChange(value);
     });
+
+    if (this.ngControl != null) {
+      this.ngControl.valueAccessor = this;
+    }
   }
 
   @ViewChild('rteCnt')
@@ -71,10 +86,19 @@ export class RichTextControlComponent implements ControlValueAccessor {
   controlType = 'richtext-input';
   containerId = `rte-container-${RichTextControlComponent.nextId++}`;
   id = `richtext-input-${RichTextControlComponent.nextId++}`;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  onChange = (_: any) => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onTouched = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  onChange = (_: any) => {
+    //empty
+  };
+  onTouched = () => {
+    // empty
+  };
+
+  @Input()
+  fieldName: string = null;
+
+  @Input()
+  fieldHint: string = null;
 
   @Input()
   autoSaveInterval = 500;
@@ -154,6 +178,18 @@ export class RichTextControlComponent implements ControlValueAccessor {
     return this.form.invalid && this.touched;
   }
 
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this._focusMonitor.stopMonitoring(this._elementRef);
+    this._focusMonitor.stopMonitoring(this.rteCnt);
+    if (
+      this.valueChangesSubscription &&
+      !this.valueChangesSubscription.closed
+    ) {
+      this.valueChangesSubscription.unsubscribe();
+    }
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onFocusIn(event: FocusEvent) {
     if (!this.focused) {
@@ -162,8 +198,16 @@ export class RichTextControlComponent implements ControlValueAccessor {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  onFocusOut(event: FocusEvent) {}
+  onFocusOut(event: FocusEvent) {
+    if (
+      !this._elementRef.nativeElement.contains(event.relatedTarget as Element)
+    ) {
+      this.touched = true;
+      this.focused = false;
+      this.onTouched();
+      this.stateChanges.next();
+    }
+  }
 
   onEsc(event: KeyboardEvent) {
     if (event.keyCode === 27) {
@@ -179,45 +223,40 @@ export class RichTextControlComponent implements ControlValueAccessor {
         }, 250);
       }
     }
-
-    // Optionally to close it - but it's not reliable.
-    //let target = event.relatedTarget as Element;
-    //if (target) {
-    //  let sRect = this._elementRef.nativeElement.getBoundingClientRect();
-    //  let tRect = target.getBoundingClientRect();
-    //  let childElement = false;
-    //  if (sRect.x < tRect.x && sRect.y < tRect.y) {
-    //    childElement = true;
-    //  }
-    //  if (!this.rteCnt.nativeElement.contains(event.relatedTarget as Element) && childElement !== true) {
-    //    if (this.displayEditor === true) {
-    //      setTimeout(() => {
-    //        this.displayEditor = false;
-    //      }, 250);
-    //    }
-    //  }
-    //}
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  autoFocusNext(control: AbstractControl, nextElement: HTMLInputElement): void {
-    // empty
+  autoFocusNext(
+    control: AbstractControl,
+    nextElement?: HTMLInputElement
+  ): void {
+    if (!control.errors && nextElement) {
+      this._focusMonitor.focusVia(nextElement, 'program');
+    }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   autoFocusPrev(control: AbstractControl, prevElement: HTMLInputElement): void {
-    // empty
+    if (control.value.length < 1) {
+      this._focusMonitor.focusVia(prevElement, 'program');
+    }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setDescribedByIds(ids: string[]) {
-    // empty
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const controlElement = this._elementRef.nativeElement.querySelector(
+      '.richtext-input-container'
+    )!;
+    controlElement.setAttribute('aria-describedby', ids.join(' '));
   }
 
   onContainerClick() {
     // Open the editor control if it's not already open
     if (this.displayEditor !== true) {
       this.displayEditor = true;
+      setTimeout(() => {
+        this._focusMonitor.focusVia(this.cntInput, 'program');
+      }, 500);
+    } else {
+      this._focusMonitor.focusVia(this.cntInput, 'program');
     }
   }
 
@@ -264,9 +303,6 @@ export class RichTextControlComponent implements ControlValueAccessor {
       'Indent',
       'Outdent',
       '|',
-      'CreateLink',
-      'SourceCode',
-      '|',
     ],
   };
 
@@ -286,12 +322,5 @@ export class RichTextControlComponent implements ControlValueAccessor {
       { text: 'Heading 5', value: 'h5' },
       { text: 'Heading 6', value: 'h6' },
     ],
-  };
-
-  @Input()
-  public fontFamily: FontFamilyModel = {
-    default: 'Roboto',
-    width: '65px',
-    items: [{ text: 'Roboto', value: 'Roboto' }],
   };
 }

@@ -4,17 +4,42 @@
       <!-- PART I. ORGANIZATIONAL PROFILE -->
       <mat-step>
         <ng-template matStepLabel>
-          <strong>
-            <h2>PART I. ORGANIZATIONAL PROFILE</h2>
-          </strong>
+          <div class="d-flex align-items-center justify-content-between">
+            <strong>
+              <h2 class="part-title">PART I. ORGANIZATIONAL PROFILE</h2>
+            </strong>
+            <div class="d-flex align-items-center">
+              <span>Click to save</span>
+              <button
+                mat-icon-button
+                color="warn"
+                type="button"
+                matTooltip="Unsaved changes"
+              >
+                <mat-icon matSuffix>
+                  <i-tabler name="device-floppy" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </div>
+          </div>
         </ng-template>
 
-        <mat-accordion multi>
+        <mat-accordion multi class="accordion-headers-align">
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT</h3>
+                <h3 class="part-subtitle">
+                  A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT
+                </h3>
               </mat-panel-title>
+              <mat-panel-description>
+                <div class="d-flex align-items-center">
+                  <strong>Changes saved</strong>
+                  <mat-icon class="m-l-10" color="primary">
+                    <i-tabler name="checkbox" class="icon-20"></i-tabler>
+                  </mat-icon>
+                </div>
+              </mat-panel-description>
             </mat-expansion-panel-header>
 
             <ng-template matExpansionPanelContent>
@@ -40,10 +65,45 @@
               <h4>A.2. Vision Statement</h4>
               <issp-richtext></issp-richtext>
               <h4>A.3. Mission Statement</h4>
-              <issp-rich-text-control></issp-rich-text-control>
+              <issp-rich-text-control
+                [keepEditorOpen]="false"
+              ></issp-rich-text-control>
 
               <h4>A.4. Major Final Outputs</h4>
-              <issp-rich-text-control></issp-rich-text-control>
+              <mat-form-field
+                hintLabel="Max 2000 characters"
+                appearance="outline"
+                class="w-100"
+                color="primary"
+                floatLabel="always"
+              >
+                <mat-label class="mat-subtitle-2 f-w-600">Outputs</mat-label>
+                <issp-rich-text-control
+                  #question
+                  required
+                  [keepEditorOpen]="false"
+                  placeholder="Mission (Required)"
+                  hintLabel="Max 2000 characters"
+                  fieldName="Rich Text"
+                ></issp-rich-text-control>
+                <!-- <app-rich-text-control
+                  [attr.data-test]="_field.controlType + '-question-name'"
+                  #question
+                  formControlName="question"
+                  placeholder="{{ configData.questionFieldLabel }} (Required)"
+                  [tools]="questionTools"
+                  [fontFamily]="fontFamily"
+                  required
+                  [keepEditorOpen]="false"
+                  maxlength="2000"
+                ></app-rich-text-control>-->
+                <mat-hint align="end"
+                  >{{ question.value?.length || 0 }}/2000</mat-hint
+                >
+              </mat-form-field>
+              <issp-rich-text-control
+                [keepEditorOpen]="false"
+              ></issp-rich-text-control>
 
               <small>
                 <strong>Fill-in Instructions:</strong>
@@ -86,8 +146,16 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>B. DEPARTMENT/AGENCY PROFILE</h3>
+                <h3 class="part-subtitle">B. DEPARTMENT/AGENCY PROFILE</h3>
               </mat-panel-title>
+              <mat-panel-description>
+                <div class="d-flex align-items-center">
+                  <strong>Unsaved changes</strong>
+                  <mat-icon class="m-l-10" color="warn">
+                    <i-tabler name="file-x" class="icon-20"></i-tabler>
+                  </mat-icon>
+                </div>
+              </mat-panel-description>
             </mat-expansion-panel-header>
 
             <ng-template matExpansionPanelContent> </ng-template>
@@ -105,8 +173,18 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>TABLE B-1 (FOR DEPARTMENT-WIDE ORGANIZATIONS ONLY)</h3>
+                <h3 class="part-subtitle">
+                  TABLE B-1 (FOR DEPARTMENT-WIDE ORGANIZATIONS ONLY)
+                </h3>
               </mat-panel-title>
+              <mat-panel-description>
+                <div class="d-flex align-items-center">
+                  <strong>Readonly</strong>
+                  <mat-icon class="m-l-10" matSuffix color="basic">
+                    <i-tabler name="lock" class="icon-20"></i-tabler>
+                  </mat-icon>
+                </div>
+              </mat-panel-description>
             </mat-expansion-panel-header>
 
             <ng-template matExpansionPanelContent> </ng-template>
@@ -124,11 +202,19 @@
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>
+                <h3 class="part-subtitle">
                   C. THE DEPARTMENT/AGENCY AND ITS ENVIRONMENT (FUNCTIONAL
                   INTERFACE CHART)
                 </h3>
               </mat-panel-title>
+              <mat-panel-description>
+                <div class="d-flex align-items-center">
+                  <strong>Unanswered</strong>
+                  <mat-icon class="m-l-10" matSuffix color="accent" disabled>
+                    <i-tabler name="writing" class="icon-20"></i-tabler>
+                  </mat-icon>
+                </div>
+              </mat-panel-description>
             </mat-expansion-panel-header>
 
             <ng-template matExpansionPanelContent> </ng-template>
@@ -146,7 +232,9 @@
           <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(5)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>D. PRESENT ICT SITUATION (STRATEGIC CHALLENGES)</h3>
+                <h3 class="part-subtitle">
+                  D. PRESENT ICT SITUATION (STRATEGIC CHALLENGES)
+                </h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -165,7 +253,7 @@
           <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>E. STRATEGIC CONCERNS FOR ICT USE</h3>
+                <h3 class="part-subtitle">E. STRATEGIC CONCERNS FOR ICT USE</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -190,16 +278,32 @@
       <!-- PART II. INFORMATION SYSTEMS STRATEGY -->
       <mat-step>
         <ng-template matStepLabel>
-          <strong>
-            <h2>PART II. INFORMATION SYSTEMS STRATEGY</h2>
-          </strong>
+          <div class="d-flex align-items-center justify-content-between">
+            <strong>
+              <h2 class="part-title">PART II. INFORMATION SYSTEMS STRATEGY</h2>
+            </strong>
+            <div class="d-flex align-items-center">
+              <span class="text-muted"> Readonly </span>
+              <button
+                mat-icon-button
+                color="basic"
+                type="button"
+                matTooltip="Readonly"
+                disabled
+              >
+                <mat-icon matSuffix color="basic">
+                  <i-tabler name="lock" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </div>
+          </div>
         </ng-template>
 
         <mat-accordion multi>
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>
+                <h3 class="part-subtitle">
                   A. CONCEPTUAL FRAMEWORK FOR INFORMATION SYSTEMS (DIAGRAM OF IS
                   INTERFACE)
                 </h3>
@@ -273,7 +377,9 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>B. DETAILED DESCRIPTION OF PROPOSED INFORMATION SYSTEMS</h3>
+                <h3 class="part-subtitle">
+                  B. DETAILED DESCRIPTION OF PROPOSED INFORMATION SYSTEMS
+                </h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -292,7 +398,7 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>C. DATABASES REQUIRED</h3>
+                <h3 class="part-subtitle">C. DATABASES REQUIRED</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -311,7 +417,7 @@
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>D. NETWORK LAYOUT</h3>
+                <h3 class="part-subtitle">D. NETWORK LAYOUT</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -339,16 +445,33 @@
       <!-- PART III. DETAILED DESCRIPTION OF ICT PROJECTS -->
       <mat-step>
         <ng-template matStepLabel>
-          <strong>
-            <h2>PART III. DETAILED DESCRIPTION OF ICT PROJECTS</h2>
-          </strong>
+          <div class="d-flex align-items-center justify-content-between">
+            <strong>
+              <h2 class="part-title">
+                PART III. DETAILED DESCRIPTION OF ICT PROJECTS
+              </h2>
+            </strong>
+            <div class="d-flex align-items-center">
+              <span> Changes saved </span>
+              <button
+                mat-icon-button
+                color="primary"
+                type="button"
+                matTooltip="Saved"
+              >
+                <mat-icon matSuffix color="basic">
+                  <i-tabler name="device-floppy" class="icon-20"></i-tabler>
+                </mat-icon>
+              </button>
+            </div>
+          </div>
         </ng-template>
 
         <mat-accordion multi>
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>A. INTERNAL ICT PROJECTS</h3>
+                <h3 class="part-subtitle">A. INTERNAL ICT PROJECTS</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -419,7 +542,7 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>B. CROSS-AGENCY ICT PROJECTS</h3>
+                <h3 class="part-subtitle">B. CROSS-AGENCY ICT PROJECTS</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -438,7 +561,9 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>C. PERFORMANCE MEASUREMENT FRAMEWORK</h3>
+                <h3 class="part-subtitle">
+                  C. PERFORMANCE MEASUREMENT FRAMEWORK
+                </h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -470,7 +595,7 @@
       <mat-step>
         <ng-template matStepLabel>
           <strong>
-            <h2>PART IV. RESOURCE REQUIREMENTS</h2>
+            <h2 class="part-title">PART IV. RESOURCE REQUIREMENTS</h2>
           </strong>
         </ng-template>
 
@@ -478,7 +603,9 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>A. DEPLOYMENT OF ICT EQUIPMENT AND SERVICES</h3>
+                <h3 class="part-subtitle">
+                  A. DEPLOYMENT OF ICT EQUIPMENT AND SERVICES
+                </h3>
               </mat-panel-title>
               <mat-panel-description>*Required Fields</mat-panel-description>
             </mat-expansion-panel-header>
@@ -550,7 +677,7 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>B. ICT ORGANIZATIONAL STRUCTURE</h3>
+                <h3 class="part-subtitle">B. ICT ORGANIZATIONAL STRUCTURE</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -584,7 +711,9 @@
       <mat-step>
         <ng-template matStepLabel>
           <strong>
-            <h2>PART V. DEVELOPMENT AND INVESTMENT PROGRAM</h2>
+            <h2 class="part-title">
+              PART V. DEVELOPMENT AND INVESTMENT PROGRAM
+            </h2>
           </strong>
         </ng-template>
 
@@ -592,7 +721,9 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>A. ICT PROJECTS IMPLEMENTATION SCHEDULE</h3>
+                <h3 class="part-subtitle">
+                  A. ICT PROJECTS IMPLEMENTATION SCHEDULE
+                </h3>
               </mat-panel-title>
               <mat-panel-description>*Required Fields</mat-panel-description>
             </mat-expansion-panel-header>
@@ -664,7 +795,9 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>B. INFORMATION SYSTEMS (IS) IMPLEMENTATION SCHEDULE</h3>
+                <h3 class="part-subtitle">
+                  B. INFORMATION SYSTEMS (IS) IMPLEMENTATION SCHEDULE
+                </h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -683,7 +816,7 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>C. SUMMARY OF INVESTMENTS</h3>
+                <h3 class="part-subtitle">C. SUMMARY OF INVESTMENTS</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -702,7 +835,7 @@
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3>D. YEAR 1 COST BREAKDOWN</h3>
+                <h3 class="part-subtitle">D. YEAR 1 COST BREAKDOWN</h3>
               </mat-panel-title>
             </mat-expansion-panel-header>
 

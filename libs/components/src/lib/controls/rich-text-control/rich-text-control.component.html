@@ -16,7 +16,6 @@
       formControlName="cnt"
       [toolbarSettings]="tools"
       [format]="formats"
-      [fontFamily]="fontFamily"
       editorMode="HTML"
       autoSaveOnIdle="true"
       [saveInterval]="autoSaveInterval"
@@ -32,7 +31,7 @@
         class="d-flex flex-grow-0"
       ></mat-icon>
       <div class="control">
-        <input #cnt formControlName="cnt" />
+        <input #cnt formControlName="cnt" placeholder="Enter value" />
       </div>
     </div>
   </ng-container>

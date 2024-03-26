@@ -24,6 +24,10 @@ module.exports = {
       value: 'chore',
       name: "chore:     Other changes that don't modify src or test files",
     },
+    {
+      value: 'components',
+      name: 'components:   building blocks',
+    },
   ],
 
   scopes: [
@@ -31,7 +35,6 @@ module.exports = {
     { name: 'client' },
     { name: 'admin' },
     { name: 'user' },
-    { name: 'components' },
     { name: 'common' },
     { name: 'auth' },
     { name: 'issp' },
