@@ -1,0 +1,111 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
+import { CategoryDetails } from '../models/category-details';
+import { API, CategoryDropdown } from '@issp/common';
+
+@UntilDestroy({ checkProperties: true })
+@Injectable({
+  providedIn: 'root',
+})
+export class CategoriesService {
+  route = `${API.BASE}${API.ADMIN.CATEGORIES}`;
+  constructor(private http: HttpClient) {}
+
+  #emitAllItems: BehaviorSubject<Array<CategoryDetails>> = new BehaviorSubject<
+    Array<CategoryDetails>
+  >(new Array<CategoryDetails>());
+  allItems$ = this.#emitAllItems.asObservable();
+
+  #emitDropdownItems: BehaviorSubject<Array<CategoryDropdown>> =
+    new BehaviorSubject<Array<CategoryDropdown>>(new Array<CategoryDropdown>());
+  dropdownItems$ = this.#emitDropdownItems.asObservable();
+
+  #emitCurrentContextItem = new Subject<CategoryDetails>();
+  currentContextItem$ = this.#emitCurrentContextItem.asObservable();
+
+  #emitLastAddedItem = new Subject<CategoryDetails>();
+  lastAddedItem$ = this.#emitLastAddedItem.asObservable();
+
+  #emitLastUpdatedItem = new Subject<CategoryDetails>();
+  lastUpdatedItem$ = this.#emitLastUpdatedItem.asObservable();
+
+  findAll() {
+    return this.http.get<CategoryDetails[]>(this.route).pipe(
+      map((data) => {
+        let list = new Array<CategoryDetails>();
+        list = data.map((e) => {
+          const entity = new CategoryDetails();
+          entity.assign(e);
+          return entity;
+        });
+        return list;
+      }),
+      tap((data) => {
+        this.#emitAllItems.next(data);
+      })
+    );
+  }
+
+  findAllDropdowns() {
+    const uri = `${this.route}/dropdown`;
+    return this.http.get<CategoryDropdown[]>(uri).pipe(
+      map((data) => {
+        let list = new Array<CategoryDropdown>();
+        list = data.map((e) => {
+          const entity = new CategoryDropdown();
+          entity.assign(e);
+          return entity;
+        });
+        return list;
+      }),
+      tap((data) => {
+        this.#emitDropdownItems.next(data);
+      })
+    );
+  }
+
+  findOne(id: string): Observable<CategoryDetails> {
+    const uri = `${this.route}/${id}`;
+    return this.http.get<CategoryDetails>(uri).pipe(
+      map((e) => {
+        const entity = new CategoryDetails();
+        entity.assign(e);
+        return entity;
+      }),
+      tap((data) => {
+        this.#emitCurrentContextItem.next(data);
+      })
+    );
+  }
+
+  updateOne(item: CategoryDetails): Observable<CategoryDetails> {
+    const uri = `${this.route}/${item.id}`;
+    return this.http.put<CategoryDetails>(uri, item).pipe(
+      map((e) => {
+        const entity = new CategoryDetails();
+        entity.assign(e);
+        return entity;
+      }),
+      tap((data) => {
+        this.#emitLastUpdatedItem.next(data);
+        this.#emitCurrentContextItem.next(data);
+      })
+    );
+  }
+
+  createOne(item: CategoryDetails): Observable<CategoryDetails> {
+    const uri = `${this.route}`;
+    return this.http.post<CategoryDetails>(uri, item).pipe(
+      map((e) => {
+        const entity = new CategoryDetails();
+        entity.assign(e);
+        return entity;
+      }),
+      tap((data) => {
+        this.#emitLastAddedItem.next(data);
+      })
+    );
+  }
+}
