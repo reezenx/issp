@@ -12,6 +12,11 @@ import { agencyDropdownResolver } from './agencies/resolvers/agency-dropdown.res
 import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
 import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
 import { categoriesResolver } from './categories/resolvers/categories.resolver';
+import { AgenciesAdminShellComponent } from './agencies/agencies-admin-shell/agencies-admin-shell.component';
+import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin.component';
+import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admin-new.component';
+import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
+import { agenciesResolver } from './agencies/resolvers/agencies.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -79,6 +84,37 @@ export const AdminRoutes: Routes = [
           categories: categoriesResolver,
         },
       }
+    ],
+  },
+  {
+    path: 'agencies',
+    component: AgenciesAdminShellComponent,
+    children: [
+      {
+        path: '',
+        title: 'agencies',
+        component: AgenciesAdminComponent,
+        resolve: {
+          agencies: agenciesResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Agency',
+        component: AgencyAdminNewComponent,
+        resolve: {
+          // agenciesDropdown: agencyDropdownResolver,
+        },
+      },
+      {
+        path: ':id',
+        title: 'Edit Agency',
+        component: AgencyAdminEditComponent,
+        resolve: {
+          // agency: agencyResolver,
+          // agenciesDropdown: agencyDropdownResolver,
+        },
+      },
     ],
   },
 ];

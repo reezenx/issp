@@ -32,6 +32,10 @@ import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.
 import { PipesModule } from '@issp/common';
 import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
 import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
+import { AgenciesAdminShellComponent } from './agencies/agencies-admin-shell/agencies-admin-shell.component';
+import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin.component';
+import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admin-new.component';
+import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
 
 @NgModule({
   imports: [
@@ -64,6 +68,10 @@ import { CategoriesAdminShellComponent } from './categories/categories-admin-she
     UserAdminEditComponent,
     CategoriesAdminComponent,
     CategoriesAdminShellComponent,
+    AgenciesAdminShellComponent,
+    AgenciesAdminComponent,
+    AgencyAdminNewComponent,
+    AgencyAdminEditComponent,
   ],
   providers: [DatePipe],
 })

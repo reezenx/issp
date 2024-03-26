@@ -53,6 +53,11 @@ export const navItems: NavItem[] = [
     route: 'admin/categories',
   },
   {
+    displayName: 'Agencies',
+    iconName: 'building',
+    route: 'admin/agencies',
+  },
+  {
     displayName: 'Projects',
     iconName: 'list-details',
     route: 'admin/projects',
