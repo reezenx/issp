@@ -18,7 +18,9 @@ export class AgenciesService {
   }
 
   findAll() {
-    return this.prisma.agency.findMany();
+    return this.prisma.agency.findMany({
+      include: { category: {  select: { name: true } } },
+    });
   }
 
   findAllDropdown() {

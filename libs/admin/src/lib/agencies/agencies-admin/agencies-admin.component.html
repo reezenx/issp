@@ -1,1 +1,63 @@
-<p>agencies-admin works!</p>
+<mat-card class="cardWithShadow">
+    <mat-card-content>
+        <div class="d-flex align-items-center">
+            <mat-card-title class="m-b-0">Agencies</mat-card-title>
+            <div class="m-l-auto">
+                <button mat-flat-button color="primary" (click)="addNew()">
+                    Add Agency
+                </button>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-0">
+        <ejs-grid #itemsGrid data-test="items-grid" [allowExcelExport]="true" [allowFiltering]="true"
+            [allowPaging]="true" [allowPdfExport]="true" [allowResizing]="true" [allowSorting]="true"
+            [allowTextWrap]="true" [allowGrouping]="true" [autoFit]="true" [showColumnChooser]="true"
+            [showColumnMenu]="true" [dataSource]="gridData" [filterSettings]="filterSettings"
+            [groupSettings]="groupSettings" [sortSettings]="sortSettings" [id]="gridId"
+            [loadingIndicator]="loadingIndicator" [pageSettings]="gridPageSettings" [toolbar]="toolbar"
+            (toolbarClick)="toolbarClick($event)" (created)="created()">
+            <e-columns>
+                <e-column headerText="Name" field="name">
+                    <ng-template #template let-data>
+                        <a data-test="item-link" [routerLink]="['/', 'admin', 'categories', data.id]">
+                            {{ data.name }}
+                        </a>
+                    </ng-template>
+                </e-column>
+                <e-column headerText="Code" field="code"></e-column>
+                <e-column headerText="Created By" field="createdBy" [visible]="false">
+                </e-column>
+                <e-column headerText="Category" field="category">
+                    <ng-template #template let-data>
+                        {{ data.category.name}}
+                    </ng-template>
+                </e-column>
+                <e-column headerText="Created At" field="createdAt" [visible]="false">
+                    <ng-template #template let-data>
+                        {{ data.createdAt | date : 'medium' }}
+                    </ng-template>
+                </e-column>
+                <e-column headerText="Updated By" field="updatedBy" [visible]="false">
+                </e-column>
+                <e-column headerText="Updated At" field="updatedAt" [visible]="false">
+                    <ng-template #template let-data>
+                        {{ data.updatedAt | date : 'medium' }}
+                    </ng-template>
+                </e-column>
+                <e-column headerText="Actions" field="actions" textAlign="center">
+                    <ng-template #template let-data>
+                        <button mat-icon-button color="primary" type="button" (click)="editItem(data.id)"
+                            matTooltip="Edit Category">
+                            <mat-icon matSuffix>
+                                <i-tabler name="pencil" class="icon-20"></i-tabler>
+                            </mat-icon>
+                        </button>
+                    </ng-template>
+                </e-column>
+            </e-columns>
+        </ejs-grid>
+    </mat-card-content>
+</mat-card>
