@@ -1,4 +1,4 @@
-import { AppBreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { AppHorizontalHeaderComponent } from './horizontal/header/header.component';
 import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
 import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
@@ -54,7 +54,7 @@ interface quicklinks {
     HeaderComponent,
     AppHorizontalHeaderComponent,
     AppHorizontalSidebarComponent,
-    AppBreadcrumbComponent,
+    BreadcrumbComponent,
     CustomizerComponent,
   ],
   templateUrl: './full.component.html',

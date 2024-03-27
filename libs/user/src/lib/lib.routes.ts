@@ -13,61 +13,64 @@ export const UserRoutes: Routes = [
   {
     path: 'account',
     data: {
-      title: 'Account',
+      breadcrumb: 'Account',
     },
     component: IsspAccountComponent,
   },
   {
     path: 'chat',
     data: {
-      title: 'Chat',
+      breadcrumb: 'Chat',
     },
     component: IsspChatComponent,
   },
   {
     path: 'calendar',
     data: {
-      title: 'Calendar',
+      breadcrumb: 'Calendar',
     },
     component: IsspCalendarComponent,
   },
   {
     path: 'issps',
     loadChildren: () => import('@issp/issp').then((m) => m.IsspModule),
+    data: {
+      breadcrumb: 'ISSPs',
+    },
   },
   {
     path: 'issp',
     component: IsspIsspsComponent,
     data: {
-      title: 'ISSP',
+      breadcrumb: 'ISSP',
     },
   },
   {
     path: 'issp/detail/:id',
     component: IsspDetailComponent,
     data: {
-      title: 'ISSP Detail',
+      breadcrumb: 'ISSP Detail',
     },
   },
   {
     path: 'permission',
     component: IsspPermissionComponent,
     data: {
-      title: 'Permission',
+      breadcrumb: 'Permission',
     },
   },
   {
     path: 'richtext',
     component: IsspDocumentEditorComponent,
     data: {
-      title: 'RichText',
+      breadcrumb: 'RichText',
     },
   },
   {
     path: 'diagram',
     component: IsspDiagramComponent,
     data: {
-      title: 'Diagram',
+      breadcrumb: 'Diagram',
     },
   },
 ];

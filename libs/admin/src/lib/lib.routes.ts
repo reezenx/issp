@@ -24,31 +24,37 @@ export const AdminRoutes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     data: {
-      title: 'Dashboard',
+      breadcrumb: 'Dashboard',
     },
   },
   {
     path: 'projects',
     component: ProjectsComponent,
     data: {
-      title: 'Projects',
+      breadcrumb: 'Projects',
     },
   },
   {
     path: 'pivot',
     component: PivotTableAdvComponent,
     data: {
-      title: 'Pivot Table',
+      breadcrumb: 'Pivot Table',
     },
   },
   {
     path: 'users',
     component: UsersAdminShellComponent,
+    data: {
+      breadcrumb: 'Users',
+    },
     children: [
       {
         path: '',
         title: 'Users',
         component: UsersAdminComponent,
+        data: {
+          breadcrumbSkipNode: true,
+        },
         resolve: {
           users: usersResolver,
         },
@@ -57,14 +63,20 @@ export const AdminRoutes: Routes = [
         path: 'new',
         title: 'New User',
         component: UserAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
         resolve: {
           agenciesDropdown: agencyDropdownResolver,
         },
       },
       {
         path: ':id',
-        title: 'Edit User',
+        title: 'Edit',
         component: UserAdminEditComponent,
+        data: {
+          breadcrumbRouteDataProperty: 'user.name',
+        },
         resolve: {
           user: userResolver,
           agenciesDropdown: agencyDropdownResolver,
@@ -75,25 +87,37 @@ export const AdminRoutes: Routes = [
   {
     path: 'categories',
     component: CategoriesAdminShellComponent,
+    data: {
+      breadcrumbSkipNode: true,
+    },
     children: [
       {
         path: '',
         title: 'Categories',
         component: CategoriesAdminComponent,
+        data: {
+          breadcrumb: 'Categories',
+        },
         resolve: {
           categories: categoriesResolver,
         },
-      }
+      },
     ],
   },
   {
     path: 'agencies',
     component: AgenciesAdminShellComponent,
+    data: {
+      breadcrumbSkipNode: true,
+    },
     children: [
       {
         path: '',
         title: 'agencies',
         component: AgenciesAdminComponent,
+        data: {
+          breadcrumb: 'Agencies',
+        },
         resolve: {
           agencies: agenciesResolver,
         },
@@ -102,6 +126,9 @@ export const AdminRoutes: Routes = [
         path: 'new',
         title: 'New Agency',
         component: AgencyAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
         resolve: {
           // agenciesDropdown: agencyDropdownResolver,
         },
@@ -109,6 +136,9 @@ export const AdminRoutes: Routes = [
       {
         path: ':id',
         title: 'Edit Agency',
+        data: {
+          breadcrumb: 'Edit',
+        },
         component: AgencyAdminEditComponent,
         resolve: {
           // agency: agencyResolver,

@@ -9,14 +9,23 @@ const routes: Routes = [
   {
     path: '',
     component: FullComponent,
+    data: {
+      breadcrumbSkipNode: true,
+    },
     children: [
       {
         path: 'user',
         loadChildren: () => import('@issp/user').then((m) => m.UserModule),
+        data: {
+          breadcrumb: 'User',
+        },
       },
       {
         path: 'admin',
         loadChildren: () => import('@issp/admin').then((m) => m.AdminModule),
+        data: {
+          breadcrumb: 'Admin',
+        },
       },
     ],
   },

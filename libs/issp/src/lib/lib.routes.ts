@@ -16,7 +16,7 @@ export const isspRoutes: Route[] = [
     title: 'ISSP',
     component: IsspItemsShellComponent,
     data: {
-      title: 'ISSP',
+      breadcrumbSkipNode: true,
     },
     children: [
       {
@@ -24,7 +24,7 @@ export const isspRoutes: Route[] = [
         title: 'ISSP Items',
         component: IsspItemsComponent,
         data: {
-          breadcrumbSkipNode: true,
+          breadcrumb: 'Items',
         },
         resolve: {
           issps: isspsResolver,
@@ -41,17 +41,16 @@ export const isspRoutes: Route[] = [
       {
         path: ':id',
         title: 'ISSP',
-        data: {
-          // breadcrumbRouteDataProperty: 'xform.name',
-        },
         component: IsspItemEditShellComponent,
+        data: {
+          breadcrumbRouteDataProperty: 'issp.title',
+        },
         resolve: {
           issp: isspResolver,
         },
         children: [
           {
             path: '',
-
             redirectTo: 'metadata',
             pathMatch: 'full',
           },
@@ -60,7 +59,7 @@ export const isspRoutes: Route[] = [
 
             title: 'ISSP Metadata',
             data: {
-              breadcrumb: 'Metadata',
+              breadcrumbSkipNode: true,
             },
             component: IsspItemEditMetadataComponent,
           },
@@ -69,7 +68,7 @@ export const isspRoutes: Route[] = [
 
             title: 'ISSP Details',
             data: {
-              breadcrumb: 'Edit',
+              breadcrumb: 'Details',
             },
             component: IsspItemEditDetailsComponent,
           },

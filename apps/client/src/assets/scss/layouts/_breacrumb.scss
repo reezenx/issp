@@ -3,20 +3,120 @@
   top: -20px;
   right: 19px;
 }
-.breadcrumb{
+.breadcrumb {
   list-style: none;
   margin: 0;
   padding: 0px;
   display: flex;
 }
 .breadcrumb-item {
-  padding: 0 10px 0 0;
-  a {
-    text-decoration: none;
-    color: $textPrimary;
-    font-size: 14px;
-    &:hover{
-      color:$primary
-    }
+  padding: 0 5px 0 0;
+  text-decoration: none;
+  color: $gray-100;
+  font-size: 14px;
+  &:hover {
+    color: $primary;
+  }
+}
+
+.issp-breadcrumb {
+  height: 1.5625rem;
+  padding: 0;
+  margin-bottom: 0;
+  line-height: 1.5rem;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.issp-breadcrumb > * {
+  text-decoration: none;
+  outline: none;
+  display: block;
+  float: left;
+  font-size: 0.75rem;
+  // color: $gray-100;
+  position: relative;
+  transition: all 0s;
+}
+
+.issp-breadcrumb > * div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.issp-breadcrumb > *:first-child {
+  padding-left: 0.25rem;
+  color: $gray-100;
+  border-radius: 0;
+  line-height: 1.5rem;
+}
+
+.issp-breadcrumb > *:first-child i {
+  vertical-align: sub;
+}
+
+.issp-breadcrumb span {
+  height: 100%;
+}
+
+.issp-breadcrumb a {
+  color: $gray-100;
+  margin-left: 0.015rem;
+}
+
+.issp-breadcrumb a:hover,
+.issp-breadcrumb a:hover:after {
+  color: $gray-100;
+  line-height: 24px;
+}
+
+.issp-breadcrumb a.active,
+.issp-breadcrumb a.active:after {
+  color: $gray-100;
+  line-height: 1.5rem;
+}
+
+.issp-breadcrumb > *:after {
+  content: '\2022\2022';
+  color: $gray-100;
+  /*font-weight: bold;*/
+  margin: 0 0.25rem 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: all 0.1s;
+}
+
+.issp-breadcrumb > *:nth-last-child(-n + 1) {
+  font-weight: bold;
+}
+
+.issp-breadcrumb > *:nth-last-child(-n + 1):after {
+  content: '';
+}
+
+.issp-breadcrumb .fa.fa-1-6x {
+  font-size: 1.6em;
+}
+
+@media (max-width: 47.9375rem) {
+  //767
+  .issp-breadcrumb > *:nth-last-child(-n + 4) {
+    display: block;
+  }
+
+  .issp-breadcrumb > * div {
+    max-width: 10.9375rem; //175
+  }
+}
+
+@media (min-width: 48rem) {
+  //768
+  .issp-breadcrumb > *:nth-last-child(-n + 6) {
+    display: block;
+  }
+
+  .issp-breadcrumb > * div {
+    max-width: 23.4375rem; //375
   }
 }

@@ -1,36 +1,44 @@
-@if(pageInfo?.['title'] != 'Analytical' && pageInfo?.['title'] != 'eCommerce'){
-<div class="bg-light-primary rounded p-y-30 p-x-24 m-b-30 overflow-hidden">
-  <div class="row">
-    <div class="col-sm-8">
-      <h4 class="page-title m-0 f-s-20 f-w-600 m-b-16">
-        {{ pageInfo?.['title'] }}
-      </h4>
-      <div class="d-flex align-items-center overflow-hidden">
-        <ul class="breadcrumb">
-          @for (url of pageInfo?.['urls']; track url.url;let index = $index,last
-          = $last ) { @if(!last){
-
-          <li class="breadcrumb-item" [routerLink]="url.url">
-            <a [routerLink]="url.url">{{ url.title }}</a>
-          </li>
-          }@else {
-          <li class="breadcrumb-item">
-            <i-tabler name="circle-filled" class="icon-8"></i-tabler>
-          </li>
-          <li class="breadcrumb-item active">{{ url.title }}</li>
-          } }
-        </ul>
-      </div>
+<div
+  class="breadcrumb pl-0 d-flex align-items-center m-b-10"
+  *ngIf="!hideBreadcrumb"
+>
+  <span>
+    <a
+      [routerLink]="['/']"
+      class="breadcrumb-item d-flex align-items-center"
+      title="home"
+      aria-label="dashboard"
+    >
+      <i-tabler name="home" class="icon-18"></i-tabler>
+    </a>
+  </span>
+  <span *ngFor="let breadcrumb of breadcrumbs; let i = index">
+    <div class="d-flex align-items-center">
+      <div class="breadcrumb-item">/</div>
+      <ng-container *ngIf="!breadcrumb.isCustomUrl">
+        <a
+          class="breadcrumb-item"
+          *ngIf="breadcrumb.includeParams"
+          [routerLink]="[breadcrumb.url, breadcrumb.params]"
+          [ngClass]="{ active: i === breadcrumbs.length - 1 }"
+          >{{ breadcrumb.label }}</a
+        >
+        <a
+          class="breadcrumb-item"
+          *ngIf="!breadcrumb.includeParams"
+          [routerLink]="[breadcrumb.url]"
+          [ngClass]="{ active: i === breadcrumbs.length - 1 }"
+          >{{ breadcrumb.label }}</a
+        >
+      </ng-container>
+      <ng-container *ngIf="breadcrumb.isCustomUrl">
+        <a
+          class="breadcrumb-item"
+          [href]="breadcrumb.url"
+          [ngClass]="{ active: i === breadcrumbs.length - 1 }"
+          >{{ breadcrumb.label }}</a
+        >
+      </ng-container>
     </div>
-    <div class="col-sm-4 text-right position-relative">
-      <div class="breadcrumb-icon">
-        <img
-          src="/assets/images/breadcrumb/ChatBc.png"
-          alt="breadcrumb"
-          width="165"
-        />
-      </div>
-    </div>
-  </div>
+  </span>
 </div>
-}
