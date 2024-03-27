@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('VIEWER', 'PLANNER', 'EVALUATOR', 'ENDORSER', 'APPROVER', 'ADMIN', 'SUPER_ADMIN');
+CREATE TYPE "Role" AS ENUM ('VIEWER', 'PLANNER', 'EVALUATOR', 'VALIDATOR', 'ASSIGNER', 'ENDORSER', 'APPROVER', 'ADMIN', 'SUPER_ADMIN');
 
 -- CreateEnum
 CREATE TYPE "ISSP_Status" AS ENUM ('NOT_STARTED', 'UNDER_REVIEW', 'FOR_VALIDATION', 'FOR_ENDORSEMENT', 'APPROVED');
@@ -74,6 +74,35 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
+CREATE TABLE "roles" (
+    "id" TEXT NOT NULL,
+    "name" "Role" NOT NULL,
+    "createdBy" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedBy" TEXT,
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "roles_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "permissions" (
+    "id" TEXT NOT NULL,
+    "roleId" TEXT NOT NULL,
+    "action" TEXT NOT NULL,
+    "subject" TEXT NOT NULL,
+    "inverted" BOOLEAN NOT NULL DEFAULT false,
+    "conditions" JSONB,
+    "reason" TEXT,
+    "createdBy" TEXT NOT NULL,
+    "updatedBy" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "permissions_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "issps" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
@@ -112,6 +141,12 @@ CREATE TABLE "Action_History" (
 );
 
 -- CreateTable
+CREATE TABLE "_UserToUser_Role" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "_ISSPUsers" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL
@@ -122,6 +157,12 @@ CREATE UNIQUE INDEX "profiles_userId_key" ON "profiles"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_UserToUser_Role_AB_unique" ON "_UserToUser_Role"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_UserToUser_Role_B_index" ON "_UserToUser_Role"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_ISSPUsers_AB_unique" ON "_ISSPUsers"("A", "B");
@@ -139,6 +180,9 @@ ALTER TABLE "agencies" ADD CONSTRAINT "agencies_categoryId_fkey" FOREIGN KEY ("c
 ALTER TABLE "users" ADD CONSTRAINT "users_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "permissions" ADD CONSTRAINT "permissions_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "issps" ADD CONSTRAINT "issps_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -149,6 +193,12 @@ ALTER TABLE "Action_History" ADD CONSTRAINT "Action_History_userId_fkey" FOREIGN
 
 -- AddForeignKey
 ALTER TABLE "Action_History" ADD CONSTRAINT "Action_History_isspId_fkey" FOREIGN KEY ("isspId") REFERENCES "issps"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_UserToUser_Role" ADD CONSTRAINT "_UserToUser_Role_A_fkey" FOREIGN KEY ("A") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_UserToUser_Role" ADD CONSTRAINT "_UserToUser_Role_B_fkey" FOREIGN KEY ("B") REFERENCES "roles"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_ISSPUsers" ADD CONSTRAINT "_ISSPUsers_A_fkey" FOREIGN KEY ("A") REFERENCES "issps"("id") ON DELETE CASCADE ON UPDATE CASCADE;

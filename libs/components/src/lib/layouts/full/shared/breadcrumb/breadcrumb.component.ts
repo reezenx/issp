@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
-  NavigationEnd,
   Params,
   Router,
   PRIMARY_OUTLET,
   RouterModule,
 } from '@angular/router';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Subscription } from 'rxjs';
 
 interface IBreadcrumb {
   label: string;
@@ -19,6 +19,7 @@ interface IBreadcrumb {
   isCustomUrl: boolean;
 }
 
+@UntilDestroy({ arrayName: 'subs' })
 @Component({
   selector: 'issp-breadcrumb',
   standalone: true,
@@ -33,22 +34,22 @@ export class BreadcrumbComponent implements OnInit {
 
   public breadcrumbs: IBreadcrumb[] = new Array<IBreadcrumb>();
   hideBreadcrumb = false;
+  subs: Subscription[] = [];
 
   ngOnInit() {
     // subscribe to the NavigationEnd event
-    this.router.events
-      // .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        // set breadcrumbs
-        const root: ActivatedRoute = this.activatedRoute.root;
-        // Don't show the breadcrumb on the home page.
-        if (root.snapshot['_routerState'].url === '/') {
-          this.hideBreadcrumb = true;
-          return;
-        }
-        this.hideBreadcrumb = false;
-        this.breadcrumbs = this.getBreadcrumbs(root);
-      });
+    const routerSub = this.router.events.subscribe(() => {
+      // set breadcrumbs
+      const root: ActivatedRoute = this.activatedRoute.root;
+      // Don't show the breadcrumb on the home page.
+      if (root.snapshot['_routerState'].url === '/') {
+        this.hideBreadcrumb = true;
+        return;
+      }
+      this.hideBreadcrumb = false;
+      this.breadcrumbs = this.getBreadcrumbs(root);
+    });
+    this.subs.push(routerSub);
   }
 
   private getBreadcrumbs(
