@@ -5,6 +5,7 @@ import { Role } from '@prisma/client';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { ApiTags, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ActionHistoryEntity } from './entities/action-history.entity';
+import { Action } from '@issp/common';
 
 @ApiTags('action-history')
 // @Roles(Role.PLANNER)

@@ -23,9 +23,22 @@ model Profile {
   @@map("profiles")
 }
 
+model Category {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  agencies  Agency[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  @@map("categories")
+}
+
 model Agency {
   id         String    @id @default(cuid())
-  code       String
+  code       String    @unique
   category   Category  @relation(fields: [categoryId], references: [id])
   categoryId String
   name       String
@@ -42,48 +55,34 @@ model Agency {
   @@map("agencies")
 }
 
-model Category {
-  id        String    @id @default(cuid())
-  code      String
-  name      String
-  agencies  Agency[]
-  createdBy String
-  updatedBy String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
-
-  @@map("categories")
-}
-
 model User {
-  id              String           @id @default(cuid())
-  firstName       String
-  lastName        String
-  email           String           @unique
-  phone           String
-  password        String
-  createdBy       String
-  updatedBy       String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime?        @updatedAt
-  agency          Agency           @relation(fields: [agencyId], references: [id])
-  agencyId        String
-  role            Role[]           @default([VIEWER])
-  status          User_Status
-  profile         Profile?
-  issps           ISSP[]           @relation("ISSPUsers")
-  tags            String[]
-  authoredIssps   ISSP[]           @relation(name: "ISSPAuthor")
-  authoredIsspIds String[]
-  history         Action_History[]
-  roles           User_Role[]
+  id            String          @id @default(cuid())
+  firstName     String
+  lastName      String
+  email         String          @unique
+  phone         String
+  password      String
+  createdBy     String
+  updatedBy     String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime?       @updatedAt
+  agency        Agency          @relation(fields: [agencyId], references: [id])
+  agencyId      String
+  role          Role[]          @default([VIEWER])
+  status        UserStatus
+  profile       Profile?
+  issps         ISSP[]          @relation("ISSPUsers")
+  tags          String[]
+  authoredIssps ISSP[]          @relation(name: "ISSPAuthor")
+  history       ActionHistory[]
+  roles         UserRole[]
 
   @@map("users")
 }
 
-model User_Role {
+model UserRole {
   id         String       @id @default(cuid())
-  name       Role
+  name       String       @unique
   createdBy  String
   createdAt  DateTime     @default(now())
   updatedBy  String?
@@ -96,11 +95,12 @@ model User_Role {
 
 model Permission {
   id         String    @id @default(cuid())
-  role       User_Role @relation(fields: [roleId], references: [id])
+  role       UserRole  @relation(fields: [roleId], references: [id])
   roleId     String
   action     String
   subject    String
-  inverted   Boolean   @default(false)
+  inverted   Boolean?  @default(false)
+  readOnly   Boolean?  @default(false)
   conditions Json?
   reason     String?
   createdBy  String
@@ -111,43 +111,130 @@ model Permission {
   @@map("permissions")
 }
 
+model Project {
+  id                          String              @id @default(cuid())
+  title                       String
+  description                 String?
+  createdBy                   String
+  updatedBy                   String?
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime?           @updatedAt()
+  projectType                 ProjectType?        @relation(fields: [projectTypeId], references: [id])
+  projectTypeId               String?
+  projectCategory             ProjectCategory?    @relation(fields: [projectCategoryId], references: [id])
+  projectCategoryId           String?
+  projectImplementationType   ImplementationType? @relation(fields: [projectImplementationTypeId], references: [id])
+  projectImplementationTypeId String?
+  projectBudgetType           BudgetType?         @relation(fields: [projectBudgetTypeId], references: [id])
+  projectBudgetTypeId         String?
+  projectBudgetSource         BudgetSource?       @relation(fields: [projectBudgetSourceId], references: [id])
+  projectBudgetSourceId       String?
+
+  @@map("projects")
+}
+
+model ProjectType {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  projects  Project[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("project-types")
+}
+
+model ProjectCategory {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  projects  Project[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("project-categories")
+}
+
+model ImplementationType {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  projects  Project[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("implementation-types")
+}
+
+model BudgetType {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  projects  Project[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("budget-types")
+}
+
+model BudgetSource {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  projects  Project[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("budget-source")
+}
+
 model ISSP {
-  id          String           @id @default(cuid())
+  id          String          @id @default(cuid())
   title       String
   description String?
-  status      ISSP_Status      @default(NOT_STARTED)
+  status      ISSPStatus      @default(NOT_STARTED)
   startYear   Int
   endYear     Int
   tags        String[]
-  users       User[]           @relation("ISSPUsers")
-  agency      Agency           @relation(fields: [agencyId], references: [id])
+  users       User[]          @relation("ISSPUsers")
+  agency      Agency          @relation(fields: [agencyId], references: [id])
   agencyId    String
-  author      User             @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
+  author      User            @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
   authorId    String
-  version     Int?             @default(1)
-  readOnly    Boolean          @default(true)
-  createdAt   DateTime         @default(now())
+  version     Int?            @default(1)
+  readOnly    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
   createdBy   String
   updatedBy   String?
-  updatedAt   DateTime?        @updatedAt
-  history     Action_History[]
+  updatedAt   DateTime?       @updatedAt
+  history     ActionHistory[]
 
   @@map("issps")
 }
 
-model Action_History {
-  id           String      @id @default(cuid())
-  user         User        @relation(fields: [userId], references: [id])
+model ActionHistory {
+  id           String     @id @default(cuid())
+  user         User       @relation(fields: [userId], references: [id])
   userId       String
-  issp         ISSP        @relation(fields: [isspId], references: [id])
+  issp         ISSP       @relation(fields: [isspId], references: [id])
   isspId       String
   isspVersion  Int
-  action       ISSP_Action
+  action       ISSPAction
   changes      String[]
   parentModule String
   childModule  String
   tags         String[]
-  createdAt    DateTime    @default(now())
+  createdAt    DateTime   @default(now())
   createdBy    String
 }
 
@@ -163,7 +250,7 @@ enum Role {
   SUPER_ADMIN
 }
 
-enum ISSP_Status {
+enum ISSPStatus {
   NOT_STARTED
   UNDER_REVIEW
   FOR_VALIDATION
@@ -171,22 +258,13 @@ enum ISSP_Status {
   APPROVED
 }
 
-enum User_Status {
+enum UserStatus {
   ACTIVE
   INACTIVE
   DELETED
 }
 
-enum Agency_Code {
-  DICT
-  DILG
-  DAR
-  DA
-  DBM
-  DE
-}
-
-enum ISSP_Action {
+enum ISSPAction {
   VIEW
   CREATE
   AMEND

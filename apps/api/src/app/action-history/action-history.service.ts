@@ -6,11 +6,11 @@ import { PrismaService } from 'nestjs-prisma';
 export class ActionHistoryService {
   constructor(private prisma: PrismaService) {}
   create(createActionHistoryDto: CreateActionHistoryDto) {
-    return this.prisma.action_History.create({ data: createActionHistoryDto });
+    return this.prisma.actionHistory.create({ data: createActionHistoryDto });
   }
 
   findAll(id: string) {
-    return this.prisma.action_History.findMany({
+    return this.prisma.actionHistory.findMany({
       where: {
         isspId: id,
       },
@@ -19,7 +19,7 @@ export class ActionHistoryService {
           select: {
             firstName: true,
             lastName: true,
-            role: true,
+            roles: true,
             id: true,
           },
         },
@@ -33,7 +33,7 @@ export class ActionHistoryService {
   }
 
   findOne(id: string) {
-    return this.prisma.action_History.findUnique({
+    return this.prisma.actionHistory.findUnique({
       where: { id },
       include: {
         user: {

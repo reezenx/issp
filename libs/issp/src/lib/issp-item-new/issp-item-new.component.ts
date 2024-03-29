@@ -16,7 +16,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { ISSP_Status } from '@prisma/client';
+import { ISSPStatus } from '@prisma/client';
 import {
   ISSP_Statuses,
   startYearMustBeLessThanEndYearValidator,
@@ -60,7 +60,7 @@ export class IsspItemNewComponent implements OnInit {
         description: new FormControl<string>('', [Validators.required]),
         endYear: new FormControl<number>(null, [Validators.required]),
         startYear: new FormControl<number>(null, [Validators.required]),
-        status: new FormControl<ISSP_Status>(ISSP_Statuses.NOT_STARTED),
+        status: new FormControl<ISSPStatus>(ISSP_Statuses.NOT_STARTED),
         version: new FormControl<number>(1),
         tags: new FormControl<string[]>([]),
         createdBy: new FormControl<string>('System'),

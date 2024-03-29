@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role, User_Status } from '@prisma/client';
+import { Role, UserStatus } from '@prisma/client';
 import {
   IsArray,
   IsEnum,
@@ -29,10 +29,10 @@ export class CreateUserDto {
   @ApiProperty()
   phone: string;
 
-  @IsEnum(User_Status)
+  @IsEnum(UserStatus)
   @IsNotEmpty()
   @ApiProperty()
-  status: User_Status;
+  status: UserStatus;
 
   @IsArray()
   @IsNotEmpty()

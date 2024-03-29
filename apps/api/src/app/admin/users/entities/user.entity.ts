@@ -6,8 +6,6 @@ export class UserEntity implements User {
   constructor(user: UserEntity) {
     Object.assign(this, user);
   }
-  @ApiProperty()
-  authoredIsspIds: string[];
 
   @ApiProperty()
   tags: string[];
@@ -16,7 +14,7 @@ export class UserEntity implements User {
   role: $Enums.Role[];
 
   @ApiProperty()
-  status: $Enums.User_Status;
+  status: $Enums.UserStatus;
 
   @ApiProperty()
   id: string;

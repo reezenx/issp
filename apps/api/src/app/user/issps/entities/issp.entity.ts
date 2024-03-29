@@ -22,7 +22,7 @@ export class IsspEntity implements ISSP {
   createdAt: Date;
 
   @ApiProperty()
-  status: $Enums.ISSP_Status;
+  status: $Enums.ISSPStatus;
 
   @ApiProperty()
   startYear: number;

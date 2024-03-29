@@ -1,6 +1,6 @@
-import { ISSP_Status, User_Status, Role } from '@prisma/client';
+import { ISSPStatus, UserStatus, Role } from '@prisma/client';
 
-export const ISSP_Statuses: { [key in ISSP_Status]: ISSP_Status } = {
+export const ISSP_Statuses: { [key in ISSPStatus]: ISSPStatus } = {
   FOR_VALIDATION: 'FOR_VALIDATION',
   APPROVED: 'APPROVED',
   NOT_STARTED: 'NOT_STARTED',
@@ -8,7 +8,7 @@ export const ISSP_Statuses: { [key in ISSP_Status]: ISSP_Status } = {
   FOR_ENDORSEMENT: 'FOR_ENDORSEMENT',
 };
 
-export const User_Statuses: { [key in User_Status]: User_Status } = {
+export const User_Statuses: { [key in UserStatus]: UserStatus } = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
   DELETED: 'DELETED',

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { $Enums, Action_History } from '@prisma/client';
+import { $Enums, ActionHistory } from '@prisma/client';
 import {
   IsArray,
   IsEnum,
@@ -24,10 +24,10 @@ export class CreateActionHistoryDto {
   @ApiProperty()
   isspVersion: number;
 
-  @IsEnum($Enums.ISSP_Action)
+  @IsEnum($Enums.ISSPAction)
   @IsNotEmpty()
   @ApiProperty()
-  action: $Enums.ISSP_Action;
+  action: $Enums.ISSPAction;
 
   @IsNumber()
   @IsNotEmpty()

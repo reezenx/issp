@@ -1,7 +1,7 @@
-import { $Enums, Action_History } from '@prisma/client';
+import { $Enums, ActionHistory } from '@prisma/client';
 import { Assign } from '@issp/common';
 
-export class ActionHistory extends Assign implements Action_History {
+export class ActionHistoryInfo extends Assign implements ActionHistory {
   constructor() {
     super();
 
@@ -24,8 +24,8 @@ export class ActionHistory extends Assign implements Action_History {
       enumerable: true,
     });
 
-    Object.defineProperty(this, 'userRole', {
-      get: () => this.user.role,
+    Object.defineProperty(this, 'userRoles', {
+      get: () => this.user.roles.map((role) => role.name).join(','),
       enumerable: true,
     });
   }
@@ -34,12 +34,12 @@ export class ActionHistory extends Assign implements Action_History {
   childModule: string;
 
   isspVersion: number;
-  action: $Enums.ISSP_Action;
+  action: $Enums.ISSPAction;
 
   createdAt: Date;
   createdBy: string;
   id: string;
-  status: $Enums.ISSP_Status;
+  status: $Enums.ISSPStatus;
   tags: string[];
   modules: string[];
   version: number;
@@ -48,7 +48,7 @@ export class ActionHistory extends Assign implements Action_History {
   user: {
     firstName: string;
     lastName: string;
-    role: string;
+    roles: { name: string }[];
   };
 
   isspId: string;

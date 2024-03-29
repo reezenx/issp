@@ -42,6 +42,11 @@ export class UserDetails extends Assign implements User {
       get: () => this.agency?.name,
       enumerable: true,
     });
+
+    Object.defineProperty(this, 'roleNames', {
+      get: () => this.roles.map((role) => role.name).join(', '),
+      enumerable: true,
+    });
   }
   id: string;
   createdBy: string;
@@ -56,7 +61,8 @@ export class UserDetails extends Assign implements User {
   phone: string;
   password: string;
   role: $Enums.Role[];
-  status: $Enums.User_Status;
+  roles: { name: string }[];
+  status: $Enums.UserStatus;
   authoredIsspIds: string[];
 
   agency: {

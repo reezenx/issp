@@ -53,7 +53,7 @@ export class ISSPDetails extends Assign implements ISSP {
   id: string;
   readOnly: boolean;
   startYear: number;
-  status: $Enums.ISSP_Status;
+  status: $Enums.ISSPStatus;
   tags: string[];
   title: string;
   updatedAt: Date;

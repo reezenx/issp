@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ISSPDetails } from '../models/issp-details';
-import { ActionHistory } from '../models/action-history';
+import { ActionHistoryInfo } from '../models/action-history';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -14,24 +14,25 @@ export class ActionHistoryService {
 
   constructor(private http: HttpClient) {}
 
-  #emitAllItems: BehaviorSubject<Array<ActionHistory>> = new BehaviorSubject<
-    Array<ActionHistory>
-  >(new Array<ActionHistory>());
+  #emitAllItems: BehaviorSubject<Array<ActionHistoryInfo>> =
+    new BehaviorSubject<Array<ActionHistoryInfo>>(
+      new Array<ActionHistoryInfo>()
+    );
   allItems$ = this.#emitAllItems.asObservable();
 
-  #emitCurrentContextItem = new Subject<ActionHistory>();
+  #emitCurrentContextItem = new Subject<ActionHistoryInfo>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
 
-  #emitLastAddedItem = new Subject<ActionHistory>();
+  #emitLastAddedItem = new Subject<ActionHistoryInfo>();
   lastAddedItem$ = this.#emitLastAddedItem.asObservable();
 
   findAll(isspId: string) {
     const uri = `${this.route}/${isspId}`;
-    return this.http.get<ActionHistory[]>(uri).pipe(
+    return this.http.get<ActionHistoryInfo[]>(uri).pipe(
       map((data) => {
-        let list = new Array<ActionHistory>();
+        let list = new Array<ActionHistoryInfo>();
         list = data.map((e) => {
-          const entity = new ActionHistory();
+          const entity = new ActionHistoryInfo();
           entity.assign(e);
           return entity;
         });
@@ -43,11 +44,11 @@ export class ActionHistoryService {
     );
   }
 
-  findOne(id: string): Observable<ActionHistory> {
+  findOne(id: string): Observable<ActionHistoryInfo> {
     const uri = `${this.route}/${id}`;
-    return this.http.get<ActionHistory>(uri).pipe(
+    return this.http.get<ActionHistoryInfo>(uri).pipe(
       map((e) => {
-        const entity = new ActionHistory();
+        const entity = new ActionHistoryInfo();
         entity.assign(e);
         return entity;
       }),
@@ -57,13 +58,13 @@ export class ActionHistoryService {
     );
   }
 
-  createOne(issp: ISSPDetails): Observable<ActionHistory> {
+  createOne(issp: ISSPDetails): Observable<ActionHistoryInfo> {
     const uri = `${this.route}`;
     issp.startYear = new Date(issp.startYear).getFullYear();
     issp.endYear = new Date(issp.endYear).getFullYear();
-    return this.http.post<ActionHistory>(uri, issp).pipe(
+    return this.http.post<ActionHistoryInfo>(uri, issp).pipe(
       map((e) => {
-        const entity = new ActionHistory();
+        const entity = new ActionHistoryInfo();
         entity.assign(e);
         return entity;
       }),

@@ -16,7 +16,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { Role, User_Status } from '@prisma/client';
+import { Role, UserStatus } from '@prisma/client';
 import { AgencyDropdown, User_Roles, User_Statuses } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
@@ -74,7 +74,7 @@ export class UserAdminEditComponent implements OnInit {
         Validators.email,
       ]),
       agencyId: new FormControl<string>('', [Validators.required]),
-      status: new FormControl<User_Status>(null),
+      status: new FormControl<UserStatus>(null),
       role: new FormControl<Role[]>(null, [Validators.required]),
     });
   }

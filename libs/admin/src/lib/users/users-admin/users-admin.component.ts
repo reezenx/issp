@@ -14,7 +14,7 @@ import { GridDefaults } from '@issp/common/ui/libraries';
 import { UserDetails } from '../models/user-details';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { User_Status } from '@prisma/client';
+import { UserStatus } from '@prisma/client';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -49,7 +49,7 @@ export class UsersAdminComponent implements OnInit {
   };
   loadingIndicator = { indicatorType: 'Shimmer' };
 
-  STATUS = User_Status;
+  STATUS = UserStatus;
   subs: Subscription[] = [];
 
   ngOnInit() {

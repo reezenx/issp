@@ -13,5 +13,5 @@
 //   updatedAt: Date;
 //   agencyId: string;
 //   role: $Enums.Role[];
-//   status: $Enums.User_Status;
+//   status: $Enums.UserStatus;
 // }

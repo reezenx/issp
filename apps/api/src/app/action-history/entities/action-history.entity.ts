@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { $Enums, Action_History } from '@prisma/client';
+import { $Enums, ActionHistory } from '@prisma/client';
 
-export class ActionHistoryEntity implements Action_History {
-  constructor(actionHistory: Action_History) {
+export class ActionHistoryEntity implements ActionHistory {
+  constructor(actionHistory: ActionHistory) {
     Object.assign(this, actionHistory);
   }
 
@@ -19,7 +19,7 @@ export class ActionHistoryEntity implements Action_History {
   isspVersion: number;
 
   @ApiProperty()
-  action: $Enums.ISSP_Action;
+  action: $Enums.ISSPAction;
 
   @ApiProperty()
   changes: string[];

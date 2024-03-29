@@ -11,10 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridDefaults } from '@issp/common/ui/libraries';
-import { ISSPDetails } from '../models/issp-details';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ActionHistory } from '../models/action-history';
+import { ActionHistoryInfo } from '../models/action-history';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -32,7 +31,7 @@ export class IsspItemEditPreviewComponent implements OnInit {
   @ViewChild('itemsGrid', { static: true })
   grid: GridComponent;
   gridId = 'itemsGrid';
-  gridData: Array<ActionHistory> = new Array<ActionHistory>();
+  gridData: Array<ActionHistoryInfo> = new Array<ActionHistoryInfo>();
   gridPageSettings: PageSettingsModel = new GridDefaults();
   resizeSettings: ResizeSettingsModel = { mode: 'Normal' };
   filterSettings: FilterSettingsModel = { type: 'Excel' };

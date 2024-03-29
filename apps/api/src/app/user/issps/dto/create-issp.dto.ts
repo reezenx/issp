@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ISSP_Status } from '@prisma/client';
+import { ISSPStatus } from '@prisma/client';
 import {
   IsArray,
   IsEnum,
@@ -19,10 +19,10 @@ export class CreateIsspDto {
   @ApiProperty()
   description: string;
 
-  @IsEnum(ISSP_Status)
+  @IsEnum(ISSPStatus)
   @IsNotEmpty()
   @ApiProperty()
-  status: ISSP_Status;
+  status: ISSPStatus;
 
   @IsNumber()
   @IsNotEmpty()
