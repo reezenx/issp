@@ -33,8 +33,8 @@ export const PROJECT_TYPE: ItemObj = {
   },
   WEM: {
     id: 'cluc0eesg000g08jqh7bzh1oo',
-    code: 'IME',
-    name: 'WEM Maintenance',
+    code: 'WEM',
+    name: 'Web Maintenance',
   },
   TEE: {
     id: 'cluc0eesg000h08jqcb118m7x',

@@ -3,9 +3,12 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
+// import { JwtStrategy } from './jwt.strategy';
 import { UsersModule } from '../admin/users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AppCaslFactory } from './casl/casl.factory';
+import { ApiAuthModule } from '@issp/api-auth';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   controllers: [AuthController],
@@ -24,6 +27,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         signOptions: { expiresIn: '10000s' },
       }),
     }),
+    ApiAuthModule.register(AppCaslFactory),
     UsersModule,
   ],
   exports: [PassportModule, JwtModule],
