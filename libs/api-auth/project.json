@@ -1,0 +1,8 @@
+{
+  "name": "api-auth",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api-auth/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:shared", "type:util"]
+}

@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@issp/admin": ["libs/admin/src/index.ts"],
+      "@issp/api-auth": ["libs/api-auth/src/index.ts"],
       "@issp/auth": ["libs/auth/src/index.ts"],
       "@issp/common": ["libs/common/src/index.ts"],
       "@issp/common/environments": [
