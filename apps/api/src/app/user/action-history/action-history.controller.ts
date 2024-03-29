@@ -2,14 +2,13 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { ActionHistoryService } from './action-history.service';
 import { CreateActionHistoryDto } from './dto/create-action-history.dto';
 import { Role } from '@prisma/client';
-import { Roles } from '../auth/decorators/roles.decorator';
+import { Roles } from '../../auth/decorators/roles.decorator';
 import { ApiTags, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ActionHistoryEntity } from './entities/action-history.entity';
-import { Action } from '@issp/common';
 
-@ApiTags('action-history')
+@ApiTags('user/action-history')
 // @Roles(Role.PLANNER)
-@Controller('action-history')
+@Controller('user/action-history')
 export class ActionHistoryController {
   constructor(private readonly actionHistoryService: ActionHistoryService) {}
 

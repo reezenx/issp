@@ -4,13 +4,14 @@ import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ISSPDetails } from '../models/issp-details';
 import { ActionHistoryInfo } from '../models/action-history';
+import { API } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class ActionHistoryService {
-  route = `api/v1/action-history`;
+  route = `${API.BASE}${API.USER.ACTION_HISTORY}`;
 
   constructor(private http: HttpClient) {}
 

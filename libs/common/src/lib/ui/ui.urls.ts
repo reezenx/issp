@@ -1,5 +1,4 @@
-export const API = {
-  BASE: 'api/v1/',
+export const URLS = {
   ADMIN: {
     USERS: 'admin/users',
     CATEGORIES: 'admin/categories',
@@ -11,8 +10,13 @@ export const API = {
     BUDGET_SOURCES: 'admin/budget-sources',
   },
   USER: {
-    ACCOUNTS: 'user/accounts',
     ISSPS: 'user/issps',
-    ACTION_HISTORY: 'user/action-history',
+  },
+  AUTH: {
+    LOGIN: 'auth/login',
+    REGISTER: 'auth/register',
+    TWO_STEPS: 'auth/two-steps',
+    ERROR: 'auth/error',
+    MAINTENANCE: 'auth/maintenance',
   },
 };
