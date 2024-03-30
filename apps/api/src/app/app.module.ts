@@ -10,7 +10,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './auth/guard/roles.guard';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
-import { JwtModule } from './jwt/jwt.module';
 
 @Module({
   imports: [
@@ -22,7 +21,6 @@ import { JwtModule } from './jwt/jwt.module';
         limit: 10,
       },
     ]),
-    JwtModule,
     AuthModule,
     AdminModule,
     UserModule,

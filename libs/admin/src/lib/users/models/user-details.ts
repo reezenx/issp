@@ -49,6 +49,7 @@ export class UserDetails extends Assign implements User {
     });
   }
   id: string;
+  sessionToken: string;
   createdBy: string;
   updatedBy: string;
   createdAt: Date;

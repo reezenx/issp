@@ -9,11 +9,11 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 
 import { CaslFactory } from '../casl-factory';
-import { ALLOW_ANONYMOUS_KEY } from '../../../../api-auth/src/lib/decorators/allow-anonymous.decorator';
+import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
 import {
   CASL_POLICY_KEY,
   CaslPolicyHandler,
-} from '../../../../api-auth/src/lib/decorators/casl-policy.decorator';
+} from '../decorators/casl-policy.decorator';
 
 /**
  * Guard that is used in conjunction with `CaslAbility`, `CaslAccessible` and `CaslPolicy` decorators.

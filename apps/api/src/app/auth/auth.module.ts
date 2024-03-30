@@ -9,10 +9,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppCaslFactory } from './casl/casl.factory';
 import { ApiAuthModule } from '@issp/api-auth';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { UserService } from './services/user.service';
+import { JwtAuthGuard } from './guard/jwt-auth.guard';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtAuthGuard, UserService, ConfigService],
+  // JwtAuthGuard,
+  // AuthService,
+  // JwtStrategy,
+  // UserService,
+  // ConfigService,
   imports: [
     PassportModule.register({
       defaultStrategy: 'jwt',
@@ -29,7 +36,15 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     }),
     ApiAuthModule.register(AppCaslFactory),
     UsersModule,
+    ConfigModule,
   ],
-  exports: [PassportModule, JwtModule],
+  exports: [
+    PassportModule,
+    JwtAuthGuard,
+    AuthService,
+    JwtModule,
+    ConfigModule,
+    // UserModule,
+  ],
 })
 export class AuthModule {}

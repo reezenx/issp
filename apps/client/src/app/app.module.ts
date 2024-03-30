@@ -31,19 +31,22 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { AuthService, ErrorDialogInterceptor } from '@issp/auth';
 import { AuthTokenInterceptor } from '@issp/auth';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { Ability, PureAbility } from '@casl/ability';
+import { createPrismaAbility } from '@casl/prisma';
 
 export function HttpLoaderFactory(http: HttpClient): unknown {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 const initialize = (authService: AuthService) => async () => {
-  // if (authService.getAccessToken()) {
-  //   try {
-  //     await authService.getProfile().toPromise();
-  //   } catch {
-  //     /* empty */
-  //   }
-  // }
+  if (authService.getAccessToken()) {
+    try {
+      await authService.getProfile().toPromise();
+    } catch {
+      /* empty */
+    }
+  }
 };
 
 @NgModule({
@@ -72,6 +75,10 @@ const initialize = (authService: AuthService) => async () => {
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+    {
       provide: APP_INITIALIZER,
       useFactory: initialize,
       deps: [AuthService],
@@ -87,6 +94,13 @@ const initialize = (authService: AuthService) => async () => {
       useClass: ErrorDialogInterceptor,
       multi: true,
     },
+    {
+      provide: Ability,
+      useValue: createPrismaAbility(undefined, {
+        detectSubjectType: (object) => object['__typename'],
+      }),
+    },
+    { provide: PureAbility, useExisting: Ability },
   ],
 })
 export class AppModule {}

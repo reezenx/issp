@@ -1,8 +1,3 @@
-<mat-spinner
-  class="position-absolute"
-  diameter="30"
-  *ngIf="loading"
-></mat-spinner>
 <div class="blank-layout-container justify-content-center align-items-center">
   <div
     class="position-relative row w-100 h-100 bg-gredient justify-content-center"
@@ -29,7 +24,7 @@
 
           <div class="text-center">
             @if(options.theme === 'light') {
-            <a [routerLink]="['/dashboards/dashboard1']">
+            <a [routerLink]="['/']">
               <img
                 src="./assets/images/logos/dark-logo.svg"
                 class="align-middle m-2 w-50"
@@ -37,7 +32,7 @@
               />
             </a>
             } @if(options.theme === 'dark') {
-            <a [routerLink]="['/dashboards/dashboard1']">
+            <a [routerLink]="['/']">
               <img
                 src="./assets/images/logos/light-logo.svg"
                 class="align-middle m-2"
@@ -48,11 +43,16 @@
           </div>
 
           <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >Email</mat-label
+            <mat-form-field
+              appearance="outline"
+              class="w-100 m-b-20"
+              color="primary"
             >
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput formControlName="email" />
+              <mat-label class="mat-subtitle-2 f-w-600">Email</mat-label>
+              <input matInput type="text" formControlName="email" />
+              <mat-icon matSuffix class="op-5">
+                <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
+              </mat-icon>
               @if(f['email'].touched && f['email'].invalid) {
               <mat-hint class="m-b-16 error-msg">
                 @if(f['email'].errors && f['email'].errors['required']) {
@@ -66,11 +66,31 @@
               }
             </mat-form-field>
             <!-- password -->
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
-              >Password</mat-label
+            <mat-form-field
+              appearance="outline"
+              class="w-100 m-b-20"
+              color="primary"
             >
-            <mat-form-field appearance="outline" class="w-100" color="primary">
-              <input matInput type="password" formControlName="password" />
+              <mat-label class="mat-subtitle-2 f-w-600">Password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                class="m-r-4"
+                (click)="hide = !hide"
+                [attr.aria-label]="hide ? 'Show password' : 'Hide password'"
+                [attr.aria-pressed]="hide"
+                [title]="hide ? 'Show password' : 'Hide password'"
+              >
+                <mat-icon class="op-5">{{
+                  hide ? 'visibility_off' : 'visibility'
+                }}</mat-icon>
+              </button>
               @if(f['password'].touched && f['password'].invalid) {
               <mat-hint class="m-b-16 error-msg">
                 @if(f['password'].errors && f['password'].errors['required']) {
@@ -92,11 +112,16 @@
               mat-flat-button
               color="primary"
               class="w-100"
-              [disabled]="!form.valid"
+              type="submit"
+              [disabled]="!form.valid || loading"
             >
-              Sign In
+              <span *ngIf="!loading"> Sign In </span>
+              <mat-spinner
+                class="w-100 d-flex justify-content-center"
+                diameter="20"
+                *ngIf="loading"
+              ></mat-spinner>
             </button>
-            <!-- input -->
           </form>
           <span class="d-block f-w-500 text-center m-t-24"
             >New to ISSP?

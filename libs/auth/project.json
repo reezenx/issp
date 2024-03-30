@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared/auth/feature-auth/src",
   "prefix": "issp",
-  "tags": ["scope:shared", "type:feature"],
+  "tags": ["scope:shared", "type:feature", "type:ui"],
   "projectType": "library",
   "targets": {}
 }

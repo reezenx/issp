@@ -64,6 +64,7 @@ model User {
   password      String
   createdBy     String
   updatedBy     String?
+  sessionToken  String?
   createdAt     DateTime        @default(now())
   updatedAt     DateTime?       @updatedAt
   agency        Agency          @relation(fields: [agencyId], references: [id])
@@ -115,6 +116,10 @@ model Project {
   id                          String              @id @default(cuid())
   title                       String
   description                 String?
+  cost                        Decimal             @db.Decimal(19, 2)
+  quantity                    Int
+  unit                        String
+  tags                        String[]
   createdBy                   String
   updatedBy                   String?
   createdAt                   DateTime            @default(now())

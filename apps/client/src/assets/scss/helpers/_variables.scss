@@ -1,4 +1,4 @@
-@use "functions" as *;
+@use 'functions' as *;
 
 // Utility Map
 
@@ -11,7 +11,7 @@ $spacers: (
   0: 0,
   2: $spacer * 0.125,
   4: $spacer * 0.25,
-  6: 7px,
+  6: 6px,
   8: $spacer * 0.5,
   10: 10px,
   12: $spacer * 0.75,

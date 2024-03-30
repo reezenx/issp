@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FullComponent } from '@issp/components';
 import { BlankComponent } from '@issp/components';
-import { AuthRoutes } from '@issp/auth';
+import { AuthGuard, AuthRoutes } from '@issp/auth';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user/account', pathMatch: 'full' },
@@ -12,6 +12,7 @@ const routes: Routes = [
     data: {
       breadcrumbSkipNode: true,
     },
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'user',

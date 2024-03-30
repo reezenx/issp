@@ -12,21 +12,24 @@ import { MaterialModule } from '@issp/common/ui/libraries';
 import { CoreService } from '@issp/common/ui/services';
 import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { TablerIconsModule } from 'angular-tabler-icons';
 
 @Component({
   selector: 'issp-boxed-login',
   standalone: true,
   imports: [
+    CommonModule,
     RouterModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule,
+    TablerIconsModule,
   ],
   templateUrl: './login.component.html',
 })
 export class IsspLoginComponent {
   options = this.settings.getOptions();
+  hide = true;
 
   constructor(
     private settings: CoreService,

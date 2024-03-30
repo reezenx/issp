@@ -279,7 +279,7 @@
 
       <div class="p-y-12 p-x-32">
         <a
-          [routerLink]="['/authentication/side-login']"
+          (click)="openLogoutDialog()"
           mat-stroked-button
           color="primary"
           class="w-100"

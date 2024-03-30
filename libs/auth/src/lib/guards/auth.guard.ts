@@ -6,6 +6,7 @@ import {
   Router,
 } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { URLS } from '@issp/common';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
+    state: RouterStateSnapshot
   ): boolean {
     const { redirect, requireAuth } = next.data;
 
@@ -43,7 +44,7 @@ export class AuthGuard implements CanActivate {
       }
 
       if (this.router.routerState.snapshot.url === '') {
-        this.router.navigate(isAuthRequired ? ['/login'] : ['/']);
+        this.router.navigate(isAuthRequired ? [URLS.AUTH.LOGIN] : ['/']);
 
         return false;
       }

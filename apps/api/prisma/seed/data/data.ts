@@ -37,37 +37,37 @@ export const CATEGORY: ItemObj = {
 export const AGENCY = {
   DICT: {
     id: 'cluapmrpz000b08jug9qn9rci',
-    email: 'dict@local',
+    email: 'dict@local.com',
     code: 'DICT',
     name: 'Department of Information and Communications Technology',
   },
   DILG: {
     id: 'cluapmrpz000c08ju6cn3bu71',
-    email: 'dilg@local',
+    email: 'dilg@local.com',
     code: 'DILG',
     name: 'Department of the Interior and Local Government',
   },
   DAR: {
     id: 'cluapmrpz000d08ju9z8cbef1',
-    email: 'dar@local',
+    email: 'dar@local.com',
     code: 'DAR',
     name: 'Department of Agrarian Reform',
   },
   DA: {
     id: 'cluapmrpz000e08ju78jt3brn',
-    email: 'da@local',
+    email: 'da@local.com',
     code: 'DA',
     name: 'Department of Agriculture',
   },
   DBM: {
     id: 'cluapq16y000f08ju4pxmeii9',
-    email: 'dbm@local',
+    email: 'dbm@local.com',
     code: 'DBM',
     name: 'Department of Budget and Management',
   },
   DE: {
     id: 'cluapq16y000g08jud2ln9y47',
-    email: 'de@local',
+    email: 'de@local.com',
     code: 'DE',
     name: 'Department of Education',
   },
@@ -183,39 +183,39 @@ export const PERMISSION = {
 export const USER = {
   SUPER_ADMIN: {
     id: 'cluaps3f9000z08ju6uuresti',
-    email: 'super.admin@local',
+    email: 'super.admin@local.com',
   },
   ADMIN: {
     id: 'cluaps3f9001008ju00qn52nv',
-    email: 'admin@local',
+    email: 'admin@local.com',
   },
   VIEWER: {
     id: 'cluattuhr000w08l6fjsdg7xq',
-    email: 'viewer@local',
+    email: 'viewer@local.com',
   },
   PLANNER: {
     id: 'cluattuhr000v08l6cr8n97vp',
-    email: 'planner@local',
+    email: 'planner@local.com',
   },
   ASSIGNER: {
     id: 'cluaps3f9001308ju3a409mq4',
-    email: 'assigner@local',
+    email: 'assigner@local.com',
   },
   EVALUATOR: {
     id: 'cluaps3f9001508ju8clt3by1',
-    email: 'evaluator@local',
+    email: 'evaluator@local.com',
   },
   VALIDATOR: {
     id: 'cluaps3f9001608juapjd62ft',
-    email: 'validator@local',
+    email: 'validator@local.com',
   },
   APPROVER: {
     id: 'cluaps3f9001708jufso65lzb',
-    email: 'approver@local',
+    email: 'approver@local.com',
   },
   ENDORSER: {
     id: 'cluaps3f9001808jucp8qhci6',
-    email: 'endorser@local',
+    email: 'endorser@local.com',
   },
 };
 

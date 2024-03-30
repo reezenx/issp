@@ -15,7 +15,7 @@ export const User_Statuses: { [key in UserStatus]: UserStatus } = {
 };
 
 export const User_Roles: {
-  [key in Role]: Role;
+  [key in Exclude<Role, 'SUPER_ADMIN'>]: Role;
 } = {
   VIEWER: 'VIEWER',
   PLANNER: 'PLANNER',
@@ -23,7 +23,6 @@ export const User_Roles: {
   ENDORSER: 'ENDORSER',
   APPROVER: 'APPROVER',
   ADMIN: 'ADMIN',
-  SUPER_ADMIN: 'VIEWER',
   VALIDATOR: 'VALIDATOR',
   ASSIGNER: 'ASSIGNER',
 };

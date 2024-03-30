@@ -1,4 +1,8 @@
 import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogComponentData,
+} from './../../../../components/confirmation-dialog/confirmation-dialog.component';
+import {
   Component,
   Output,
   EventEmitter,
@@ -15,6 +19,10 @@ import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { CoreService } from '@issp/common/ui/services';
 import { MaterialModule } from '@issp/common/ui/libraries';
+
+import { take } from 'rxjs';
+import { AuthService } from '@issp/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface notifications {
   id: number;
@@ -67,7 +75,12 @@ export class HeaderComponent {
 
   showFiller = false;
 
-  constructor(public dialog: MatDialog, private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private readonly dialog: MatDialog,
+    private readonly authService: AuthService,
+    private readonly snackBar: MatSnackBar
+  ) {
     translate.setDefaultLang('en');
   }
 
@@ -77,6 +90,32 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  openLogoutDialog() {
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Logout',
+          message: 'Are you sure you want to logout?',
+        } as ConfirmationDialogComponentData,
+      })
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((result: ConfirmationDialogComponentData) => {
+        if (result && result.result) {
+          this.authService
+            .logout()
+            .pipe(take(1))
+            .subscribe(() =>
+              this.snackBar.open('You have successfully logout', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom',
+                duration: 5000,
+              })
+            );
+        }
+      });
   }
 
   notifications: notifications[] = [
@@ -247,11 +286,11 @@ export class HeaderComponent {
 })
 export class AppSearchDialogComponent {
   searchText = '';
-  navItems = navItems;
+  searchInput = '';
 
   navItemsData = navItems.filter((navitem) => navitem.displayName);
 
-  // filtered = this.navItemsData.find((obj) => {
-  //   return obj.displayName == this.searchinput;
-  // });
+  filtered = this.navItemsData.find((obj) => {
+    return obj.displayName == this.searchInput;
+  });
 }
