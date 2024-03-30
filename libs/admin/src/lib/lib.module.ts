@@ -36,6 +36,8 @@ import { AgenciesAdminShellComponent } from './agencies/agencies-admin-shell/age
 import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin.component';
 import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admin-new.component';
 import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
+import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
+import { CategoryAdminEditComponent } from './categories/category-admin-edit/category-admin-edit.component';
 
 @NgModule({
   imports: [
@@ -68,6 +70,8 @@ import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-ad
     UserAdminEditComponent,
     CategoriesAdminComponent,
     CategoriesAdminShellComponent,
+    CategoryAdminNewComponent,
+    CategoryAdminEditComponent,
     AgenciesAdminShellComponent,
     AgenciesAdminComponent,
     AgencyAdminNewComponent,

@@ -17,6 +17,8 @@ import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin
 import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admin-new.component';
 import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
 import { agenciesResolver } from './agencies/resolvers/agencies.resolver';
+import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
+import { CategoryAdminEditComponent } from './categories/category-admin-edit/category-admin-edit.component';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -100,6 +102,25 @@ export const AdminRoutes: Routes = [
         },
         resolve: {
           categories: categoriesResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Category',
+        component: CategoryAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {},
+      },
+      {
+        path: ':id',
+        title: 'Edit Category',
+        data: {
+          breadcrumb: 'Edit',
+        },
+        component: CategoryAdminEditComponent,
+        resolve: {
         },
       },
     ],
