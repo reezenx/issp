@@ -1,62 +1,41 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-// import { ApolloError } from '@apollo/client/errors';
-import { Ability } from '@casl/ability';
-import { Environment } from '@issp/common';
-// import {
-//   AuthExchangeTokenGQL,
-//   AuthLoginGQL,
-//   AuthLoginInput,
-//   AuthSession,
-//   GetAccountInfoGQL,
-// } from '@zen/graphql';
-// import { Apollo } from 'apollo-angular';
+import { BehaviorSubject, from, lastValueFrom } from 'rxjs';
+import { mergeMap, tap } from 'rxjs/operators';
+import { AuthTokenInterceptor } from './interceptor/auth-token.interceptor';
+import { ErrorDialogInterceptor } from './interceptor/error-dialog.interceptor';
+import { environment } from '@issp/common/environments';
+import { API, AuthSession, LocalStorageKey, URLS } from '@issp/common';
 import ls from 'localstorage-slim';
-import {
-  BehaviorSubject,
-  Subscription,
-  interval,
-  map,
-  share,
-  throwError,
-  timer,
-} from 'rxjs';
-import { retry, tap } from 'rxjs/operators';
-
 import { token } from './token.signal';
+import { Ability } from '@casl/ability';
+import { UserRole } from '@prisma/client';
+import { UntilDestroy } from '@ngneat/until-destroy';
+const { api } = environment;
 
-export enum LocalStorageKey {
-  userId = 'userId',
-  token = 'token',
-  sessionExpiresOn = 'sessionExpiresOn',
-  roles = 'roles',
-  rememberMe = 'rememberMe',
-  rules = 'rules',
+export interface User {
+  _id: string;
+  username: string;
+  password: string;
+  email: string;
+  online: boolean;
+  isSocial: boolean;
 }
 
-export type AuthSession = {
-  expiresIn: number;
-  rememberMe: boolean;
-  roles: string[];
-  rules: JSON[];
-  token: string;
-  userId: string;
-};
-
+@UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  #exchangeIntervalSubscription?: Subscription;
-
   #userId: AuthSession['userId'] | null = null;
   get userId(): AuthSession['userId'] | null {
     return this.#userId;
   }
 
-  #accountInfo$;
-  get accountInfo$() {
-    return this.#accountInfo$;
+  #user$ = new BehaviorSubject<User>(null);
+  get user(): User {
+    return this.#user$.getValue();
   }
 
   #loggedIn = false;
@@ -69,177 +48,138 @@ export class AuthService {
     return this.#loggedIn$.asObservable();
   }
 
-  #userRoles: string[] = [];
+  #accountInfo$;
+  get accountInfo$() {
+    return this.#accountInfo$;
+  }
+
+  #userRoles: Pick<UserRole, 'name'>[] = [];
   get userRoles() {
     return this.#userRoles;
   }
 
-  #userRoles$ = new BehaviorSubject<string[]>([]);
+  #userRoles$ = new BehaviorSubject<Pick<UserRole, 'name'>[]>([]);
   get userRoles$() {
     return this.#userRoles$.asObservable();
   }
 
+  get isAuthenticated(): boolean {
+    return this.user != null;
+  }
+
   constructor(
+    private http: HttpClient,
     private router: Router,
-    // private apollo: Apollo,
-    private ability: Ability,
-    // private authLoginGQL: AuthLoginGQL,
-    // private authExchangeTokenGQL: AuthExchangeTokenGQL,
-    private env: Environment
-  ) // getAccountInfoGQL: GetAccountInfoGQL
-  {
-    // this.#accountInfo$ = getAccountInfoGQL.watch().valueChanges.pipe(
-    //   map(({ data }) => data.accountInfo),
-    //   share()
-    // );
+    private ability: Ability
+  ) {}
 
-    if (this.validSession) {
-      try {
-        // Initialize Apollo client state
-        const roles = ls.get<string[]>(LocalStorageKey.roles, {
-          decrypt: true,
-        });
-        this.#userRoles = roles ? roles : [];
-        this.#userRoles$.next([...this.#userRoles]);
-        this.#loggedIn = roles ? true : false;
-        this.#loggedIn$.next(this.#loggedIn);
-        this.#userId = ls.get(LocalStorageKey.userId, { decrypt: true });
+  login(user: Partial<User>) {
+    return this.http
+      .post<AuthSession>(`${API.BASE}${API.AUTH.LOGIN}`, user)
+      .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
+  }
 
-        const rules: Array<any> | null = ls.get(LocalStorageKey.rules, {
-          decrypt: true,
-        });
-        if (Array.isArray(rules)) this.ability.update(rules);
+  register(user: Partial<User>) {
+    return this.http
+      .post<AuthSession>(`${API.BASE}${API.AUTH.REGISTER}`, user)
+      .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
+  }
 
-        switch (env.auth.exchangeStrategy) {
-          case 'app-load':
-            this.exchangeToken();
-            break;
-          case 'efficient':
-            if (
-              !this.rememberMe &&
-              this.sessionTimeRemaining <= env.auth.jwtExchangeInterval
-            ) {
-              this.exchangeToken();
-            } else if (
-              this.rememberMe &&
-              this.sessionTimeRemaining <= env.auth.rememberMeExchangeThreshold
-            ) {
-              this.exchangeToken();
-            }
-            break;
+  getProfile() {
+    return this.http
+      .get<User>(`${API.BASE}${API.AUTH.ME}`, {
+        headers: {
+          [ErrorDialogInterceptor.skipHeader]: 'true',
+        },
+      })
+      .pipe(tap((user) => this.#user$.next(user)));
+  }
+
+  loginWithRefreshToken() {
+    return this.http
+      .post<AuthSession>(
+        `${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
+        {
+          refreshToken: this.getRefreshToken(),
+        },
+        {
+          headers: {
+            [AuthTokenInterceptor.skipHeader]: 'true',
+          },
         }
-
-        this.startExchangeInterval();
-      } catch (error) {
-        console.error('AuthService failed to initialize', error);
-        this.logout();
-      }
-    } else {
-      this.clearSession();
-    }
+      )
+      .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
-  login(data: any) {
-    // login(data: AuthLoginInput) {
-    // return this.authLoginGQL.fetch({ data }, { fetchPolicy: 'no-cache' }).pipe(
-    //   tap(({ data: { authLogin } }) => {
-    //     this.setSession(authLogin);
-    //   })
-    // );
+  logoutFromAllDevices() {
+    return this.http
+      .delete<AuthSession>(`${api}/auth/logout-from-all-devices`)
+      .pipe(
+        mergeMap((authSession) => this.setSessionTokens(authSession))
+        // tap(() => this.subscriptionService.requestSubscription())
+      );
   }
 
-  loginWithGoogle() {
-    window.location.href = this.env.url.api + '/auth/google';
+  async setSessionTokens(response: AuthSession) {
+    this.setRefreshToken(response.refreshToken);
+    return this.setAuthToken(response);
+  }
+
+  getAccessToken() {
+    return ls.get(LocalStorageKey.accessToken, { decrypt: true });
+  }
+
+  async setAuthToken(session: AuthSession) {
+    this.setSession(session);
+    return lastValueFrom(this.getProfile());
+  }
+
+  getRefreshToken() {
+    return ls.get(LocalStorageKey.refreshToken, { decrypt: true });
+  }
+
+  setRefreshToken(token: string) {
+    ls.set(LocalStorageKey.refreshToken, token, { encrypt: true });
+  }
+
+  getLoginCallbackUrl() {
+    return ls.get('loginCallbackUrl');
+  }
+
+  setLoginCallbackUrl(url: string) {
+    ls.set('loginCallbackUrl', url);
+  }
+
+  async redirectToCallback() {
+    const url = this.getLoginCallbackUrl() ?? '/';
+    const output = await this.router.navigate([url]);
+
+    this.setLoginCallbackUrl(null);
+
+    return output;
   }
 
   logout() {
     this.clearSession();
-    this.router.navigateByUrl('/login');
+    return from(this.router.navigate([URLS.AUTH.LOGIN]));
   }
 
-  setSession(authSession: AuthSession) {
-    ls.set(LocalStorageKey.userId, authSession.userId, { encrypt: true });
-    ls.set(LocalStorageKey.token, authSession.token, { encrypt: true });
-    ls.set(
-      LocalStorageKey.sessionExpiresOn,
-      Date.now() + authSession.expiresIn * 1000
-    );
-    ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
-    ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
-    ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
-
-    this.#userId = authSession.userId;
-
-    // this.ability.update(authSession.rules);
-
-    token.set(authSession.token);
-
-    if (
-      !this.rolesEqual(this.#userRoles, authSession.roles) ||
-      this.#userRoles === null ||
-      this.#userRoles === undefined
-    ) {
-      this.#userRoles = authSession.roles;
-      this.#userRoles$.next([...this.#userRoles]);
-    }
-
-    if (!this.#loggedIn) {
-      this.#loggedIn = true;
-      this.#loggedIn$.next(true);
-    }
-
-    this.startExchangeInterval();
-  }
-
-  rolesEqual(
-    a: string | string[] | null | undefined,
-    b: string | string[] | null | undefined
-  ) {
-    let compareA: string[];
-    let compareB: string[];
-
-    if (Array.isArray(a)) compareA = [...a];
-    else if (typeof a === 'string') compareA = [a];
-    else if (a === null || a === undefined) compareA = [];
-    else throw new Error(`'a' is not a valid type for comparison`);
-
-    if (Array.isArray(b)) compareB = [...b];
-    else if (typeof b === 'string') compareB = [b];
-    else if (b === null || b === undefined) compareB = [];
-    else throw new Error(`'b' is not a valid type for comparison`);
-
-    if (compareA.length !== compareB.length) return false;
-
-    compareA.sort();
-    compareB.sort();
-
-    for (let i = 0; i < compareA.length; i++) {
-      if (compareA[i] !== compareB[i]) return false;
-    }
-
-    return true;
-  }
-
-  userHasRole(role: string | string[]) {
-    if (role) {
-      if (typeof role === 'string')
-        return this.#userRoles.some((r) => r === role);
-      else return this.#userRoles.some((r) => role.includes(r));
-    }
+  userHasRole(role: string | Pick<UserRole, 'name'>[][]) {
+    // if (role) {
+    //   if (typeof role === 'string')
+    //     return this.#userRoles.some((r) => r === role);
+    //   else return this.#userRoles.some((r) => role.includes(r));
+    // }
     return false;
   }
 
   userNotInRole(role: string | string[]) {
-    if (role) {
-      if (typeof role === 'string')
-        return !this.#userRoles.some((r) => r === role);
-      return this.#userRoles.filter((r) => role.includes(r)).length === 0;
-    }
+    // if (role) {
+    //   if (typeof role === 'string')
+    //     return !this.#userRoles.some((r) => r === role);
+    //   return this.#userRoles.filter((r) => role.includes(r)).length === 0;
+    // }
     return true;
-  }
-
-  private get rememberMe() {
-    return ls.get<boolean>(LocalStorageKey.rememberMe);
   }
 
   private get validSession(): boolean {
@@ -256,100 +196,88 @@ export class AuthService {
     else return timeRemaining;
   }
 
+  setSession(authSession: AuthSession) {
+    ls.set(LocalStorageKey.userId, authSession.userId, { encrypt: true });
+    ls.set(LocalStorageKey.accessToken, authSession.accessToken, {
+      encrypt: true,
+    });
+    ls.set(LocalStorageKey.refreshToken, authSession.refreshToken, {
+      encrypt: true,
+    });
+    ls.set(
+      LocalStorageKey.sessionExpiresOn,
+      Date.now() + authSession.expiresIn * 1000
+    );
+    ls.set(LocalStorageKey.rememberMe, authSession.rememberMe);
+    ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
+    ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
+
+    this.#userId = authSession.userId;
+
+    this.ability.update(authSession.rules);
+
+    if (
+      !this.rolesEqual(this.#userRoles, authSession.roles) ||
+      this.#userRoles === null ||
+      this.#userRoles === undefined
+    ) {
+      this.#userRoles = authSession.roles;
+      this.#userRoles$.next([...this.#userRoles]);
+    }
+
+    if (!this.#loggedIn) {
+      this.#loggedIn = true;
+      this.#loggedIn$.next(true);
+    }
+
+    // this.startExchangeInterval();
+  }
+
   clearSession() {
-    this.stopExchangeInterval();
     ls.remove(LocalStorageKey.userId);
-    ls.remove(LocalStorageKey.token);
+    ls.remove(LocalStorageKey.accessToken);
+    ls.remove(LocalStorageKey.refreshToken);
     ls.remove(LocalStorageKey.sessionExpiresOn);
     ls.remove(LocalStorageKey.rememberMe);
     ls.remove(LocalStorageKey.roles);
     ls.remove(LocalStorageKey.rules);
+    sessionStorage.clear();
 
-    this.#userId = null;
     this.ability.update([]);
     token.set(null);
+    this.#user$.next(null);
     this.#userRoles = [];
     this.#userRoles$.next([]);
     this.#loggedIn = false;
     this.#loggedIn$.next(false);
-    // this.apollo.client.cache.reset();
   }
 
-  private exchangeToken() {
-    // this.authExchangeTokenGQL
-    //   .fetch(
-    //     { data: { rememberMe: !!ls.get<boolean>(LocalStorageKey.rememberMe) } },
-    //     { fetchPolicy: 'no-cache' }
-    //   )
-    //   .pipe(
-    //     retry({
-    //       delay: retryStrategy({
-    //         excludeStatusCodes: [
-    //           'FORBIDDEN',
-    //           'UNAUTHENTICATED',
-    //           'INTERNAL_SERVER_ERROR',
-    //         ],
-    //         delay: this.env.auth.retryExchangeTokenDelay,
-    //       }),
-    //     })
-    //   )
-    //   .subscribe({
-    //     next: ({ data: { authExchangeToken } }) => {
-    //       this.setSession(authExchangeToken);
-    //       if (!this.env.production) console.log('Exchanged token');
-    //     },
-    //     error: (error: Error) => {
-    //       // error: (error: ApolloError) => {
-    //       this.logout();
-    //       console.error('Exchange token failed', error);
-    //     },
-    //   });
-  }
+  rolesEqual(
+    a: string | Pick<UserRole, 'name'>[] | null | undefined,
+    b: string | Pick<UserRole, 'name'>[] | null | undefined
+  ) {
+    let compareA: Pick<UserRole, 'name'>[];
+    let compareB: Pick<UserRole, 'name'>[];
 
-  private startExchangeInterval() {
-    if (!this.rememberMe && !this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription = interval(
-        this.env.auth.jwtExchangeInterval
-      ).subscribe(() => {
-        if (this.validSession) this.exchangeToken();
-        else this.logout();
-      });
-    }
-  }
+    if (Array.isArray(a)) compareA = [...a];
+    // else if (typeof a === 'string') compareA = [a];
+    else if (a === null || a === undefined) compareA = [];
+    else throw new Error(`'a' is not a valid type for comparison`);
 
-  private stopExchangeInterval() {
-    if (this.#exchangeIntervalSubscription) {
-      this.#exchangeIntervalSubscription.unsubscribe();
-      this.#exchangeIntervalSubscription = undefined;
-    }
-  }
-}
+    if (Array.isArray(b)) compareB = [...b];
+    // else if (typeof b === 'string') compareB = [b];
+    else if (b === null || b === undefined) compareB = [];
+    else throw new Error(`'b' is not a valid type for comparison`);
 
-function retryStrategy({
-  maxAttempts = Infinity,
-  delay = 5000,
-  excludeStatusCodes = [],
-}: {
-  maxAttempts?: number;
-  delay?: number;
-  excludeStatusCodes?: string[];
-}) {
-  return (error: Error, retryCount: number) => {
-    const excludedStatusFound = !!excludeStatusCodes.find(
-      (exclude) => exclude === error.message
-    );
+    if (compareA.length !== compareB.length) return false;
 
-    if (retryCount > maxAttempts || excludedStatusFound) {
-      return throwError(() => error);
+    compareA.sort();
+    compareB.sort();
+
+    for (let i = 0; i < compareA.length; i++) {
+      if (compareA[i] !== compareB[i]) return false;
     }
 
-    console.warn(
-      `Exchange token attempt ${retryCount}. Retrying in ${Math.round(
-        delay / 1000
-      )}s`,
-      error
-    );
-
-    return timer(delay);
-  };
+    return true;
+  }
 }

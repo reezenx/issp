@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ApiTags, ApiCreatedResponse } from '@nestjs/swagger';
 import { LoginDto } from './dto/login.dto';
@@ -13,8 +6,6 @@ import { Public, CurrentUser } from '@issp/api-auth';
 import { User } from '@prisma/client';
 import { UserService } from '../user/user.service';
 import { AuthEntity } from './entity/auth.entity';
-import { checkAbilities } from './casl/abilities.decorator';
-import { AbilitiesGuard } from './casl/abilities.guard';
 
 @Controller('auth')
 @ApiTags('auth')

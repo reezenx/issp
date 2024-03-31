@@ -1,15 +1,12 @@
 import * as Mustache from 'mustache';
 import { User } from '@prisma/client';
 import { Reflector } from '@nestjs/core';
-// import { FastifyRequest } from 'fastify';
 import { map, size } from 'lodash';
-import { RequiredRule, CHECK_ABILITY } from './abilities.decorator';
+import { CHECK_ABILITY } from '../decorators/abilities.decorator';
 import {
   subject,
-  RawRuleOf,
-  MongoAbility,
-  ForcedSubject,
   ForbiddenError,
+  RawRuleOf,
   createMongoAbility,
 } from '@casl/ability';
 import {
@@ -20,33 +17,12 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
-import { actions, subjects } from '@issp/common';
+import { AppAbility, RequiredRule } from '@issp/common';
 import { ALLOW_PUBLIC_KEY } from '@issp/api-auth';
-
-// export const actions = [
-//   'read',
-//   'manage',
-//   'create',
-//   'update',
-//   'delete',
-// ] as const;
-
-// export const subjects = ['Story', 'User', 'all'] as const;
-
-export type Abilities = [
-  (typeof actions)[number],
-  (
-    | (typeof subjects)[number]
-    | ForcedSubject<Exclude<(typeof subjects)[number], 'all'>>
-  )
-];
-
-export type AppAbility = MongoAbility<Abilities>;
 
 @Injectable()
 export class AbilitiesGuard implements CanActivate {
   constructor(private reflector: Reflector, private prisma: PrismaService) {}
-
   createAbility = (rules: RawRuleOf<AppAbility>[]) =>
     createMongoAbility<AppAbility>(rules);
 
@@ -63,11 +39,12 @@ export class AbilitiesGuard implements CanActivate {
     );
     if (allowPublicClass) return true;
 
-    const rules: any =
+    const rules: RequiredRule[] =
       this.reflector.get<RequiredRule[]>(CHECK_ABILITY, context.getHandler()) ||
       [];
     const user: User = context.switchToHttp().getRequest().user;
     const request = context.switchToHttp().getRequest();
+    // const permissions = await this.authService.getRolePermissions(user.roleId);
 
     const permissions = await this.prisma.permission.findMany({
       where: {
@@ -105,12 +82,12 @@ export class AbilitiesGuard implements CanActivate {
     const data = map(permissions, (permission) => {
       if (size(permission.conditions)) {
         const parsedVal = Mustache.render(
-          permission.conditions['created_by'],
+          permission.conditions['createdBy'],
           currentUser
         );
         return {
           ...permission,
-          conditions: { created_by: +parsedVal },
+          conditions: { createdBy: +parsedVal },
         };
       }
       return permission;

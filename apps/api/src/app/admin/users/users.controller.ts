@@ -13,15 +13,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
-import { AbilitiesGuard } from '../../auth/casl/abilities.guard';
-import { checkAbilities } from '../../auth/casl/abilities.decorator';
+import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
+import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 
 @ApiTags('admin/users')
 @Controller('admin/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @checkAbilities({ action: 'create', subject: 'user' })
+  @checkAbilities({ action: 'create', subject: 'User' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
@@ -30,7 +30,7 @@ export class UsersController {
     return new UserEntity(await this.usersService.create(createUserDto));
   }
 
-  @checkAbilities({ action: 'read', subject: 'user' })
+  @checkAbilities({ action: 'read', subject: 'User' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity, isArray: true })
@@ -40,7 +40,7 @@ export class UsersController {
     return users.map((user) => new UserEntity(user));
   }
 
-  @checkAbilities({ action: 'read', subject: 'user' })
+  @checkAbilities({ action: 'read', subject: 'User' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
@@ -49,7 +49,7 @@ export class UsersController {
     return new UserEntity(await this.usersService.findOne(id));
   }
 
-  @checkAbilities({ action: 'update', subject: 'user' })
+  @checkAbilities({ action: 'update', subject: 'User' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
@@ -58,7 +58,7 @@ export class UsersController {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
 
-  @checkAbilities({ action: 'delete', subject: 'user' })
+  @checkAbilities({ action: 'delete', subject: 'User' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })

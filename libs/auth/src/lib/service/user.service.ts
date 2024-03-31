@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@issp/common/environments';
-import { User } from './auth.service';
+import { User } from '../auth.service';
 
 const { api } = environment;
 

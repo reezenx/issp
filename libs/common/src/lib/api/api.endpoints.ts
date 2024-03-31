@@ -17,6 +17,7 @@ export const API = {
   },
   AUTH: {
     LOGIN: '/auth/login',
+    REFRESH_TOKEN: '/auth/refresh-token',
     ME: '/auth/me',
     REGISTER: '/auth/register',
     ACTION_HISTORY: '/user/action-history',

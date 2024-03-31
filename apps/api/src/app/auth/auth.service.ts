@@ -12,12 +12,8 @@ import { AuthSession } from '@issp/common';
 // import { ConfigService } from '../config';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigService } from '@nestjs/config';
+import { createMongoAbility, RawRuleOf } from '@casl/ability';
 // import { JwtStrategy } from './strategies/jwt.strategy';
-
-export interface TokenResponse {
-  accessToken: string;
-  refreshToken: string;
-}
 
 @Injectable()
 export class AuthService {
@@ -60,8 +56,11 @@ export class AuthService {
   //   };
   // }
 
+  createAbility = (rules: RawRuleOf<AppAbility>[]) =>
+    createMongoAbility<AppAbility>(rules);
+
   async validate(email: string, password: string) {
-    const user = await this.userService.getUserRolesPermissionByEmail(email);
+    const user = await this.userService.getUserByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException('User does not exist');
@@ -94,7 +93,10 @@ export class AuthService {
     //   ? this.config.expiresInRememberMe
     //   : (this.config.jwtOptions?.signOptions?.expiresIn as number);
     const expiresIn = 7_776_000;
-    const ability = await this.createAbility(user);
+    // const ability = await this.createAbility(user);
+    const permissions = await this.getRolePermissions(user.roleId);
+    const ability = this.createAbility(Object(permissions));
+
     const rules = ability.rules;
     const accessToken = await this.jwtService.signAsync(
       payload,
@@ -159,9 +161,22 @@ export class AuthService {
     return options;
   }
 
-  async createAbility(user: RequestUser): Promise<AppAbility> {
-    return this.caslFactory.createAbility(user);
+  async getRolePermissions(roleId: string) {
+    return await this.prisma.permission.findMany({
+      where: {
+        roleId,
+      },
+      select: {
+        action: true,
+        subject: true,
+        conditions: true,
+      },
+    });
   }
+
+  // async createAbility(user: RequestUser): Promise<AppAbility> {
+  //   return this.caslFactory.createAbility(user);
+  // }
 
   // accessibleBy = accessibleBy;
 

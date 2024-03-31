@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../auth.service';
 import { MaterialModule } from '@issp/common/ui/libraries';
 import { CoreService } from '@issp/common/ui/services';
 import { take } from 'rxjs';

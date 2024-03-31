@@ -121,127 +121,127 @@ export const PERMISSION = {
   MANAGE_USER: {
     id: 'cluatov0p000208l22biw52gk',
     action: 'manage',
-    subject: 'user',
+    subject: 'User',
   },
   CREATE_USER: {
     id: 'cluatov0p000308l24bgb2csg',
     action: 'create',
-    subject: 'user',
+    subject: 'User',
   },
   READ_USER: {
     id: 'wer7h122rtujlu38yt509k9k',
     action: 'read',
-    subject: 'user',
+    subject: 'User',
   },
   UPDATE_USER: {
     id: 'cluatov0q000408l2a45cemce',
     action: 'update',
-    subject: 'user',
+    subject: 'User',
   },
   DELETE_USER: {
     id: 'cluatov0q000508l2ekxz6pxr',
     action: 'delete',
-    subject: 'user',
+    subject: 'User',
   },
   MANAGE_ISSP: {
     id: 'cluatov0q000608l23pfxbtpx',
     action: 'manage',
-    subject: 'issp',
+    subject: 'ISSP',
   },
   CREATE_ISSP: {
     id: 'cluatov0q000708l2bmvca6od',
     action: 'create',
-    subject: 'issp',
+    subject: 'ISSP',
   },
   READ_ISSP: {
     id: 'qr8eqcaw3n270mhins6fmct3',
     action: 'read',
-    subject: 'issp',
+    subject: 'ISSP',
   },
   UPDATE_ISSP: {
     id: 'cluatov0q000808l21af6cb4q',
     action: 'update',
-    subject: 'issp',
+    subject: 'ISSP',
   },
   DELETE_ISSP: {
     id: 'clubgyhum000008l6e1w9gwt2',
     action: 'delete',
-    subject: 'issp',
+    subject: 'ISSP',
   },
   MANAGE_PROJECT: {
     id: 'cluatov0q000908l260xg8y9e',
     action: 'manage',
-    subject: 'project',
+    subject: 'Project',
   },
   CREATE_PROJECT: {
     id: 'cluatqs4r000h08l6e4906s7q',
     action: 'create',
-    subject: 'project',
+    subject: 'Project',
   },
   READ_PROJECT: {
     id: 'inlv9iqgwejd85maq7991c60',
     action: 'read',
-    subject: 'project',
+    subject: 'Project',
   },
   UPDATE_PROJECT: {
     id: 'cluatqs4r000i08l6hjf5cwpf',
     action: 'update',
-    subject: 'project',
+    subject: 'Project',
   },
   DELETE_PROJECT: {
     id: 'cluatqs4r000j08l68upfbuvz',
     action: 'delete',
-    subject: 'project',
+    subject: 'Project',
   },
-  MANAGE_CATEGORIES: {
+  MANAGE_CATEGORY: {
     id: 'dtudgdduwqmxse4xfb5krdzx',
     action: 'manage',
-    subject: 'category',
+    subject: 'Category',
   },
-  CREATE_CATEGORIES: {
+  CREATE_CATEGORY: {
     id: 'zba387omkrf7rj9ra1wh2sts',
     action: 'create',
-    subject: 'category',
+    subject: 'Category',
   },
-  READ_CATEGORIES: {
+  READ_CATEGORY: {
     id: 'bm16btw7rfqik9k3tyf3l0bn',
     action: 'read',
-    subject: 'category',
+    subject: 'Category',
   },
-  UPDATE_CATEGORIES: {
+  UPDATE_CATEGORY: {
     id: 'afcgr9xqp3j2gpjbvnv4si4v',
     action: 'update',
-    subject: 'category',
+    subject: 'Category',
   },
-  DELETE_CATEGORIES: {
+  DELETE_CATEGORY: {
     id: 'pas6hjte9y4dfg87dxcbj3rv',
     action: 'delete',
-    subject: 'category',
+    subject: 'Category',
   },
-  MANAGE_AGENCIES: {
+  MANAGE_AGENCY: {
     id: 'g41nugmns81317uclicz1v4m',
     action: 'manage',
-    subject: 'agency',
+    subject: 'Agency',
   },
-  CREATE_AGENCIES: {
+  CREATE_AGENCY: {
     id: 'idilo92uwmu0ny0gwxk4inhk',
     action: 'create',
-    subject: 'agency',
+    subject: 'Agency',
   },
-  READ_AGENCIES: {
-    id: 'idilo92uwmu0ny0gwxk4inhk',
+  READ_AGENCY: {
+    id: 'ujs9nkezfak9cpub770cbqke',
     action: 'read',
-    subject: 'agency',
+    subject: 'Agency',
   },
-  UPDATE_AGENCIES: {
+  UPDATE_AGENCY: {
     id: 'uvg8wwulkcie6nur57i8nl4f',
     action: 'update',
-    subject: 'agency',
+    subject: 'Agency',
   },
-  DELETE_AGENCIES: {
+  DELETE_AGENCY: {
     id: 'onvbc2jmlk1jur5v3rg52jit',
     action: 'delete',
-    subject: 'agency',
+    subject: 'Agency',
   },
 };
 

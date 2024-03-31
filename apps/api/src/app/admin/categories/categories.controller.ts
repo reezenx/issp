@@ -13,15 +13,15 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CategoryEntity } from './entities/category.entity';
-import { AbilitiesGuard } from '../../auth/casl/abilities.guard';
-import { checkAbilities } from '../../auth/casl/abilities.decorator';
+import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
+import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 
 @ApiTags('admin/categories')
 @Controller('admin/categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @checkAbilities({ action: 'create', subject: 'category' })
+  @checkAbilities({ action: 'create', subject: 'Category' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
@@ -32,7 +32,7 @@ export class CategoriesController {
     );
   }
 
-  @checkAbilities({ action: 'read', subject: 'category' })
+  @checkAbilities({ action: 'read', subject: 'Category' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity, isArray: true })
@@ -42,7 +42,7 @@ export class CategoriesController {
     return categories.map((item) => new CategoryEntity(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'category' })
+  @checkAbilities({ action: 'read', subject: 'Category' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
@@ -51,7 +51,7 @@ export class CategoriesController {
     return new CategoryEntity(await this.categoriesService.findOne(id));
   }
 
-  @checkAbilities({ action: 'update', subject: 'category' })
+  @checkAbilities({ action: 'update', subject: 'Category' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
@@ -65,7 +65,7 @@ export class CategoriesController {
     );
   }
 
-  @checkAbilities({ action: 'delete', subject: 'category' })
+  @checkAbilities({ action: 'delete', subject: 'Category' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })

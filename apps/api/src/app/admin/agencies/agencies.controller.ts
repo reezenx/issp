@@ -14,8 +14,8 @@ import { UpdateAgencyDto } from './dto/update-agency.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AgencyEntity } from './entities/agency.entity';
 import { AgencyEntityDropdown } from './entities/agency-dropdown.entity';
-import { checkAbilities } from '../../auth/casl/abilities.decorator';
-import { AbilitiesGuard } from '../../auth/casl/abilities.guard';
+import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 
 @ApiTags('admin/agencies')
 @Controller('admin/agencies')
@@ -29,7 +29,7 @@ export class AgenciesController {
     return new AgencyEntity(await this.agenciesService.create(createAgencyDto));
   }
 
-  @checkAbilities({ action: 'create', subject: 'agency' })
+  @checkAbilities({ action: 'create', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
@@ -39,7 +39,7 @@ export class AgenciesController {
     return items.map((item) => new AgencyEntity(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'agency' })
+  @checkAbilities({ action: 'read', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
@@ -49,7 +49,7 @@ export class AgenciesController {
     return items.map((item) => new AgencyEntityDropdown(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'agency' })
+  @checkAbilities({ action: 'read', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
@@ -58,7 +58,7 @@ export class AgenciesController {
     return new AgencyEntity(await this.agenciesService.findOne(id));
   }
 
-  @checkAbilities({ action: 'update', subject: 'agency' })
+  @checkAbilities({ action: 'update', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
@@ -72,7 +72,7 @@ export class AgenciesController {
     );
   }
 
-  @checkAbilities({ action: 'delete', subject: 'agency' })
+  @checkAbilities({ action: 'delete', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })

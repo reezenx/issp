@@ -13,7 +13,7 @@ import {
   ErrorDialogComponent,
   ErrorDialogData,
 } from '../components/error-dialog/error-dialog.component';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../auth.service';
 import { AuthTokenInterceptor } from './auth-token.interceptor';
 
 export interface HttpError {

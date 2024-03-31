@@ -1,6 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {
   HttpClientModule,
   HttpClient,
@@ -29,11 +30,13 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { APP_BASE_HREF } from '@angular/common';
 
+// Authorization
 import { AuthService, ErrorDialogInterceptor } from '@issp/auth';
 import { AuthTokenInterceptor } from '@issp/auth';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { Ability, PureAbility } from '@casl/ability';
 import { createPrismaAbility } from '@casl/prisma';
+import { AbilityModule } from '@casl/angular';
+import { lastValueFrom } from 'rxjs';
 
 export function HttpLoaderFactory(http: HttpClient): unknown {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient): unknown {
 const initialize = (authService: AuthService) => async () => {
   if (authService.getAccessToken()) {
     try {
-      await authService.getProfile().toPromise();
+      await lastValueFrom(authService.getProfile());
     } catch {
       /* empty */
     }
@@ -69,6 +72,7 @@ const initialize = (authService: AuthService) => async () => {
     }),
     NgScrollbarModule,
     FullComponent,
+    AbilityModule,
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
