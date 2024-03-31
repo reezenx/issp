@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { AgenciesService } from './agencies.service';
 import { CreateAgencyDto } from './dto/create-agency.dto';
@@ -13,14 +14,14 @@ import { UpdateAgencyDto } from './dto/update-agency.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AgencyEntity } from './entities/agency.entity';
 import { AgencyEntityDropdown } from './entities/agency-dropdown.entity';
+import { checkAbilities } from '../../auth/casl/abilities.decorator';
+import { AbilitiesGuard } from '../../auth/casl/abilities.guard';
 
-// @Roles(Role.ADMIN)
 @ApiTags('admin/agencies')
 @Controller('admin/agencies')
 export class AgenciesController {
   constructor(private readonly agenciesService: AgenciesService) {}
 
-  // @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
   @Post()
@@ -28,7 +29,8 @@ export class AgenciesController {
     return new AgencyEntity(await this.agenciesService.create(createAgencyDto));
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'create', subject: 'agency' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
   @Get()
@@ -37,7 +39,8 @@ export class AgenciesController {
     return items.map((item) => new AgencyEntity(item));
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'read', subject: 'agency' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
   @Get('dropdown')
@@ -46,7 +49,8 @@ export class AgenciesController {
     return items.map((item) => new AgencyEntityDropdown(item));
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'read', subject: 'agency' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
   @Get(':id')
@@ -54,7 +58,8 @@ export class AgenciesController {
     return new AgencyEntity(await this.agenciesService.findOne(id));
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'update', subject: 'agency' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
   @Put(':id')
@@ -67,7 +72,8 @@ export class AgenciesController {
     );
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'delete', subject: 'agency' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: AgencyEntity })
   @Delete(':id')

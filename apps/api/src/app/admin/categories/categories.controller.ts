@@ -3,52 +3,59 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CategoryEntity } from './entities/category.entity';
+import { AbilitiesGuard } from '../../auth/casl/abilities.guard';
+import { checkAbilities } from '../../auth/casl/abilities.decorator';
 
 @ApiTags('admin/categories')
 @Controller('admin/categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @Post()
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'create', subject: 'category' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
   @Post()
   async create(@Body() createCategoryDto: CreateCategoryDto) {
-    return new CategoryEntity(await this.categoriesService.create(createCategoryDto)
+    return new CategoryEntity(
+      await this.categoriesService.create(createCategoryDto)
     );
   }
 
-  @Get()
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'read', subject: 'category' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity, isArray: true })
+  @Get()
   async findAll() {
     const categories = await this.categoriesService.findAll();
     return categories.map((item) => new CategoryEntity(item));
   }
 
-  @Get(':id')
+  @checkAbilities({ action: 'read', subject: 'category' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
+  @Get(':id')
   async findOne(@Param('id') id: string) {
     return new CategoryEntity(await this.categoriesService.findOne(id));
   }
 
-  @Put(':id')
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'update', subject: 'category' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
+  @Put(':id')
   async update(
     @Param('id') id: string,
     @Body() updateCategoryDto: UpdateCategoryDto
@@ -58,10 +65,11 @@ export class CategoriesController {
     );
   }
 
-  @Delete(':id')
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'delete', subject: 'category' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: CategoryEntity })
+  @Delete(':id')
   async remove(@Param('id') id: string) {
     return new CategoryEntity(await this.categoriesService.remove(id));
   }

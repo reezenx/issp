@@ -25,6 +25,7 @@ export const environment: EnvironmentBase = {
   },
   jwtOptions: {
     secret: process.env.JWT_PRIVATE_KEY,
+    publicKey: process.env.JWT_PUBLIC_KEY,
     signOptions: {
       algorithm: 'HS256',
       /**

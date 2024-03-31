@@ -1,7 +1,13 @@
-import { ActionHistory, PrismaClient, User, UserStatus } from '@prisma/client';
+import {
+  ActionHistory,
+  PrismaClient,
+  User,
+  UserRole,
+  UserStatus,
+} from '@prisma/client';
 import { DateTime } from 'luxon';
 import { ISSPS } from './issps.create';
-import { ACTION_HISTORY, AGENCY, USER } from '../data/data';
+import { ACTION_HISTORY, AGENCY, ROLE, USER } from '../data/data';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 import { DEFAULT, roundsOfHashing } from './users.create';
@@ -12,27 +18,33 @@ export const ACTION_HISTORIES: {
     'id' | 'parentModule' | 'childModule' | 'changes' | 'action' | 'isspVersion'
   > & {
     user: Pick<User, 'id' | 'email'>;
+    role: Pick<UserRole, 'id' | 'name'>;
   };
 } = {
   DICT_ISSP_1: {
     ...ACTION_HISTORY.DICT_ISSP_1,
     user: USER.PLANNER,
+    role: ROLE.PLANNER,
   },
   DICT_ISSP_2: {
     ...ACTION_HISTORY.DICT_ISSP_2,
     user: USER.ADMIN,
+    role: ROLE.ADMIN,
   },
   DICT_ISSP_3: {
     ...ACTION_HISTORY.DICT_ISSP_3,
     user: USER.ENDORSER,
+    role: ROLE.ENDORSER,
   },
   DICT_ISSP_4: {
     ...ACTION_HISTORY.DICT_ISSP_4,
     user: USER.EVALUATOR,
+    role: ROLE.EVALUATOR,
   },
   DICT_ISSP_5: {
     ...ACTION_HISTORY.DICT_ISSP_5,
     user: USER.APPROVER,
+    role: ROLE.APPROVER,
   },
 };
 
@@ -41,7 +53,16 @@ export async function createActionHistory(prisma: PrismaClient) {
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       key,
-      { id, user, parentModule, childModule, changes, isspVersion, action },
+      {
+        id,
+        user,
+        role,
+        parentModule,
+        childModule,
+        changes,
+        isspVersion,
+        action,
+      },
     ]) => {
       const item = {
         id,
@@ -75,6 +96,7 @@ export async function createActionHistory(prisma: PrismaClient) {
                 createdAt: new Date(),
                 password: await bcrypt.hash(DEFAULT.PW, roundsOfHashing),
                 agencyId: AGENCY.DICT.id,
+                roleId: role.id,
               },
             },
           },

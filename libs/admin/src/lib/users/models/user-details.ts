@@ -63,6 +63,7 @@ export class UserDetails extends Assign implements User {
   password: string;
   role: $Enums.Role[];
   roles: { name: string }[];
+  roleId: string;
   status: $Enums.UserStatus;
   authoredIsspIds: string[];
 

@@ -10,6 +10,7 @@ import { API, AuthSession, LocalStorageKey, URLS } from '@issp/common';
 import ls from 'localstorage-slim';
 import { token } from '../token.signal';
 import { Ability } from '@casl/ability';
+import { UserRole } from '@prisma/client';
 const { api } = environment;
 
 export interface TokenResponse {
@@ -30,6 +31,11 @@ export interface User {
   providedIn: 'root',
 })
 export class AuthService {
+  #userId: AuthSession['userId'] | null = null;
+  get userId(): AuthSession['userId'] | null {
+    return this.#userId;
+  }
+
   #user$ = new BehaviorSubject<User>(null);
   get user(): User {
     return this.#user$.getValue();
@@ -50,12 +56,12 @@ export class AuthService {
     return this.#accountInfo$;
   }
 
-  #userRoles: string[] = [];
+  #userRoles: Pick<UserRole, 'name'>[] = [];
   get userRoles() {
     return this.#userRoles;
   }
 
-  #userRoles$ = new BehaviorSubject<string[]>([]);
+  #userRoles$ = new BehaviorSubject<Pick<UserRole, 'name'>[]>([]);
   get userRoles$() {
     return this.#userRoles$.asObservable();
   }
@@ -72,14 +78,14 @@ export class AuthService {
 
   login(user: Partial<User>) {
     return this.http
-      .post<TokenResponse>(`${API.BASE}${API.AUTH.LOGIN}`, user)
-      .pipe(mergeMap((response) => this.setTokens(response)));
+      .post<AuthSession>(`${API.BASE}${API.AUTH.LOGIN}`, user)
+      .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   register(user: Partial<User>) {
     return this.http
-      .post<TokenResponse>(`${api}/auth/register`, user)
-      .pipe(mergeMap((response) => this.setTokens(response)));
+      .post<AuthSession>(`${api}/auth/register`, user)
+      .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   getProfile() {
@@ -94,7 +100,7 @@ export class AuthService {
 
   loginWithRefreshToken() {
     return this.http
-      .post<TokenResponse>(
+      .post<AuthSession>(
         `${api}/auth/refresh-token`,
         {
           refreshToken: this.getRefreshToken(),
@@ -105,31 +111,29 @@ export class AuthService {
           },
         }
       )
-      .pipe(mergeMap((response) => this.setTokens(response)));
+      .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   logoutFromAllDevices() {
     return this.http
-      .delete<TokenResponse>(`${api}/auth/logout-from-all-devices`)
+      .delete<AuthSession>(`${api}/auth/logout-from-all-devices`)
       .pipe(
-        mergeMap((tokens) => this.setTokens(tokens))
+        mergeMap((authSession) => this.setSessionTokens(authSession))
         // tap(() => this.subscriptionService.requestSubscription())
       );
   }
 
-  async setTokens(response: TokenResponse) {
+  async setSessionTokens(response: AuthSession) {
     this.setRefreshToken(response.refreshToken);
-
-    return this.setAccessToken(response.accessToken);
+    return this.setAuthToken(response);
   }
 
   getAccessToken() {
     return ls.get(LocalStorageKey.accessToken, { decrypt: true });
   }
 
-  async setAccessToken(token: string) {
-    ls.set(LocalStorageKey.accessToken, token, { encrypt: true });
-
+  async setAuthToken(session: AuthSession) {
+    this.setSession(session);
     return this.getProfile().toPromise();
   }
 
@@ -163,21 +167,21 @@ export class AuthService {
     return from(this.router.navigate([URLS.AUTH.LOGIN]));
   }
 
-  userHasRole(role: string | string[]) {
-    if (role) {
-      if (typeof role === 'string')
-        return this.#userRoles.some((r) => r === role);
-      else return this.#userRoles.some((r) => role.includes(r));
-    }
+  userHasRole(role: string | Pick<UserRole, 'name'>[][]) {
+    // if (role) {
+    //   if (typeof role === 'string')
+    //     return this.#userRoles.some((r) => r === role);
+    //   else return this.#userRoles.some((r) => role.includes(r));
+    // }
     return false;
   }
 
   userNotInRole(role: string | string[]) {
-    if (role) {
-      if (typeof role === 'string')
-        return !this.#userRoles.some((r) => r === role);
-      return this.#userRoles.filter((r) => role.includes(r)).length === 0;
-    }
+    // if (role) {
+    //   if (typeof role === 'string')
+    //     return !this.#userRoles.some((r) => r === role);
+    //   return this.#userRoles.filter((r) => role.includes(r)).length === 0;
+    // }
     return true;
   }
 
@@ -211,11 +215,9 @@ export class AuthService {
     ls.set(LocalStorageKey.roles, authSession.roles, { encrypt: true });
     ls.set(LocalStorageKey.rules, authSession.rules, { encrypt: true });
 
-    // this.#userId = authSession.userId;
+    this.#userId = authSession.userId;
 
     this.ability.update(authSession.rules);
-
-    // token.set(authSession.token);
 
     if (
       !this.rolesEqual(this.#userRoles, authSession.roles) ||
@@ -253,19 +255,19 @@ export class AuthService {
     this.#loggedIn$.next(false);
   }
   rolesEqual(
-    a: string | string[] | null | undefined,
-    b: string | string[] | null | undefined
+    a: string | Pick<UserRole, 'name'>[] | null | undefined,
+    b: string | Pick<UserRole, 'name'>[] | null | undefined
   ) {
-    let compareA: string[];
-    let compareB: string[];
+    let compareA: Pick<UserRole, 'name'>[];
+    let compareB: Pick<UserRole, 'name'>[];
 
     if (Array.isArray(a)) compareA = [...a];
-    else if (typeof a === 'string') compareA = [a];
+    // else if (typeof a === 'string') compareA = [a];
     else if (a === null || a === undefined) compareA = [];
     else throw new Error(`'a' is not a valid type for comparison`);
 
     if (Array.isArray(b)) compareB = [...b];
-    else if (typeof b === 'string') compareB = [b];
+    // else if (typeof b === 'string') compareB = [b];
     else if (b === null || b === undefined) compareB = [];
     else throw new Error(`'b' is not a valid type for comparison`);
 

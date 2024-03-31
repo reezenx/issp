@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { $Enums, User } from '@prisma/client';
+import { $Enums, Permission, User, UserRole } from '@prisma/client';
 import { Exclude } from 'class-transformer';
-import * as bcrypt from 'bcrypt';
-import { randomString } from '../../../shared/utils/random-string';
 
 export class UserEntity implements User {
   constructor(user: UserEntity) {
@@ -53,4 +51,13 @@ export class UserEntity implements User {
 
   @Exclude()
   password: string;
+
+  @ApiProperty()
+  roles?: Pick<UserRole, 'name'>[];
+  // @ApiProperty()
+  // roles?: (Pick<UserRole, 'name'> & {
+  //   permissions?: Pick<Permission, 'action' | 'conditions' | 'subject'>;
+  // })[];
+  @ApiProperty()
+  roleId: string;
 }

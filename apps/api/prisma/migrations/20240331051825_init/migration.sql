@@ -64,6 +64,7 @@ CREATE TABLE "users" (
     "updatedAt" TIMESTAMP(3),
     "agencyId" TEXT NOT NULL,
     "role" "Role"[] DEFAULT ARRAY['VIEWER']::"Role"[],
+    "roleId" TEXT NOT NULL,
     "status" "UserStatus" NOT NULL,
     "tags" TEXT[],
 
@@ -287,6 +288,9 @@ ALTER TABLE "agencies" ADD CONSTRAINT "agencies_categoryId_fkey" FOREIGN KEY ("c
 
 -- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "users" ADD CONSTRAINT "users_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "permissions" ADD CONSTRAINT "permissions_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

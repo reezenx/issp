@@ -50,18 +50,18 @@ export class ErrorDialogInterceptor implements HttpInterceptor {
               return;
             }
 
-            this.handleError(response.error);
+            this.handleError(response);
           }
         }
       )
     );
   }
 
-  handleError(err: HttpError) {
+  handleError(res: HttpErrorResponse) {
     this.dialog.open<ErrorDialogData>(ErrorDialogComponent, {
       data: {
-        title: err.error || 'Error',
-        message: err.message,
+        title: res.error.error || 'Error',
+        message: res.error.message ?? res.statusText,
       },
       width: '350px',
     });

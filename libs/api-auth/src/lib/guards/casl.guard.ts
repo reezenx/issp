@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 
 import { CaslFactory } from '../casl-factory';
-import { ALLOW_ANONYMOUS_KEY } from '../decorators/allow-anonymous.decorator';
+import { ALLOW_PUBLIC_KEY } from '../decorators/allow-public.decorator';
 import {
   CASL_POLICY_KEY,
   CaslPolicyHandler,
@@ -43,17 +43,17 @@ export class CaslGuard extends AuthGuard('jwt') {
   }
 
   override async canActivate(context: ExecutionContext) {
-    const allowAnonymousHandler = this.reflector.get<boolean | undefined>(
-      ALLOW_ANONYMOUS_KEY,
+    const allowPublicHandler = this.reflector.get<boolean | undefined>(
+      ALLOW_PUBLIC_KEY,
       context.getHandler()
     );
-    if (allowAnonymousHandler) return true;
+    if (allowPublicHandler) return true;
 
-    const allowAnonymousClass = this.reflector.get<boolean | undefined>(
-      ALLOW_ANONYMOUS_KEY,
+    const allowPublicClass = this.reflector.get<boolean | undefined>(
+      ALLOW_PUBLIC_KEY,
       context.getClass()
     );
-    if (allowAnonymousClass) return true;
+    if (allowPublicClass) return true;
 
     let req: any;
     const type = context.getType() as ContextType | 'graphql';

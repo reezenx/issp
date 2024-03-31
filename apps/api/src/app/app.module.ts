@@ -1,20 +1,28 @@
-import { Module } from '@nestjs/common';
-import { ThrottlerModule } from '@nestjs/throttler';
-import { PrismaModule, PrismaService } from 'nestjs-prisma';
-
+import { AdminModule } from './admin/admin.module';
+import { ApiAuthModule } from '@issp/api-auth';
+import { APP_GUARD } from '@nestjs/core';
+import { AppCaslFactory } from './auth/casl/casl.factory';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './auth/guard/roles.guard';
+import { JwtAuthGuard } from './auth/guard/jwt-auth.guard';
+import { JwtService } from '@nestjs/jwt';
+import { Module } from '@nestjs/common';
+import { PrismaModule, PrismaService } from 'nestjs-prisma';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { UserModule } from './user/user.module';
-import { AdminModule } from './admin/admin.module';
+import { UserService } from './user/user.service';
+import { JwtStrategy } from './auth/jwt.strategy';
+import { CaslModule } from './auth/casl/casl.module';
+import { AbilitiesGuard } from './auth/casl/abilities.guard';
+// import { ConfigModule } from './config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule.forRoot({ isGlobal: true }),
+    ApiAuthModule.register(AppCaslFactory),
     ThrottlerModule.forRoot([
       {
         ttl: 60000,
@@ -23,15 +31,26 @@ import { AdminModule } from './admin/admin.module';
     ]),
     AuthModule,
     AdminModule,
+    ConfigModule,
+    CaslModule,
     UserModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
+    AuthService,
+    // ConfigService,
+    JwtService,
+    JwtStrategy,
     PrismaService,
+    UserService,
     {
       provide: APP_GUARD,
-      useClass: RolesGuard,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AbilitiesGuard,
     },
   ],
 })

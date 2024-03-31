@@ -17,7 +17,7 @@ export class AppCaslFactory extends CaslFactory {
     if (user.roles.includes('Super')) {
       can('manage', 'all');
     } else {
-      // ... Customize user permissions here
+      can('read', 'all');
     }
 
     return build();

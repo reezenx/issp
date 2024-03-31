@@ -39,13 +39,30 @@ export class CategoryAdminEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.initSubs();
   }
 
   initForm() {
     this.form = this.formBuilder.group({
+      id: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
     });
+  }
+
+  initSubs() {
+    const routeSub = this.route.data.subscribe(({ item }) => {
+      this.item = item;
+      this.form.patchValue(this.item);
+    });
+    this.subs.push(routeSub);
+
+    const currentIsspSub = this.categoriesService.currentContextItem$.subscribe(
+      (data) => {
+        this.item = data;
+      }
+    );
+    this.subs.push(currentIsspSub);
   }
 
   save() {

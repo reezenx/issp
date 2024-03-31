@@ -9,7 +9,7 @@ import { Reflector } from '@nestjs/core';
 // import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 
-import { ALLOW_ANONYMOUS_KEY } from '../../../../api-auth/src/lib/decorators/allow-anonymous.decorator';
+import { ALLOW_PUBLIC_KEY } from '../decorators/allow-public.decorator';
 
 // import { Role } from '@zen/common';
 
@@ -44,19 +44,19 @@ export function RolesGuard<R extends string>(...roles: Array<R>) {
     }
 
     override async canActivate(context: ExecutionContext) {
-      const allowAnonymousHandler = this.reflector.get<boolean | undefined>(
-        ALLOW_ANONYMOUS_KEY,
+      const allowPublicHandler = this.reflector.get<boolean | undefined>(
+        ALLOW_PUBLIC_KEY,
         context.getHandler()
       );
 
-      if (allowAnonymousHandler) return true;
+      if (allowPublicHandler) return true;
 
-      const allowAnonymousClass = this.reflector.get<boolean | undefined>(
-        ALLOW_ANONYMOUS_KEY,
+      const allowPublicClass = this.reflector.get<boolean | undefined>(
+        ALLOW_PUBLIC_KEY,
         context.getClass()
       );
 
-      if (allowAnonymousClass) return true;
+      if (allowPublicClass) return true;
 
       let req;
       const type = context.getType() as ContextType | 'graphql';

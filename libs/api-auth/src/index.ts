@@ -1,4 +1,7 @@
-export { AllowAnonymous } from './lib/decorators/allow-anonymous.decorator';
+export {
+  Public,
+  ALLOW_PUBLIC_KEY,
+} from './lib/decorators/allow-public.decorator';
 export { CaslPolicy } from './lib/decorators/casl-policy.decorator';
 export { RequestUser } from './lib/models/request-user';
 export { RolesGuard } from './lib/guards/roles.guard';

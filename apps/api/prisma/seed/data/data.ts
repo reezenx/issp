@@ -79,7 +79,7 @@ export const ROLE = {
     name: Role.SUPER_ADMIN,
   },
   ADMIN: {
-    id: 'cluapr6o2000u08jubf798fhv',
+    id: 'wx2ewanr3jntnxoavw4m1upn',
     name: Role.ADMIN,
   },
   VIEWER: {
@@ -128,6 +128,11 @@ export const PERMISSION = {
     action: 'create',
     subject: 'user',
   },
+  READ_USER: {
+    id: 'wer7h122rtujlu38yt509k9k',
+    action: 'read',
+    subject: 'user',
+  },
   UPDATE_USER: {
     id: 'cluatov0q000408l2a45cemce',
     action: 'update',
@@ -148,6 +153,11 @@ export const PERMISSION = {
     action: 'create',
     subject: 'issp',
   },
+  READ_ISSP: {
+    id: 'qr8eqcaw3n270mhins6fmct3',
+    action: 'read',
+    subject: 'issp',
+  },
   UPDATE_ISSP: {
     id: 'cluatov0q000808l21af6cb4q',
     action: 'update',
@@ -161,22 +171,77 @@ export const PERMISSION = {
   MANAGE_PROJECT: {
     id: 'cluatov0q000908l260xg8y9e',
     action: 'manage',
-    subject: 'Project',
+    subject: 'project',
   },
   CREATE_PROJECT: {
     id: 'cluatqs4r000h08l6e4906s7q',
     action: 'create',
-    subject: 'Project',
+    subject: 'project',
+  },
+  READ_PROJECT: {
+    id: 'inlv9iqgwejd85maq7991c60',
+    action: 'read',
+    subject: 'project',
   },
   UPDATE_PROJECT: {
     id: 'cluatqs4r000i08l6hjf5cwpf',
     action: 'update',
-    subject: 'Project',
+    subject: 'project',
   },
   DELETE_PROJECT: {
     id: 'cluatqs4r000j08l68upfbuvz',
     action: 'delete',
-    subject: 'Project',
+    subject: 'project',
+  },
+  MANAGE_CATEGORIES: {
+    id: 'dtudgdduwqmxse4xfb5krdzx',
+    action: 'manage',
+    subject: 'category',
+  },
+  CREATE_CATEGORIES: {
+    id: 'zba387omkrf7rj9ra1wh2sts',
+    action: 'create',
+    subject: 'category',
+  },
+  READ_CATEGORIES: {
+    id: 'bm16btw7rfqik9k3tyf3l0bn',
+    action: 'read',
+    subject: 'category',
+  },
+  UPDATE_CATEGORIES: {
+    id: 'afcgr9xqp3j2gpjbvnv4si4v',
+    action: 'update',
+    subject: 'category',
+  },
+  DELETE_CATEGORIES: {
+    id: 'pas6hjte9y4dfg87dxcbj3rv',
+    action: 'delete',
+    subject: 'category',
+  },
+  MANAGE_AGENCIES: {
+    id: 'g41nugmns81317uclicz1v4m',
+    action: 'manage',
+    subject: 'agency',
+  },
+  CREATE_AGENCIES: {
+    id: 'idilo92uwmu0ny0gwxk4inhk',
+    action: 'create',
+    subject: 'agency',
+  },
+  READ_AGENCIES: {
+    id: 'idilo92uwmu0ny0gwxk4inhk',
+    action: 'read',
+    subject: 'agency',
+  },
+  UPDATE_AGENCIES: {
+    id: 'uvg8wwulkcie6nur57i8nl4f',
+    action: 'update',
+    subject: 'agency',
+  },
+  DELETE_AGENCIES: {
+    id: 'onvbc2jmlk1jur5v3rg52jit',
+    action: 'delete',
+    subject: 'agency',
   },
 };
 

@@ -101,7 +101,9 @@
             </mat-form-field>
 
             <div class="d-flex align-items-center m-b-12">
-              <mat-checkbox color="primary">Remember this Device</mat-checkbox>
+              <mat-checkbox formControlName="rememberMe" color="primary"
+                >Remember this Device</mat-checkbox
+              >
               <a
                 [routerLink]="['/auth/forgot-pwd']"
                 class="text-primary f-w-600 text-decoration-none m-l-auto f-s-14"

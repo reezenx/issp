@@ -96,6 +96,17 @@ export async function createUsers(prisma: PrismaClient) {
             },
           },
         },
+        userRole: {
+          connectOrCreate: {
+            where: {
+              id: role.id,
+            },
+            create: {
+              ...role,
+              createdBy: 'System',
+            },
+          },
+        },
       },
     });
   });

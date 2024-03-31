@@ -1,25 +1,18 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
-// import { JwtService } from '@nestjs/jwt';
-import { AuthEntity } from './entity/auth.entity';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'nestjs-prisma';
-
 import { CaslFactory, JwtPayload, RequestUser } from '@issp/api-auth';
-
-import { accessibleBy } from './casl/casl-prisma';
 import { AppAbility } from './casl/casl.factory';
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { AuthSession } from './models/auth-session';
 import { JwtService, JwtSignOptions } from '@nestjs/jwt';
 import { Token } from './guard/jwt-auth.guard';
-import { UserService } from './services/user.service';
+import { UserService } from '../user/user.service';
 import { environments } from '../environments/environments';
 import { UserEntity } from '../admin/users/entities/user.entity';
-import { ConfigService } from '../config';
+import { AuthSession } from '@issp/common';
+// import { ConfigService } from '../config';
+import { JwtStrategy } from './jwt.strategy';
+import { ConfigService } from '@nestjs/config';
+// import { JwtStrategy } from './strategies/jwt.strategy';
 
 export interface TokenResponse {
   accessToken: string;
@@ -31,7 +24,6 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private userService: UserService,
-    // private jwtService: JwtService,
     private readonly jwtService: JwtService,
     // private readonly jwtStrategy: JwtStrategy,
     // private readonly config: ConfigService,
@@ -52,7 +44,8 @@ export class AuthService {
   //     ? this.config.expiresInRememberMe
   //     : (this.config.jwtOptions.signOptions?.expiresIn as number);
 
-  //   const token = this.jwtService.sign(jwtPayload, { expiresIn });
+  //   const accessToken = this.jwtService.sign(jwtPayload, { expiresIn });
+  //   const refreshToken = this.jwtService.sign(jwtPayload, { expiresIn });
 
   //   const ability = await this.createAbility(user);
 
@@ -60,14 +53,15 @@ export class AuthService {
   //     userId: user.id,
   //     roles: user.roles,
   //     rules: ability.rules,
-  //     token,
+  //     accessToken,
+  //     refreshToken,
   //     rememberMe,
   //     expiresIn,
   //   };
   // }
 
   async validate(email: string, password: string) {
-    const user = await this.userService.getUserByEmail(email);
+    const user = await this.userService.getUserRolesPermissionByEmail(email);
 
     if (!user) {
       throw new UnauthorizedException('User does not exist');
@@ -81,7 +75,7 @@ export class AuthService {
     return user;
   }
 
-  async login(user: UserEntity): Promise<TokenResponse> {
+  async login(user: UserEntity, rememberMe = false): Promise<AuthSession> {
     const payload: Token = {
       sub: user.id,
       email: user.email,
@@ -96,12 +90,27 @@ export class AuthService {
       );
     }
 
+    // const expiresIn = rememberMe
+    //   ? this.config.expiresInRememberMe
+    //   : (this.config.jwtOptions?.signOptions?.expiresIn as number);
+    const expiresIn = 7_776_000;
+    const ability = await this.createAbility(user);
+    const rules = ability.rules;
+    const accessToken = await this.jwtService.signAsync(
+      payload,
+      this.getAccessTokenOptions(user)
+    );
+    const roles = user.roles;
+    const userId = user.id;
+
     return {
-      accessToken: await this.jwtService.signAsync(
-        payload,
-        this.getAccessTokenOptions(user)
-      ),
+      accessToken,
       refreshToken,
+      roles,
+      rules,
+      userId,
+      expiresIn,
+      rememberMe,
     };
   }
 
@@ -150,39 +159,11 @@ export class AuthService {
     return options;
   }
 
-  // async getAuthSession(
-  //   user: RequestUser,
-  //   rememberMe = false
-  // ): Promise<AuthSession> {
-  //   const jwtPayload: JwtPayload = {
-  //     aud: this.config.siteUrl,
-  //     sub: user.id,
-  //     roles: user.roles,
-  //   };
-
-  //   const expiresIn = rememberMe
-  //     ? this.config.expiresInRememberMe
-  //     : (this.config.jwtOptions.signOptions?.expiresIn as number);
-
-  //   const token = this.jwtService.sign(jwtPayload, { expiresIn });
-
-  //   const ability = await this.createAbility(user);
-
-  //   return {
-  //     userId: user.id,
-  //     roles: user.roles,
-  //     rules: ability.rules,
-  //     token,
-  //     rememberMe,
-  //     expiresIn,
-  //   };
-  // }
-
   async createAbility(user: RequestUser): Promise<AppAbility> {
     return this.caslFactory.createAbility(user);
   }
 
-  accessibleBy = accessibleBy;
+  // accessibleBy = accessibleBy;
 
   /**
    * @returns `RequestUser` if valid and `null` otherwise

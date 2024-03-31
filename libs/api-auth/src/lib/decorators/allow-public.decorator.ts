@@ -1,6 +1,6 @@
 import { SetMetadata } from '@nestjs/common';
 
-export const ALLOW_ANONYMOUS_KEY = 'AllowAnonymous';
+export const ALLOW_PUBLIC_KEY = 'Public';
 
 /**
  * Allows access for non-authenticated users to individual endpoints.
@@ -12,7 +12,7 @@ export const ALLOW_ANONYMOUS_KEY = 'AllowAnonymous';
  * ＠UseGuards(RolesGuard('Moderator'))
  * export class BlogController {
  *   ＠Get()
- *   ＠AllowAnonymous()
+ *   ＠Public()
  *   getBlog() { ... }
  *
  *   ＠Put()
@@ -20,4 +20,4 @@ export const ALLOW_ANONYMOUS_KEY = 'AllowAnonymous';
  * }
  * ```
  */
-export const AllowAnonymous = () => SetMetadata(ALLOW_ANONYMOUS_KEY, true);
+export const Public = () => SetMetadata(ALLOW_PUBLIC_KEY, true);

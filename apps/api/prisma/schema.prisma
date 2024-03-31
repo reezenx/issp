@@ -70,6 +70,8 @@ model User {
   agency        Agency          @relation(fields: [agencyId], references: [id])
   agencyId      String
   role          Role[]          @default([VIEWER])
+  userRole      UserRole        @relation("UserRole", fields: [roleId], references: [id])
+  roleId        String
   status        UserStatus
   profile       Profile?
   issps         ISSP[]          @relation("ISSPUsers")
@@ -82,14 +84,15 @@ model User {
 }
 
 model UserRole {
-  id         String       @id @default(cuid())
-  name       String       @unique
-  createdBy  String
-  createdAt  DateTime     @default(now())
-  updatedBy  String?
-  updatedAt  DateTime?    @updatedAt()
-  Permission Permission[]
-  User       User[]
+  id          String       @id @default(cuid())
+  name        String       @unique
+  createdBy   String
+  createdAt   DateTime     @default(now())
+  updatedBy   String?
+  updatedAt   DateTime?    @updatedAt()
+  permissions Permission[]
+  users       User[]
+  user        User[]       @relation("UserRole")
 
   @@map("roles")
 }

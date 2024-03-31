@@ -8,11 +8,10 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
-// import { Socket } from 'socket.io';
-import { AUTH_NOT_REQUIRED } from '../decorators/auth-not-required.decorator';
 import { Client, getClient } from '../../shared/utils/get-client';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
+import { ALLOW_PUBLIC_KEY } from '@issp/api-auth';
 
 export interface Token {
   sub: string;
@@ -35,7 +34,7 @@ export class JwtAuthGuard implements CanActivate {
     const client = this.getRequest(ctx);
 
     const allowAny = this.reflector.get<boolean>(
-      AUTH_NOT_REQUIRED,
+      ALLOW_PUBLIC_KEY,
       ctx.getHandler()
     );
 

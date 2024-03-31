@@ -19,6 +19,7 @@ import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-ad
 import { agenciesResolver } from './agencies/resolvers/agencies.resolver';
 import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
 import { CategoryAdminEditComponent } from './categories/category-admin-edit/category-admin-edit.component';
+import { categoryResolver } from './categories/resolvers/category.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -90,15 +91,16 @@ export const AdminRoutes: Routes = [
     path: 'categories',
     component: CategoriesAdminShellComponent,
     data: {
-      breadcrumbSkipNode: true,
+      breadcrumb: 'Categories',
     },
+
     children: [
       {
         path: '',
         title: 'Categories',
         component: CategoriesAdminComponent,
         data: {
-          breadcrumb: 'Categories',
+          breadcrumbSkipNode: true,
         },
         resolve: {
           categories: categoriesResolver,
@@ -121,6 +123,7 @@ export const AdminRoutes: Routes = [
         },
         component: CategoryAdminEditComponent,
         resolve: {
+          item: categoryResolver,
         },
       },
     ],

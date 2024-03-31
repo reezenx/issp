@@ -5,59 +5,64 @@ import {
   Body,
   Param,
   Delete,
-  UseGuards,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
-// import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
+import { AbilitiesGuard } from '../../auth/casl/abilities.guard';
+import { checkAbilities } from '../../auth/casl/abilities.decorator';
 
-// @Roles(Role.ADMIN)
 @ApiTags('admin/users')
 @Controller('admin/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'create', subject: 'user' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
+  @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     return new UserEntity(await this.usersService.create(createUserDto));
   }
 
-  @Get()
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'read', subject: 'user' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity, isArray: true })
+  @Get()
   async findAll() {
     const users = await this.usersService.findAll();
     return users.map((user) => new UserEntity(user));
   }
 
-  @Get(':id')
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'read', subject: 'user' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
+  @Get(':id')
   async findOne(@Param('id') id: string) {
     return new UserEntity(await this.usersService.findOne(id));
   }
 
-  @Put(':id')
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'update', subject: 'user' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
+  @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return new UserEntity(await this.usersService.update(id, updateUserDto));
   }
 
-  @Delete(':id')
-  // @UseGuards(JwtAuthGuard)
+  @checkAbilities({ action: 'delete', subject: 'user' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
+  @Delete(':id')
   async remove(@Param('id') id: string) {
     return new UserEntity(await this.usersService.remove(id));
   }
