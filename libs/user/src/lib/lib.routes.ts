@@ -3,7 +3,6 @@ import { IsspAccountComponent } from './account/account.component';
 import { IsspChatComponent } from './chat/chat.component';
 import { IsspCalendarComponent } from './calendar/calendar.component';
 import { IsspIsspsComponent } from './issp/issps.component';
-import { IsspPermissionComponent } from './permission/permission.component';
 import { IsspDocumentEditorComponent } from './document-editor/document-editor.component';
 import { IsspDiagramComponent } from './diagram/diagram.component';
 import { IsspDetailComponent } from './issp/issp-detail/issp-detail.component';
@@ -50,13 +49,6 @@ export const UserRoutes: Routes = [
     component: IsspDetailComponent,
     data: {
       breadcrumb: 'ISSP Detail',
-    },
-  },
-  {
-    path: 'permission',
-    component: IsspPermissionComponent,
-    data: {
-      breadcrumb: 'Permission',
     },
   },
   {

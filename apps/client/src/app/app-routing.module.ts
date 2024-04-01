@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FullComponent } from '@issp/components';
 import { BlankComponent } from '@issp/components';
-import { AuthGuard, AuthRoutes } from '@issp/auth';
+import { AuthGuard, AuthRoutes, RolesGuard } from '@issp/auth';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'user/account', pathMatch: 'full' },
   {
     path: '',
     component: FullComponent,
@@ -17,6 +16,7 @@ const routes: Routes = [
       {
         path: 'user',
         loadChildren: () => import('@issp/user').then((m) => m.UserModule),
+        canMatch: [RolesGuard.has('PLANNER', 'SUPER_ADMIN')],
         data: {
           breadcrumb: 'User',
         },
@@ -24,6 +24,7 @@ const routes: Routes = [
       {
         path: 'admin',
         loadChildren: () => import('@issp/admin').then((m) => m.AdminModule),
+        canMatch: [RolesGuard.has('ADMIN', 'SUPER_ADMIN')],
         data: {
           breadcrumb: 'Admin',
         },

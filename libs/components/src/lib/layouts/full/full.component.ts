@@ -5,7 +5,7 @@ import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.compon
 import { AppSettings } from '@issp/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CoreService } from '@issp/common/ui/services';
 import { CustomizerComponent } from './shared/customizer/customizer.component';
 import { filter } from 'rxjs/operators';
@@ -19,6 +19,9 @@ import { RouterModule } from '@angular/router';
 import { SidebarComponent } from './vertical/sidebar/sidebar.component';
 import { Subscription } from 'rxjs';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { AuthService } from '@issp/auth';
+import { NavItem } from './vertical/sidebar/nav-item/nav-item';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -40,6 +43,7 @@ interface quicklinks {
   link: string;
 }
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'issp-full',
   standalone: true,
@@ -61,8 +65,8 @@ interface quicklinks {
   styleUrls: [],
   encapsulation: ViewEncapsulation.None,
 })
-export class FullComponent {
-  navItems = navItems;
+export class FullComponent implements OnInit {
+  navItems: NavItem[] = [];
 
   @ViewChild('leftsidenav')
   public sidenav!: MatSidenav;
@@ -190,7 +194,8 @@ export class FullComponent {
   constructor(
     private settings: CoreService,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthService
   ) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.htmlElement = document.querySelector('html')!;
@@ -218,8 +223,10 @@ export class FullComponent {
       });
   }
 
-  ngOnDestroy() {
-    this.layoutChangesSubscription.unsubscribe();
+  ngOnInit(): void {
+    this.navItems = navItems.filter((nav) =>
+      this.authService.userHasRole(nav.roles)
+    );
   }
 
   toggleCollapsed() {

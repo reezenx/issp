@@ -34,9 +34,11 @@ import { APP_BASE_HREF } from '@angular/common';
 import { AuthService, ErrorDialogInterceptor } from '@issp/auth';
 import { AuthTokenInterceptor } from '@issp/auth';
 import { Ability, PureAbility } from '@casl/ability';
-import { createPrismaAbility } from '@casl/prisma';
-import { AbilityModule } from '@casl/angular';
+import { AbilityModule, AbilityService } from '@casl/angular';
 import { lastValueFrom } from 'rxjs';
+import { AppAbility, Environment } from '@issp/common';
+
+import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(http: HttpClient): unknown {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,6 +80,7 @@ const initialize = (authService: AuthService) => async () => {
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: Environment, useValue: environment },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
@@ -98,13 +101,9 @@ const initialize = (authService: AuthService) => async () => {
       useClass: ErrorDialogInterceptor,
       multi: true,
     },
-    {
-      provide: Ability,
-      useValue: createPrismaAbility(undefined, {
-        detectSubjectType: (object) => object['__typename'],
-      }),
-    },
-    { provide: PureAbility, useExisting: Ability },
+    { provide: AppAbility, useValue: new AppAbility() },
+    { provide: PureAbility, useExisting: AppAbility },
+    AbilityService,
   ],
 })
 export class AppModule {}

@@ -170,6 +170,8 @@ export class AuthService {
         action: true,
         subject: true,
         conditions: true,
+        inverted: true,
+        reason: true,
       },
     });
   }

@@ -1,17 +1,21 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "es2022",
+  },
   "files": [],
-  "references": [
-    {
+  "include": [],
+  "references": [{
       "path": "./tsconfig.app.json"
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.editor.json"
     }
   ],
-  "compilerOptions": {
-    "esModuleInterop": true,
-  },
+  "extends": "../../tsconfig.base.json",
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

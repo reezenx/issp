@@ -19,7 +19,9 @@ import { IsspItemsShellComponent } from './issp-items-shell/issp-items-shell.com
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 import { ControlsModule, RichtextComponent } from '@issp/components';
-import { PipesModule } from '@issp/common';
+import { AppAbility, PipesModule } from '@issp/common';
+import { PureAbility } from '@casl/ability';
+import { AbilityService } from '@casl/angular';
 
 @NgModule({
   imports: [
@@ -42,6 +44,11 @@ import { PipesModule } from '@issp/common';
     IsspItemNewComponent,
     IsspItemsComponent,
     IsspItemsShellComponent,
+  ],
+  providers: [
+    { provide: AppAbility, useValue: new AppAbility() },
+    { provide: PureAbility, useExisting: AppAbility },
+    AbilityService,
   ],
 })
 export class IsspModule {}

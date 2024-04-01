@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CoreService } from '@issp/common/ui/services';
 
 @Component({
-  selector: 'app-branding',
+  selector: 'issp-branding',
   standalone: true,
   template: `
     <div class="branding">

@@ -1,5 +1,6 @@
 export const URLS = {
   ADMIN: {
+    DASHBOARD: '/admin/dashboard',
     USERS: '/admin/users',
     CATEGORIES: '/admin/categories',
     AGENCIES: '/admin/agencies',

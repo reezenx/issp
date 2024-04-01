@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
-import { AuthEntity } from '../auth/entity/auth.entity';
 
 @Injectable()
 export class UserService {
@@ -10,7 +9,11 @@ export class UserService {
     return this.prisma.user.findUnique({
       where: { email },
       include: {
-        roles: true,
+        roles: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
   }

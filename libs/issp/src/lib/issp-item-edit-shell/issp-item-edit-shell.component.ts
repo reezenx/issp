@@ -4,6 +4,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
 import { IsspsService } from '../services/issps.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserAbility } from '@issp/common';
+import { AuthService } from '@issp/auth';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -11,13 +13,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './issp-item-edit-shell.component.html',
 })
 export class IsspItemEditShellComponent implements OnInit {
-  constructor(
-    private isspsService: IsspsService,
-    private route: ActivatedRoute
-  ) {}
   issp: ISSPDetails;
   subs: Subscription[] = [];
-
+  readonly ability: UserAbility;
   views = [
     {
       name: 'Metadata',
@@ -35,6 +33,14 @@ export class IsspItemEditShellComponent implements OnInit {
       iconName: 'history',
     },
   ];
+
+  constructor(
+    private isspsService: IsspsService,
+    private route: ActivatedRoute,
+    authService: AuthService
+  ) {
+    this.ability = authService.ability;
+  }
 
   ngOnInit() {
     this.initSubs();

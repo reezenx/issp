@@ -49,10 +49,23 @@
               color="primary"
             >
               <mat-label class="mat-subtitle-2 f-w-600">Email</mat-label>
-              <input matInput type="text" formControlName="email" />
-              <mat-icon matSuffix class="op-5">
+              <input #email matInput type="text" formControlName="email" />
+              <mat-icon matPrefix class="op-5">
                 <i-tabler name="user" class="icon-20 d-flex"></i-tabler>
               </mat-icon>
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                class="m-r-4"
+                (click)="email.value = ''"
+                [attr.aria-label]="'Clear Email'"
+                [disabled]="!email.value"
+              >
+                <mat-icon matPrefix class="op-5">
+                  <i-tabler name="backspace" class="icon-20 d-flex"></i-tabler>
+                </mat-icon>
+              </button>
               @if(f['email'].touched && f['email'].invalid) {
               <mat-hint class="m-b-16 error-msg">
                 @if(f['email'].errors && f['email'].errors['required']) {
@@ -74,9 +87,13 @@
               <mat-label class="mat-subtitle-2 f-w-600">Password</mat-label>
               <input
                 matInput
+                #password
                 [type]="hide ? 'password' : 'text'"
                 formControlName="password"
               />
+              <mat-icon matPrefix class="op-5">
+                <i-tabler name="lock" class="icon-20 d-flex"></i-tabler>
+              </mat-icon>
               <button
                 mat-icon-button
                 matSuffix
@@ -86,6 +103,7 @@
                 [attr.aria-label]="hide ? 'Show password' : 'Hide password'"
                 [attr.aria-pressed]="hide"
                 [title]="hide ? 'Show password' : 'Hide password'"
+                [disabled]="!password.value"
               >
                 <mat-icon class="op-5">{{
                   hide ? 'visibility_off' : 'visibility'

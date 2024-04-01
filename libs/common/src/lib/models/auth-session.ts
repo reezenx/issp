@@ -4,15 +4,18 @@ import {
   Subject,
   SubjectRawRule,
 } from '@casl/ability';
-import { Permission, UserRole } from '@prisma/client';
+import { UserRole } from '@prisma/client';
 
+export type AbilityRule = SubjectRawRule<
+  string,
+  ExtractSubjectType<Subject>,
+  MongoQuery
+>;
 export type AuthSession = {
   expiresIn: number;
   rememberMe: boolean;
-  roles: (Pick<UserRole, 'name'> & {
-    permission?: Pick<Permission, 'action' | 'conditions' | 'subject'>;
-  })[];
-  rules: SubjectRawRule<string, ExtractSubjectType<Subject>, MongoQuery>[];
+  roles: Pick<UserRole, 'name'>[];
+  rules: AbilityRule[];
   accessToken: string;
   refreshToken: string;
   userId: string;
