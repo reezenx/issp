@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
-import { IsspAccountComponent } from './account/account.component';
 import { IsspChatComponent } from './chat/chat.component';
 import { IsspCalendarComponent } from './calendar/calendar.component';
-import { IsspIsspsComponent } from './issp/issps.component';
-import { IsspDocumentEditorComponent } from './document-editor/document-editor.component';
-import { IsspDiagramComponent } from './diagram/diagram.component';
-import { IsspDetailComponent } from './issp/issp-detail/issp-detail.component';
+import { UserAccountShellComponent } from './account/user-account-shell/user-account-shell.component';
+import { UserAccountDashboardComponent } from './account/user-account-dashboard/user-account-dashboard.component';
+import { UserAccountMonitoringComponent } from './account/user-account-monitoring/user-account-monitoring.component';
+import { UserAccountApplicationComponent } from './account/user-account-application/user-account-application.component';
+import { UserAccountAmendmentComponent } from './account/user-account-amendment/user-account-amendment.component';
+import { UserAccountItraComponent } from './account/user-account-itra/user-account-itra.component';
+import { isspsResolver } from './resolvers/issps.resolver';
 
 export const UserRoutes: Routes = [
   { path: '', redirectTo: 'account', pathMatch: 'full' },
@@ -14,7 +16,67 @@ export const UserRoutes: Routes = [
     data: {
       breadcrumb: 'Account',
     },
-    component: IsspAccountComponent,
+    component: UserAccountShellComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        title: 'Dashboard',
+        data: {
+          breadcrumb: 'Dashboard',
+        },
+        component: UserAccountDashboardComponent,
+      },
+      {
+        path: 'monitoring',
+
+        title: 'monitoring',
+        data: {
+          breadcrumb: 'Monitoring',
+        },
+        component: UserAccountMonitoringComponent,
+        resolve: {
+          items: isspsResolver,
+        },
+      },
+      {
+        path: 'application',
+        title: 'Application',
+        data: {
+          breadcrumb: 'Application',
+        },
+        component: UserAccountApplicationComponent,
+        resolve: {
+          items: isspsResolver,
+        },
+      },
+      {
+        path: 'amendment',
+        title: 'Amendment',
+        data: {
+          breadcrumb: 'Amendment',
+        },
+        component: UserAccountAmendmentComponent,
+        resolve: {
+          items: isspsResolver,
+        },
+      },
+      {
+        path: 'itra',
+        title: 'ITRA',
+        data: {
+          breadcrumb: 'ITRA',
+        },
+        component: UserAccountItraComponent,
+        resolve: {
+          items: isspsResolver,
+        },
+      },
+    ],
   },
   {
     path: 'chat',
@@ -35,34 +97,6 @@ export const UserRoutes: Routes = [
     loadChildren: () => import('@issp/issp').then((m) => m.IsspModule),
     data: {
       breadcrumb: 'ISSPs',
-    },
-  },
-  {
-    path: 'issp',
-    component: IsspIsspsComponent,
-    data: {
-      breadcrumb: 'ISSP',
-    },
-  },
-  {
-    path: 'issp/detail/:id',
-    component: IsspDetailComponent,
-    data: {
-      breadcrumb: 'ISSP Detail',
-    },
-  },
-  {
-    path: 'richtext',
-    component: IsspDocumentEditorComponent,
-    data: {
-      breadcrumb: 'RichText',
-    },
-  },
-  {
-    path: 'diagram',
-    component: IsspDiagramComponent,
-    data: {
-      breadcrumb: 'Diagram',
     },
   },
 ];

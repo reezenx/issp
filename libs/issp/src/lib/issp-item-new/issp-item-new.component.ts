@@ -1,7 +1,6 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISSPDetails } from '../models/issp-details';
 import {
   FormGroup,
   FormBuilder,
@@ -19,6 +18,7 @@ import {
 import { ISSPStatus } from '@prisma/client';
 import {
   ISSP_Statuses,
+  ISSPDetails,
   startYearMustBeLessThanEndYearValidator,
 } from '@issp/common';
 

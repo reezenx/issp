@@ -2,9 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ISSPDetails } from '../models/issp-details';
-import { ActionHistoryInfo } from '../models/action-history';
-import { API } from '@issp/common';
+import { ActionHistoryInfo, API, ISSPDetails } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ISSPDetails } from '../models/issp-details';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
 import { IsspsService } from '../services/issps.service';
 import { ActivatedRoute } from '@angular/router';
-import { UserAbility } from '@issp/common';
+import { ISSPDetails, UserAbility } from '@issp/common';
 import { AuthService } from '@issp/auth';
 
 @UntilDestroy({ arrayName: 'subs' })
@@ -13,7 +12,7 @@ import { AuthService } from '@issp/auth';
   templateUrl: './issp-item-edit-shell.component.html',
 })
 export class IsspItemEditShellComponent implements OnInit {
-  issp: ISSPDetails;
+  item: ISSPDetails;
   subs: Subscription[] = [];
   readonly ability: UserAbility;
   views = [
@@ -47,14 +46,14 @@ export class IsspItemEditShellComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ issp }) => {
-      this.issp = issp;
+    const routeSub = this.route.data.subscribe(({ item }) => {
+      this.item = item;
     });
     this.subs.push(routeSub);
 
     const currentIsspSub = this.isspsService.currentContextItem$.subscribe(
       (data) => {
-        this.issp = data;
+        this.item = data;
       }
     );
     this.subs.push(currentIsspSub);

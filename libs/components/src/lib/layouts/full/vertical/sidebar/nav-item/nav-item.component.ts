@@ -6,7 +6,6 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { NavItem } from './nav-item';
 import { Router } from '@angular/router';
 import {
   animate,
@@ -20,6 +19,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
 import { NavService } from '@issp/common/ui/services';
 import { MaterialModule } from '@issp/common/ui/libraries';
+import { NavItem } from '@issp/common';
 
 @Component({
   selector: 'issp-nav-item',

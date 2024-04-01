@@ -11,9 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridDefaults } from '@issp/common/ui/libraries';
-import { ISSPDetails } from '../models/issp-details';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { ISSPDetails } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -56,8 +56,8 @@ export class IsspItemsComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ issps }) => {
-      this.gridData = issps;
+    const routeSub = this.route.data.subscribe(({ items }) => {
+      this.gridData = items;
     });
     this.subs.push(routeSub);
   }

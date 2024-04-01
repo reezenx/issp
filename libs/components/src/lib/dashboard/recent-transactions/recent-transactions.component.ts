@@ -23,7 +23,7 @@ export class RecentTransactionsComponent {
       id: 1,
       time: '09.30 am',
       color: 'primary',
-      subtext: 'Payment received from John Doe of $385.90',
+      subtext: 'Payment received from John Doe of ₱385.90',
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ export class RecentTransactionsComponent {
       id: 3,
       time: '12.30 pm',
       color: 'success',
-      subtext: 'Payment was made of $64.95 to Michael',
+      subtext: 'Payment was made of ₱64.95 to Michael',
     },
     {
       id: 4,

@@ -1,7 +1,6 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISSPDetails } from '../models/issp-details';
 import {
   FormGroup,
   FormBuilder,
@@ -19,6 +18,7 @@ import {
 import { ISSPStatus } from '@prisma/client';
 import {
   ISSP_Statuses,
+  ISSPDetails,
   startYearMustBeLessThanEndYearValidator,
 } from '@issp/common';
 
@@ -39,7 +39,7 @@ export class IsspItemEditMetadataComponent implements OnInit {
   ) {}
 
   form: FormGroup;
-  issp: ISSPDetails;
+  item: ISSPDetails;
   subs: Subscription[] = [];
   statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
   titleMinLength = 6;
@@ -51,9 +51,9 @@ export class IsspItemEditMetadataComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.parent.data.subscribe(({ issp }) => {
-      this.issp = issp;
-      this.form.patchValue(this.issp);
+    const routeSub = this.route.parent.data.subscribe(({ item }) => {
+      this.item = item;
+      this.form.patchValue(this.item);
     });
     this.subs.push(routeSub);
   }

@@ -13,7 +13,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridDefaults } from '@issp/common/ui/libraries';
 import { Subscription } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ActionHistoryInfo } from '../models/action-history';
+import { ActionHistoryInfo } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -55,8 +55,8 @@ export class IsspItemEditPreviewComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ actionHistory }) => {
-      this.gridData = actionHistory;
+    const routeSub = this.route.data.subscribe(({ items }) => {
+      this.gridData = items;
     });
     this.subs.push(routeSub);
   }

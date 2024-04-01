@@ -1,5 +1,5 @@
 import { Ability } from '@casl/ability';
-import { AbilityRule, AppAbility, Environment } from '@issp/common';
+import { AbilityRule, Environment } from '@issp/common';
 import { API, AuthSession, LocalStorageKey, URLS } from '@issp/common';
 import { AuthTokenInterceptor } from './interceptor/auth-token.interceptor';
 import {
@@ -11,7 +11,6 @@ import {
   throwError,
   timer,
 } from 'rxjs';
-import { environment } from '@issp/common/environments';
 import { ErrorDialogInterceptor } from './interceptor/error-dialog.interceptor';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

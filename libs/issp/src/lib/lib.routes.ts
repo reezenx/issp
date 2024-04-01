@@ -27,7 +27,7 @@ export const isspRoutes: Route[] = [
           breadcrumb: 'Items',
         },
         resolve: {
-          issps: isspsResolver,
+          items: isspsResolver,
         },
       },
       {
@@ -46,7 +46,7 @@ export const isspRoutes: Route[] = [
           breadcrumbRouteDataProperty: 'issp.title',
         },
         resolve: {
-          issp: isspResolver,
+          item: isspResolver,
         },
         children: [
           {
@@ -79,7 +79,7 @@ export const isspRoutes: Route[] = [
               breadcrumb: 'History',
             },
             resolve: {
-              actionHistory: actionHistoryResolver,
+              items: actionHistoryResolver,
             },
             component: IsspItemEditHistoryComponent,
           },

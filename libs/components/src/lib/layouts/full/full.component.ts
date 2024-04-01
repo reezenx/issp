@@ -2,7 +2,7 @@ import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { AppHorizontalHeaderComponent } from './horizontal/header/header.component';
 import { AppHorizontalSidebarComponent } from './horizontal/sidebar/sidebar.component';
 import { AppNavItemComponent } from './vertical/sidebar/nav-item/nav-item.component';
-import { AppSettings } from '@issp/common';
+import { AppSettings, NavItem } from '@issp/common';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
@@ -21,7 +21,6 @@ import { Subscription } from 'rxjs';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from '@issp/auth';
-import { NavItem } from './vertical/sidebar/nav-item/nav-item';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';

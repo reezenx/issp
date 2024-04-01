@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@issp/common/ui/libraries';
+import {
+  MaterialModule,
+  SyncfusionGridModule,
+} from '@issp/common/ui/libraries';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -15,15 +18,20 @@ import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { UserRoutes } from './lib.routes';
 
-import { IsspAccountComponent } from './account/account.component';
 import { IsspChatComponent } from './chat/chat.component';
 import {
   CalendarDialogComponent,
   IsspCalendarComponent,
 } from './calendar/calendar.component';
 import { CalendarFormDialogComponent } from './calendar/calendar-form-dialog/calendar-form-dialog.component';
-import { IsspIsspsComponent } from './issp/issps.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { UserAccountShellComponent } from './account/user-account-shell/user-account-shell.component';
+import { UserAccountDashboardComponent } from './account/user-account-dashboard/user-account-dashboard.component';
+import { UserAccountMonitoringComponent } from './account/user-account-monitoring/user-account-monitoring.component';
+import { UserAccountApplicationComponent } from './account/user-account-application/user-account-application.component';
+import { UserAccountAmendmentComponent } from './account/user-account-amendment/user-account-amendment.component';
+import { UserAccountItraComponent } from './account/user-account-itra/user-account-itra.component';
+import { PipesModule } from '@issp/common';
 
 @NgModule({
   imports: [
@@ -33,6 +41,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    PipesModule,
+    SyncfusionGridModule,
     TablerIconsModule.pick(TablerIcons),
     AngularEditorModule,
     CalendarModule.forRoot({
@@ -41,14 +51,18 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     }),
     MatNativeDateModule,
     NgScrollbarModule,
+    UserAccountDashboardComponent,
   ],
   declarations: [
-    IsspAccountComponent,
     IsspChatComponent,
     IsspCalendarComponent,
-    IsspIsspsComponent,
     CalendarFormDialogComponent,
     CalendarDialogComponent,
+    UserAccountShellComponent,
+    UserAccountMonitoringComponent,
+    UserAccountApplicationComponent,
+    UserAccountAmendmentComponent,
+    UserAccountItraComponent,
   ],
 })
 export class UserModule {}

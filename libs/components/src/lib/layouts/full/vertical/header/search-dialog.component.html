@@ -24,14 +24,14 @@
 <mat-dialog-content class="mat-typography search-dialog">
   <h4 class="f-s-18 f-w-600 mat-subtitle-1 m-b-16">Quick Page Links</h4>
 
-  @for(item of navItemsData; track item.displayName) {
+  @for(item of navItemsData; track item.name) {
   <a
     [routerLink]="[item.route]"
     mat-dialog-close
     class="p-y-12 text-decoration-none d-block"
   >
     <h5 class="f-s-14 f-w-500 d-block mat-subtitle-1 m-0">
-      {{ item.displayName }}
+      {{ item.name }}
     </h5>
     <span class="f-s-12 mat-body-2">{{ item.route }}</span>
   </a>

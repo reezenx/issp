@@ -234,7 +234,7 @@ export class AppHorizontalSearchDialogComponent {
   searchText = '';
   navItems = navItems;
 
-  navItemsData = navItems.filter((navitem) => navitem.displayName);
+  navItemsData = navItems.filter((navitem) => navitem.name);
 
   // filtered = this.navItemsData.find((obj) => {
   //   return obj.displayName == this.searchinput;

@@ -20,6 +20,8 @@ import { agenciesResolver } from './agencies/resolvers/agencies.resolver';
 import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
 import { CategoryAdminEditComponent } from './categories/category-admin-edit/category-admin-edit.component';
 import { categoryResolver } from './categories/resolvers/category.resolver';
+import { DocumentEditorComponent } from './document-editor/document-editor.component';
+import { DiagramComponent } from './diagram/diagram.component';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -170,5 +172,19 @@ export const AdminRoutes: Routes = [
         },
       },
     ],
+  },
+  {
+    path: 'richtext',
+    component: DocumentEditorComponent,
+    data: {
+      breadcrumb: 'RichText',
+    },
+  },
+  {
+    path: 'diagram',
+    component: DiagramComponent,
+    data: {
+      breadcrumb: 'Diagram',
+    },
   },
 ];
