@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { CategoryDetails } from '../models/category-details';
-import { API, CategoryDropdown } from '@issp/common';
+import { API, CategoryDropdown, Environment } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class CategoriesService {
-  route = `${API.BASE}${API.ADMIN.CATEGORIES}`;
-  constructor(private http: HttpClient) {}
+  route = `${this.env.url.api}${API.BASE}${API.ADMIN.CATEGORIES}`;
+  constructor(private http: HttpClient, private readonly env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<CategoryDetails>> = new BehaviorSubject<
     Array<CategoryDetails>

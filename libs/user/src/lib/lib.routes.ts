@@ -34,7 +34,7 @@ export const UserRoutes: Routes = [
       {
         path: 'monitoring',
 
-        title: 'monitoring',
+        title: 'Monitoring',
         data: {
           breadcrumb: 'Monitoring',
         },

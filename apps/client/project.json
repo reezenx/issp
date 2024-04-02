@@ -48,7 +48,13 @@
               "maximumError": "150kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/api/src/environments/environment.ts",
+              "with": "apps/api/src/environments/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "buildOptimizer": false,
@@ -65,12 +71,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "client:build:production",
-          "proxyConfig": "apps/client/proxy.prod.conf.json"
+          "buildTarget": "client:build:production"
         },
         "development": {
-          "buildTarget": "client:build:development",
-          "proxyConfig": "apps/client/proxy.conf.json"
+          "buildTarget": "client:build:development"
         }
       },
       "defaultConfiguration": "development"

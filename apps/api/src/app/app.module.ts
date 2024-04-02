@@ -7,11 +7,11 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { ConfigModule } from '@nestjs/config';
-import { JwtAuthGuard } from './auth/guard/jwt-auth.guard';
+import { AuthGuard } from './auth/guard/jwt-auth.guard';
 import { JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { PrismaModule, PrismaService } from 'nestjs-prisma';
-import { ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/user.service';
 import { JwtStrategy } from './auth/jwt.strategy';
@@ -46,7 +46,11 @@ import { AbilitiesGuard } from './auth/guard/abilities.guard';
     UserService,
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
     {
       provide: APP_GUARD,

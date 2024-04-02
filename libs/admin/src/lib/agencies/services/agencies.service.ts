@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AgencyDetails } from '../models/agency-details';
-import { AgencyDropdown, API } from '@issp/common';
+import { AgencyDropdown, API, Environment } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class AgenciesService {
-  route = `${API.BASE}${API.ADMIN.AGENCIES}`;
+  route = `${this.env.url.api}${API.BASE}${API.ADMIN.AGENCIES}`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<AgencyDetails>> = new BehaviorSubject<
     Array<AgencyDetails>

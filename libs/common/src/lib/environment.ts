@@ -62,7 +62,8 @@ export class EnvironmentDev implements Environment {
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
-    api: 'http://localhost:3000',
+    // api: 'http://localhost:3000/',
+    api: 'https://issp-hkqu.onrender.com/',
     portal: 'http://localhost:4200/#',
     graphql: 'http://localhost:7080/graphql',
     graphqlSubscriptions: 'ws://localhost:7080/graphql',
@@ -82,8 +83,8 @@ export class EnvironmentProd implements Environment {
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
-    api: 'https://api.site.com',
-    portal: 'https://portal.site.com/#',
+    api: 'https://issp-hkqu.onrender.com/',
+    portal: 'https://issp-alpha.vercel.app/#',
     graphql: 'https://api.site.com/graphql',
     graphqlSubscriptions: 'wss://api.site.com/graphql',
     socketio: 'https://api.site.com:81',

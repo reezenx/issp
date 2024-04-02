@@ -15,7 +15,7 @@ import { ErrorDialogInterceptor } from './interceptor/error-dialog.interceptor';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { mergeMap, retry, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { token } from './token.signal';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Role, User, UserRole } from '@prisma/client';
@@ -68,11 +68,11 @@ export class AuthService {
   }
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
-    public ability: Ability,
-    private env: Environment,
-    private snackBar: MatSnackBar
+    private readonly http: HttpClient,
+    private readonly router: Router,
+    public readonly ability: Ability,
+    private readonly env: Environment,
+    private readonly snackBar: MatSnackBar
   ) {
     if (this.validSession) {
       try {
@@ -127,19 +127,25 @@ export class AuthService {
 
   login(user: Partial<User>) {
     return this.http
-      .post<AuthSession>(`${API.BASE}${API.AUTH.LOGIN}`, user)
+      .post<AuthSession>(
+        `${this.env.url.api}${API.BASE}${API.AUTH.LOGIN}`,
+        user
+      )
       .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   register(user: Partial<User>) {
     return this.http
-      .post<AuthSession>(`${API.BASE}${API.AUTH.REGISTER}`, user)
+      .post<AuthSession>(
+        `${this.env.url.api}${API.BASE}${API.AUTH.REGISTER}`,
+        user
+      )
       .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   getProfile() {
     return this.http
-      .get<User>(`${API.BASE}${API.AUTH.ME}`, {
+      .get<User>(`${this.env.url.api}${API.BASE}${API.AUTH.ME}`, {
         headers: {
           [ErrorDialogInterceptor.skipHeader]: 'true',
         },
@@ -150,7 +156,7 @@ export class AuthService {
   loginWithRefreshToken() {
     return this.http
       .post<AuthSession>(
-        `${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
+        `${this.env.url.api}${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
         {
           refreshToken: this.getRefreshToken(),
         },
@@ -165,7 +171,9 @@ export class AuthService {
 
   logoutFromAllDevices() {
     return this.http
-      .delete<AuthSession>(`${API.BASE}${API.AUTH.LOGOUT_ALL}`)
+      .delete<AuthSession>(
+        `${this.env.url.api}${API.BASE}${API.AUTH.LOGOUT_ALL}`
+      )
       .pipe(
         mergeMap((authSession) => this.setSessionTokens(authSession))
         // tap(() => this.subscriptionService.requestSubscription())
@@ -323,7 +331,7 @@ export class AuthService {
   private exchangeToken() {
     this.http
       .post<AuthSession>(
-        `${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
+        `${this.env.url.api}${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
         {
           refreshToken: this.getRefreshToken(),
         },

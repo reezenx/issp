@@ -4,7 +4,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
-import { JwtAuthGuard } from './guard/jwt-auth.guard';
+import { AuthGuard } from './guard/jwt-auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UserService } from '../user/user.service';
@@ -15,13 +15,7 @@ import { CaslModule } from './casl/casl.module';
 
 @Module({
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    JwtAuthGuard,
-    UserService,
-    ConfigService,
-    JwtStrategy,
-  ],
+  providers: [AuthService, AuthGuard, UserService, ConfigService, JwtStrategy],
   imports: [
     PassportModule.register({
       defaultStrategy: 'jwt',

@@ -28,16 +28,12 @@ import { BlankComponent } from '@issp/components';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {
-  APP_BASE_HREF,
-  HashLocationStrategy,
-  LocationStrategy,
-} from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common';
 
 // Authorization
 import { AuthService, ErrorDialogInterceptor } from '@issp/auth';
 import { AuthTokenInterceptor } from '@issp/auth';
-import { Ability, PureAbility } from '@casl/ability';
+import { PureAbility } from '@casl/ability';
 import { AbilityModule, AbilityService } from '@casl/angular';
 import { lastValueFrom } from 'rxjs';
 import { AppAbility, Environment } from '@issp/common';
@@ -84,7 +80,6 @@ const initialize = (authService: AuthService) => async () => {
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: Environment, useValue: environment },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

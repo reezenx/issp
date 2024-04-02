@@ -82,7 +82,7 @@ export class AuthService {
 
     let refreshToken: string;
 
-    if (environments.accessTokenExpiration) {
+    if (environments.refreshTokenExpiration) {
       refreshToken = await this.jwtService.signAsync(
         payload,
         this.getRefreshTokenOptions(user)

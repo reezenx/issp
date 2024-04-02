@@ -27,6 +27,7 @@ export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: 'dashboard',
+    title: 'Dashboard',
     component: DashboardComponent,
     data: {
       breadcrumb: 'Dashboard',
@@ -34,6 +35,7 @@ export const AdminRoutes: Routes = [
   },
   {
     path: 'projects',
+    title: 'Projects',
     component: ProjectsComponent,
     data: {
       breadcrumb: 'Projects',
@@ -41,6 +43,7 @@ export const AdminRoutes: Routes = [
   },
   {
     path: 'pivot',
+    title: 'Reports',
     component: PivotTableAdvComponent,
     data: {
       breadcrumb: 'Pivot Table',
@@ -139,7 +142,7 @@ export const AdminRoutes: Routes = [
     children: [
       {
         path: '',
-        title: 'agencies',
+        title: 'Agencies',
         component: AgenciesAdminComponent,
         data: {
           breadcrumb: 'Agencies',

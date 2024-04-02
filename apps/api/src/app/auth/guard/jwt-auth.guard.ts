@@ -19,7 +19,7 @@ export interface Token {
 }
 
 @Injectable()
-export class JwtAuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   reflector: Reflector;
 
   constructor(
