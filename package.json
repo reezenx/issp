@@ -5,10 +5,12 @@
   "scripts": {
     "start": "nx serve client",
     "start:api": "nx serve api",
+    "start:prod": "nx serve client --prod --skip-nx-cache",
+    "start:api:prod": "nx serve api --prod --skip-nx-cache",
     "e2e:portal": "nx e2e client-e2e --ui",
     "e2e:api": "nx e2e api-e2e",
     "serve": "nx run-many --target=serve --projects=api,client",
-    "build": "nx run-many --target=build --projects=api,client ",
+    "build": "nx run-many --target=build --projects=api,client --skip-nx-cache",
     "db:studio": "prisma studio --schema apps/api/prisma/schema.prisma",
     "db:migrate": "npx prisma migrate dev",
     "db:reset": "npx prisma migrate reset",
@@ -16,7 +18,7 @@
     "db:seed": "npx prisma db seed",
     "docker:up": "docker-compose up",
     "docker:down": "docker-compose down",
-    "prod:portal": "nx build client --prod",
+    "prod:portal": "nx build client --prod --proxy-config proxy.prod.config.json",
     "prod:api": "nx build api --prod",
     "graph": "nx graph",
     "test": "nx run-many -t test",
@@ -180,7 +182,7 @@
   },
   "prisma": {
     "seed": "tsx ./apps/api/prisma/seed.ts",
-    "schema": "apps/api/prisma/schema.prisma"
+    "schema": "./apps/api/prisma/schema.prisma"
   },
   "config": {
     "commitizen": {
