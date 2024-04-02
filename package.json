@@ -18,7 +18,7 @@
     "db:seed": "npx prisma db seed",
     "docker:up": "docker-compose up",
     "docker:down": "docker-compose down",
-    "prod:portal": "nx build client --prod --proxy-config proxy.prod.config.json",
+    "prod:portal": "nx build client --prod",
     "prod:api": "nx build api --prod",
     "graph": "nx graph",
     "test": "nx run-many -t test",
