@@ -116,26 +116,26 @@ model Permission {
 }
 
 model Project {
-  id                          String              @id @default(cuid())
+  id                          String                     @id @default(cuid())
   title                       String
   description                 String?
-  cost                        Decimal             @db.Decimal(19, 2)
+  cost                        Decimal                    @db.Decimal(19, 2)
   quantity                    Int
   unit                        String
   tags                        String[]
   createdBy                   String
   updatedBy                   String?
-  createdAt                   DateTime            @default(now())
-  updatedAt                   DateTime?           @updatedAt()
-  projectType                 ProjectType?        @relation(fields: [projectTypeId], references: [id])
+  createdAt                   DateTime                   @default(now())
+  updatedAt                   DateTime?                  @updatedAt()
+  projectType                 ProjectType?               @relation(fields: [projectTypeId], references: [id])
   projectTypeId               String?
-  projectCategory             ProjectCategory?    @relation(fields: [projectCategoryId], references: [id])
+  projectCategory             ProjectCategory?           @relation(fields: [projectCategoryId], references: [id])
   projectCategoryId           String?
-  projectImplementationType   ImplementationType? @relation(fields: [projectImplementationTypeId], references: [id])
+  projectImplementationType   ProjectImplementationType? @relation(fields: [projectImplementationTypeId], references: [id])
   projectImplementationTypeId String?
-  projectBudgetType           BudgetType?         @relation(fields: [projectBudgetTypeId], references: [id])
+  projectBudgetType           BudgetType?                @relation(fields: [projectBudgetTypeId], references: [id])
   projectBudgetTypeId         String?
-  projectBudgetSource         BudgetSource?       @relation(fields: [projectBudgetSourceId], references: [id])
+  projectBudgetSource         BudgetSource?              @relation(fields: [projectBudgetSourceId], references: [id])
   projectBudgetSourceId       String?
 
   @@map("projects")
@@ -167,7 +167,7 @@ model ProjectCategory {
   @@map("project-categories")
 }
 
-model ImplementationType {
+model ProjectImplementationType {
   id        String    @id @default(cuid())
   code      String    @unique
   name      String
@@ -177,7 +177,7 @@ model ImplementationType {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt()
 
-  @@map("implementation-types")
+  @@map("project-implementation-types")
 }
 
 model BudgetType {

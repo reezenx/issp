@@ -150,7 +150,7 @@ CREATE TABLE "project-categories" (
 );
 
 -- CreateTable
-CREATE TABLE "implementation-types" (
+CREATE TABLE "project-implementation-types" (
     "id" TEXT NOT NULL,
     "code" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE "implementation-types" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
 
-    CONSTRAINT "implementation-types_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "project-implementation-types_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -260,7 +260,7 @@ CREATE UNIQUE INDEX "project-types_code_key" ON "project-types"("code");
 CREATE UNIQUE INDEX "project-categories_code_key" ON "project-categories"("code");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "implementation-types_code_key" ON "implementation-types"("code");
+CREATE UNIQUE INDEX "project-implementation-types_code_key" ON "project-implementation-types"("code");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "budget-types_code_key" ON "budget-types"("code");
@@ -302,7 +302,7 @@ ALTER TABLE "projects" ADD CONSTRAINT "projects_projectTypeId_fkey" FOREIGN KEY 
 ALTER TABLE "projects" ADD CONSTRAINT "projects_projectCategoryId_fkey" FOREIGN KEY ("projectCategoryId") REFERENCES "project-categories"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "projects" ADD CONSTRAINT "projects_projectImplementationTypeId_fkey" FOREIGN KEY ("projectImplementationTypeId") REFERENCES "implementation-types"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "projects" ADD CONSTRAINT "projects_projectImplementationTypeId_fkey" FOREIGN KEY ("projectImplementationTypeId") REFERENCES "project-implementation-types"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "projects" ADD CONSTRAINT "projects_projectBudgetTypeId_fkey" FOREIGN KEY ("projectBudgetTypeId") REFERENCES "budget-types"("id") ON DELETE SET NULL ON UPDATE CASCADE;

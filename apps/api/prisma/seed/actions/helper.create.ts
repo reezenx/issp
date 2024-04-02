@@ -68,7 +68,7 @@ export async function upsertItems(
     category: prisma.category,
     projectType: prisma.projectType,
     projectCategory: prisma.projectCategory,
-    implementationType: prisma.implementationType,
+    implementationType: prisma.projectImplementationType,
     budgetSource: prisma.budgetSource,
     budgetType: prisma.budgetType,
   };
