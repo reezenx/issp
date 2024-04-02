@@ -39,7 +39,7 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "5mb",
+              "maximumWarning": "20mb",
               "maximumError": "20mb"
             },
             {
@@ -69,13 +69,11 @@
           "proxyConfig": "apps/client/proxy.prod.conf.json"
         },
         "development": {
-          "buildTarget": "client:build:development"
+          "buildTarget": "client:build:development",
+          "proxyConfig": "apps/client/proxy.conf.json"
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/client/proxy.conf.json"
-      }
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
