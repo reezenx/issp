@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://issp-hkqu.onrender.com/api",
+    "pathRewrite": { "^/api": "" },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
