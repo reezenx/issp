@@ -22,6 +22,11 @@ import { CategoryAdminEditComponent } from './categories/category-admin-edit/cat
 import { categoryResolver } from './categories/resolvers/category.resolver';
 import { DocumentEditorComponent } from './document-editor/document-editor.component';
 import { DiagramComponent } from './diagram/diagram.component';
+import { BudgetTypesAdminShellComponent } from './budget-types/budget-types-admin-shell/budget-types-admin-shell.component';
+import { budgetTypeResolver } from './budget-types/resolvers/budget-type.resolver';
+import { BudgetTypesAdminNewComponent } from './budget-types/budget-types-admin-new/budget-types-admin-new.component';
+import { BudgetTypesAdminEditComponent } from './budget-types/budget-types-admin-edit/budget-types-admin-edit.component';
+import { BudgetTypesAdminComponent } from './budget-types/budget-types-admin/budget-types-admin.component';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -169,6 +174,49 @@ export const AdminRoutes: Routes = [
           breadcrumb: 'Edit',
         },
         component: AgencyAdminEditComponent,
+        resolve: {
+          // agency: agencyResolver,
+          // agenciesDropdown: agencyDropdownResolver,
+        },
+      },
+    ],
+  },
+  {
+    path: 'budget-types',
+    component: BudgetTypesAdminShellComponent,
+    data: {
+      breadcrumbSkipNode: true,
+    },
+    children: [
+      {
+        path: '',
+        title: 'Budget Types',
+        component: BudgetTypesAdminComponent,
+        data: {
+          breadcrumb: 'Budget Types',
+        },
+        resolve: {
+          budgettypes: budgetTypeResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Budget Type',
+        component: BudgetTypesAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {
+          // agenciesDropdown: agencyDropdownResolver,
+        },
+      },
+      {
+        path: ':id',
+        title: 'Edit Budget Type',
+        data: {
+          breadcrumb: 'Edit',
+        },
+        component: BudgetTypesAdminEditComponent,
         resolve: {
           // agency: agencyResolver,
           // agenciesDropdown: agencyDropdownResolver,

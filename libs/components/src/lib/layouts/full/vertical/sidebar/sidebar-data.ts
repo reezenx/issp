@@ -59,6 +59,12 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
+    name: 'Budget Types',
+    icon: 'cash',
+    route: 'admin/budget-types',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
     name: 'Projects',
     icon: 'list-details',
     route: 'admin/projects',

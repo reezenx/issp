@@ -10,18 +10,18 @@ import {
   ResizeSettingsModel,
   ToolbarItems,
 } from '@syncfusion/ej2-angular-grids';
-import { CategoryDetails } from '../models/category-details';
+import { BudgetTypeDetails } from '../models/budget-type-details';
 import { GridDefaults } from '@issp/common/ui/libraries';
 import { Subscription } from 'rxjs';
 import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-categories-admin',
-  templateUrl: './categories-admin.component.html',
-  styleUrl: './categories-admin.component.scss',
+  selector: 'issp-budget-types-admin',
+  templateUrl: './budget-types-admin.component.html',
+  styleUrl: './budget-types-admin.component.scss',
 })
-export class CategoriesAdminComponent implements OnInit {
+export class BudgetTypesAdminComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router
@@ -31,7 +31,7 @@ export class CategoriesAdminComponent implements OnInit {
   @ViewChild('itemsGrid', { static: true })
   grid: GridComponent;
   gridId = 'itemsGrid';
-  gridData: Array<CategoryDetails> = new Array<CategoryDetails>();
+  gridData: Array<BudgetTypeDetails> = new Array<BudgetTypeDetails>();
   gridPageSettings: PageSettingsModel = new GridDefaults();
   resizeSettings: ResizeSettingsModel = { mode: 'Normal' };
   filterSettings: FilterSettingsModel = { type: 'Excel' };
@@ -55,8 +55,8 @@ export class CategoriesAdminComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ categories }) => {
-      this.gridData = categories;
+    const routeSub = this.route.data.subscribe(({ budgettypes }) => {
+      this.gridData = budgettypes;
     });
     this.subs.push(routeSub);
   }

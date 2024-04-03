@@ -38,6 +38,10 @@ import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admi
 import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
 import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
 import { CategoryAdminEditComponent } from './categories/category-admin-edit/category-admin-edit.component';
+import { BudgetTypesAdminShellComponent } from './budget-types/budget-types-admin-shell/budget-types-admin-shell.component';
+import { BudgetTypesAdminComponent } from './budget-types/budget-types-admin/budget-types-admin.component';
+import { BudgetTypesAdminNewComponent } from './budget-types/budget-types-admin-new/budget-types-admin-new.component';
+import { BudgetTypesAdminEditComponent } from './budget-types/budget-types-admin-edit/budget-types-admin-edit.component';
 
 @NgModule({
   imports: [
@@ -76,6 +80,10 @@ import { CategoryAdminEditComponent } from './categories/category-admin-edit/cat
     AgenciesAdminComponent,
     AgencyAdminNewComponent,
     AgencyAdminEditComponent,
+    BudgetTypesAdminShellComponent,
+    BudgetTypesAdminComponent,
+    BudgetTypesAdminNewComponent,
+    BudgetTypesAdminEditComponent,
   ],
   providers: [DatePipe],
 })
