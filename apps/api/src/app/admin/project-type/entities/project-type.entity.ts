@@ -1,8 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { ProjectType } from "@prisma/client";
+import { ApiProperty } from '@nestjs/swagger';
+import { ProjectType } from '@prisma/client';
 
 export class ProjectTypeEntity implements ProjectType {
-  constructor(projectType: ProjectTypeEntity){
+  constructor(projectType: ProjectTypeEntity) {
     Object.assign(this, projectType);
   }
 
@@ -14,6 +14,9 @@ export class ProjectTypeEntity implements ProjectType {
 
   @ApiProperty()
   name: string;
+
+  @ApiProperty()
+  projectTypeGroupId: string;
 
   @ApiProperty()
   createdBy: string;

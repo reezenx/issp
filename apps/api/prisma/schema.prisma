@@ -143,6 +143,7 @@ model Project {
   quantity                    Int
   unit                        String
   tags                        String[]
+  readOnly                    Boolean                    @default(false)
   createdBy                   String
   updatedBy                   String?
   createdAt                   DateTime                   @default(now())
@@ -157,37 +158,36 @@ model Project {
   projectBudgetTypeId         String?
   projectBudgetSource         BudgetSource?              @relation(fields: [projectBudgetSourceId], references: [id])
   projectBudgetSourceId       String?
-  agency                      Agency                     @relation(fields: [agencyId], references: [id])
-  agencyId                    String
+  agency                      Agency?                    @relation(fields: [agencyId], references: [id])
+  agencyId                    String?
 
   @@map("projects")
 }
 
 model ProjectType {
-  id              String           @id @default(cuid())
-  code            String           @unique
-  name            String
-  projects        Project[]
-  createdBy       String
-  updatedBy       String?
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime?        @updatedAt()
-  projectSubTypes ProjectSubType[]
+  id                 String            @id @default(cuid())
+  code               String            @unique
+  name               String
+  createdBy          String
+  updatedBy          String?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime?         @updatedAt()
+  projects           Project[]
+  projectTypeGroup   ProjectTypeGroup? @relation(fields: [projectTypeGroupId], references: [id])
+  projectTypeGroupId String?
 
   @@map("project-types")
 }
 
-model ProjectSubType {
-  id            String      @id @default(cuid())
-  code          String      @unique
-  name          String
-  uacs          String
-  projectTpe    ProjectType @relation(fields: [projectTypeId], references: [id])
-  createdBy     String
-  updatedBy     String?
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime?   @updatedAt()
-  projectTypeId String
+model ProjectTypeGroup {
+  id          String        @id @default(cuid())
+  code        String        @unique
+  name        String
+  createdBy   String
+  updatedBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime?     @updatedAt()
+  ProjectType ProjectType[]
 
   @@map("project-sub-types")
 }

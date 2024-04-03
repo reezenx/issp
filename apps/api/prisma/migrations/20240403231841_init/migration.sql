@@ -131,6 +131,7 @@ CREATE TABLE "projects" (
     "quantity" INTEGER NOT NULL,
     "unit" TEXT NOT NULL,
     "tags" TEXT[],
+    "readOnly" BOOLEAN NOT NULL DEFAULT false,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -140,7 +141,7 @@ CREATE TABLE "projects" (
     "projectImplementationTypeId" TEXT,
     "projectBudgetTypeId" TEXT,
     "projectBudgetSourceId" TEXT,
-    "agencyId" TEXT NOT NULL,
+    "agencyId" TEXT,
 
     CONSTRAINT "projects_pkey" PRIMARY KEY ("id")
 );
@@ -154,6 +155,7 @@ CREATE TABLE "project-types" (
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
+    "projectTypeGroupId" TEXT,
 
     CONSTRAINT "project-types_pkey" PRIMARY KEY ("id")
 );
@@ -163,12 +165,10 @@ CREATE TABLE "project-sub-types" (
     "id" TEXT NOT NULL,
     "code" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "uacs" TEXT NOT NULL,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
-    "projectTypeId" TEXT NOT NULL,
 
     CONSTRAINT "project-sub-types_pkey" PRIMARY KEY ("id")
 );
@@ -360,10 +360,10 @@ ALTER TABLE "projects" ADD CONSTRAINT "projects_projectBudgetTypeId_fkey" FOREIG
 ALTER TABLE "projects" ADD CONSTRAINT "projects_projectBudgetSourceId_fkey" FOREIGN KEY ("projectBudgetSourceId") REFERENCES "budget-source"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "projects" ADD CONSTRAINT "projects_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "projects" ADD CONSTRAINT "projects_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "project-sub-types" ADD CONSTRAINT "project-sub-types_projectTypeId_fkey" FOREIGN KEY ("projectTypeId") REFERENCES "project-types"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "project-types" ADD CONSTRAINT "project-types_projectTypeGroupId_fkey" FOREIGN KEY ("projectTypeGroupId") REFERENCES "project-sub-types"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "issps" ADD CONSTRAINT "issps_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
