@@ -1,58 +1,70 @@
-import { Agency, Category, PrismaClient } from '@prisma/client';
+import { Agency, Category, Department, PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { AGENCY, CATEGORY } from '../data/data';
+import { AGENCY, CATEGORY, DEPARTMENT } from '../data/data';
 
 export const AGENCIES: {
-  [key: string]: Pick<Agency, 'id' | 'email' | 'name' | 'code'> & {
+  [key: string]: Pick<Agency, 'id' | 'email' | 'name' | 'code' | 'uacs'> & {
     category: Pick<Category, 'id' | 'code' | 'name'>;
+    department: Pick<Department, 'id' | 'name' | 'code' | 'uacs'>;
   };
 } = {
-  DICT: {
-    ...AGENCY.DICT,
+  DICT_EGOV: {
+    ...AGENCY.DICT_EGOV,
     category: CATEGORY.EDS,
+    department: DEPARTMENT.DICT,
   },
-  DILG: {
-    ...AGENCY.DILG,
+  DILG_BFP: {
+    ...AGENCY.DILG_BFP,
     category: CATEGORY.EDC,
+    department: DEPARTMENT.DILG,
   },
-  DAR: {
-    ...AGENCY.DAR,
+  DAR_OS: {
+    ...AGENCY.DAR_OS,
     category: CATEGORY.FEC,
+    department: DEPARTMENT.DAR,
   },
-  DA: {
-    ...AGENCY.DA,
+  DA_AGCPC: {
+    ...AGENCY.DA_AGCPC,
     category: CATEGORY.GGS,
+    department: DEPARTMENT.DA,
   },
-  DBM: {
-    ...AGENCY.DBM,
+  DBM_PS: {
+    ...AGENCY.DBM_PS,
     category: CATEGORY.HDS,
+    department: DEPARTMENT.DBM,
   },
-  DE: {
-    ...AGENCY.DE,
+  DE_NBDB: {
+    ...AGENCY.DE_NBDB,
     category: CATEGORY.SPJ,
+    department: DEPARTMENT.DE,
   },
 };
 
 export async function createAgencies(prisma: PrismaClient) {
+  const phone = faker.helpers.fromRegExp('09[0-9]{9}');
   Object.entries(AGENCIES).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async ([key, { id, name, code, email, category }]) => {
+    async ([key, { id, name, code, email, category, uacs, department }]) => {
       const item = {
         id,
         name,
         code,
         email,
-        phone: faker.helpers.fromRegExp('09[0-9]{9}'),
+        uacs,
+        phone,
         createdAt: new Date(),
         createdBy: 'System',
         tags: ['new'],
       };
 
       await prisma.agency.upsert({
-        where: { code },
+        where: { id },
         update: {
           name,
           code,
+          email,
+          uacs,
+          phone,
         },
         create: {
           ...item,
@@ -63,6 +75,17 @@ export async function createAgencies(prisma: PrismaClient) {
               },
               create: {
                 ...category,
+                createdBy: 'System',
+              },
+            },
+          },
+          department: {
+            connectOrCreate: {
+              where: {
+                id: department.id,
+              },
+              create: {
+                ...department,
                 createdBy: 'System',
               },
             },

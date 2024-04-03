@@ -1,4 +1,4 @@
-import { Agency } from '@prisma/client';
+import { Agency, Status } from '@prisma/client';
 import { Assign } from '@issp/common';
 
 export class AgencyDetails extends Assign implements Agency {
@@ -38,6 +38,10 @@ export class AgencyDetails extends Assign implements Agency {
       enumerable: true,
     });
   }
+
+  status: Status;
+  uacs: string;
+  departmentId: string;
   id: string;
   code: string;
   categoryId: string;

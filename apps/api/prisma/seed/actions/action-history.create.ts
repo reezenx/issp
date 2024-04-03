@@ -84,7 +84,7 @@ export async function createActionHistory(prisma: PrismaClient) {
           user: {
             connectOrCreate: {
               where: {
-                id: user.id,
+                email: user.email,
               },
               create: {
                 ...user,
@@ -95,7 +95,7 @@ export async function createActionHistory(prisma: PrismaClient) {
                 status: UserStatus.ACTIVE,
                 createdAt: new Date(),
                 password: await bcrypt.hash(DEFAULT.PW, roundsOfHashing),
-                agencyId: AGENCY.DICT.id,
+                agencyId: AGENCY.DICT_EGOV.id,
                 roleId: role.id,
               },
             },

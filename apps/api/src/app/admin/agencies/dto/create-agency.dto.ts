@@ -30,5 +30,10 @@ export class CreateAgencyDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
+  uacs: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
   createdBy: string;
 }

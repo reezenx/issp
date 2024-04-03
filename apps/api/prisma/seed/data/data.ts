@@ -34,42 +34,87 @@ export const CATEGORY: ItemObj = {
   },
 };
 
-export const AGENCY = {
+export const DEPARTMENT = {
   DICT: {
     id: 'cluapmrpz000b08jug9qn9rci',
-    email: 'dict@local.com',
     code: 'DICT',
+    uacs: '01',
     name: 'Department of Information and Communications Technology',
   },
   DILG: {
     id: 'cluapmrpz000c08ju6cn3bu71',
-    email: 'dilg@local.com',
     code: 'DILG',
+    uacs: '02',
     name: 'Department of the Interior and Local Government',
   },
   DAR: {
     id: 'cluapmrpz000d08ju9z8cbef1',
-    email: 'dar@local.com',
     code: 'DAR',
+    uacs: '03',
     name: 'Department of Agrarian Reform',
   },
   DA: {
     id: 'cluapmrpz000e08ju78jt3brn',
-    email: 'da@local.com',
     code: 'DA',
+    uacs: '04',
     name: 'Department of Agriculture',
   },
   DBM: {
     id: 'cluapq16y000f08ju4pxmeii9',
-    email: 'dbm@local.com',
     code: 'DBM',
+    uacs: '05',
     name: 'Department of Budget and Management',
   },
   DE: {
     id: 'cluapq16y000g08jud2ln9y47',
-    email: 'de@local.com',
     code: 'DE',
+    uacs: '06',
     name: 'Department of Education',
+  },
+};
+
+export const AGENCY = {
+  DICT_EGOV: {
+    id: 'cluapmrpz000b08jug9qn9rci',
+    email: 'dictegov@local.com',
+    code: 'DICT_EGOV',
+    uacs: '005',
+    name: 'eGovernment',
+  },
+  DILG_BFP: {
+    id: 'cluapmrpz000c08ju6cn3bu71',
+    email: 'dilg@local.com',
+    code: 'DILG_BFP',
+    uacs: '002',
+    name: 'Bureau of Fire Protection',
+  },
+  DAR_OS: {
+    id: 'cluapmrpz000d08ju9z8cbef1',
+    email: 'dar.sec@local.com',
+    code: 'DAR_OS',
+    uacs: '001',
+    name: 'Office of the Secretary',
+  },
+  DA_AGCPC: {
+    id: 'cluapmrpz000e08ju78jt3brn',
+    email: 'da@local.com',
+    code: 'DA_AGCPC',
+    uacs: '002',
+    name: 'Agricultural Credit Policy Council ',
+  },
+  DBM_PS: {
+    id: 'cluapq16y000f08ju4pxmeii9',
+    email: 'dbm@local.com',
+    code: 'DBM_PS',
+    uacs: '003',
+    name: 'Procurement Service',
+  },
+  DE_NBDB: {
+    id: 'cluapq16y000g08jud2ln9y47',
+    email: 'de@local.com',
+    code: 'DE_NBDB',
+    uacs: '003',
+    name: 'National Book Development Board ',
   },
 };
 
@@ -242,6 +287,181 @@ export const PERMISSION = {
     id: 'onvbc2jmlk1jur5v3rg52jit',
     action: 'delete',
     subject: 'Agency',
+  },
+  MANAGE_DEPARTMENT: {
+    id: 'uz5hvax0n32zz9cg40jidwub',
+    action: 'manage',
+    subject: 'Department',
+  },
+  CREATE_DEPARTMENT: {
+    id: 'l2jt6easf2brrts35shrzvgk',
+    action: 'create',
+    subject: 'Department',
+  },
+  READ_DEPARTMENT: {
+    id: 'ux2tvg1csor6560pxyv98qtx',
+    action: 'read',
+    subject: 'Department',
+  },
+  UPDATE_DEPARTMENT: {
+    id: 'lt8hae3ehppzo0t5jb17wifa',
+    action: 'update',
+    subject: 'Department',
+  },
+  DELETE_DEPARTMENT: {
+    id: 's39kbdrrkd810009lb2qh9k3',
+    action: 'delete',
+    subject: 'Department',
+  },
+  MANAGE_PROJECT_TYPE: {
+    id: 'vco43waupsbebvhz1upod7ej',
+    action: 'manage',
+    subject: 'ProjectType',
+  },
+  CREATE_PROJECT_TYPE: {
+    id: 'p0paw3lqlb7xzmw9g39otzse',
+    action: 'create',
+    subject: 'ProjectType',
+  },
+  READ_PROJECT_TYPE: {
+    id: 'ujs9nkezfak9cpub770cbqke',
+    action: 'read',
+    subject: 'ProjectType',
+  },
+  UPDATE_PROJECT_TYPE: {
+    id: 'rs3wf77tnei68rk5cv8w5c8w',
+    action: 'update',
+    subject: 'ProjectType',
+  },
+  DELETE_PROJECT_TYPE: {
+    id: 'fpg67ho4eo1t7doodyk74is4',
+    action: 'delete',
+    subject: 'ProjectType',
+  },
+  MANAGE_PROJECT_SUB_TYPE: {
+    id: 'lf7x4hperobak4nhyngxl7wm',
+    action: 'manage',
+    subject: 'ProjectSubType',
+  },
+  CREATE_PROJECT_SUB_TYPE: {
+    id: 'z6ibouujq4874vfgrkoak9vp',
+    action: 'create',
+    subject: 'ProjectSubType',
+  },
+  READ_PROJECT_SUB_TYPE: {
+    id: 'zeekscdzed2nzf3w248h7dfo',
+    action: 'read',
+    subject: 'ProjectSubType',
+  },
+  UPDATE_PROJECT_SUB_TYPE: {
+    id: 'minla78zsntte0hji2bgr50f',
+    action: 'update',
+    subject: 'ProjectSubType',
+  },
+  DELETE_PROJECT_SUB_TYPE: {
+    id: 'uonfi8ozj5a842mxyfjhrzef',
+    action: 'delete',
+    subject: 'ProjectSubType',
+  },
+  MANAGE_PROJECT_IMPL_TYPE: {
+    id: 'r1cffv1zyc4qi64niuoud8uk',
+    action: 'manage',
+    subject: 'ProjectImplementationType',
+  },
+  CREATE_PROJECT_IMPL_TYPE: {
+    id: 'bdbu9qsxrhmw2ndtb9927ygi',
+    action: 'create',
+    subject: 'ProjectImplementationType',
+  },
+  READ_PROJECT_IMPL_TYPE: {
+    id: 'o58p732fsnkiaal0xybfzagc',
+    action: 'read',
+    subject: 'ProjectImplementationType',
+  },
+  UPDATE_PROJECT_IMPL_TYPE: {
+    id: 'usjh390qobe9ktacu3twzrk8',
+    action: 'update',
+    subject: 'ProjectImplementationType',
+  },
+  DELETE_PROJECT_IMPL_TYPE: {
+    id: 'onvbc2jmlk1jur5v3rg52jit',
+    action: 'delete',
+    subject: 'ProjectImplementationType',
+  },
+  MANAGE_PROJECT_CATEGORY: {
+    id: 'tcrlhhmy3im7k0161b3lbgff',
+    action: 'manage',
+    subject: 'ProjectCategory',
+  },
+  CREATE_PROJECT_CATEGORY: {
+    id: 'gnwo7ap4ftho38rsof5sinvc',
+    action: 'create',
+    subject: 'ProjectCategory',
+  },
+  READ_PROJECT_CATEGORY: {
+    id: 'yxc5k8wctcratj8yxbxmgitp',
+    action: 'read',
+    subject: 'ProjectCategory',
+  },
+  UPDATE_PROJECT_CATEGORY: {
+    id: 'giz2wy500d8vnby5fuz2zmb4',
+    action: 'update',
+    subject: 'ProjectCategory',
+  },
+  DELETE_PROJECT_CATEGORY: {
+    id: 'dci03f3cd7uwycfny0s11g2m',
+    action: 'delete',
+    subject: 'ProjectCategory',
+  },
+  MANAGE_BUDGET_TYPE: {
+    id: 'am2m5riptp5ngy3mr5cqv79d',
+    action: 'manage',
+    subject: 'BudgetType',
+  },
+  CREATE_BUDGET_TYPE: {
+    id: 'nlz9at2ztx7h0ialagckd6w9',
+    action: 'create',
+    subject: 'BudgetType',
+  },
+  READ_BUDGET_TYPE: {
+    id: 'ujs9nkezfak9cpub770cbqke',
+    action: 'read',
+    subject: 'BudgetType',
+  },
+  UPDATE_BUDGET_TYPE: {
+    id: 'e59dk3x0qn3vggle4cj8g4wf',
+    action: 'update',
+    subject: 'BudgetType',
+  },
+  DELETE_BUDGET_TYPE: {
+    id: 'jw7ziqdhukeijmybat9rzr0p',
+    action: 'delete',
+    subject: 'BudgetType',
+  },
+  MANAGE_BUDGET_SOURCE: {
+    id: 'wg27sv451wjwtyklrf4dfvz2',
+    action: 'manage',
+    subject: 'BudgetSource',
+  },
+  CREATE_BUDGET_SOURCE: {
+    id: 'ciqryhdlfvqg2q0xhwad9zpj',
+    action: 'create',
+    subject: 'BudgetSource',
+  },
+  READ_BUDGET_SOURCE: {
+    id: 'vxefrbj0bny2t9pq61v2hfxr',
+    action: 'read',
+    subject: 'BudgetSource',
+  },
+  UPDATE_BUDGET_SOURCE: {
+    id: 'uvg8wwulkcie6nur57i8nl4f',
+    action: 'update',
+    subject: 'BudgetSource',
+  },
+  DELETE_BUDGET_SOURCE: {
+    id: 'bgfjeedw12xumy2u94nb1udj',
+    action: 'delete',
+    subject: 'BudgetSource',
   },
 };
 

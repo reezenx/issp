@@ -7,11 +7,13 @@ import { PrismaClient } from '@prisma/client';
 import { createUserRoles } from './seed/actions/roles.create';
 import { createPermissions } from './seed/actions/permissions.create';
 import { createProjectDetails } from './seed/actions/project.create';
+import { createDepartments } from './seed/actions/departments.create';
 
 const prisma = new PrismaClient();
 
 async function main() {
   await createCategories(prisma);
+  await createDepartments(prisma);
   await createAgencies(prisma);
   await createUserRoles(prisma);
   await createPermissions(prisma);

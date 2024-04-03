@@ -1,10 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Agency } from '@prisma/client';
+import { Agency, Status } from '@prisma/client';
 
 export class AgencyEntity implements Agency {
   constructor(agency: AgencyEntity) {
     Object.assign(this, agency);
   }
+  @ApiProperty()
+  status: Status;
+
+  @ApiProperty()
+  departmentId: string;
 
   @ApiProperty()
   id: string;
@@ -23,6 +28,9 @@ export class AgencyEntity implements Agency {
 
   @ApiProperty()
   phone: string;
+
+  @ApiProperty()
+  uacs: string;
 
   @ApiProperty()
   createdBy: string;
