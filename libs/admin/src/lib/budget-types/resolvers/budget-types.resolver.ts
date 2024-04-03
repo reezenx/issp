@@ -4,10 +4,9 @@ import { BudgetTypeService } from '../services/budget-type.service';
 import { inject } from '@angular/core';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const budgetTypeResolver: ResolveFn<BudgetTypeDetails> = (
+export const budgetTypesResolver: ResolveFn<BudgetTypeDetails[]> = (
   route,
   state
 ) => {
-  const id = route.params.id;
-  return inject(BudgetTypeService).findOne(id);
+  return inject(BudgetTypeService).findAll();
 };
