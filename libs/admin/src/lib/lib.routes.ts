@@ -186,7 +186,7 @@ export const AdminRoutes: Routes = [
     path: 'budget-types',
     component: BudgetTypesAdminShellComponent,
     data: {
-      breadcrumbSkipNode: true,
+      breadcrumb: 'Budget Types',
     },
     children: [
       {
