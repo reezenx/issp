@@ -32,11 +32,6 @@ export class BudgetTypeDetails extends Assign implements BudgetType {
           : new Date(val);
       },
     });
-
-    Object.defineProperty(this, 'categoryName', {
-      get: () => this.category?.name,
-      enumerable: true,
-    });
   }
 
   id: string;

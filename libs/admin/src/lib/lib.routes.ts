@@ -207,9 +207,7 @@ export const AdminRoutes: Routes = [
         data: {
           breadcrumb: 'New',
         },
-        resolve: {
-          // agenciesDropdown: agencyDropdownResolver,
-        },
+        resolve: {},
       },
       {
         path: ':id',
@@ -220,8 +218,6 @@ export const AdminRoutes: Routes = [
         component: BudgetTypesAdminEditComponent,
         resolve: {
           item: budgetTypeResolver,
-          // agency: agencyResolver,
-          // agenciesDropdown: agencyDropdownResolver,
         },
       },
     ],

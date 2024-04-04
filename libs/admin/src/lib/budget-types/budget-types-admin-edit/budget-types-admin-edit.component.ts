@@ -57,11 +57,11 @@ export class BudgetTypesAdminEditComponent implements OnInit {
     });
     this.subs.push(routeSub);
 
-    const currentIsspSub =
+    const currentItemSub =
       this.budgetTypesService.currentContextItem$.subscribe((data) => {
         this.item = data;
       });
-    this.subs.push(currentIsspSub);
+    this.subs.push(currentItemSub);
   }
 
   save() {
