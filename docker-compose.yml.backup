@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:13.5
+    restart: always
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - postgres
+
+  api:
+    container_name: api
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    build:
+      dockerfile: ./deploy/api/Dockerfile
+    networks:
+      - postgres
+
+  client:
+    container_name: client
+    restart: always
+    ports:
+      - '4200:80'
+    depends_on:
+      - api
+    build:
+      dockerfile: ./deploy/client/Dockerfile"
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
+volumes:
+  postgres:
