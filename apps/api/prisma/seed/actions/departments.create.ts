@@ -1,5 +1,6 @@
 import { Department, PrismaClient, Status } from '@prisma/client';
 import { DEPARTMENT } from '../data/data';
+import { findDuplicates } from './helper.create';
 
 export const DEPARTMENTS: {
   [key: string]: Pick<Department, 'id' | 'name' | 'code' | 'uacs'>;
@@ -25,6 +26,7 @@ export const DEPARTMENTS: {
 };
 
 export async function createDepartments(prisma: PrismaClient) {
+  findDuplicates(DEPARTMENTS);
   Object.entries(DEPARTMENTS).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async ([key, { id, name, code, uacs }]) => {

@@ -11,6 +11,7 @@ import { ACTION_HISTORY, AGENCY, ROLE, USER } from '../data/data';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 import { DEFAULT, roundsOfHashing } from './users.create';
+import { findDuplicates } from './helper.create';
 
 export const ACTION_HISTORIES: {
   [key: string]: Pick<
@@ -49,6 +50,7 @@ export const ACTION_HISTORIES: {
 };
 
 export async function createActionHistory(prisma: PrismaClient) {
+  findDuplicates(ACTION_HISTORIES);
   Object.entries(ACTION_HISTORIES).forEach(
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

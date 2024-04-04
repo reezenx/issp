@@ -13,6 +13,7 @@ import { faker } from '@faker-js/faker';
 import { AGENCY, CATEGORY, DEPARTMENT, ISSP_, ROLE, USER } from '../data/data';
 import * as bcrypt from 'bcrypt';
 import { DEFAULT, roundsOfHashing } from './users.create';
+import { findDuplicates } from './helper.create';
 
 export const ISSPS: {
   [key: string]: Pick<ISSP, 'id' | 'title' | 'startYear' | 'endYear'> & {
@@ -66,6 +67,7 @@ export const ISSPS: {
 };
 
 export async function createISSPs(prisma: PrismaClient) {
+  findDuplicates(ISSPS);
   Object.entries(ISSPS).forEach(
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

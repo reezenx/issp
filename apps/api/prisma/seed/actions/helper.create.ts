@@ -79,8 +79,35 @@ export async function upsertItems(
     budgetType: prisma.budgetType,
   };
 
-  Object.entries(itemsObj).forEach(async ([code, { id, name }]) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  Object.entries(itemsObj).forEach(async ([key, { id, name, code }]) => {
     const item = createItem({ id, name, code });
     await modelDelegates[model].upsert(createPrismaArgs(item));
   });
+}
+
+export function findDuplicates(data: object, prop: 'id' | 'code' = 'id') {
+  const propMap = {};
+  const duplicates: string[] = [];
+
+  for (const key in data) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (data.hasOwnProperty(key)) {
+      const property = data[key][prop];
+
+      // If prop already exists in the propMap, it's a duplicate
+      if (propMap[property]) {
+        duplicates.push(property);
+      } else {
+        // Otherwise, add it to the propMap
+        propMap[property] = true;
+      }
+    }
+  }
+
+  if (duplicates.length > 0) {
+    console.log(`duplicate ${prop} - ${duplicates}`);
+  }
+
+  return duplicates;
 }

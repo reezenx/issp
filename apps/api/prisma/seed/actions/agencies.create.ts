@@ -1,6 +1,7 @@
 import { Agency, Category, Department, PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import { AGENCY, CATEGORY, DEPARTMENT } from '../data/data';
+import { findDuplicates } from './helper.create';
 
 export const AGENCIES: {
   [key: string]: Pick<Agency, 'id' | 'email' | 'name' | 'code' | 'uacs'> & {
@@ -42,6 +43,9 @@ export const AGENCIES: {
 
 export async function createAgencies(prisma: PrismaClient) {
   const phone = faker.helpers.fromRegExp('09[0-9]{9}');
+
+  findDuplicates(AGENCIES);
+
   Object.entries(AGENCIES).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async ([key, { id, name, code, email, category, uacs, department }]) => {
