@@ -1,6 +1,10 @@
 # ISSP
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/10dc54f6-36aa-4b3e-bd11-20f2f4723746/deploy-status)](https://app.netlify.com/sites/ixp/deploys)
+<p align="left">
+  <img src='https://api.netlify.com/api/v1/badges/10dc54f6-36aa-4b3e-bd11-20f2f4723746/deploy-status' alt='netlify'>
+  <img src='https://issp-badge.vercel.app/api/reezenx/issp' alt='vercel'>
+  <img src='https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Frender-deploy-status-latest-cpsl.onrender.com%2Fsrv-co5plf6v3ddc7394l4gg&query=%24.status&style=flat&label=render' alt='render'>
+</p>
 
 ## Source Code & Environment
 
