@@ -60,6 +60,11 @@ export class UsersService {
             name: true,
           },
         },
+        roles: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
   }

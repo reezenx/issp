@@ -16,6 +16,7 @@
     "db:reset": "npx prisma migrate reset",
     "db:push": "npx prisma db push",
     "db:seed": "npx prisma db seed",
+    "db:deploy": "npx prisma migrate deploy",
     "docker:up": "docker-compose up",
     "docker:down": "docker-compose down",
     "prod:portal": "nx build client --prod",
@@ -24,7 +25,8 @@
     "test": "nx run-many -t test",
     "lint": "nx run-many -t lint",
     "format": "nx format:write --all",
-    "commit": "nx affected --target=build && cz-cust"
+    "commit": "nx affected --target=build && cz-cust",
+    "start:inspect": "nest start --debug 0.0.0.0:9229 --watch --exec 'node --inspect-brk'"
   },
   "private": true,
   "dependencies": {

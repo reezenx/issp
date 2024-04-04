@@ -8,6 +8,9 @@ CREATE TYPE "ISSPStatus" AS ENUM ('NOT_STARTED', 'UNDER_REVIEW', 'FOR_VALIDATION
 CREATE TYPE "UserStatus" AS ENUM ('ACTIVE', 'INACTIVE', 'DELETED');
 
 -- CreateEnum
+CREATE TYPE "Status" AS ENUM ('ACTIVE', 'INACTIVE', 'SUSPENDED', 'DELETED');
+
+-- CreateEnum
 CREATE TYPE "ISSPAction" AS ENUM ('VIEW', 'CREATE', 'AMEND', 'INSERT', 'ASSIGN', 'UPDATE', 'ENDORSED', 'APPROVE');
 
 -- CreateTable
@@ -39,14 +42,32 @@ CREATE TABLE "agencies" (
     "categoryId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
+    "phone" TEXT,
+    "status" "Status" NOT NULL DEFAULT 'ACTIVE',
+    "uacs" TEXT NOT NULL,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
     "tags" TEXT[],
+    "departmentId" TEXT,
 
     CONSTRAINT "agencies_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "departments" (
+    "id" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "uacs" TEXT NOT NULL,
+    "status" "Status" NOT NULL DEFAULT 'ACTIVE',
+    "createdBy" TEXT NOT NULL,
+    "updatedBy" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "departments_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -110,6 +131,7 @@ CREATE TABLE "projects" (
     "quantity" INTEGER NOT NULL,
     "unit" TEXT NOT NULL,
     "tags" TEXT[],
+    "readOnly" BOOLEAN NOT NULL DEFAULT false,
     "createdBy" TEXT NOT NULL,
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -119,6 +141,7 @@ CREATE TABLE "projects" (
     "projectImplementationTypeId" TEXT,
     "projectBudgetTypeId" TEXT,
     "projectBudgetSourceId" TEXT,
+    "agencyId" TEXT,
 
     CONSTRAINT "projects_pkey" PRIMARY KEY ("id")
 );
@@ -132,8 +155,22 @@ CREATE TABLE "project-types" (
     "updatedBy" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3),
+    "projectTypeGroupId" TEXT,
 
     CONSTRAINT "project-types_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "project-sub-types" (
+    "id" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "createdBy" TEXT NOT NULL,
+    "updatedBy" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3),
+
+    CONSTRAINT "project-sub-types_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -248,6 +285,12 @@ CREATE UNIQUE INDEX "categories_code_key" ON "categories"("code");
 CREATE UNIQUE INDEX "agencies_code_key" ON "agencies"("code");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "departments_code_key" ON "departments"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "departments_uacs_key" ON "departments"("uacs");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
@@ -255,6 +298,9 @@ CREATE UNIQUE INDEX "roles_name_key" ON "roles"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "project-types_code_key" ON "project-types"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "project-sub-types_code_key" ON "project-sub-types"("code");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "project-categories_code_key" ON "project-categories"("code");
@@ -287,6 +333,9 @@ ALTER TABLE "profiles" ADD CONSTRAINT "profiles_userId_fkey" FOREIGN KEY ("userI
 ALTER TABLE "agencies" ADD CONSTRAINT "agencies_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "categories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "agencies" ADD CONSTRAINT "agencies_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "departments"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "users" ADD CONSTRAINT "users_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -309,6 +358,12 @@ ALTER TABLE "projects" ADD CONSTRAINT "projects_projectBudgetTypeId_fkey" FOREIG
 
 -- AddForeignKey
 ALTER TABLE "projects" ADD CONSTRAINT "projects_projectBudgetSourceId_fkey" FOREIGN KEY ("projectBudgetSourceId") REFERENCES "budget-source"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "projects" ADD CONSTRAINT "projects_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "project-types" ADD CONSTRAINT "project-types_projectTypeGroupId_fkey" FOREIGN KEY ("projectTypeGroupId") REFERENCES "project-sub-types"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "issps" ADD CONSTRAINT "issps_agencyId_fkey" FOREIGN KEY ("agencyId") REFERENCES "agencies"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

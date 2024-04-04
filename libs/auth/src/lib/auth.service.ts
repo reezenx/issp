@@ -116,7 +116,7 @@ export class AuthService {
         this.logout();
       }
     } else {
-      this.snackBar.open('Session Expired!', 'Ok', {
+      this.snackBar.open('Invalid Session!', 'Ok', {
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
         duration: 5000,
@@ -126,6 +126,7 @@ export class AuthService {
   }
 
   login(user: Partial<User>) {
+    console.log(this.env);
     return this.http
       .post<AuthSession>(
         `${this.env.url.api}${API.BASE}${API.AUTH.LOGIN}`,

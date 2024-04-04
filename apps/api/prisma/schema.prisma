@@ -37,22 +37,42 @@ model Category {
 }
 
 model Agency {
-  id         String    @id @default(cuid())
-  code       String    @unique
-  category   Category  @relation(fields: [categoryId], references: [id])
-  categoryId String
-  name       String
-  email      String
-  phone      String
-  users      User[]
-  createdBy  String
-  updatedBy  String?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime? @updatedAt
-  issps      ISSP[]
-  tags       String[]
+  id           String      @id @default(cuid())
+  code         String      @unique
+  category     Category    @relation(fields: [categoryId], references: [id])
+  categoryId   String
+  name         String
+  email        String
+  phone        String?
+  status       Status      @default(ACTIVE)
+  users        User[]
+  uacs         String
+  createdBy    String
+  updatedBy    String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime?   @updatedAt
+  issps        ISSP[]
+  tags         String[]
+  department   Department? @relation(fields: [departmentId], references: [id])
+  departmentId String?
+  projects     Project[]
 
   @@map("agencies")
+}
+
+model Department {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  uacs      String    @unique
+  status    Status    @default(ACTIVE)
+  agencies  Agency[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  @@map("departments")
 }
 
 model User {
@@ -123,6 +143,7 @@ model Project {
   quantity                    Int
   unit                        String
   tags                        String[]
+  readOnly                    Boolean                    @default(false)
   createdBy                   String
   updatedBy                   String?
   createdAt                   DateTime                   @default(now())
@@ -137,21 +158,38 @@ model Project {
   projectBudgetTypeId         String?
   projectBudgetSource         BudgetSource?              @relation(fields: [projectBudgetSourceId], references: [id])
   projectBudgetSourceId       String?
+  agency                      Agency?                    @relation(fields: [agencyId], references: [id])
+  agencyId                    String?
 
   @@map("projects")
 }
 
 model ProjectType {
-  id        String    @id @default(cuid())
-  code      String    @unique
-  name      String
-  projects  Project[]
-  createdBy String
-  updatedBy String?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt()
+  id                 String            @id @default(cuid())
+  code               String            @unique
+  name               String
+  createdBy          String
+  updatedBy          String?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime?         @updatedAt()
+  projects           Project[]
+  projectTypeGroup   ProjectTypeGroup? @relation(fields: [projectTypeGroupId], references: [id])
+  projectTypeGroupId String?
 
   @@map("project-types")
+}
+
+model ProjectTypeGroup {
+  id          String        @id @default(cuid())
+  code        String        @unique
+  name        String
+  createdBy   String
+  updatedBy   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime?     @updatedAt()
+  ProjectType ProjectType[]
+
+  @@map("project-sub-types")
 }
 
 model ProjectCategory {
@@ -269,6 +307,13 @@ enum ISSPStatus {
 enum UserStatus {
   ACTIVE
   INACTIVE
+  DELETED
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
   DELETED
 }
 

@@ -28,6 +28,13 @@ import { BudgetTypesAdminNewComponent } from './budget-types/budget-types-admin-
 import { BudgetTypesAdminEditComponent } from './budget-types/budget-types-admin-edit/budget-types-admin-edit.component';
 import { BudgetTypesAdminComponent } from './budget-types/budget-types-admin/budget-types-admin.component';
 import { budgetTypeResolver } from './budget-types/resolvers/budget-type.resolver';
+import { AdminProjectImplTypeShellComponent } from './project-impl-types/admin-project-impl-type-shell/admin-project-impl-type-shell.component';
+import { projectImplTypesResolver } from './project-impl-types/resolvers/project-impl-types.resolver';
+import { ProjectImplTypeAdminComponent } from './project-impl-types/admin-project-impl-types/admin-project-impl-types.component';
+import { ProjectImplTypeAdminNewComponent } from './project-impl-types/admin-project-impl-type-new/admin-project-impl-type-new.component';
+import { ProjectImplTypeAdminEditComponent } from './project-impl-types/admin-project-impl-type-edit/admin-project-impl-type-edit.component';
+import { projectImplTypeResolver } from './project-impl-types/resolvers/project-impl-type.resolver';
+
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -139,6 +146,49 @@ export const AdminRoutes: Routes = [
       },
     ],
   },
+
+  {
+    path: 'implementationtypes',
+    component: AdminProjectImplTypeShellComponent,
+    data: {
+      breadcrumb: 'Implementation Type',
+    },
+
+    children: [
+      {
+        path: '',
+        title: 'Implementation Type',
+        component: ProjectImplTypeAdminComponent,
+        data: {
+          breadcrumbSkipNode: true,
+        },
+        resolve: {
+          implementationtypes: projectImplTypesResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Implementation Type',
+        component: ProjectImplTypeAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {},
+      },
+      {
+        path: ':id',
+        title: 'Edit Implementation Type',
+        data: {
+          breadcrumb: 'Edit',
+        },
+        component: ProjectImplTypeAdminEditComponent,
+        resolve: {
+          item: projectImplTypeResolver,
+        },
+      },
+    ],
+  },
+
   {
     path: 'agencies',
     component: AgenciesAdminShellComponent,

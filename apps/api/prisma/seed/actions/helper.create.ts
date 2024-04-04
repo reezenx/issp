@@ -9,6 +9,7 @@ export type Item = {
 export type ModelDelegate =
   | 'category'
   | 'projectType'
+  | 'projectTypeGroup'
   | 'projectCategory'
   | 'implementationType'
   | 'budgetSource'
@@ -23,7 +24,7 @@ export type DBItem = {
   name: string;
   code: string;
   createdAt: Date;
-  createdBy: 'System';
+  createdBy: string;
 };
 
 export type PrismaArgs = {
@@ -33,13 +34,17 @@ export type PrismaArgs = {
 };
 
 export function createItem({ id, name, code }: Item): DBItem {
-  return {
+  const createdBy = 'System';
+  const createdAt = new Date();
+  const item = {
     id,
     name,
     code,
-    createdAt: new Date(),
-    createdBy: 'System',
+    createdAt,
+    createdBy,
   };
+
+  return item;
 }
 
 export function createPrismaArgs({
@@ -67,6 +72,7 @@ export async function upsertItems(
   } = {
     category: prisma.category,
     projectType: prisma.projectType,
+    projectTypeGroup: prisma.projectTypeGroup,
     projectCategory: prisma.projectCategory,
     implementationType: prisma.projectImplementationType,
     budgetSource: prisma.budgetSource,
