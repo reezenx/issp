@@ -62,8 +62,8 @@ export class EnvironmentDev implements Environment {
   enableGoogleOAuth = true;
   url = {
     loginRedirect: '/',
-    // api: 'http://localhost:3000/',
-    api: 'https://issp-hkqu.onrender.com/',
+    api: 'http://localhost:3000/',
+    // api: 'https://issp-hkqu.onrender.com/',
     portal: 'http://localhost:4200/#',
     graphql: 'http://localhost:7080/graphql',
     graphqlSubscriptions: 'ws://localhost:7080/graphql',

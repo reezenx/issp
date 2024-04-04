@@ -193,7 +193,7 @@ export const AdminRoutes: Routes = [
     path: 'agencies',
     component: AgenciesAdminShellComponent,
     data: {
-      breadcrumbSkipNode: true,
+      breadcrumb: 'Agencies',
     },
     children: [
       {
@@ -201,7 +201,7 @@ export const AdminRoutes: Routes = [
         title: 'Agencies',
         component: AgenciesAdminComponent,
         data: {
-          breadcrumb: 'Agencies',
+          breadcrumbSkipNode: true,
         },
         resolve: {
           agencies: agenciesResolver,

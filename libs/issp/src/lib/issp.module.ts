@@ -7,7 +7,7 @@ import {
   SyncfusionGridModule,
 } from '@issp/common/ui/libraries';
 
-import { isspRoutes } from './lib.routes';
+import { isspRoutes } from './issp.routes';
 
 import { IsspItemEditShellComponent } from './issp-item-edit-shell/issp-item-edit-shell.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
