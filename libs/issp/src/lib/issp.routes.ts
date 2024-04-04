@@ -43,7 +43,7 @@ export const isspRoutes: Route[] = [
         title: 'ISSP',
         component: IsspItemEditShellComponent,
         data: {
-          breadcrumbRouteDataProperty: 'issp.title',
+          breadcrumbRouteDataProperty: 'item.title',
         },
         resolve: {
           item: isspResolver,
@@ -56,7 +56,6 @@ export const isspRoutes: Route[] = [
           },
           {
             path: 'metadata',
-
             title: 'ISSP Metadata',
             data: {
               breadcrumbSkipNode: true,

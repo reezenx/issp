@@ -16,7 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-import { AdminRoutes } from './lib.routes';
+import { AdminRoutes } from './admin.routes';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import {

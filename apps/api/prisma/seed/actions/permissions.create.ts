@@ -1,5 +1,6 @@
 import { Permission, PrismaClient, Role, UserRole } from '@prisma/client';
 import { PERMISSION, ROLE } from '../data/data';
+import { findDuplicates } from './helper.create';
 
 export const PERMISSIONS: Record<
   Role | string,
@@ -254,6 +255,8 @@ export const PERMISSIONS: Record<
 };
 
 export async function createPermissions(prisma: PrismaClient) {
+  findDuplicates(PERMISSIONS);
+
   Object.entries(PERMISSIONS).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async ([key, { id, role, action, subject }]) => {

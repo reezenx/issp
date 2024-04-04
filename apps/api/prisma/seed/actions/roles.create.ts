@@ -1,5 +1,6 @@
 import { PrismaClient, Role, UserRole } from '@prisma/client';
 import { ROLE } from '../data/data';
+import { findDuplicates } from './helper.create';
 
 export const ROLES: Record<Role | string, Pick<UserRole, 'id' | 'name'>> = {
   SUPER_ADMIN: ROLE.SUPER_ADMIN,
@@ -12,6 +13,7 @@ export const ROLES: Record<Role | string, Pick<UserRole, 'id' | 'name'>> = {
 };
 
 export async function createUserRoles(prisma: PrismaClient) {
+  findDuplicates(ROLES);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(ROLES).forEach(async ([key, { id, name }]) => {
     const item = {

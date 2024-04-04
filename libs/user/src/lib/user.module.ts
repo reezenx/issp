@@ -16,7 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-import { UserRoutes } from './lib.routes';
+import { UserRoutes } from './user.routes';
 
 import { IsspChatComponent } from './chat/chat.component';
 import {

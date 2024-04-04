@@ -9,6 +9,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { faker } from '@faker-js/faker';
 import { AGENCY, CATEGORY, DEPARTMENT, ROLE, USER } from '../data/data';
+import { findDuplicates } from './helper.create';
 
 export const DEFAULT = {
   PW: 'ChangeM3!',
@@ -70,6 +71,8 @@ export const roundsOfHashing = 10;
 export async function createUsers(prisma: PrismaClient) {
   const superPassword = await bcrypt.hash(DEFAULT._PW, roundsOfHashing);
   const userPassword = await bcrypt.hash(DEFAULT.PW, roundsOfHashing);
+
+  findDuplicates(USERS);
 
   Object.entries(USERS).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

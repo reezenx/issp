@@ -279,7 +279,7 @@ export const PERMISSION = {
     subject: 'Agency',
   },
   UPDATE_AGENCY: {
-    id: 'uvg8wwulkcie6nur57i8nl4f',
+    id: 'izpemfabeqo72ow1qflkr44c',
     action: 'update',
     subject: 'Agency',
   },
@@ -324,7 +324,7 @@ export const PERMISSION = {
     subject: 'ProjectType',
   },
   READ_PROJECT_TYPE: {
-    id: 'ujs9nkezfak9cpub770cbqke',
+    id: 'vdlztd9o2iqnhvwlf1tlzo4c',
     action: 'read',
     subject: 'ProjectType',
   },
@@ -384,7 +384,7 @@ export const PERMISSION = {
     subject: 'ProjectImplementationType',
   },
   DELETE_PROJECT_IMPL_TYPE: {
-    id: 'onvbc2jmlk1jur5v3rg52jit',
+    id: 'vyaqujq94fvl2okauve9ppd6',
     action: 'delete',
     subject: 'ProjectImplementationType',
   },
@@ -424,7 +424,7 @@ export const PERMISSION = {
     subject: 'BudgetType',
   },
   READ_BUDGET_TYPE: {
-    id: 'ujs9nkezfak9cpub770cbqke',
+    id: 'e13hxcpnhl9tke5x05j0k8ig',
     action: 'read',
     subject: 'BudgetType',
   },
