@@ -5,7 +5,6 @@ import { AgenciesModule } from './agencies/agencies.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProjectTypeModule } from './project-type/project-type.module';
 import { BudgetTypesModule } from './budget-types/budget-types.module';
-import { BudgetResourcesModule } from './budget-resources/budget-resources.module';
 import { BudgetSourcesModule } from './budget-sources/budget-sources.module';
 
 @Module({
@@ -16,7 +15,6 @@ import { BudgetSourcesModule } from './budget-sources/budget-sources.module';
     BudgetTypesModule,
     ProjectTypeModule,
     ProjectImplTypesModule,
-    BudgetResourcesModule,
     BudgetSourcesModule,
   ],
 })
