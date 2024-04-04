@@ -5,6 +5,7 @@ import { AgenciesModule } from './agencies/agencies.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProjectTypeModule } from './project-type/project-type.module';
 import { BudgetTypesModule } from './budget-types/budget-types.module';
+import { BudgetResourcesModule } from './budget-resources/budget-resources.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { BudgetTypesModule } from './budget-types/budget-types.module';
     BudgetTypesModule,
     ProjectTypeModule,
     ProjectImplTypesModule,
+    BudgetResourcesModule,
   ],
 })
 export class AdminModule {}

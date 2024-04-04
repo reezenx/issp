@@ -21,7 +21,7 @@ import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 export class BudgetTypesController {
   constructor(private readonly budgetTypesService: BudgetTypesService) {}
 
-  @checkAbilities({ action: 'create', subject: 'Category' }) //change to budget-type
+  @checkAbilities({ action: 'create', subject: 'BudgetType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: BudgetTypeEntity })
@@ -32,7 +32,7 @@ export class BudgetTypesController {
     );
   }
 
-  @checkAbilities({ action: 'read', subject: 'Category' }) //change to budget-type
+  @checkAbilities({ action: 'read', subject: 'BudgetType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: BudgetTypeEntity, isArray: true })
@@ -42,7 +42,7 @@ export class BudgetTypesController {
     return budgetTypes.map((item) => new BudgetTypeEntity(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'Category' }) //cahnge to budget-type
+  @checkAbilities({ action: 'read', subject: 'BudgetType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: BudgetTypeEntity })
@@ -51,7 +51,7 @@ export class BudgetTypesController {
     return new BudgetTypeEntity(await this.budgetTypesService.findOne(id));
   }
 
-  @checkAbilities({ action: 'update', subject: 'Category' }) //change to budget-type
+  @checkAbilities({ action: 'update', subject: 'BudgetType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: BudgetTypeEntity })
@@ -65,7 +65,7 @@ export class BudgetTypesController {
     );
   }
 
-  @checkAbilities({ action: 'delete', subject: 'Category' }) //change to budget-type
+  @checkAbilities({ action: 'delete', subject: 'BudgetType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: BudgetTypeEntity })
