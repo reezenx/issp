@@ -46,6 +46,10 @@ import { AdminProjectImplTypeShellComponent } from './project-impl-types/admin-p
 import { ProjectImplTypeAdminComponent } from './project-impl-types/admin-project-impl-types/admin-project-impl-types.component';
 import { ProjectImplTypeAdminNewComponent } from './project-impl-types/admin-project-impl-type-new/admin-project-impl-type-new.component';
 import { ProjectImplTypeAdminEditComponent } from './project-impl-types/admin-project-impl-type-edit/admin-project-impl-type-edit.component';
+import { BudgetSourcesAdminComponent } from './budget-sources/budget-sources-admin/budget-sources-admin.component';
+import { BudgetSourcesAdminNewComponent } from './budget-sources/budget-sources-admin-new/budget-sources-admin-new.component';
+import { BudgetSourcesAdminEditComponent } from './budget-sources/budget-sources-admin-edit/budget-sources-admin-edit.component';
+import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-sources-admin-shell/budget-sources-admin-shell.component';
 
 @NgModule({
   imports: [
@@ -88,6 +92,10 @@ import { ProjectImplTypeAdminEditComponent } from './project-impl-types/admin-pr
     BudgetTypesAdminComponent,
     BudgetTypesAdminNewComponent,
     BudgetTypesAdminEditComponent,
+    BudgetSourcesAdminShellComponent,
+    BudgetSourcesAdminComponent,
+    BudgetSourcesAdminNewComponent,
+    BudgetSourcesAdminEditComponent,
     AdminProjectImplTypeShellComponent,
     ProjectImplTypeAdminComponent,
     ProjectImplTypeAdminNewComponent,

@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateBudgetResourceDto } from './dto/create-budget-resource.dto';
-import { UpdateBudgetResourceDto } from './dto/update-budget-resource.dto';
+import { CreateBudgetSourceDto } from './dto/create-budget-source.dto';
+import { UpdateBudgetSourceDto } from './dto/update-budget-source.dto';
 import { PrismaService } from 'nestjs-prisma';
 
 @Injectable()
-export class BudgetResourcesService {
+export class BudgetSourcesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createBudgetResourceDto: CreateBudgetResourceDto) {
+  create(createBudgetSourceDto: CreateBudgetSourceDto) {
     return this.prisma.budgetSource.create({
-      data: createBudgetResourceDto,
+      data: createBudgetSourceDto,
     });
   }
 
@@ -21,10 +21,10 @@ export class BudgetResourcesService {
     return this.prisma.budgetSource.findUnique({ where: { id } });
   }
 
-  update(id: string, updateBudgetResourceDto: UpdateBudgetResourceDto) {
+  update(id: string, updateBudgetSourceDto: UpdateBudgetSourceDto) {
     return this.prisma.budgetSource.update({
       where: { id },
-      data: updateBudgetResourceDto,
+      data: updateBudgetSourceDto,
     });
   }
 

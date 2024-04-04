@@ -6,6 +6,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { ProjectTypeModule } from './project-type/project-type.module';
 import { BudgetTypesModule } from './budget-types/budget-types.module';
 import { BudgetResourcesModule } from './budget-resources/budget-resources.module';
+import { BudgetSourcesModule } from './budget-sources/budget-sources.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { BudgetResourcesModule } from './budget-resources/budget-resources.modul
     ProjectTypeModule,
     ProjectImplTypesModule,
     BudgetResourcesModule,
+    BudgetSourcesModule,
   ],
 })
 export class AdminModule {}

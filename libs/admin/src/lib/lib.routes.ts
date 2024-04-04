@@ -34,7 +34,12 @@ import { ProjectImplTypeAdminComponent } from './project-impl-types/admin-projec
 import { ProjectImplTypeAdminNewComponent } from './project-impl-types/admin-project-impl-type-new/admin-project-impl-type-new.component';
 import { ProjectImplTypeAdminEditComponent } from './project-impl-types/admin-project-impl-type-edit/admin-project-impl-type-edit.component';
 import { projectImplTypeResolver } from './project-impl-types/resolvers/project-impl-type.resolver';
-
+import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-sources-admin-shell/budget-sources-admin-shell.component';
+import { BudgetSourcesAdminComponent } from './budget-sources/budget-sources-admin/budget-sources-admin.component';
+import { BudgetSourcesAdminNewComponent } from './budget-sources/budget-sources-admin-new/budget-sources-admin-new.component';
+import { BudgetSourcesAdminEditComponent } from './budget-sources/budget-sources-admin-edit/budget-sources-admin-edit.component';
+import { budgetSourceResolver } from './budget-sources/resolvers/budget-source.resolver';
+import { budgetSourcesResolver } from './budget-sources/resolvers/budget-sources.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -268,6 +273,46 @@ export const AdminRoutes: Routes = [
         component: BudgetTypesAdminEditComponent,
         resolve: {
           item: budgetTypeResolver,
+        },
+      },
+    ],
+  },
+  {
+    path: 'budget-sources',
+    component: BudgetSourcesAdminShellComponent,
+    data: {
+      breadcrumb: 'Budget Sources',
+    },
+    children: [
+      {
+        path: '',
+        title: 'Budget Sources',
+        component: BudgetSourcesAdminComponent,
+        data: {
+          breadcrumb: 'Budget Sources',
+        },
+        resolve: {
+          budgetsources: budgetSourcesResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Budget Source',
+        component: BudgetSourcesAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {},
+      },
+      {
+        path: ':id',
+        title: 'Edit Budget Source',
+        data: {
+          breadcrumb: 'Edit',
+        },
+        component: BudgetSourcesAdminEditComponent,
+        resolve: {
+          item: budgetSourceResolver,
         },
       },
     ],

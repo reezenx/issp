@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BudgetSource } from '@prisma/client';
 
-export class BudgetResourceEntity implements BudgetSource {
-  constructor(budgetResource: BudgetResourceEntity) {
-    Object.assign(this, budgetResource);
+export class BudgetSourceEntity implements BudgetSource {
+  constructor(budgetSource: BudgetSourceEntity) {
+    Object.assign(this, budgetSource);
   }
 
   @ApiProperty()

@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-card class="cardWithShadow theme-card m-b-0">
+    <mat-card-header>
+      <mat-card-title class="m-b-0">Create New Budget Source</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="b-t-1">
+      <div class="row m-t-20">
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
+            <input #code matInput type="text" formControlName="code" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
+            <input #name matInput type="text" formControlName="name" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="b-t-1">
+      <div class="w-100 m-t-12 text-right">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid || !form.dirty"
+        >
+          Save
+        </button>
+
+        <button
+          mat-flat-button
+          color="warn"
+          type="button"
+          (click)="discardChanges()"
+          class="m-l-8"
+        >
+          Cancel
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</form>
