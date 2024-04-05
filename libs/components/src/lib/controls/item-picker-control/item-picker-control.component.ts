@@ -19,29 +19,29 @@ import {
 import { Subscription, Subject, Observable, startWith, map } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { AgencyDropdown } from '@issp/common';
+import { ItemDropdown } from '@issp/common';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const AGENCY_PICKER_FORM_CONTROL_VALUE_ACCESSOR: any = {
+export const ITEM_PICKER_FORM_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => AgencyPickerControlComponent),
+  useExisting: forwardRef(() => ItemPickerControlComponent),
   multi: true,
 };
 
 @UntilDestroy({ checkProperties: true })
 @Component({
-  selector: 'issp-agency-picker-control',
-  templateUrl: './agency-picker-control.component.html',
-  styleUrl: './agency-picker-control.component.scss',
-  providers: [AGENCY_PICKER_FORM_CONTROL_VALUE_ACCESSOR],
+  selector: 'issp-item-picker-control',
+  templateUrl: './item-picker-control.component.html',
+  styleUrl: './item-picker-control.component.scss',
+  providers: [ITEM_PICKER_FORM_CONTROL_VALUE_ACCESSOR],
 })
-export class AgencyPickerControlComponent implements ControlValueAccessor {
+export class ItemPickerControlComponent implements ControlValueAccessor {
   static nextId = 0;
 
   constructor(formBuilder: UntypedFormBuilder) {
-    this.agenciesFilteredOptions$ = this.searchControl.valueChanges.pipe(
+    this.itemsFilteredOptions$ = this.searchControl.valueChanges.pipe(
       startWith(''),
-      map((value: string) => this.searchFilterAgencies(value || ''))
+      map((value: string) => this.searchFilterItems(value || ''))
     );
 
     this.form = formBuilder.group({
@@ -67,13 +67,13 @@ export class AgencyPickerControlComponent implements ControlValueAccessor {
   focused = false;
   touched = false;
   controlType = 'key-value-input';
-  id = `key-value-input-${AgencyPickerControlComponent.nextId++}`;
+  id = `key-value-input-${ItemPickerControlComponent.nextId++}`;
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   onChange = (_: any) => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouched = () => {};
 
-  agenciesFilteredOptions$: Observable<AgencyDropdown[]>;
+  itemsFilteredOptions$: Observable<ItemDropdown[]>;
 
   get empty() {
     return (
@@ -93,7 +93,10 @@ export class AgencyPickerControlComponent implements ControlValueAccessor {
   fieldHint: string = null;
 
   @Input()
-  agenciesDropdown: AgencyDropdown[] = [];
+  displayCode = true;
+
+  @Input()
+  itemsDropdown: ItemDropdown[] = [];
 
   // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('aria-describedby')
@@ -136,25 +139,24 @@ export class AgencyPickerControlComponent implements ControlValueAccessor {
   private _disabled = false;
 
   @Input()
-  get value(): AgencyDropdown | null {
+  get value(): ItemDropdown | null {
     if (this.form.valid) {
       return this.form.value.cnt;
     }
     return null;
   }
-  set value(value: AgencyDropdown | string) {
-    const agency = this.agenciesDropdown.find((a) => a.id === value);
+  set value(value: ItemDropdown | string) {
+    const item = this.itemsDropdown.find((a) => a.id === value);
     const cnt = value || null;
     this.form.setValue({
       cnt: cnt,
     });
-    this.searchControl.setValue(this.displayFn(agency));
+    this.searchControl.setValue(this.displayFn(item));
     this.stateChanges.next();
   }
 
   @Output()
-  optionSelected: EventEmitter<AgencyDropdown> =
-    new EventEmitter<AgencyDropdown>();
+  optionSelected: EventEmitter<ItemDropdown> = new EventEmitter<ItemDropdown>();
 
   get errorState(): boolean {
     return this.form.invalid && this.touched;
@@ -189,7 +191,7 @@ export class AgencyPickerControlComponent implements ControlValueAccessor {
     }
   }
 
-  writeValue(item: AgencyDropdown | null): void {
+  writeValue(item: ItemDropdown | null): void {
     this.value = item;
   }
 
@@ -212,20 +214,24 @@ export class AgencyPickerControlComponent implements ControlValueAccessor {
   //////////////////////////////////////
 
   onOptionSelected(event: MatAutocompleteSelectedEvent) {
-    const value = event.option.value as AgencyDropdown;
+    const value = event.option.value as ItemDropdown;
     this.form.controls['cnt'].patchValue(value.id);
   }
 
-  displayFn = (agency: AgencyDropdown | string): string => {
-    if (typeof agency === 'string') return agency;
-    return agency && agency.name ? `(${agency.code}) ${agency.name}` : '';
+  displayFn = (item: ItemDropdown | string): string => {
+    if (typeof item === 'string') return item;
+    return item && item.name
+      ? this.displayCode
+        ? `(${item.code}) ${item.name}`
+        : item.name
+      : '';
   };
 
-  private searchFilterAgencies(value: string): AgencyDropdown[] {
-    if (typeof value !== 'string') return this.agenciesDropdown;
+  private searchFilterItems(value: string): ItemDropdown[] {
+    if (typeof value !== 'string') return this.itemsDropdown;
     const searchFilterValue = value.toLowerCase();
 
-    return this.agenciesDropdown.filter(
+    return this.itemsDropdown.filter(
       (searchOption) =>
         searchOption.name.toLowerCase().includes(searchFilterValue) ||
         searchOption.code.toLowerCase().includes(searchFilterValue)

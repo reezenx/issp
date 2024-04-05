@@ -3,24 +3,24 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   UseGuards,
   Put,
 } from '@nestjs/common';
-import { ProjectTypeService } from './project-type.service';
+import { ProjectTypesService } from './project-types.service';
 import { CreateProjectTypeDto } from './dto/create-project-type.dto';
 import { UpdateProjectTypeDto } from './dto/update-project-type.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ProjectTypeEntity } from './entities/project-type.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
+import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 
-@ApiTags('admin/project-type')
-@Controller('admin/project-type')
-export class ProjectTypeController {
-  constructor(private readonly projectTypeService: ProjectTypeService) {}
+@ApiTags('admin/project-types')
+@Controller('admin/project-types')
+export class ProjectTypesController {
+  constructor(private readonly projectTypeService: ProjectTypesService) {}
 
   @checkAbilities({ action: 'create', subject: 'ProjectType' })
   @UseGuards(AbilitiesGuard)
@@ -46,6 +46,16 @@ export class ProjectTypeController {
   @checkAbilities({ action: 'read', subject: 'ProjectType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
+  @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
+  @Get('dropdown')
+  async findAllDropdown() {
+    const items = await this.projectTypeService.findAllDropdown();
+    return items.map((item) => new ItemEntityDropdown(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'ProjectType' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectTypeEntity })
   @Get(':id')
   async findOne(@Param('id') id: string) {
@@ -59,11 +69,11 @@ export class ProjectTypeController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-      @Body() updateProjectTypeDto: UpdateProjectTypeDto
-    ) {
-      return new ProjectTypeEntity(
-        await this.projectTypeService.update(id, updateProjectTypeDto)
-      );
+    @Body() updateProjectTypeDto: UpdateProjectTypeDto
+  ) {
+    return new ProjectTypeEntity(
+      await this.projectTypeService.update(id, updateProjectTypeDto)
+    );
   }
 
   @checkAbilities({ action: 'delete', subject: 'ProjectType' })

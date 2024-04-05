@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class AgencyEntityDropdown {
-  constructor(item: AgencyEntityDropdown) {
+export class IsspEntityDropdown {
+  constructor(item: IsspEntityDropdown) {
     Object.assign(this, item);
   }
 
@@ -9,8 +9,5 @@ export class AgencyEntityDropdown {
   id: string;
 
   @ApiProperty()
-  code: string;
-
-  @ApiProperty()
-  name: string;
+  title: string;
 }

@@ -7,7 +7,7 @@ import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.com
 import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
 import { usersResolver } from './users/resolvers/users.resolver';
 import { userResolver } from './users/resolvers/user.resolver';
-import { agencyDropdownResolver } from './agencies/resolvers/agency-dropdown.resolver';
+import { agenciesDropdownResolver } from './agencies/resolvers/agencies-dropdown.resolver';
 import { agencyResolver } from './agencies/resolvers/agency.resolver';
 import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
 import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
@@ -46,6 +46,12 @@ import { ProjectsAdminNewComponent } from './projects/projects-admin-new/project
 import { ProjectsAdminEditComponent } from './projects/projects-admin-edit/projects-admin-edit.component';
 import { projectsResolver } from './projects/resolvers/projects.resolver';
 import { projectResolver } from './projects/resolvers/project.resolver';
+import { projectTypesDropdownResolver } from './project-types/resolvers/project-type-dropdown.resolver';
+import { projectCategoriesDropdownResolver } from './project-categories/resolvers/project-categories-dropdown.resolver';
+import { projectImplTypesDropdownResolver } from './project-impl-types/resolvers/project-impl-types-dropdown.resolver';
+import { budgetTypesDropdownResolver } from './budget-types/resolvers/budget-types-dropdown.resolver';
+import { budgetSourcesDropdownResolver } from './budget-sources/resolvers/budget-sources-dropdown.resolver';
+import { isspsDropdownResolver } from '@issp/issp';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -91,7 +97,7 @@ export const AdminRoutes: Routes = [
           breadcrumb: 'New',
         },
         resolve: {
-          agenciesDropdown: agencyDropdownResolver,
+          agenciesDropdown: agenciesDropdownResolver,
         },
       },
       {
@@ -103,7 +109,7 @@ export const AdminRoutes: Routes = [
         },
         resolve: {
           user: userResolver,
-          agenciesDropdown: agencyDropdownResolver,
+          agenciesDropdown: agenciesDropdownResolver,
         },
       },
     ],
@@ -215,9 +221,6 @@ export const AdminRoutes: Routes = [
         data: {
           breadcrumb: 'New',
         },
-        resolve: {
-          // agenciesDropdown: agencyDropdownResolver,
-        },
       },
       {
         path: ':id',
@@ -228,7 +231,6 @@ export const AdminRoutes: Routes = [
         component: AgencyAdminEditComponent,
         resolve: {
           item: agencyResolver,
-          // agenciesDropdown: agencyDropdownResolver,
         },
       },
     ],
@@ -353,7 +355,15 @@ export const AdminRoutes: Routes = [
         data: {
           breadcrumb: 'New',
         },
-        resolve: {},
+        resolve: {
+          isspsDropdown: isspsDropdownResolver,
+          agenciesDropdown: agenciesDropdownResolver,
+          projectTypesDropdown: projectTypesDropdownResolver,
+          projectCategoriesDropdown: projectCategoriesDropdownResolver,
+          implementationTypesDropdown: projectImplTypesDropdownResolver,
+          budgetTypesDropdown: budgetTypesDropdownResolver,
+          budgetSourcesDropdown: budgetSourcesDropdownResolver,
+        },
       },
       {
         path: ':id',
@@ -364,6 +374,13 @@ export const AdminRoutes: Routes = [
         component: ProjectsAdminEditComponent,
         resolve: {
           item: projectResolver,
+          isspsDropdown: isspsDropdownResolver,
+          agenciesDropdown: agenciesDropdownResolver,
+          projectTypesDropdown: projectTypesDropdownResolver,
+          projectCategoriesDropdown: projectCategoriesDropdownResolver,
+          implementationTypesDropdown: projectImplTypesDropdownResolver,
+          budgetTypesDropdown: budgetTypesDropdownResolver,
+          budgetSourcesDropdown: budgetSourcesDropdownResolver,
         },
       },
     ],

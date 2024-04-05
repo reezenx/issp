@@ -10,12 +10,12 @@
             <mat-label class="mat-subtitle-2 f-w-600">First Name</mat-label>
             <input #firstNam matInput type="text" formControlName="firstName" />
           </mat-form-field>
-          <issp-agency-picker-control
+          <issp-item-picker-control
             placeholder="Search & Select Agency"
             formControlName="agencyId"
             fieldName="Agency"
-            [agenciesDropdown]="agenciesDropdown"
-          ></issp-agency-picker-control>
+            [itemsDropdown]="agenciesDropdown"
+          ></issp-item-picker-control>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Status</mat-label>
             <mat-select #status matInput formControlName="status">

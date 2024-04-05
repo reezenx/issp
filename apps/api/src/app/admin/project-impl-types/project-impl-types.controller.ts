@@ -16,6 +16,7 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { ProjectImplementationTypeEntity } from './entities/project-impl-type.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 
 @ApiTags('admin/project-impl-types')
 @Controller('admin/project-impl-types')
@@ -45,6 +46,16 @@ export class ProjectImplTypesController {
     return projectImplTypes.map(
       (item) => new ProjectImplementationTypeEntity(item)
     );
+  }
+
+  @checkAbilities({ action: 'read', subject: 'ImplementationType' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
+  @Get('dropdown')
+  async findAllDropdown() {
+    const items = await this.projectImplTypesService.findAllDropdown();
+    return items.map((item) => new ItemEntityDropdown(item));
   }
 
   @checkAbilities({ action: 'read', subject: 'ImplementationType' })

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { CategoryDetails } from '../models/category-details';
-import { API, CategoryDropdown, Environment } from '@issp/common';
+import { API, ItemDropdown, Environment } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -18,8 +18,8 @@ export class CategoriesService {
   >(new Array<CategoryDetails>());
   allItems$ = this.#emitAllItems.asObservable();
 
-  #emitDropdownItems: BehaviorSubject<Array<CategoryDropdown>> =
-    new BehaviorSubject<Array<CategoryDropdown>>(new Array<CategoryDropdown>());
+  #emitDropdownItems: BehaviorSubject<Array<ItemDropdown>> =
+    new BehaviorSubject<Array<ItemDropdown>>(new Array<ItemDropdown>());
   dropdownItems$ = this.#emitDropdownItems.asObservable();
 
   #emitCurrentContextItem = new Subject<CategoryDetails>();
@@ -50,11 +50,11 @@ export class CategoriesService {
 
   findAllDropdowns() {
     const uri = `${this.route}/dropdown`;
-    return this.http.get<CategoryDropdown[]>(uri).pipe(
+    return this.http.get<ItemDropdown[]>(uri).pipe(
       map((data) => {
-        let list = new Array<CategoryDropdown>();
+        let list = new Array<ItemDropdown>();
         list = data.map((e) => {
-          const entity = new CategoryDropdown();
+          const entity = new ItemDropdown();
           entity.assign(e);
           return entity;
         });

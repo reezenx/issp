@@ -1,7 +1,6 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserDetails } from '../models/user-details';
 import {
   FormGroup,
   FormBuilder,
@@ -17,7 +16,7 @@ import {
   ConfirmationDialogComponentData,
 } from '@issp/components';
 import { UserStatus, Role } from '@prisma/client';
-import { AgencyDropdown, User_Roles, User_Statuses } from '@issp/common';
+import { ItemDropdown, User_Roles, User_Statuses } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -35,9 +34,8 @@ export class UserAdminNewComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  agenciesDropdown: AgencyDropdown[] = [];
+  agenciesDropdown: ItemDropdown[] = [];
   form: FormGroup;
-  issp: UserDetails;
   rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
   subs: Subscription[] = [];

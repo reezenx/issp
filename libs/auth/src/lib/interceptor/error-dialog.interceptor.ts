@@ -50,6 +50,7 @@ export class ErrorDialogInterceptor implements HttpInterceptor {
               return;
             }
 
+            this.authService.logout();
             this.handleError(response);
           }
         }

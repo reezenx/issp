@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { BudgetSourceService } from '../services/budget-source.service';
+import { BudgetSourcesService } from '../services/budget-sources.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { BudgetSourceDetails } from '../models/budget-source-details';
@@ -28,7 +28,7 @@ export class BudgetSourcesAdminNewComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly budgetSourceService: BudgetSourceService,
+    private readonly budgetSourceService: BudgetSourcesService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}

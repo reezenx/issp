@@ -11,18 +11,23 @@
     matInput
     #cnt
     [formControl]="searchControl"
-    [matAutocomplete]="agencyAutoComplete"
+    [matAutocomplete]="itemAutoComplete"
     [placeholder]="placeholder"
   />
 
   <mat-autocomplete
-    #agencyAutoComplete="matAutocomplete"
+    #itemAutoComplete="matAutocomplete"
     [displayWith]="displayFn"
     (optionSelected)="onOptionSelected($event)"
   >
-    @for(option of agenciesFilteredOptions$ | async; track option.id) {
+    @for(option of itemsFilteredOptions$ | async; track option.id) {
     <mat-option [value]="option">
-      ({{ option.code }}) {{ option.name }}
+      <ng-container *ngIf="displayCode; else hiddenCode">
+        ({{ option.code }}) {{ option.name }}
+      </ng-container>
+      <ng-template #hiddenCode>
+        {{ option.name }}
+      </ng-template>
     </mat-option>
     }
   </mat-autocomplete>

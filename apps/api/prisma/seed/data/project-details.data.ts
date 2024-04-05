@@ -214,7 +214,7 @@ export const PROJECT_TYPE: { [key: string]: Item & { group: Item } } = {
   WEM: {
     id: 'iv89q1hgmuovfarikgj3cusq',
     name: 'Website Maintenance',
-    code: '50299990 01',
+    code: '50299990-01',
     group: PROJECT_TYPE_GROUP['SUE'],
   },
   CNI: {

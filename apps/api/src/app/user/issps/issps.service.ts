@@ -36,6 +36,15 @@ export class IsspService {
     });
   }
 
+  findAllDropdown() {
+    return this.prisma.iSSP.findMany({
+      select: {
+        id: true,
+        title: true,
+      },
+    });
+  }
+
   findOne(id: string) {
     return this.prisma.iSSP.findUnique({
       where: { id },

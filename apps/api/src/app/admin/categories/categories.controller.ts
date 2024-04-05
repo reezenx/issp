@@ -15,6 +15,7 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CategoryEntity } from './entities/category.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 
 @ApiTags('admin/categories')
 @Controller('admin/categories')
@@ -40,6 +41,16 @@ export class CategoriesController {
   async findAll() {
     const categories = await this.categoriesService.findAll();
     return categories.map((item) => new CategoryEntity(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'Category' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
+  @Get('dropdown')
+  async findAllDropdown() {
+    const items = await this.categoriesService.findAllDropdown();
+    return items.map((item) => new ItemEntityDropdown(item));
   }
 
   @checkAbilities({ action: 'read', subject: 'Category' })

@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { CategoryDropdown } from '@issp/common';
+import { ItemDropdown } from '@issp/common';
 import { CategoriesService } from '../services/categories.service';
 
-export const categoryDropdownResolver: ResolveFn<CategoryDropdown[]> = () => {
+export const ItemDropdownResolver: ResolveFn<ItemDropdown[]> = () => {
   return inject(CategoriesService).findAllDropdowns();
 };

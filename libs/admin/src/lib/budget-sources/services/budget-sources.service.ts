@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { BudgetSourceDetails } from '../models/budget-source-details';
-import { API, Environment } from '@issp/common';
+import { API, Environment, ItemDropdown } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
-export class BudgetSourceService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.BUDGET_TYPES}`;
+export class BudgetSourcesService {
+  route = `${this.env.url.api}${API.BASE}${API.ADMIN.BUDGET_SOURCES}`;
   constructor(private http: HttpClient, private env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<BudgetSourceDetails>> =
@@ -18,6 +18,10 @@ export class BudgetSourceService {
       new Array<BudgetSourceDetails>()
     );
   allItems$ = this.#emitAllItems.asObservable();
+
+  #emitDropdownItems: BehaviorSubject<Array<ItemDropdown>> =
+    new BehaviorSubject<Array<ItemDropdown>>(new Array<ItemDropdown>());
+  dropdownItems$ = this.#emitDropdownItems.asObservable();
 
   #emitCurrentContextItem = new Subject<BudgetSourceDetails>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
@@ -41,6 +45,24 @@ export class BudgetSourceService {
       }),
       tap((data) => {
         this.#emitAllItems.next(data);
+      })
+    );
+  }
+
+  findAllDropdowns() {
+    const uri = `${this.route}/dropdown`;
+    return this.http.get<ItemDropdown[]>(uri).pipe(
+      map((data) => {
+        let list = new Array<ItemDropdown>();
+        list = data.map((e) => {
+          const entity = new ItemDropdown();
+          entity.assign(e);
+          return entity;
+        });
+        return list;
+      }),
+      tap((data) => {
+        this.#emitDropdownItems.next(data);
       })
     );
   }

@@ -6,18 +6,24 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { IsspService } from './issps.service';
 import { CreateIsspDto } from './dto/create-issp.dto';
 import { UpdateIsspDto } from './dto/update-issp.dto';
 import { ApiTags, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { IsspEntity } from './entities/issp.entity';
+import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
+import { IsspEntityDropdown } from '../../shared/models/issp-dropdown.entity';
 
 @ApiTags('user/issps')
 @Controller('user/issps')
 export class IsspController {
   constructor(private readonly isspService: IsspService) {}
 
+  @checkAbilities({ action: 'create', subject: 'ISSP' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   @Post()
@@ -25,6 +31,8 @@ export class IsspController {
     return new IsspEntity(await this.isspService.create(createIsspDto));
   }
 
+  @checkAbilities({ action: 'read', subject: 'ISSP' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity, isArray: true })
   @Get()
@@ -33,6 +41,18 @@ export class IsspController {
     return issps.map((issp) => new IsspEntity(issp));
   }
 
+  @checkAbilities({ action: 'read', subject: 'ISSP' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: IsspEntityDropdown, isArray: true })
+  @Get('dropdown')
+  async findAllDropdown() {
+    const items = await this.isspService.findAllDropdown();
+    return items.map((item) => new IsspEntityDropdown(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'ISSP' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   @Get(':id')
@@ -40,6 +60,8 @@ export class IsspController {
     return new IsspEntity(await this.isspService.findOne(id));
   }
 
+  @checkAbilities({ action: 'update', subject: 'ISSP' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   @Put(':id')
@@ -47,6 +69,8 @@ export class IsspController {
     return new IsspEntity(await this.isspService.update(id, updateIsspDto));
   }
 
+  @checkAbilities({ action: 'delete', subject: 'ISSP' })
+  @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   @Delete(':id')

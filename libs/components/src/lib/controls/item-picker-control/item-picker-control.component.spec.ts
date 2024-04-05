@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AgencyPickerControlComponent } from './agency-picker-control.component';
+import { ItemPickerControlComponent } from './item-picker-control.component';
 
 describe('AgencyPickerControlComponent', () => {
-  let component: AgencyPickerControlComponent;
-  let fixture: ComponentFixture<AgencyPickerControlComponent>;
+  let component: ItemPickerControlComponent;
+  let fixture: ComponentFixture<ItemPickerControlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AgencyPickerControlComponent],
+      declarations: [ItemPickerControlComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AgencyPickerControlComponent);
+    fixture = TestBed.createComponent(ItemPickerControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

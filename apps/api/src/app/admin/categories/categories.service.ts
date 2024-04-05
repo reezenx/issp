@@ -5,16 +5,26 @@ import { PrismaService } from 'nestjs-prisma';
 
 @Injectable()
 export class CategoriesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   create(createCategoryDto: CreateCategoryDto) {
     return this.prisma.category.create({
-      data: createCategoryDto
+      data: createCategoryDto,
     });
   }
 
   findAll() {
     return this.prisma.category.findMany();
+  }
+
+  findAllDropdown() {
+    return this.prisma.category.findMany({
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+    });
   }
 
   findOne(id: string) {
@@ -24,11 +34,11 @@ export class CategoriesService {
   update(id: string, updateCategoryDto: UpdateCategoryDto) {
     return this.prisma.category.update({
       where: { id },
-      data: updateCategoryDto
+      data: updateCategoryDto,
     });
   }
 
   remove(id: string) {
-     return this.prisma.category.delete({ where: { id } });
+    return this.prisma.category.delete({ where: { id } });
   }
 }

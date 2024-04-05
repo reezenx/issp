@@ -7,7 +7,7 @@ export const API = {
     PROJECTS: '/admin/projects',
     PROJECT_TYPES: '/admin/project-types',
     PROJECT_CATEGORIES: '/admin/project-categories',
-    IMPL_TYPES: '/admin/impl-types',
+    IMPL_TYPES: '/admin/project-impl-types',
     BUDGET_TYPES: '/admin/budget-types',
     BUDGET_SOURCES: '/admin/budget-sources',
   },

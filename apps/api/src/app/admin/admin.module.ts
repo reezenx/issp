@@ -3,10 +3,11 @@ import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { AgenciesModule } from './agencies/agencies.module';
 import { CategoriesModule } from './categories/categories.module';
-import { ProjectTypeModule } from './project-type/project-type.module';
+import { ProjectTypesModule } from './project-types/project-types.module';
 import { BudgetTypesModule } from './budget-types/budget-types.module';
 import { BudgetSourcesModule } from './budget-sources/budget-sources.module';
 import { ProjectsModule } from './projects/projects.module';
+import { ProjectCategoriesModule } from './project-categories/project-categories.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { ProjectsModule } from './projects/projects.module';
     AgenciesModule,
     CategoriesModule,
     BudgetTypesModule,
-    ProjectTypeModule,
+    ProjectTypesModule,
+    ProjectCategoriesModule,
     ProjectImplTypesModule,
     BudgetSourcesModule,
     ProjectsModule,
