@@ -40,10 +40,7 @@
       <e-columns>
         <e-column headerText="Name" field="name">
           <ng-template #template let-data>
-            <a
-              data-test="item-link"
-              [routerLink]="['/', 'admin', 'categories', data.id]"
-            >
+            <a data-test="item-link" [routerLink]="['/', 'admin', 'agencies', data.id]">
               {{ data.name }}
             </a>
           </ng-template>
@@ -72,13 +69,8 @@
         </e-column>
         <e-column headerText="Actions" field="actions" textAlign="center">
           <ng-template #template let-data>
-            <button
-              mat-icon-button
-              color="primary"
-              type="button"
-              (click)="editItem(data.id)"
-              matTooltip="Edit Category"
-            >
+            <button mat-icon-button color="primary" type="button" (click)="editItem(data.id)"
+              matTooltip="Edit Category">
               <mat-icon matSuffix>
                 <i-tabler name="pencil" class="icon-20"></i-tabler>
               </mat-icon>

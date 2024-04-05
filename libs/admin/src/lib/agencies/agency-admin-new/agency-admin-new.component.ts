@@ -54,12 +54,12 @@ export class AgencyAdminNewComponent implements OnInit {
       name: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
-      password: new FormControl<string>('ChangeM3!', [Validators.required]),
       email: new FormControl<string>('', [
         Validators.required,
         Validators.email,
       ]),
-      agencyId: new FormControl<string>('', [Validators.required]),
+      // categoryId: new FormControl<string>('cluapmrpz000908juao9a7bub', [Validators.required]),
+      // uacs: new FormControl<string>('12345', [Validators.required]),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
@@ -71,7 +71,7 @@ export class AgencyAdminNewComponent implements OnInit {
         .createOne(this.form.value)
         .pipe(take(1))
         .subscribe((data) => {
-          this.snackBar.open('User successfully created!', 'Ok', {
+          this.snackBar.open('Agency successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,

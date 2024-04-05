@@ -47,8 +47,8 @@ export class AgenciesAdminComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ agencies }) => {
-      this.gridData = agencies;
+    const routeSub = this.route.data.subscribe(({ items }) => {
+      this.gridData = items;
     });
     this.subs.push(routeSub);
   }

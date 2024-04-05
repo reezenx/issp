@@ -8,6 +8,7 @@ import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.
 import { usersResolver } from './users/resolvers/users.resolver';
 import { userResolver } from './users/resolvers/user.resolver';
 import { agencyDropdownResolver } from './agencies/resolvers/agency-dropdown.resolver';
+import { agencyResolver } from './agencies/resolvers/agency.resolver';
 import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
 import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
 import { categoriesResolver } from './categories/resolvers/categories.resolver';
@@ -204,7 +205,7 @@ export const AdminRoutes: Routes = [
           breadcrumbSkipNode: true,
         },
         resolve: {
-          agencies: agenciesResolver,
+          items: agenciesResolver,
         },
       },
       {
@@ -226,7 +227,7 @@ export const AdminRoutes: Routes = [
         },
         component: AgencyAdminEditComponent,
         resolve: {
-          // agency: agencyResolver,
+          item: agencyResolver,
           // agenciesDropdown: agencyDropdownResolver,
         },
       },
