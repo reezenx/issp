@@ -136,30 +136,30 @@ model Permission {
 }
 
 model Project {
-  id                          String                     @id @default(cuid())
-  title                       String
-  description                 String?
-  cost                        Decimal                    @db.Decimal(19, 2)
-  quantity                    Int
-  unit                        String
-  tags                        String[]
-  readOnly                    Boolean                    @default(false)
-  createdBy                   String
-  updatedBy                   String?
-  createdAt                   DateTime                   @default(now())
-  updatedAt                   DateTime?                  @updatedAt()
-  projectType                 ProjectType?               @relation(fields: [projectTypeId], references: [id])
-  projectTypeId               String?
-  projectCategory             ProjectCategory?           @relation(fields: [projectCategoryId], references: [id])
-  projectCategoryId           String?
-  projectImplementationType   ProjectImplementationType? @relation(fields: [projectImplementationTypeId], references: [id])
-  projectImplementationTypeId String?
-  projectBudgetType           BudgetType?                @relation(fields: [projectBudgetTypeId], references: [id])
-  projectBudgetTypeId         String?
-  projectBudgetSource         BudgetSource?              @relation(fields: [projectBudgetSourceId], references: [id])
-  projectBudgetSourceId       String?
-  agency                      Agency?                    @relation(fields: [agencyId], references: [id])
-  agencyId                    String?
+  id                   String                     @id @default(cuid())
+  title                String
+  description          String?
+  cost                 Decimal                    @db.Decimal(19, 2)
+  quantity             Int
+  unit                 String
+  tags                 String[]
+  readOnly             Boolean                    @default(false)
+  createdBy            String
+  updatedBy            String?
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime?                  @updatedAt()
+  type                 ProjectType?               @relation(fields: [typeId], references: [id])
+  typeId               String?
+  category             ProjectCategory?           @relation(fields: [categoryId], references: [id])
+  categoryId           String?
+  implementationType   ProjectImplementationType? @relation(fields: [implementationTypeId], references: [id])
+  implementationTypeId String?
+  budgetType           BudgetType?                @relation(fields: [budgetTypeId], references: [id])
+  budgetTypeId         String?
+  budgetSource         BudgetSource?              @relation(fields: [budgetSourceId], references: [id])
+  budgetSourceId       String?
+  agency               Agency?                    @relation(fields: [agencyId], references: [id])
+  agencyId             String?
 
   @@map("projects")
 }

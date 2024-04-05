@@ -249,6 +249,19 @@ export const PROJECT_TYPE: { [key: string]: Item & { group: Item } } = {
   },
 };
 
+export const PROJECT_CATEGORY: ItemObj = {
+  TR1: {
+    id: 'clubxk9c3000308jp9a9h3eje',
+    code: 'TR1',
+    name: 'Tier 1',
+  },
+  TR2: {
+    id: 'clubxk9c4000508jpcj8jd3r3',
+    code: 'TR2',
+    name: 'Tier 2',
+  },
+};
+
 export const BUDGET_TYPE: ItemObj = {
   CO: {
     id: 'cluc0eesg000r08jq2s42ha6m',
@@ -290,18 +303,5 @@ export const IMPLEMENTATION_TYPE: ItemObj = {
     id: 'clubxk9c3000208jpcruz4d4l',
     code: 'CRA',
     name: 'Cross-Agency',
-  },
-};
-
-export const PROJECT_CATEGORY: ItemObj = {
-  TR1: {
-    id: 'clubxk9c3000308jp9a9h3eje',
-    code: 'TR1',
-    name: 'Tier 1',
-  },
-  TR2: {
-    id: 'clubxk9c4000508jpcj8jd3r3',
-    code: 'TR2',
-    name: 'Tier 2',
   },
 };

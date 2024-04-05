@@ -19,12 +19,21 @@
 - git clone https://github.com/reezenx/issp.git
 - npm install
 - docker-compose up
-- npx prisma migrate dev
-- npm run dev
+- npm run db:migrate
+- npm run start
+- npm run start:api
 
 Client - http://localhost:4200/
 Swagger - http://localhost:3000/api
 Prisma Studio - http://localhost:5555/
+
+### Migration
+
+- npm run db:push - Push current schema to db
+- npm run db:seed - Push seed data to db
+- npm run db:reset - Reset schema and seed data
+- npm run db:deploy - Deploy schema to production
+- npx prisma migrate dev --name add-status-column - Add new migration
 
 ### VS Code Plugins
 
