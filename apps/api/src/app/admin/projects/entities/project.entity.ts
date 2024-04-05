@@ -17,7 +17,7 @@ export class ProjectEntity implements Project {
   description: string;
 
   @ApiProperty()
-  cost: Decimal;
+  cost: number;
 
   @ApiProperty()
   quantity: number;
@@ -30,6 +30,9 @@ export class ProjectEntity implements Project {
 
   @ApiProperty()
   readOnly: boolean;
+
+  @ApiProperty()
+  isspId: string;
 
   @ApiProperty()
   typeId: string;

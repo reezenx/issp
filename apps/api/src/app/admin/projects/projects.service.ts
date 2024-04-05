@@ -10,6 +10,7 @@ export class ProjectsService {
 
   create(createProjectDto: CreateProjectDto, user: User) {
     const {
+      isspId,
       agencyId,
       typeId,
       categoryId,
@@ -23,6 +24,7 @@ export class ProjectsService {
         ...projectData,
         createdBy: `${user.firstName} ${user.lastName}`,
         agency: { connect: { id: agencyId } },
+        issp: { connect: { id: isspId } },
         type: { connect: { id: typeId } },
         category: { connect: { id: categoryId } },
         budgetSource: { connect: { id: budgetTypeId } },
@@ -35,6 +37,11 @@ export class ProjectsService {
   findAll() {
     return this.prisma.project.findMany({
       include: {
+        issp: {
+          select: {
+            title: true,
+          },
+        },
         agency: {
           select: {
             name: true,

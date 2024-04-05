@@ -89,7 +89,7 @@ export class AuthService {
           decrypt: true,
         });
         if (Array.isArray(rules)) this.ability.update(rules);
-        this.redirectToUserHomePage();
+        // this.redirectToUserHomePage();
 
         switch (env.auth.exchangeStrategy) {
           case 'app-load':

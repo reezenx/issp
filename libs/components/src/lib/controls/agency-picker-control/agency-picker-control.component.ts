@@ -35,7 +35,6 @@ export const AGENCY_PICKER_FORM_CONTROL_VALUE_ACCESSOR: any = {
   styleUrl: './agency-picker-control.component.scss',
   providers: [AGENCY_PICKER_FORM_CONTROL_VALUE_ACCESSOR],
 })
-// MatFormFieldControl<AgencyDropdown>,
 export class AgencyPickerControlComponent implements ControlValueAccessor {
   static nextId = 0;
 

@@ -1,4 +1,4 @@
-import { AGENCY } from './data';
+import { AGENCY, ISSP_ } from './data';
 import {
   PROJECT_TYPE,
   PROJECT_CATEGORY,
@@ -20,5 +20,6 @@ export const PROJECT = {
     budgetSource: BUDGET_SOURCE['CB'],
     implType: IMPLEMENTATION_TYPE['OUT'],
     agency: AGENCY['DICT_EGOV'],
+    issp: ISSP_['DICT'],
   },
 };

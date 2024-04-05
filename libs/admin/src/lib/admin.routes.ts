@@ -336,7 +336,7 @@ export const AdminRoutes: Routes = [
     children: [
       {
         path: '',
-        title: 'Categories',
+        title: 'Projects',
         component: ProjectsAdminComponent,
         data: {
           breadcrumbSkipNode: true,
@@ -358,7 +358,7 @@ export const AdminRoutes: Routes = [
         path: ':id',
         title: 'Edit Project',
         data: {
-          breadcrumb: 'Edit',
+          breadcrumbRouteDataProperty: 'item.title',
         },
         component: ProjectsAdminEditComponent,
         resolve: {

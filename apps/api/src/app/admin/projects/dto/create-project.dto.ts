@@ -18,7 +18,7 @@ export class CreateProjectDto {
   @ApiProperty()
   description: string;
 
-  @IsDecimal()
+  @IsNumber()
   @IsNotEmpty()
   @ApiProperty()
   cost: number;
@@ -42,6 +42,11 @@ export class CreateProjectDto {
   @IsNotEmpty()
   @ApiProperty()
   agencyId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  isspId: string;
 
   @IsString()
   @IsNotEmpty()

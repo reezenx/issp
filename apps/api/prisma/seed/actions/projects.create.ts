@@ -57,6 +57,7 @@ export async function connectProjectToTypes(prisma: PrismaClient) {
         budgetSource,
         implType,
         agency,
+        issp,
       },
     ]) => {
       await prisma.project.update({
@@ -90,6 +91,11 @@ export async function connectProjectToTypes(prisma: PrismaClient) {
           agency: {
             connect: {
               id: agency.id,
+            },
+          },
+          issp: {
+            connect: {
+              id: issp.id,
             },
           },
         },

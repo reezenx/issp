@@ -139,7 +139,7 @@ model Project {
   id                   String                     @id @default(cuid())
   title                String
   description          String?
-  cost                 Decimal                    @db.Decimal(19, 2)
+  cost                 Float
   quantity             Int
   unit                 String
   tags                 String[]
@@ -160,6 +160,8 @@ model Project {
   budgetSourceId       String?
   agency               Agency?                    @relation(fields: [agencyId], references: [id])
   agencyId             String?
+  issp                 ISSP?                      @relation(fields: [isspId], references: [id])
+  isspId               String?
 
   @@map("projects")
 }
@@ -264,6 +266,7 @@ model ISSP {
   updatedBy   String?
   updatedAt   DateTime?       @updatedAt
   history     ActionHistory[]
+  projects    Project[]
 
   @@map("issps")
 }

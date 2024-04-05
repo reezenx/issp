@@ -1,6 +1,5 @@
-import { Category, Project } from '@prisma/client';
+import { Project } from '@prisma/client';
 import { Assign } from '@issp/common';
-import { Decimal } from '@prisma/client/runtime/library';
 
 export class ProjectDetails extends Assign implements Project {
   constructor() {
@@ -63,16 +62,22 @@ export class ProjectDetails extends Assign implements Project {
       get: () => this.budgetSource?.name,
       enumerable: true,
     });
+
+    Object.defineProperty(this, 'isspName', {
+      get: () => this.issp?.title,
+      enumerable: true,
+    });
   }
 
   id: string;
   title: string;
   description: string;
-  cost: Decimal;
+  cost: number;
   quantity: number;
   unit: string;
   tags: string[];
   readOnly: boolean;
+  isspId: string;
   typeId: string;
   categoryId: string;
   implementationTypeId: string;
@@ -82,6 +87,10 @@ export class ProjectDetails extends Assign implements Project {
 
   agency: {
     name: string;
+  };
+
+  issp: {
+    title: string;
   };
 
   type: {
