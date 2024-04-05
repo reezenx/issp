@@ -39,6 +39,12 @@ import { BudgetSourcesAdminNewComponent } from './budget-sources/budget-sources-
 import { BudgetSourcesAdminEditComponent } from './budget-sources/budget-sources-admin-edit/budget-sources-admin-edit.component';
 import { budgetSourceResolver } from './budget-sources/resolvers/budget-source.resolver';
 import { budgetSourcesResolver } from './budget-sources/resolvers/budget-sources.resolver';
+import { ProjectsAdminShellComponent } from './projects/projects-admin-shell/projects-admin-shell.component';
+import { ProjectsAdminComponent } from './projects/projects-admin/projects-admin.component';
+import { ProjectsAdminNewComponent } from './projects/projects-admin-new/projects-admin-new.component';
+import { ProjectsAdminEditComponent } from './projects/projects-admin-edit/projects-admin-edit.component';
+import { projectsResolver } from './projects/resolvers/projects.resolver';
+import { projectResolver } from './projects/resolvers/project.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -48,14 +54,6 @@ export const AdminRoutes: Routes = [
     component: DashboardComponent,
     data: {
       breadcrumb: 'Dashboard',
-    },
-  },
-  {
-    path: 'projects',
-    title: 'Projects',
-    // component: ProjectsComponent,
-    data: {
-      breadcrumb: 'Projects',
     },
   },
   {
@@ -150,7 +148,6 @@ export const AdminRoutes: Routes = [
       },
     ],
   },
-
   {
     path: 'implementationtypes',
     component: ProjectImplTypesAdminShellComponent,
@@ -192,7 +189,6 @@ export const AdminRoutes: Routes = [
       },
     ],
   },
-
   {
     path: 'agencies',
     component: AgenciesAdminShellComponent,
@@ -329,5 +325,46 @@ export const AdminRoutes: Routes = [
     data: {
       breadcrumb: 'Diagram',
     },
+  },
+  {
+    path: 'projects',
+    component: ProjectsAdminShellComponent,
+    data: {
+      breadcrumb: 'Projects',
+    },
+
+    children: [
+      {
+        path: '',
+        title: 'Categories',
+        component: ProjectsAdminComponent,
+        data: {
+          breadcrumbSkipNode: true,
+        },
+        resolve: {
+          items: projectsResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Project',
+        component: ProjectsAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {},
+      },
+      {
+        path: ':id',
+        title: 'Edit Project',
+        data: {
+          breadcrumb: 'Edit',
+        },
+        component: ProjectsAdminEditComponent,
+        resolve: {
+          item: projectResolver,
+        },
+      },
+    ],
   },
 ];

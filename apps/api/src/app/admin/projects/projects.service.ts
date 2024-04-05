@@ -74,7 +74,7 @@ export class ProjectsService {
   }
 
   update(id: string, updateProjectDto: UpdateProjectDto, user: User) {
-    return this.prisma.category.update({
+    return this.prisma.project.update({
       where: { id },
       data: {
         ...updateProjectDto,
@@ -84,6 +84,6 @@ export class ProjectsService {
   }
 
   remove(id: string) {
-    return this.prisma.category.delete({ where: { id } });
+    return this.prisma.project.delete({ where: { id } });
   }
 }

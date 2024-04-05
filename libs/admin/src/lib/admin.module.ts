@@ -16,7 +16,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-import { ProjectImplTypesAdminShellComponent } from './project-impl-types/project-impl-types-admin-shell/project-impl-types-admin-shell.component';
 import { AdminRoutes } from './admin.routes';
 import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin.component';
 import { AgenciesAdminShellComponent } from './agencies/agencies-admin-shell/agencies-admin-shell.component';
@@ -38,9 +37,14 @@ import { ControlsModule, PivotTableComponent } from '@issp/components';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PipesModule } from '@issp/common';
 import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
-import { ProjectImplTypesAdminComponent } from './project-impl-types/project-impl-types-admin/project-impl-types-admin.component';
 import { ProjectImplTypeAdminEditComponent } from './project-impl-types/project-impl-type-admin-edit/project-impl-type-admin-edit.component';
 import { ProjectImplTypeAdminNewComponent } from './project-impl-types/project-impl-type-admin-new/project-impl-type-admin-new.component';
+import { ProjectImplTypesAdminComponent } from './project-impl-types/project-impl-types-admin/project-impl-types-admin.component';
+import { ProjectImplTypesAdminShellComponent } from './project-impl-types/project-impl-types-admin-shell/project-impl-types-admin-shell.component';
+import { ProjectsAdminComponent } from './projects/projects-admin/projects-admin.component';
+import { ProjectsAdminEditComponent } from './projects/projects-admin-edit/projects-admin-edit.component';
+import { ProjectsAdminNewComponent } from './projects/projects-admin-new/projects-admin-new.component';
+import { ProjectsAdminShellComponent } from './projects/projects-admin-shell/projects-admin-shell.component';
 import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
 import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.component';
 import { UsersAdminComponent } from './users/users-admin/users-admin.component';
@@ -68,31 +72,35 @@ import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-
     DashboardComponent,
   ],
   declarations: [
-    PivotTableAdvComponent,
-    UsersAdminShellComponent,
-    UsersAdminComponent,
-    UserAdminNewComponent,
-    UserAdminEditComponent,
+    AgenciesAdminComponent,
+    AgenciesAdminShellComponent,
+    AgencyAdminEditComponent,
+    AgencyAdminNewComponent,
+    BudgetSourcesAdminComponent,
+    BudgetSourcesAdminEditComponent,
+    BudgetSourcesAdminNewComponent,
+    BudgetSourcesAdminShellComponent,
+    BudgetTypesAdminComponent,
+    BudgetTypesAdminEditComponent,
+    BudgetTypesAdminNewComponent,
+    BudgetTypesAdminShellComponent,
     CategoriesAdminComponent,
     CategoriesAdminShellComponent,
-    CategoryAdminNewComponent,
     CategoryAdminEditComponent,
-    AgenciesAdminShellComponent,
-    AgenciesAdminComponent,
-    AgencyAdminNewComponent,
-    AgencyAdminEditComponent,
-    BudgetTypesAdminShellComponent,
-    BudgetTypesAdminComponent,
-    BudgetTypesAdminNewComponent,
-    BudgetTypesAdminEditComponent,
-    BudgetSourcesAdminShellComponent,
-    BudgetSourcesAdminComponent,
-    BudgetSourcesAdminNewComponent,
-    BudgetSourcesAdminEditComponent,
-    ProjectImplTypesAdminShellComponent,
-    ProjectImplTypesAdminComponent,
-    ProjectImplTypeAdminNewComponent,
+    CategoryAdminNewComponent,
+    PivotTableAdvComponent,
     ProjectImplTypeAdminEditComponent,
+    ProjectImplTypeAdminNewComponent,
+    ProjectImplTypesAdminComponent,
+    ProjectImplTypesAdminShellComponent,
+    ProjectsAdminComponent,
+    ProjectsAdminEditComponent,
+    ProjectsAdminNewComponent,
+    ProjectsAdminShellComponent,
+    UserAdminEditComponent,
+    UserAdminNewComponent,
+    UsersAdminComponent,
+    UsersAdminShellComponent,
   ],
   providers: [DatePipe],
 })

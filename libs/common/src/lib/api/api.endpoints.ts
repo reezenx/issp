@@ -4,6 +4,7 @@ export const API = {
     USERS: '/admin/users',
     CATEGORIES: '/admin/categories',
     AGENCIES: '/admin/agencies',
+    PROJECTS: '/admin/projects',
     PROJECT_TYPES: '/admin/project-types',
     PROJECT_CATEGORIES: '/admin/project-categories',
     IMPL_TYPES: '/admin/impl-types',

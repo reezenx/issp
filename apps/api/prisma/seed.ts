@@ -12,16 +12,20 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+async function createBaseData() {
+  await createPermissions(prisma);
+  await createCategories(prisma);
+  await createUserRoles(prisma);
+  await createProjectDetails(prisma);
+  await createDepartments(prisma);
+}
+
 async function main() {
-  // await createCategories(prisma);
-  // await createDepartments(prisma);
-  // await createAgencies(prisma);
-  // await createUserRoles(prisma);
-  // await createPermissions(prisma);
-  // await createUsers(prisma);
-  // await createProjectDetails(prisma);
-  // await createProjects(prisma);
-  // await createISSPs(prisma);
+  await createBaseData();
+  await createAgencies(prisma);
+  await createISSPs(prisma);
+  await createUsers(prisma);
+  await createProjects(prisma);
   await createActionHistory(prisma);
 }
 
