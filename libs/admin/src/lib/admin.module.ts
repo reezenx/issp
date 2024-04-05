@@ -16,40 +16,35 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
+import { ProjectImplTypesAdminShellComponent } from './project-impl-types/project-impl-types-admin-shell/project-impl-types-admin-shell.component';
 import { AdminRoutes } from './admin.routes';
-import { DashboardComponent } from './dashboard/dashboard.component';
-
-import {
-  ProjectsComponent,
-  ProjectDialogContentComponent,
-} from './projects/projects.component';
-import { ControlsModule, PivotTableComponent } from '@issp/components';
-import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
-import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-shell.component';
-import { UsersAdminComponent } from './users/users-admin/users-admin.component';
-import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.component';
-import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
-import { PipesModule } from '@issp/common';
+import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin.component';
+import { AgenciesAdminShellComponent } from './agencies/agencies-admin-shell/agencies-admin-shell.component';
+import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
+import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admin-new.component';
+import { BudgetSourcesAdminComponent } from './budget-sources/budget-sources-admin/budget-sources-admin.component';
+import { BudgetSourcesAdminEditComponent } from './budget-sources/budget-sources-admin-edit/budget-sources-admin-edit.component';
+import { BudgetSourcesAdminNewComponent } from './budget-sources/budget-sources-admin-new/budget-sources-admin-new.component';
+import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-sources-admin-shell/budget-sources-admin-shell.component';
+import { BudgetTypesAdminComponent } from './budget-types/budget-types-admin/budget-types-admin.component';
+import { BudgetTypesAdminEditComponent } from './budget-types/budget-types-admin-edit/budget-types-admin-edit.component';
+import { BudgetTypesAdminNewComponent } from './budget-types/budget-types-admin-new/budget-types-admin-new.component';
+import { BudgetTypesAdminShellComponent } from './budget-types/budget-types-admin-shell/budget-types-admin-shell.component';
 import { CategoriesAdminComponent } from './categories/categories-admin/categories-admin.component';
 import { CategoriesAdminShellComponent } from './categories/categories-admin-shell/categories-admin-shell.component';
-import { AgenciesAdminShellComponent } from './agencies/agencies-admin-shell/agencies-admin-shell.component';
-import { AgenciesAdminComponent } from './agencies/agencies-admin/agencies-admin.component';
-import { AgencyAdminNewComponent } from './agencies/agency-admin-new/agency-admin-new.component';
-import { AgencyAdminEditComponent } from './agencies/agency-admin-edit/agency-admin-edit.component';
-import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
 import { CategoryAdminEditComponent } from './categories/category-admin-edit/category-admin-edit.component';
-import { BudgetTypesAdminShellComponent } from './budget-types/budget-types-admin-shell/budget-types-admin-shell.component';
-import { BudgetTypesAdminComponent } from './budget-types/budget-types-admin/budget-types-admin.component';
-import { BudgetTypesAdminNewComponent } from './budget-types/budget-types-admin-new/budget-types-admin-new.component';
-import { BudgetTypesAdminEditComponent } from './budget-types/budget-types-admin-edit/budget-types-admin-edit.component';
-import { AdminProjectImplTypeShellComponent } from './project-impl-types/admin-project-impl-type-shell/admin-project-impl-type-shell.component';
-import { ProjectImplTypeAdminComponent } from './project-impl-types/admin-project-impl-types/admin-project-impl-types.component';
-import { ProjectImplTypeAdminNewComponent } from './project-impl-types/admin-project-impl-type-new/admin-project-impl-type-new.component';
-import { ProjectImplTypeAdminEditComponent } from './project-impl-types/admin-project-impl-type-edit/admin-project-impl-type-edit.component';
-import { BudgetSourcesAdminComponent } from './budget-sources/budget-sources-admin/budget-sources-admin.component';
-import { BudgetSourcesAdminNewComponent } from './budget-sources/budget-sources-admin-new/budget-sources-admin-new.component';
-import { BudgetSourcesAdminEditComponent } from './budget-sources/budget-sources-admin-edit/budget-sources-admin-edit.component';
-import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-sources-admin-shell/budget-sources-admin-shell.component';
+import { CategoryAdminNewComponent } from './categories/category-admin-new/category-admin-new.component';
+import { ControlsModule, PivotTableComponent } from '@issp/components';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { PipesModule } from '@issp/common';
+import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
+import { ProjectImplTypesAdminComponent } from './project-impl-types/project-impl-types-admin/project-impl-types-admin.component';
+import { ProjectImplTypeAdminEditComponent } from './project-impl-types/project-impl-type-admin-edit/project-impl-type-admin-edit.component';
+import { ProjectImplTypeAdminNewComponent } from './project-impl-types/project-impl-type-admin-new/project-impl-type-admin-new.component';
+import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.component';
+import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.component';
+import { UsersAdminComponent } from './users/users-admin/users-admin.component';
+import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-shell.component';
 
 @NgModule({
   imports: [
@@ -73,8 +68,6 @@ import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-source
     DashboardComponent,
   ],
   declarations: [
-    ProjectsComponent,
-    ProjectDialogContentComponent,
     PivotTableAdvComponent,
     UsersAdminShellComponent,
     UsersAdminComponent,
@@ -96,8 +89,8 @@ import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-source
     BudgetSourcesAdminComponent,
     BudgetSourcesAdminNewComponent,
     BudgetSourcesAdminEditComponent,
-    AdminProjectImplTypeShellComponent,
-    ProjectImplTypeAdminComponent,
+    ProjectImplTypesAdminShellComponent,
+    ProjectImplTypesAdminComponent,
     ProjectImplTypeAdminNewComponent,
     ProjectImplTypeAdminEditComponent,
   ],

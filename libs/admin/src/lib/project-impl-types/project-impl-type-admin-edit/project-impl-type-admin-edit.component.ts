@@ -10,8 +10,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectImplementationTypeService } from '../services/project-impl-types.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription, take } from 'rxjs';
 import { ProjectImplementationTypeDetails } from '../models/project-impl-type-details';
+import { Subscription, take } from 'rxjs';
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
@@ -19,45 +19,61 @@ import {
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-admin-project-impl-type-new',
-  templateUrl: './admin-project-impl-type-new.component.html',
-  styleUrl: './admin-project-impl-type-new.component.scss',
+  selector: 'issp-project-impl-type-admin-edit',
+  templateUrl: './project-impl-type-admin-edit.component.html',
+  styleUrl: './project-impl-type-admin-edit.component.scss',
 })
-export class ProjectImplTypeAdminNewComponent implements OnInit {
+export class ProjectImplTypeAdminEditComponent implements OnInit {
   constructor(
-    private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly projectImplementationTypeService: ProjectImplementationTypeService,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private readonly snackBar: MatSnackBar,
+    private readonly dialog: MatDialog
   ) {}
 
   form: FormGroup;
-  issp: ProjectImplementationTypeDetails;
+  item: ProjectImplementationTypeDetails;
   subs: Subscription[] = [];
 
   ngOnInit(): void {
     this.initForm();
+    this.initSubs();
   }
 
   initForm() {
     this.form = this.formBuilder.group({
+      id: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
-      createdBy: new FormControl<string>('System'),
-      updatedBy: new FormControl<string>('System'),
     });
+  }
+
+  initSubs() {
+    const routeSub = this.route.data.subscribe(({ item }) => {
+      this.item = item;
+      this.form.patchValue(this.item);
+    });
+    this.subs.push(routeSub);
+
+    const currentIsspSub =
+      this.projectImplementationTypeService.currentContextItem$.subscribe(
+        (data) => {
+          this.item = data;
+        }
+      );
+    this.subs.push(currentIsspSub);
   }
 
   save() {
     if (this.form.valid && this.form.dirty) {
       this.projectImplementationTypeService
-        .createOne(this.form.value)
+        .updateOne(this.form.value)
         .pipe(take(1))
-        .subscribe((data) => {
+        .subscribe(() => {
           this.snackBar.open(
-            'Implementation type successfully created!',
+            'Implementation Type successfully updated!',
             'Ok',
             {
               horizontalPosition: 'center',
@@ -65,7 +81,6 @@ export class ProjectImplTypeAdminNewComponent implements OnInit {
               duration: 5000,
             }
           );
-          this.navigateToEdit(data.id);
         });
     }
   }
@@ -93,9 +108,5 @@ export class ProjectImplTypeAdminNewComponent implements OnInit {
 
   navigateToList() {
     this.router.navigate(['../'], { relativeTo: this.route });
-  }
-
-  navigateToEdit(id: string) {
-    this.router.navigate(['../', id], { relativeTo: this.route });
   }
 }

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProjectsComponent } from './projects/projects.component';
 import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
 import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-shell.component';
 import { UsersAdminComponent } from './users/users-admin/users-admin.component';
@@ -28,11 +27,11 @@ import { BudgetTypesAdminNewComponent } from './budget-types/budget-types-admin-
 import { BudgetTypesAdminEditComponent } from './budget-types/budget-types-admin-edit/budget-types-admin-edit.component';
 import { BudgetTypesAdminComponent } from './budget-types/budget-types-admin/budget-types-admin.component';
 import { budgetTypeResolver } from './budget-types/resolvers/budget-type.resolver';
-import { AdminProjectImplTypeShellComponent } from './project-impl-types/admin-project-impl-type-shell/admin-project-impl-type-shell.component';
+import { ProjectImplTypesAdminShellComponent } from './project-impl-types/project-impl-types-admin-shell/project-impl-types-admin-shell.component';
 import { projectImplTypesResolver } from './project-impl-types/resolvers/project-impl-types.resolver';
-import { ProjectImplTypeAdminComponent } from './project-impl-types/admin-project-impl-types/admin-project-impl-types.component';
-import { ProjectImplTypeAdminNewComponent } from './project-impl-types/admin-project-impl-type-new/admin-project-impl-type-new.component';
-import { ProjectImplTypeAdminEditComponent } from './project-impl-types/admin-project-impl-type-edit/admin-project-impl-type-edit.component';
+import { ProjectImplTypesAdminComponent } from './project-impl-types/project-impl-types-admin/project-impl-types-admin.component';
+import { ProjectImplTypeAdminNewComponent } from './project-impl-types/project-impl-type-admin-new/project-impl-type-admin-new.component';
+import { ProjectImplTypeAdminEditComponent } from './project-impl-types/project-impl-type-admin-edit/project-impl-type-admin-edit.component';
 import { projectImplTypeResolver } from './project-impl-types/resolvers/project-impl-type.resolver';
 import { BudgetSourcesAdminShellComponent } from './budget-sources/budget-sources-admin-shell/budget-sources-admin-shell.component';
 import { BudgetSourcesAdminComponent } from './budget-sources/budget-sources-admin/budget-sources-admin.component';
@@ -54,7 +53,7 @@ export const AdminRoutes: Routes = [
   {
     path: 'projects',
     title: 'Projects',
-    component: ProjectsComponent,
+    // component: ProjectsComponent,
     data: {
       breadcrumb: 'Projects',
     },
@@ -154,7 +153,7 @@ export const AdminRoutes: Routes = [
 
   {
     path: 'implementationtypes',
-    component: AdminProjectImplTypeShellComponent,
+    component: ProjectImplTypesAdminShellComponent,
     data: {
       breadcrumb: 'Implementation Type',
     },
@@ -163,7 +162,7 @@ export const AdminRoutes: Routes = [
       {
         path: '',
         title: 'Implementation Type',
-        component: ProjectImplTypeAdminComponent,
+        component: ProjectImplTypesAdminComponent,
         data: {
           breadcrumbSkipNode: true,
         },

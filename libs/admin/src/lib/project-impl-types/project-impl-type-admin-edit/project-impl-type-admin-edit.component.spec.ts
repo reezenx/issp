@@ -1,4 +1,4 @@
-import { ProjectImplTypeAdminEditComponent } from './admin-project-impl-type-edit.component';
+import { ProjectImplTypeAdminEditComponent } from './project-impl-type-admin-edit.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('ProjectImplTypeAdminEditComponent', () => {

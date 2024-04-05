@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProjectImplTypeAdminNewComponent } from './admin-project-impl-type-new.component';
+import { ProjectImplTypeAdminNewComponent } from './project-impl-type-admin-new.component';
 
 describe('ProjectImplTypeAdminNewComponent', () => {
   let component: ProjectImplTypeAdminNewComponent;

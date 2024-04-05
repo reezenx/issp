@@ -17,11 +17,11 @@ import { ClickEventArgs } from '@syncfusion/ej2-navigations';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-admin-project-impl-types',
-  templateUrl: './admin-project-impl-types.component.html',
-  styleUrl: './admin-project-impl-types.component.scss',
+  selector: 'issp-project-impl-types-admin',
+  templateUrl: './project-impl-types-admin.component.html',
+  styleUrl: './project-impl-types-admin.component.scss',
 })
-export class ProjectImplTypeAdminComponent implements OnInit {
+export class ProjectImplTypesAdminComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router
