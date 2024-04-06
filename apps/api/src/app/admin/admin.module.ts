@@ -9,6 +9,7 @@ import { BudgetSourcesModule } from './budget-sources/budget-sources.module';
 import { ProjectsModule } from './projects/projects.module';
 import { ProjectCategoriesModule } from './project-categories/project-categories.module';
 import { UserRolesModule } from './user-roles/user-roles.module';
+import { DepartmentsModule } from './departments/departments.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { UserRolesModule } from './user-roles/user-roles.module';
     ProjectImplTypesModule,
     BudgetSourcesModule,
     ProjectsModule,
+    DepartmentsModule,
   ],
 })
 export class AdminModule {}

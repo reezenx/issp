@@ -16,7 +16,8 @@ export type SubjectType =
   | 'ImplementationType'
   | 'ProjectCategory'
   | 'BudgetType'
-  | 'BudgetSource';
+  | 'BudgetSource'
+  | 'Department';
 export const Subject: { [key: string]: SubjectType } = {
   User: 'User',
   UserRole: 'UserRole',
