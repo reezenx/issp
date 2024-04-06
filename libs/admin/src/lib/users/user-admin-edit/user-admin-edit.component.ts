@@ -50,8 +50,8 @@ export class UserAdminEditComponent implements OnInit {
 
   initSubs() {
     const routeSub = this.route.data.subscribe(
-      ({ user, agenciesDropdown, userRolesDropdown }) => {
-        this.item = user;
+      ({ item, agenciesDropdown, userRolesDropdown }) => {
+        this.item = item;
         this.agenciesDropdown = agenciesDropdown;
         this.userRolesDropdown = userRolesDropdown;
         this.form.patchValue(this.item);
@@ -78,10 +78,14 @@ export class UserAdminEditComponent implements OnInit {
         Validators.email,
       ]),
       agencyId: new FormControl<string>('', [Validators.required]),
-      status: new FormControl<UserStatus>(null),
+      status: new FormControl<UserStatus>(null, [Validators.required]),
       roleId: new FormControl<string>(null, [Validators.required]),
       tags: new FormControl<string[]>([]),
     });
+  }
+
+  get f() {
+    return this.form.controls;
   }
 
   save() {
@@ -95,6 +99,7 @@ export class UserAdminEditComponent implements OnInit {
             verticalPosition: 'bottom',
             duration: 5000,
           });
+          this.form.markAsPristine();
         });
     }
   }
@@ -118,6 +123,11 @@ export class UserAdminEditComponent implements OnInit {
     } else {
       this.navigateToList();
     }
+  }
+
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
   }
 
   navigateToList() {

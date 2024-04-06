@@ -37,7 +37,7 @@ export class UsersService {
             name: true,
           },
         },
-        roles: {
+        role: {
           select: {
             name: true,
           },

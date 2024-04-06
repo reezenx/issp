@@ -43,8 +43,14 @@ export class UserDetails extends Assign implements User {
       enumerable: true,
     });
 
-    Object.defineProperty(this, 'roleNames', {
-      get: () => this.roles.map((role) => role.name).join(', '),
+    // User for multi roles testing
+    // Object.defineProperty(this, 'rolesName', {
+    //   get: () => this.roles.map((role) => role.name).join(', '),
+    //   enumerable: true,
+    // });
+
+    Object.defineProperty(this, 'roleName', {
+      get: () => this.role.name,
       enumerable: true,
     });
   }
@@ -58,16 +64,13 @@ export class UserDetails extends Assign implements User {
   password: string;
   phone: string;
   readOnly: boolean;
-  role: $Enums.Role[];
+  role: { name: string };
   roleId: string;
   roles: { name: string }[];
   sessionToken: string;
   status: $Enums.UserStatus;
   tags: string[];
-
-  agency: {
-    name: string;
-  };
+  agency: { name: string };
 
   createdBy: string;
   updatedBy: string;

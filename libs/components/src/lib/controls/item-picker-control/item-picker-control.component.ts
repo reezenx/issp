@@ -86,10 +86,6 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     );
   }
 
-  get shouldLabelFloat() {
-    return this.focused || !this.empty;
-  }
-
   @Input()
   fieldName: string = null;
 
@@ -97,7 +93,19 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
   fieldHint: string = null;
 
   @Input()
+  class: string = 'w-100 m-b-10';
+
+  @Input()
+  prefixIcon: string = 'search';
+
+  @Input()
+  suffixIcon: string = 'backspace';
+
+  @Input()
   displayCode = true;
+
+  @Input()
+  sentenceCase = false;
 
   @Input()
   itemsDropdown: ItemDropdown[] = [];
@@ -224,11 +232,19 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
 
   displayFn = (item: ItemDropdown | string): string => {
     if (typeof item === 'string') return item;
-    return item && item.name
-      ? this.displayCode
-        ? `(${item.code}) ${this.sentenceCasePipe.transform(item.name)}`
-        : this.sentenceCasePipe.transform(item.name)
-      : '';
+    let display = '';
+    let name = '';
+    if (item && item.name) {
+      name = this.sentenceCase
+        ? this.sentenceCasePipe.transform(item.name)
+        : item.name;
+      if (this.displayCode) {
+        name = `(${item.code}) ${name}`;
+      }
+
+      display = name;
+    }
+    return display;
   };
 
   private searchFilterItems(value: string): ItemDropdown[] {
@@ -240,5 +256,10 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
         searchOption?.name?.toLowerCase().includes(searchFilterValue) ||
         searchOption?.code?.toLowerCase().includes(searchFilterValue)
     );
+  }
+
+  discardChanges() {
+    this.searchControl.setValue(null);
+    this.form.controls['cnt'].patchValue(null);
   }
 }

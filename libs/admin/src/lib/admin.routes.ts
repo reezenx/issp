@@ -87,7 +87,7 @@ export const AdminRoutes: Routes = [
           breadcrumbSkipNode: true,
         },
         resolve: {
-          users: usersResolver,
+          items: usersResolver,
         },
       },
       {
@@ -107,10 +107,10 @@ export const AdminRoutes: Routes = [
         title: 'Edit',
         component: UserAdminEditComponent,
         data: {
-          breadcrumbRouteDataProperty: 'user.name',
+          breadcrumbRouteDataProperty: 'item.name',
         },
         resolve: {
-          user: userResolver,
+          item: userResolver,
           agenciesDropdown: agenciesDropdownResolver,
           userRolesDropdown: userRolesDropdownResolver,
         },

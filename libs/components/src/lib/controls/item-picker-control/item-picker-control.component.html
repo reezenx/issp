@@ -1,10 +1,13 @@
 <mat-form-field
   appearance="outline"
-  class="w-100"
+  [class]="class"
   color="primary"
   hintLabel="{{ fieldHint }}"
 >
   <mat-label class="mat-subtitle-2 f-w-600">{{ fieldName }}</mat-label>
+  <mat-icon matPrefix class="op-5">
+    <i-tabler [name]="prefixIcon" class="icon-18 d-flex"></i-tabler>
+  </mat-icon>
   <input
     [attr.data-test]="id"
     type="text"
@@ -14,7 +17,26 @@
     [matAutocomplete]="itemAutoComplete"
     [placeholder]="placeholder"
   />
-
+  <button
+    mat-icon-button
+    matSuffix
+    type="button"
+    class="m-r-4"
+    (click)="discardChanges()"
+    [attr.aria-label]="'Clear'"
+    [disabled]="!cnt.value"
+  >
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+  </button>
+  @if(searchControl.touched && searchControl.invalid) {
+  <mat-hint class="m-b-16 error-msg">
+    @if(searchControl.errors && searchControl.errors['required']) {
+    <div class="text-error">{{ fieldName }} is required.</div>
+    }
+  </mat-hint>
+  }
   <mat-autocomplete
     #itemAutoComplete="matAutocomplete"
     [displayWith]="displayFn"
@@ -22,12 +44,8 @@
   >
     @for(option of itemsFilteredOptions$ | async; track option.id) {
     <mat-option [value]="option">
-      <ng-container *ngIf="displayCode; else hiddenCode">
-        ({{ option.code }}) {{ option.name | sentenceCase }}
-      </ng-container>
-      <ng-template #hiddenCode>
-        {{ option.name | sentenceCase }}
-      </ng-template>
+      {{ displayCode ? '(' + option.code + ')' : '' }}
+      {{ sentenceCase ? (option.name | sentenceCase) : option.name }}
     </mat-option>
     }
   </mat-autocomplete>

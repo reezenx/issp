@@ -62,7 +62,7 @@
                 [attr.aria-label]="'Clear Email'"
                 [disabled]="!email.value"
               >
-                <mat-icon matPrefix class="op-5">
+                <mat-icon class="op-5">
                   <i-tabler name="backspace" class="icon-20 d-flex"></i-tabler>
                 </mat-icon>
               </button>
@@ -72,13 +72,12 @@
                 <div class="text-error">Email is required.</div>
                 } @if(f['email'].errors && f['email'].errors['email']) {
                 <div class="text-error">
-                  Email should be in format (name&#64;email.com)
+                  Email should be in format (name&#64;agency.com)
                 </div>
                 }
               </mat-hint>
               }
             </mat-form-field>
-            <!-- password -->
             <mat-form-field
               appearance="outline"
               class="w-100 m-b-20"

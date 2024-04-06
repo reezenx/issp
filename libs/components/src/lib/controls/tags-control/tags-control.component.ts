@@ -97,7 +97,16 @@ export class TagsControlComponent implements ControlValueAccessor {
   ariaLabel: string = 'Enter Tags';
 
   @Input()
+  class: string = 'w-100 m-b-10';
+
+  @Input()
   fieldHint: string = null;
+
+  @Input()
+  prefixIcon: string = 'tags';
+
+  @Input()
+  suffixIcon: string = 'backspace';
 
   // eslint-disable-next-line @angular-eslint/no-input-rename
   @Input('aria-describedby')
@@ -252,5 +261,10 @@ export class TagsControlComponent implements ControlValueAccessor {
     // this.tagsControl.patchValue(this.tags);
     this.form.controls['cnt'].patchValue(this.tags);
     this.stateChanges.next();
+  }
+
+  discardChanges() {
+    this.tags = [];
+    this.form.controls['cnt'].patchValue(null);
   }
 }

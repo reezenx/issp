@@ -73,11 +73,13 @@ export class UserAdminNewComponent implements OnInit {
       ]),
       agencyId: new FormControl<string>('', [Validators.required]),
       roleId: new FormControl<string>('', [Validators.required]),
-      status: new FormControl<UserStatus>(UserStatus.ACTIVE, [
-        Validators.required,
-      ]),
+      status: new FormControl<UserStatus>(null, [Validators.required]),
       tags: new FormControl<string[]>([]),
     });
+  }
+
+  get f() {
+    return this.form.controls;
   }
 
   save() {
