@@ -10,17 +10,21 @@ import { RichTextControlComponent } from './rich-text-control/rich-text-control.
 import { ItemPickerControlComponent } from './item-picker-control/item-picker-control.component';
 import { PipesModule } from '@issp/common';
 import { SentenceCasePipe } from 'libs/common/src/lib/ui/pipes/sentence-case.pipe';
+import { TagsControlComponent } from './tags-control/tags-control.component';
+import { TablerIconsModule } from 'angular-tabler-icons';
 
 @NgModule({
   declarations: [
     YearPickerControlComponent,
     ItemPickerControlComponent,
     RichTextControlComponent,
+    TagsControlComponent,
   ],
   exports: [
     ItemPickerControlComponent,
     YearPickerControlComponent,
     RichTextControlComponent,
+    TagsControlComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +33,7 @@ import { SentenceCasePipe } from 'libs/common/src/lib/ui/pipes/sentence-case.pip
     FormsModule,
     PipesModule,
     ReactiveFormsModule,
+    TablerIconsModule,
   ],
   providers: [SentenceCasePipe],
 })

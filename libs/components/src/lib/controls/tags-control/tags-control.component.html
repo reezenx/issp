@@ -1,0 +1,33 @@
+<mat-form-field
+  appearance="outline"
+  class="w-100"
+  color="primary"
+  hintLabel="{{ fieldHint }}"
+>
+  <mat-label class="mat-subtitle-2 f-w-600">{{ fieldName }}</mat-label>
+  <mat-chip-grid #chipGrid [ariaLabel]="ariaLabel">
+    @for(item of tags; track item) {
+    <mat-chip-row
+      (removed)="remove(item)"
+      [editable]="true"
+      (edited)="edit(item, $event)"
+      [aria-description]="'press enter to edit ' + item"
+      class="f-s-14"
+    >
+      {{ item }}
+      <button matChipRemove [attr.aria-label]="'remove ' + item">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+    }
+
+    <input
+      [formControl]="inputControl"
+      [placeholder]="placeholder"
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-grid>
+</mat-form-field>
