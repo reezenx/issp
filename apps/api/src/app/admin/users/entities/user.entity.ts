@@ -1,17 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { $Enums, Permission, User, UserRole } from '@prisma/client';
+import { $Enums, User, UserRole } from '@prisma/client';
 import { Exclude } from 'class-transformer';
 
 export class UserEntity implements User {
   constructor(user: UserEntity) {
     Object.assign(this, user);
   }
+  @ApiProperty()
+  readOnly: boolean;
 
   @ApiProperty()
   tags: string[];
-
-  @ApiProperty()
-  role: $Enums.Role[];
 
   @ApiProperty()
   status: $Enums.UserStatus;
@@ -54,10 +53,7 @@ export class UserEntity implements User {
 
   @ApiProperty()
   roles?: Pick<UserRole, 'name'>[];
-  // @ApiProperty()
-  // roles?: (Pick<UserRole, 'name'> & {
-  //   permissions?: Pick<Permission, 'action' | 'conditions' | 'subject'>;
-  // })[];
+
   @ApiProperty()
   roleId: string;
 }

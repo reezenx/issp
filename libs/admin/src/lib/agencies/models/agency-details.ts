@@ -39,16 +39,17 @@ export class AgencyDetails extends Assign implements Agency {
     });
   }
 
-  status: Status;
-  uacs: string;
-  departmentId: string;
-  id: string;
-  code: string;
   categoryId: string;
-  name: string;
+  code: string;
+  departmentId: string;
   email: string;
+  id: string;
+  name: string;
   phone: string;
+  readOnly: boolean;
+  status: Status;
   tags: string[];
+  uacs: string;
 
   category: {
     name: string;

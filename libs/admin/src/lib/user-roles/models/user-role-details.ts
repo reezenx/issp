@@ -36,6 +36,9 @@ export class UserRoleDetails extends Assign implements UserRole {
 
   id: string;
   name: string;
+  readOnly: boolean;
+  tags: string[];
+
   createdBy: string;
   updatedBy: string;
   createdAt: Date;

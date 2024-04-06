@@ -38,6 +38,7 @@ export class UserAdminEditComponent implements OnInit {
   form: FormGroup;
   item: UserDetails;
   agenciesDropdown: ItemDropdown[] = [];
+  userRolesDropdown: ItemDropdown[] = [];
   rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
   subs: Subscription[] = [];
@@ -48,11 +49,14 @@ export class UserAdminEditComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ user, agenciesDropdown }) => {
-      this.item = user;
-      this.agenciesDropdown = agenciesDropdown;
-      this.form.patchValue(this.item);
-    });
+    const routeSub = this.route.data.subscribe(
+      ({ user, agenciesDropdown, userRolesDropdown }) => {
+        this.item = user;
+        this.agenciesDropdown = agenciesDropdown;
+        this.userRolesDropdown = userRolesDropdown;
+        this.form.patchValue(this.item);
+      }
+    );
     this.subs.push(routeSub);
 
     const currentIsspSub = this.usersService.currentContextItem$.subscribe(
@@ -75,7 +79,8 @@ export class UserAdminEditComponent implements OnInit {
       ]),
       agencyId: new FormControl<string>('', [Validators.required]),
       status: new FormControl<UserStatus>(null),
-      role: new FormControl<Role[]>(null, [Validators.required]),
+      roleId: new FormControl<string>(null, [Validators.required]),
+      tags: new FormControl<string[]>([]),
     });
   }
 

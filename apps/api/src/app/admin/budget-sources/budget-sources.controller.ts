@@ -53,6 +53,15 @@ export class BudgetSourcesController {
     return items.map((item) => new ItemEntityDropdown(item));
   }
 
+  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: BudgetSourceEntity })
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return new BudgetSourceEntity(await this.budgetSourcesService.findOne(id));
+  }
+
   @checkAbilities({ action: 'update', subject: 'BudgetSource' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

@@ -23,10 +23,10 @@
     @for(option of itemsFilteredOptions$ | async; track option.id) {
     <mat-option [value]="option">
       <ng-container *ngIf="displayCode; else hiddenCode">
-        ({{ option.code }}) {{ option.name }}
+        ({{ option.code }}) {{ option.name | sentenceCase }}
       </ng-container>
       <ng-template #hiddenCode>
-        {{ option.name }}
+        {{ option.name | sentenceCase }}
       </ng-template>
     </mat-option>
     }

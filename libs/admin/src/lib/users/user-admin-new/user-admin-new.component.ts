@@ -16,7 +16,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { UserStatus, Role } from '@prisma/client';
+import { UserStatus } from '@prisma/client';
 import { ItemDropdown, User_Roles, User_Statuses } from '@issp/common';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
@@ -77,8 +77,6 @@ export class UserAdminNewComponent implements OnInit {
         Validators.required,
       ]),
       tags: new FormControl<string[]>([]),
-      createdBy: new FormControl<string>('System'),
-      updatedBy: new FormControl<string>('System'),
     });
   }
 

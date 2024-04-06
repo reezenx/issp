@@ -39,9 +39,12 @@ export class ProjectTypeDetails extends Assign implements ProjectType {
     });
   }
 
-  id: string;
   code: string;
+  id: string;
   name: string;
+  readOnly: boolean;
+  tags: string[];
+
   createdBy: string;
   updatedBy: string;
   createdAt: Date;

@@ -29,6 +29,8 @@ model Category {
   name      String
   agencies  Agency[]
   createdBy String
+  readOnly  Boolean?  @default(false)
+  tags      String[]
   updatedBy String?
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
@@ -44,6 +46,7 @@ model Agency {
   name         String
   email        String
   phone        String?
+  readOnly     Boolean?    @default(false)
   status       Status      @default(ACTIVE)
   users        User[]
   uacs         String
@@ -67,6 +70,8 @@ model Department {
   uacs      String    @unique
   status    Status    @default(ACTIVE)
   agencies  Agency[]
+  readOnly  Boolean?  @default(false)
+  tags      String[]
   createdBy String
   updatedBy String?
   createdAt DateTime  @default(now())
@@ -89,9 +94,9 @@ model User {
   updatedAt     DateTime?       @updatedAt
   agency        Agency          @relation(fields: [agencyId], references: [id])
   agencyId      String
-  role          Role[]          @default([VIEWER])
-  userRole      UserRole        @relation("UserRole", fields: [roleId], references: [id])
-  roleId        String
+  readOnly      Boolean?        @default(false)
+  role          UserRole?       @relation("UserRole", fields: [roleId], references: [id])
+  roleId        String?
   status        UserStatus
   profile       Profile?
   issps         ISSP[]          @relation("ISSPUsers")
@@ -110,6 +115,8 @@ model UserRole {
   createdAt   DateTime     @default(now())
   updatedBy   String?
   updatedAt   DateTime?    @updatedAt()
+  readOnly    Boolean?     @default(false)
+  tags        String[]
   permissions Permission[]
   users       User[]
   user        User[]       @relation("UserRole")
@@ -125,6 +132,7 @@ model Permission {
   subject    String
   inverted   Boolean?  @default(false)
   readOnly   Boolean?  @default(false)
+  tags       String[]
   conditions Json?
   reason     String?
   createdBy  String
@@ -174,6 +182,8 @@ model ProjectType {
   updatedBy          String?
   createdAt          DateTime          @default(now())
   updatedAt          DateTime?         @updatedAt()
+  readOnly           Boolean?          @default(false)
+  tags               String[]
   projects           Project[]
   projectTypeGroup   ProjectTypeGroup? @relation(fields: [projectTypeGroupId], references: [id])
   projectTypeGroupId String?
@@ -185,6 +195,8 @@ model ProjectTypeGroup {
   id           String        @id @default(cuid())
   code         String        @unique
   name         String
+  readOnly     Boolean?      @default(false)
+  tags         String[]
   createdBy    String
   updatedBy    String?
   createdAt    DateTime      @default(now())
@@ -199,6 +211,8 @@ model ProjectCategory {
   code      String    @unique
   name      String
   projects  Project[]
+  readOnly  Boolean?  @default(false)
+  tags      String[]
   createdBy String
   updatedBy String?
   createdAt DateTime  @default(now())
@@ -212,6 +226,8 @@ model ProjectImplementationType {
   code      String    @unique
   name      String
   projects  Project[]
+  readOnly  Boolean?  @default(false)
+  tags      String[]
   createdBy String
   updatedBy String?
   createdAt DateTime  @default(now())
@@ -225,6 +241,8 @@ model BudgetType {
   code      String    @unique
   name      String
   projects  Project[]
+  readOnly  Boolean?  @default(false)
+  tags      String[]
   createdBy String
   updatedBy String?
   createdAt DateTime  @default(now())
@@ -238,6 +256,8 @@ model BudgetSource {
   code      String    @unique
   name      String
   projects  Project[]
+  readOnly  Boolean?  @default(false)
+  tags      String[]
   createdBy String
   updatedBy String?
   createdAt DateTime  @default(now())
@@ -285,6 +305,11 @@ model ActionHistory {
   tags         String[]
   createdAt    DateTime   @default(now())
   createdBy    String
+}
+
+model Temp {
+  id   String @id @default(cuid())
+  role Role?
 }
 
 enum Role {

@@ -53,9 +53,9 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Implementation Type',
+    name: 'Implementation Types',
     icon: 'browser-check',
-    route: 'admin/implementationtypes',
+    route: 'admin/impl-types',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {

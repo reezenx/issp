@@ -112,6 +112,7 @@ export const AdminRoutes: Routes = [
         resolve: {
           user: userResolver,
           agenciesDropdown: agenciesDropdownResolver,
+          userRolesDropdown: userRolesDropdownResolver,
         },
       },
     ],
@@ -158,7 +159,7 @@ export const AdminRoutes: Routes = [
     ],
   },
   {
-    path: 'implementationtypes',
+    path: 'impl-types',
     component: ProjectImplTypesAdminShellComponent,
     data: {
       breadcrumb: 'Implementation Type',
@@ -173,7 +174,7 @@ export const AdminRoutes: Routes = [
           breadcrumbSkipNode: true,
         },
         resolve: {
-          implementationtypes: projectImplTypesResolver,
+          items: projectImplTypesResolver,
         },
       },
       {
@@ -189,7 +190,7 @@ export const AdminRoutes: Routes = [
         path: ':id',
         title: 'Edit Implementation Type',
         data: {
-          breadcrumb: 'Edit',
+          breadcrumbRouteDataProperty: 'item.name',
         },
         component: ProjectImplTypeAdminEditComponent,
         resolve: {
@@ -249,10 +250,10 @@ export const AdminRoutes: Routes = [
         title: 'Budget Types',
         component: BudgetTypesAdminComponent,
         data: {
-          breadcrumb: 'Budget Types',
+          breadcrumbSkpNode: true,
         },
         resolve: {
-          budgettypes: budgetTypesResolver,
+          items: budgetTypesResolver,
         },
       },
       {
@@ -268,7 +269,7 @@ export const AdminRoutes: Routes = [
         path: ':id',
         title: 'Edit Budget Type',
         data: {
-          breadcrumb: 'Edit',
+          breadcrumbRouteDataProperty: 'item.name',
         },
         component: BudgetTypesAdminEditComponent,
         resolve: {
@@ -292,7 +293,7 @@ export const AdminRoutes: Routes = [
           breadcrumb: 'Budget Sources',
         },
         resolve: {
-          budgetsources: budgetSourcesResolver,
+          items: budgetSourcesResolver,
         },
       },
       {
@@ -308,7 +309,7 @@ export const AdminRoutes: Routes = [
         path: ':id',
         title: 'Edit Budget Source',
         data: {
-          breadcrumb: 'Edit',
+          breadcrumbRouteDataProperty: 'item.name',
         },
         component: BudgetSourcesAdminEditComponent,
         resolve: {

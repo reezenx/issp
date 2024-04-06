@@ -31,14 +31,14 @@
               }
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Roles</mat-label>
-            <mat-select formControlName="role" multiple>
-              @for (item of rolesList; track item) {
-              <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
+          <issp-item-picker-control
+            placeholder="Search & Select Role"
+            formControlName="roleId"
+            fieldName="Role"
+            [required]="true"
+            [displayCode]="false"
+            [itemsDropdown]="userRolesDropdown"
+          ></issp-item-picker-control>
         </div>
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">

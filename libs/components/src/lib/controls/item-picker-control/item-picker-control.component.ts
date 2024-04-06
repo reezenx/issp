@@ -20,6 +20,7 @@ import { Subscription, Subject, Observable, startWith, map } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ItemDropdown } from '@issp/common';
+import { SentenceCasePipe } from 'libs/common/src/lib/ui/pipes/sentence-case.pipe';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ITEM_PICKER_FORM_CONTROL_VALUE_ACCESSOR: any = {
@@ -38,7 +39,10 @@ export const ITEM_PICKER_FORM_CONTROL_VALUE_ACCESSOR: any = {
 export class ItemPickerControlComponent implements ControlValueAccessor {
   static nextId = 0;
 
-  constructor(formBuilder: UntypedFormBuilder) {
+  constructor(
+    formBuilder: UntypedFormBuilder,
+    private sentenceCasePipe: SentenceCasePipe
+  ) {
     this.itemsFilteredOptions$ = this.searchControl.valueChanges.pipe(
       startWith(''),
       map((value: string) => this.searchFilterItems(value || ''))
@@ -222,8 +226,8 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     if (typeof item === 'string') return item;
     return item && item.name
       ? this.displayCode
-        ? `(${item.code}) ${item.name}`
-        : item.name
+        ? `(${item.code}) ${this.sentenceCasePipe.transform(item.name)}`
+        : this.sentenceCasePipe.transform(item.name)
       : '';
   };
 
@@ -233,8 +237,8 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
 
     return this.itemsDropdown.filter(
       (searchOption) =>
-        searchOption.name.toLowerCase().includes(searchFilterValue) ||
-        searchOption.code.toLowerCase().includes(searchFilterValue)
+        searchOption?.name?.toLowerCase().includes(searchFilterValue) ||
+        searchOption?.code?.toLowerCase().includes(searchFilterValue)
     );
   }
 }

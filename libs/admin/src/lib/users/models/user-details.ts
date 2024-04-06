@@ -48,28 +48,31 @@ export class UserDetails extends Assign implements User {
       enumerable: true,
     });
   }
-  id: string;
-  sessionToken: string;
-  createdBy: string;
-  updatedBy: string;
-  createdAt: Date;
-  updatedAt: Date;
+
   agencyId: string;
-  tags: string[];
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  role: $Enums.Role[];
-  roles: { name: string }[];
-  roleId: string;
-  status: $Enums.UserStatus;
   authoredIsspIds: string[];
+  email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  password: string;
+  phone: string;
+  readOnly: boolean;
+  role: $Enums.Role[];
+  roleId: string;
+  roles: { name: string }[];
+  sessionToken: string;
+  status: $Enums.UserStatus;
+  tags: string[];
 
   agency: {
     name: string;
   };
+
+  createdBy: string;
+  updatedBy: string;
+  createdAt: Date;
+  updatedAt: Date;
 
   private _createdAt: Date = new Date('0001-01-01T00:00:00Z');
   private _updatedAt: Date = new Date('0001-01-01T00:00:00Z');

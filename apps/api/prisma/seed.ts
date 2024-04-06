@@ -21,12 +21,12 @@ async function createBaseData() {
 }
 
 async function main() {
-  // await createBaseData();
-  // await createAgencies(prisma);
-  // await createISSPs(prisma);
+  await createBaseData();
+  await createAgencies(prisma);
+  await createISSPs(prisma);
   await createUsers(prisma);
-  // await createProjects(prisma);
-  // await createActionHistory(prisma);
+  await createProjects(prisma);
+  await createActionHistory(prisma);
 }
 
 main()

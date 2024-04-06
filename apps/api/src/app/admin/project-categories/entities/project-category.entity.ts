@@ -7,6 +7,12 @@ export class ProjectCategoryEntity implements ProjectCategory {
   }
 
   @ApiProperty()
+  readOnly: boolean;
+
+  @ApiProperty()
+  tags: string[];
+
+  @ApiProperty()
   id: string;
 
   @ApiProperty()

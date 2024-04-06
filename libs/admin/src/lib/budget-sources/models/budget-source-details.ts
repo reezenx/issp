@@ -34,9 +34,12 @@ export class BudgetSourceDetails extends Assign implements BudgetSource {
     });
   }
 
-  id: string;
   code: string;
+  id: string;
   name: string;
+  readOnly: boolean;
+  tags: string[];
+
   createdBy: string;
   updatedBy: string;
   createdAt: Date;

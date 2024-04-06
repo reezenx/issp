@@ -24,20 +24,13 @@ export class UsersService {
         ...userData,
         createdBy: `${user.firstName} ${user.lastName}`,
         agency: { connect: { id: agencyId } },
-        userRole: { connect: { id: roleId } },
+        role: { connect: { id: roleId } },
       },
     });
   }
 
   findAll() {
     return this.prisma.user.findMany({
-      where: {
-        NOT: {
-          role: {
-            has: 'SUPER_ADMIN',
-          },
-        },
-      },
       include: {
         agency: {
           select: {
@@ -62,7 +55,7 @@ export class UsersService {
             name: true,
           },
         },
-        roles: {
+        role: {
           select: {
             name: true,
           },

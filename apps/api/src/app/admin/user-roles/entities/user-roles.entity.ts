@@ -7,6 +7,12 @@ export class UserRoleEntity implements UserRole {
   }
 
   @ApiProperty()
+  readOnly: boolean;
+
+  @ApiProperty()
+  tags: string[];
+
+  @ApiProperty()
   id: string;
 
   @ApiProperty()

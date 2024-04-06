@@ -55,8 +55,8 @@ export class BudgetTypesAdminComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ budgettypes }) => {
-      this.gridData = budgettypes;
+    const routeSub = this.route.data.subscribe(({ items }) => {
+      this.gridData = items;
     });
     this.subs.push(routeSub);
   }

@@ -1,10 +1,16 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Category } from "@prisma/client";
+import { ApiProperty } from '@nestjs/swagger';
+import { Category } from '@prisma/client';
 
 export class CategoryEntity implements Category {
-  constructor(category: CategoryEntity){
+  constructor(category: CategoryEntity) {
     Object.assign(this, category);
   }
+
+  @ApiProperty()
+  readOnly: boolean;
+
+  @ApiProperty()
+  tags: string[];
 
   @ApiProperty()
   id: string;
