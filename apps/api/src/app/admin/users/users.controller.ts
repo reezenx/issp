@@ -15,6 +15,8 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { UserEntity } from './entities/user.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { CurrentUser } from '@issp/api-auth';
+import { User } from '@prisma/client';
 
 @ApiTags('admin/users')
 @Controller('admin/users')
@@ -26,8 +28,11 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    return new UserEntity(await this.usersService.create(createUserDto));
+  async create(
+    @Body() createUserDto: CreateUserDto,
+    @CurrentUser() user: User
+  ) {
+    return new UserEntity(await this.usersService.create(createUserDto, user));
   }
 
   @checkAbilities({ action: 'read', subject: 'User' })
@@ -54,8 +59,14 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserEntity })
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return new UserEntity(await this.usersService.update(id, updateUserDto));
+  async update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+    @CurrentUser() user: User
+  ) {
+    return new UserEntity(
+      await this.usersService.update(id, updateUserDto, user)
+    );
   }
 
   @checkAbilities({ action: 'delete', subject: 'User' })

@@ -2,6 +2,7 @@ export const API = {
   BASE: 'api/v1',
   ADMIN: {
     USERS: '/admin/users',
+    USER_ROLES: '/admin/user-roles',
     CATEGORIES: '/admin/categories',
     AGENCIES: '/admin/agencies',
     PROJECTS: '/admin/projects',

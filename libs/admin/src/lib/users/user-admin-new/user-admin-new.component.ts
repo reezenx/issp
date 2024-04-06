@@ -1,5 +1,6 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormGroup,
@@ -17,6 +18,7 @@ import {
 } from '@issp/components';
 import { UserStatus, Role } from '@prisma/client';
 import { ItemDropdown, User_Roles, User_Statuses } from '@issp/common';
+import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -35,10 +37,14 @@ export class UserAdminNewComponent implements OnInit {
   ) {}
 
   agenciesDropdown: ItemDropdown[] = [];
+  userRolesDropdown: ItemDropdown[] = [];
   form: FormGroup;
   rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
   subs: Subscription[] = [];
+  addOnBlur = true;
+  tags: string[] = [];
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   ngOnInit(): void {
     this.initForm();
@@ -46,9 +52,12 @@ export class UserAdminNewComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ agenciesDropdown }) => {
-      this.agenciesDropdown = agenciesDropdown;
-    });
+    const routeSub = this.route.data.subscribe(
+      ({ agenciesDropdown, userRolesDropdown }) => {
+        this.agenciesDropdown = agenciesDropdown;
+        this.userRolesDropdown = userRolesDropdown;
+      }
+    );
     this.subs.push(routeSub);
   }
 
@@ -63,15 +72,16 @@ export class UserAdminNewComponent implements OnInit {
         Validators.email,
       ]),
       agencyId: new FormControl<string>('', [Validators.required]),
+      roleId: new FormControl<string>('', [Validators.required]),
       status: new FormControl<UserStatus>(UserStatus.ACTIVE, [
         Validators.required,
       ]),
-      role: new FormControl<Role[]>([Role.VIEWER], [Validators.required]),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
     });
   }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.usersService
@@ -86,6 +96,45 @@ export class UserAdminNewComponent implements OnInit {
           this.navigateToEdit(data.id);
         });
     }
+  }
+
+  get tagsControl() {
+    return this.form.controls.tags;
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.tags.push(value);
+    }
+
+    this.tagsControl.patchValue(this.tags);
+    event.chipInput?.clear();
+  }
+
+  edit(tag: string, event: MatChipEditedEvent) {
+    const value = event.value.trim();
+
+    if (!value) {
+      this.remove(tag);
+      return;
+    }
+
+    const index = this.tags.indexOf(tag);
+    if (index >= 0) {
+      this.tags[index] = value;
+    }
+    this.tagsControl.patchValue(this.tags);
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+    this.tagsControl.patchValue(this.tags);
   }
 
   discardChanges() {

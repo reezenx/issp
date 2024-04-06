@@ -52,6 +52,7 @@ import { projectImplTypesDropdownResolver } from './project-impl-types/resolvers
 import { budgetTypesDropdownResolver } from './budget-types/resolvers/budget-types-dropdown.resolver';
 import { budgetSourcesDropdownResolver } from './budget-sources/resolvers/budget-sources-dropdown.resolver';
 import { isspsDropdownResolver } from '@issp/issp';
+import { userRolesDropdownResolver } from './user-roles/resolvers/user-roles-dropdown.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -98,6 +99,7 @@ export const AdminRoutes: Routes = [
         },
         resolve: {
           agenciesDropdown: agenciesDropdownResolver,
+          userRolesDropdown: userRolesDropdownResolver,
         },
       },
       {

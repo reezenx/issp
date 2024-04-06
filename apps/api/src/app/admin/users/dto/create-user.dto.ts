@@ -34,11 +34,6 @@ export class CreateUserDto {
   @ApiProperty()
   status: UserStatus;
 
-  @IsArray()
-  @IsNotEmpty()
-  @ApiProperty()
-  role: Role[];
-
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
@@ -48,16 +43,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ApiProperty()
   roleId: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  createdBy: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  updatedBy: string;
 
   @IsString()
   @IsNotEmpty()

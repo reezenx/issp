@@ -24,14 +24,14 @@
               }
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Roles</mat-label>
-            <mat-select formControlName="role" multiple>
-              @for (item of rolesList; track item) {
-              <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
+          <issp-item-picker-control
+            placeholder="Search & Select UserRole"
+            formControlName="roleId"
+            fieldName="Role"
+            [required]="true"
+            [displayCode]="false"
+            [itemsDropdown]="userRolesDropdown"
+          ></issp-item-picker-control>
         </div>
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -45,6 +45,34 @@
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Email</mat-label>
             <input #email matInput type="text" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tags</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter tags">
+              @for(item of tags; track item) {
+              <mat-chip-row
+                (removed)="remove(item)"
+                [editable]="true"
+                (edited)="edit(item, $event)"
+                [aria-description]="'press enter to edit ' + item"
+                class="f-s-14"
+              >
+                {{ item }}
+                <button matChipRemove [attr.aria-label]="'remove ' + item">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              }
+
+              <!-- formControlName="tags" -->
+              <input
+                placeholder="New tag..."
+                [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-grid>
           </mat-form-field>
         </div>
       </div>
