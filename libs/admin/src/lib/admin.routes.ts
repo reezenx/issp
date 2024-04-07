@@ -59,6 +59,12 @@ import { DepartmentsAdminComponent } from './departments/departments-admin/depar
 import { DepartmentAdminNewComponent } from './departments/department-admin-new/department-admin-new.component';
 import { DepartmentsAdminEditComponent } from './departments/departments-admin-edit/departments-admin-edit.component';
 import { departmentResolver } from './departments/resolvers/department.resolver';
+import { ProjectCategoriesAdminShellComponent } from './project-categories/project-categories-admin-shell/project-categories-admin-shell.component';
+import { ProjectCategoriesAdminComponent } from './project-categories/project-categories-admin/project-categories-admin.component';
+import { projectCategoriesResolver } from './project-categories/resolvers/project-categories.resolver';
+import { ProjectCategoryAdminNewComponent } from './project-categories/project-category-admin-new/project-category-admin-new.component';
+import { ProjectCategoryAdminEditComponent } from './project-categories/project-category-admin-edit/project-category-admin-edit.component';
+import { projectCategoryResolver } from './project-categories/resolvers/project-category.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -360,6 +366,46 @@ export const AdminRoutes: Routes = [
         component: BudgetSourcesAdminEditComponent,
         resolve: {
           item: budgetSourceResolver,
+        },
+      },
+    ],
+  },
+  {
+    path: 'project-categories',
+    component: ProjectCategoriesAdminShellComponent,
+    data: {
+      breadcrumb: 'Project Category',
+    },
+    children: [
+      {
+        path: '',
+        title: 'Project Category',
+        component: ProjectCategoriesAdminComponent,
+        data: {
+          breadcrumbSkipNode: true,
+        },
+        resolve: {
+          items: projectCategoriesResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Project Category',
+        component: ProjectCategoryAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {},
+      },
+      {
+        path: ':id',
+        title: 'Edit Project Category',
+        data: {
+          breadcrumbRouteDataProperty: 'item.name',
+        },
+        component: ProjectCategoryAdminEditComponent,
+        resolve: {
+          item: projectCategoryResolver,
         },
       },
     ],

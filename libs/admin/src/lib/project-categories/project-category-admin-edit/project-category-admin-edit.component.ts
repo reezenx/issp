@@ -1,32 +1,32 @@
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { UntilDestroy } from '@ngneat/until-destroy';
 import { Component, OnInit } from '@angular/core';
-import { DepartmentsService } from '../services/departments.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { DepartmentDetails } from '../models/department-details';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { ProjectCategoriesService } from '../services/project-categories.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectCategoryDetails } from '../models/project-category-details';
 import { Subscription, take } from 'rxjs';
 import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-departments-admin-edit',
-  templateUrl: './departments-admin-edit.component.html',
-  styleUrl: './departments-admin-edit.component.scss',
+  selector: 'issp-project-category-admin-edit',
+  templateUrl: './project-category-admin-edit.component.html',
+  styleUrl: './project-category-admin-edit.component.scss',
 })
-export class DepartmentsAdminEditComponent implements OnInit {
+export class ProjectCategoryAdminEditComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly departmentsService: DepartmentsService,
+    private readonly projectCategoriesService: ProjectCategoriesService,
     private readonly snackBar: MatSnackBar,
     private readonly dialog: MatDialog
   ) {}
 
   form: FormGroup;
-  item: DepartmentDetails;
+  item: ProjectCategoryDetails;
   subs: Subscription[] = [];
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class DepartmentsAdminEditComponent implements OnInit {
     this.subs.push(routeSub);
 
     const currentIsspSub =
-      this.departmentsService.currentContextItem$.subscribe((data) => {
+      this.projectCategoriesService.currentContextItem$.subscribe((data) => {
         this.item = data;
       });
     this.subs.push(currentIsspSub);
@@ -53,18 +53,17 @@ export class DepartmentsAdminEditComponent implements OnInit {
       id: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
-      uacs: new FormControl<string>('', [Validators.required]),
       updatedBy: new FormControl<string>('System'),
     });
   }
 
   save() {
     if (this.form.valid && this.form.dirty) {
-      this.departmentsService
+      this.projectCategoriesService
         .updateOne(this.form.value)
         .pipe(take(1))
         .subscribe(() => {
-          this.snackBar.open('Department successfully updated!', 'Ok', {
+          this.snackBar.open('Project Category successfully updated!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,

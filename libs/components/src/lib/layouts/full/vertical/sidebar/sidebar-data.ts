@@ -89,6 +89,12 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
+    name: 'Project Category',
+    icon: 'category',
+    route: 'admin/project-categories',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
     name: 'Pivot Table',
     icon: 'table-plus',
     route: 'admin/pivot',

@@ -4,7 +4,7 @@ import { ProjectCategoryDetails } from '../models/project-category-details';
 import { ProjectCategoriesService } from '../services/project-categories.service';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const projectTypeResolver: ResolveFn<ProjectCategoryDetails> = (
+export const projectCategoryResolver: ResolveFn<ProjectCategoryDetails> = (
   route,
   state
 ) => {

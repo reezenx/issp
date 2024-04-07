@@ -53,6 +53,10 @@ import { DepartmentsAdminComponent } from './departments/departments-admin/depar
 import { DepartmentsAdminShellComponent } from './departments/departments-admin-shell/departments-admin-shell.component';
 import { DepartmentAdminNewComponent } from './departments/department-admin-new/department-admin-new.component';
 import { DepartmentsAdminEditComponent } from './departments/departments-admin-edit/departments-admin-edit.component';
+import { ProjectCategoriesAdminShellComponent } from './project-categories/project-categories-admin-shell/project-categories-admin-shell.component';
+import { ProjectCategoriesAdminComponent } from './project-categories/project-categories-admin/project-categories-admin.component';
+import { ProjectCategoryAdminEditComponent } from './project-categories/project-category-admin-edit/project-category-admin-edit.component';
+import { ProjectCategoryAdminNewComponent } from './project-categories/project-category-admin-new/project-category-admin-new.component';
 
 @NgModule({
   imports: [
@@ -109,6 +113,10 @@ import { DepartmentsAdminEditComponent } from './departments/departments-admin-e
     DepartmentsAdminComponent,
     DepartmentAdminNewComponent,
     DepartmentsAdminEditComponent,
+    ProjectCategoriesAdminShellComponent,
+    ProjectCategoriesAdminComponent,
+    ProjectCategoryAdminEditComponent,
+    ProjectCategoryAdminNewComponent,
   ],
   providers: [DatePipe],
 })
