@@ -94,8 +94,14 @@ export class ProjectsAdminEditComponent implements OnInit {
       id: new FormControl<string>('', [Validators.required]),
       title: new FormControl<string>('', [Validators.required]),
       description: new FormControl<string>('', [Validators.required]),
-      cost: new FormControl<number>(0, [Validators.required]),
-      quantity: new FormControl<number>(0, [Validators.required]),
+      cost: new FormControl<number>(0, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      quantity: new FormControl<number>(0, [
+        Validators.required,
+        Validators.min(1),
+      ]),
       unit: new FormControl<string>('', [Validators.required]),
       agencyId: new FormControl<string>('', [Validators.required]),
       isspId: new FormControl<string>('', [Validators.required]),
@@ -107,6 +113,11 @@ export class ProjectsAdminEditComponent implements OnInit {
       tags: new FormControl<string[]>([]),
     });
   }
+
+  get f() {
+    return this.form.controls;
+  }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.projectsService
@@ -150,5 +161,10 @@ export class ProjectsAdminEditComponent implements OnInit {
 
   navigateToEdit(id: string) {
     this.router.navigate(['../', id], { relativeTo: this.route });
+  }
+
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
   }
 }

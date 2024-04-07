@@ -82,8 +82,14 @@ export class ProjectsAdminNewComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: new FormControl<string>('', [Validators.required]),
       description: new FormControl<string>('', [Validators.required]),
-      cost: new FormControl<number>(0, [Validators.required]),
-      quantity: new FormControl<number>(0, [Validators.required]),
+      cost: new FormControl<number>(0, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+      quantity: new FormControl<number>(0, [
+        Validators.required,
+        Validators.min(1),
+      ]),
       unit: new FormControl<string>('', [Validators.required]),
       agencyId: new FormControl<string>('', [Validators.required]),
       isspId: new FormControl<string>('', [Validators.required]),
@@ -95,6 +101,11 @@ export class ProjectsAdminNewComponent implements OnInit {
       tags: new FormControl<string[]>([]),
     });
   }
+
+  get f() {
+    return this.form.controls;
+  }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.projectsService
