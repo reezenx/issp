@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Project } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/library';
 
 export class ProjectEntity implements Project {
   constructor(project: ProjectEntity) {
