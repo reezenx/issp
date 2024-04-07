@@ -40,21 +40,22 @@
       <e-columns>
         <e-column headerText="Name" field="name">
           <ng-template #template let-data>
-            <a data-test="item-link" [routerLink]="['/', 'admin', 'agencies', data.id]">
+            <a
+              data-test="item-link"
+              [routerLink]="['/', 'admin', 'agencies', data.id]"
+            >
               {{ data.name }}
             </a>
           </ng-template>
         </e-column>
         <e-column headerText="Code" field="code"></e-column>
+        <e-column headerText="UACS" field="uacs"></e-column>
         <e-column headerText="Email" field="email"></e-column>
         <e-column headerText="Phone" field="phone"></e-column>
         <e-column headerText="Created By" field="createdBy" [visible]="false">
         </e-column>
-        <e-column headerText="Category" field="category">
-          <ng-template #template let-data>
-            {{ data.category.name }}
-          </ng-template>
-        </e-column>
+        <e-column headerText="Category" field="categoryName"></e-column>
+        <e-column headerText="Department" field="departmentName"></e-column>
         <e-column headerText="Created At" field="createdAt" [visible]="false">
           <ng-template #template let-data>
             {{ data.createdAt | date : 'medium' }}
@@ -69,8 +70,13 @@
         </e-column>
         <e-column headerText="Actions" field="actions" textAlign="center">
           <ng-template #template let-data>
-            <button mat-icon-button color="primary" type="button" (click)="editItem(data.id)"
-              matTooltip="Edit Category">
+            <button
+              mat-icon-button
+              color="primary"
+              type="button"
+              (click)="editItem(data.id)"
+              matTooltip="Edit Category"
+            >
               <mat-icon matSuffix>
                 <i-tabler name="pencil" class="icon-20"></i-tabler>
               </mat-icon>

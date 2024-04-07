@@ -37,6 +37,11 @@ export class AgencyDetails extends Assign implements Agency {
       get: () => this.category?.name,
       enumerable: true,
     });
+
+    Object.defineProperty(this, 'departmentName', {
+      get: () => this.department?.name,
+      enumerable: true,
+    });
   }
 
   categoryId: string;
@@ -53,7 +58,10 @@ export class AgencyDetails extends Assign implements Agency {
 
   category: {
     name: string;
-    id: string;
+  };
+
+  department: {
+    name: string;
   };
 
   createdBy: string;
