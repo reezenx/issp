@@ -49,6 +49,10 @@ import { UserAdminEditComponent } from './users/user-admin-edit/user-admin-edit.
 import { UserAdminNewComponent } from './users/user-admin-new/user-admin-new.component';
 import { UsersAdminComponent } from './users/users-admin/users-admin.component';
 import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-shell.component';
+import { DepartmentsAdminComponent } from './departments/departments-admin/departments-admin.component';
+import { DepartmentsAdminShellComponent } from './departments/departments-admin-shell/departments-admin-shell.component';
+import { DepartmentAdminNewComponent } from './departments/department-admin-new/department-admin-new.component';
+import { DepartmentsAdminEditComponent } from './departments/departments-admin-edit/departments-admin-edit.component';
 
 @NgModule({
   imports: [
@@ -101,6 +105,10 @@ import { UsersAdminShellComponent } from './users/users-admin-shell/users-admin-
     UserAdminNewComponent,
     UsersAdminComponent,
     UsersAdminShellComponent,
+    DepartmentsAdminShellComponent,
+    DepartmentsAdminComponent,
+    DepartmentAdminNewComponent,
+    DepartmentsAdminEditComponent,
   ],
   providers: [DatePipe],
 })

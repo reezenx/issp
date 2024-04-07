@@ -11,6 +11,7 @@ export const API = {
     IMPL_TYPES: '/admin/project-impl-types',
     BUDGET_TYPES: '/admin/budget-types',
     BUDGET_SOURCES: '/admin/budget-sources',
+    DEPARTMENTS: '/admin/departments',
   },
   USER: {
     ACCOUNTS: '/user/accounts',

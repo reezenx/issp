@@ -53,6 +53,12 @@ import { budgetTypesDropdownResolver } from './budget-types/resolvers/budget-typ
 import { budgetSourcesDropdownResolver } from './budget-sources/resolvers/budget-sources-dropdown.resolver';
 import { isspsDropdownResolver } from '@issp/issp';
 import { userRolesDropdownResolver } from './user-roles/resolvers/user-roles-dropdown.resolver';
+import { DepartmentsAdminShellComponent } from './departments/departments-admin-shell/departments-admin-shell.component';
+import { departmentsResolver } from './departments/resolvers/departments.resolver';
+import { DepartmentsAdminComponent } from './departments/departments-admin/departments-admin.component';
+import { DepartmentAdminNewComponent } from './departments/department-admin-new/department-admin-new.component';
+import { DepartmentsAdminEditComponent } from './departments/departments-admin-edit/departments-admin-edit.component';
+import { departmentResolver } from './departments/resolvers/department.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -195,6 +201,46 @@ export const AdminRoutes: Routes = [
         component: ProjectImplTypeAdminEditComponent,
         resolve: {
           item: projectImplTypeResolver,
+        },
+      },
+    ],
+  },
+  {
+    path: 'departments',
+    component: DepartmentsAdminShellComponent,
+    data: {
+      breadcrumb: 'Department',
+    },
+    children: [
+      {
+        path: '',
+        title: 'Department',
+        component: DepartmentsAdminComponent,
+        data: {
+          breadcrumbSkipNode: true,
+        },
+        resolve: {
+          items: departmentsResolver,
+        },
+      },
+      {
+        path: 'new',
+        title: 'New Department',
+        component: DepartmentAdminNewComponent,
+        data: {
+          breadcrumb: 'New',
+        },
+        resolve: {},
+      },
+      {
+        path: ':id',
+        title: 'Edit Department',
+        data: {
+          breadcrumb: 'Edit',
+        },
+        component: DepartmentsAdminEditComponent,
+        resolve: {
+          item: departmentResolver,
         },
       },
     ],
