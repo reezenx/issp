@@ -54,6 +54,15 @@ export class UsersController {
     return new UserEntity(await this.usersService.findOne(id));
   }
 
+  @checkAbilities({ action: 'read', subject: 'User' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:email')
+  async isEmailExist(@Param('email') email: string) {
+    const data = await this.usersService.isEmailExist(email);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'User' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

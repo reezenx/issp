@@ -17,7 +17,13 @@ import {
   ConfirmationDialogComponentData,
 } from '@issp/components';
 import { UserStatus } from '@prisma/client';
-import { ItemDropdown, User_Roles, User_Statuses } from '@issp/common';
+import {
+  IsKeyUniqueValidatorOptions,
+  ItemDropdown,
+  UniqueKeyValidator,
+  User_Roles,
+  User_Statuses,
+} from '@issp/common';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
 @UntilDestroy({ arrayName: 'subs' })
@@ -67,10 +73,15 @@ export class UserAdminNewComponent implements OnInit {
       lastName: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
       password: new FormControl<string>('ChangeM3!', [Validators.required]),
-      email: new FormControl<string>('', [
-        Validators.required,
-        Validators.email,
-      ]),
+      email: new FormControl<string>('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.usersService.isEmailUnique,
+            {}
+          ),
+        ],
+      }),
       agencyId: new FormControl<string>('', [Validators.required]),
       roleId: new FormControl<string>('', [Validators.required]),
       status: new FormControl<UserStatus>(null, [Validators.required]),

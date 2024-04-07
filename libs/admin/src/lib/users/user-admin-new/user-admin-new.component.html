@@ -1,13 +1,17 @@
-<form [formGroup]="form" (ngSubmit)="save()">
-  <mat-card class="cardWithShadow theme-card m-b-0">
-    <mat-card-header class="d-flex align-items-center">
-      <mat-card-title class="p-l-0 m-b-0 d-flex align-items-center">
+<mat-card class="cardWithShadow m-b-4">
+  <mat-card-content>
+    <div class="d-flex align-items-center">
+      <mat-card-title class="m-b-0 d-flex align-items-center">
         <mat-icon class="op-5 m-r-6 m-b-0 rounded-0">
           <i-tabler name="user" class="icon-25 d-flex"></i-tabler>
         </mat-icon>
         <div>Create New User</div>
       </mat-card-title>
-    </mat-card-header>
+    </div>
+  </mat-card-content>
+</mat-card>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-card class="cardWithShadow theme-card m-b-0">
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
@@ -193,6 +197,8 @@
               <div class="text-error">
                 Email should be in format (name&#64;agency.com)
               </div>
+              } @if(f['email'].errors && f['email'].errors['notUnique']) {
+              <div class="text-error">Email already exists.</div>
               }
             </mat-hint>
             }

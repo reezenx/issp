@@ -1,5 +1,9 @@
 module.exports = {
   types: [
+    {
+      value: 'task',
+      name: 'task:      A new task that is not feature or bug.',
+    },
     { value: 'feat', name: 'feat:      A new feature' },
     { value: 'fix', name: 'fix:       A bug fix' },
     { value: 'docs', name: 'docs:      Documentation only changes' },

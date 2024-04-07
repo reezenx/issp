@@ -200,6 +200,8 @@
               <div class="text-error">
                 Email should be in format (name&#64;agency.com)
               </div>
+              } @if(f['email'].errors && f['email'].errors['notUnique']) {
+              <div class="text-error">Email already exists.</div>
               }
             </mat-hint>
             }

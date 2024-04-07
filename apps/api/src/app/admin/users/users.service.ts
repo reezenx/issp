@@ -64,6 +64,14 @@ export class UsersService {
     });
   }
 
+  async isEmailExist(email: string) {
+    const r = await this.prisma.user.findFirst({
+      where: { email },
+      select: { email: true },
+    });
+    return Boolean(r);
+  }
+
   async update(id: string, updateUserDto: UpdateUserDto, user: User) {
     if (updateUserDto.password) {
       updateUserDto.password = await bcrypt.hash(
