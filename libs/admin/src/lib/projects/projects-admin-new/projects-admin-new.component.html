@@ -45,7 +45,7 @@
               </mat-icon>
             </button>
             @if(f['title'].touched && f['title'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['title'].errors && f['title'].errors['required']) {
               <div class="text-error">Title is required.</div>
               }
@@ -81,7 +81,7 @@
               </mat-icon>
             </button>
             @if(f['description'].touched && f['description'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['description'].errors &&
               f['description'].errors['required']) {
               <div class="text-error">Description is required.</div>
@@ -120,7 +120,7 @@
               </mat-icon>
             </button>
             @if(f['quantity'].touched && f['quantity'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['quantity'].errors && f['quantity'].errors['required']) {
               <div class="text-error">Quantity is required.</div>
               } @if(f['quantity'].errors && f['quantity'].errors['min']) {
@@ -155,7 +155,7 @@
               </mat-icon>
             </button>
             @if(f['unit'].touched && f['unit'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['unit'].errors && f['unit'].errors['required']) {
               <div class="text-error">Unit is required.</div>
               }
@@ -188,7 +188,7 @@
               </mat-icon>
             </button>
             @if(f['cost'].touched && f['cost'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['cost'].errors && f['cost'].errors['required']) {
               <div class="text-error">Cost is required.</div>
               } @if(f['cost'].errors && f['cost'].errors['min']) {

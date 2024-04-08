@@ -67,7 +67,7 @@
                 </mat-icon>
               </button>
               @if(f['email'].touched && f['email'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['email'].errors && f['email'].errors['required']) {
                 <div class="text-error">Email is required.</div>
                 } @if(f['email'].errors && f['email'].errors['email']) {
@@ -109,7 +109,7 @@
                 }}</mat-icon>
               </button>
               @if(f['password'].touched && f['password'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['password'].errors && f['password'].errors['required']) {
                 <div class="text-error">Password is required.</div>
                 }

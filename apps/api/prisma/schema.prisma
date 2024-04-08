@@ -126,8 +126,8 @@ model UserRole {
 
 model Permission {
   id         String    @id @default(cuid())
-  role       UserRole  @relation(fields: [roleId], references: [id])
-  roleId     String
+  role       UserRole? @relation(fields: [roleId], references: [id])
+  roleId     String?
   action     String
   subject    String
   inverted   Boolean?  @default(false)

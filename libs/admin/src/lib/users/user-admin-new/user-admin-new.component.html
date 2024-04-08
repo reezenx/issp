@@ -44,7 +44,7 @@
               </mat-icon>
             </button>
             @if(f['firstName'].touched && f['firstName'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['firstName'].errors && f['firstName'].errors['required']) {
               <div class="text-error">First Name is required.</div>
               }
@@ -86,7 +86,7 @@
               </mat-icon>
             </button>
             @if(f['status'].touched && f['status'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['status'].errors && f['status'].errors['required']) {
               <div class="text-error">Status is required.</div>
               }
@@ -128,7 +128,7 @@
               </mat-icon>
             </button>
             @if(f['lastName'].touched && f['lastName'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['lastName'].errors && f['lastName'].errors['required']) {
               <div class="text-error">Last Name is required.</div>
               }
@@ -159,7 +159,7 @@
               </mat-icon>
             </button>
             @if(f['phone'].touched && f['phone'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['phone'].errors && f['phone'].errors['required']) {
               <div class="text-error">Phone is required.</div>
               }
@@ -190,7 +190,7 @@
               </mat-icon>
             </button>
             @if(f['email'].touched && f['email'].invalid) {
-            <mat-hint class="m-b-16 error-msg">
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['email'].errors && f['email'].errors['required']) {
               <div class="text-error">Email is required.</div>
               } @if(f['email'].errors && f['email'].errors['email']) {

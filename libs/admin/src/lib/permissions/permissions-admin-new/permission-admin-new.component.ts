@@ -8,76 +8,48 @@ import {
   Validators,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { UsersService } from '../services/users.service';
+import { PermissionsService } from '../services/permissions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { UserStatus } from '@prisma/client';
-import {
-  IsKeyUniqueValidatorOptions,
-  ItemDropdown,
-  UniqueKeyValidator,
-  User_Statuses,
-} from '@issp/common';
+import { actions, jsonValidator, subjects } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-user-admin-new',
-  templateUrl: './user-admin-new.component.html',
-  styleUrl: './user-admin-new.component.scss',
+  selector: 'issp-permission-admin-new',
+  templateUrl: './permission-admin-new.component.html',
+  styleUrl: './permission-admin-new.component.scss',
 })
-export class UserAdminNewComponent implements OnInit {
+export class PermissionAdminNewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly usersService: UsersService,
+    private readonly permissionsService: PermissionsService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
-  agenciesDropdown: ItemDropdown[] = [];
-  userRolesDropdown: ItemDropdown[] = [];
   form: FormGroup;
-  statusList = Object.entries(User_Statuses).map(([key]) => key);
+  actions = actions;
+  subjects = subjects;
   subs: Subscription[] = [];
 
   ngOnInit(): void {
     this.initForm();
-    this.initSubs();
-  }
-
-  initSubs() {
-    const routeSub = this.route.data.subscribe(
-      ({ agenciesDropdown, userRolesDropdown }) => {
-        this.agenciesDropdown = agenciesDropdown;
-        this.userRolesDropdown = userRolesDropdown;
-      }
-    );
-    this.subs.push(routeSub);
   }
 
   initForm() {
     this.form = this.formBuilder.group({
-      firstName: new FormControl<string>('', [Validators.required]),
-      lastName: new FormControl<string>('', [Validators.required]),
-      phone: new FormControl<string>('', [Validators.required]),
-      password: new FormControl<string>('ChangeM3!', [Validators.required]),
-      email: new FormControl<string>('', {
-        validators: [Validators.required, Validators.email],
-        asyncValidators: [
-          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
-            this.usersService.isEmailUnique,
-            {}
-          ),
-        ],
-      }),
-      agencyId: new FormControl<string>('', [Validators.required]),
-      roleId: new FormControl<string>('', [Validators.required]),
-      status: new FormControl<UserStatus>(null, [Validators.required]),
+      action: new FormControl<string>('', [Validators.required]),
+      subject: new FormControl<string>('', [Validators.required]),
+      conditions: new FormControl<string>('{}', [jsonValidator()]),
+      reason: new FormControl<string>(''),
+      inverted: new FormControl<boolean>(false),
+      readOnly: new FormControl<boolean>(false),
       tags: new FormControl<string[]>([]),
     });
   }
@@ -88,11 +60,11 @@ export class UserAdminNewComponent implements OnInit {
 
   save() {
     if (this.form.valid && this.form.dirty) {
-      this.usersService
+      this.permissionsService
         .createOne(this.form.value)
         .pipe(take(1))
         .subscribe((data) => {
-          this.snackBar.open('User successfully created!', 'Ok', {
+          this.snackBar.open('Permission successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,

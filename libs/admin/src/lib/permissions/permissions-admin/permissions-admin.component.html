@@ -43,16 +43,17 @@
       (created)="created()"
     >
       <e-columns>
-        <e-column headerText="Title" field="title">
+        <e-column headerText="Action" field="action">
           <ng-template #template let-data>
             <a
               data-test="item-link"
               [routerLink]="['/', 'admin', 'permissions', data.id]"
             >
-              {{ data.action }} {{ data.subject }}
+              {{ data.action }}
             </a>
           </ng-template>
         </e-column>
+        <e-column headerText="Subject" field="subject"></e-column>
         <e-column headerText="Conditions" field="conditions"></e-column>
         <e-column headerText="Inverted" field="inverted"></e-column>
         <e-column headerText="Role" field="roleName"> </e-column>

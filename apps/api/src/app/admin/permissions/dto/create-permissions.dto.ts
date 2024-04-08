@@ -5,7 +5,6 @@ import {
   IsBoolean,
   IsJSON,
   IsNotEmpty,
-  IsNumber,
   IsString,
 } from 'class-validator';
 
@@ -13,27 +12,20 @@ export class CreatePermissionDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  roleId: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
   action: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   @ApiProperty()
   subject: string;
 
   @IsBoolean()
-  @IsNotEmpty()
   @ApiProperty()
   inverted: boolean;
 
   @IsBoolean()
-  @IsNotEmpty()
   @ApiProperty()
-  readonly: boolean;
+  readOnly: boolean;
 
   @IsString()
   @ApiProperty()

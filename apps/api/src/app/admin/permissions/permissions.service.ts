@@ -9,11 +9,18 @@ export class PermissionsService {
   constructor(private prisma: PrismaService) {}
 
   create(createPermissionDto: CreatePermissionDto, user: User) {
-    const { roleId, ...permissionData } = createPermissionDto;
     return this.prisma.permission.create({
       data: {
-        ...permissionData,
+        ...createPermissionDto,
         createdBy: `${user.firstName} ${user.lastName}`,
+      },
+    });
+  }
+
+  connectToRole(roleId: string, id: string) {
+    return this.prisma.permission.update({
+      where: { id },
+      data: {
         role: { connect: { id: roleId } },
       },
     });

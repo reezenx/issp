@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import { permissionsResolver } from './resolvers/permissions.resolver';
 import { PermissionsAdminShellComponent } from './permissions-admin-shell/permissions-admin-shell.component';
 import { PermissionsAdminComponent } from './permissions-admin/permissions-admin.component';
+import { PermissionAdminNewComponent } from './permissions-admin-new/permission-admin-new.component';
+import { PermissionAdminEditComponent } from './permissions-admin-edit/permission-admin-edit.component';
+import { permissionResolver } from './resolvers/permission.resolver';
 
 export const PermissionsRoutes: Routes = [
   {
@@ -24,8 +27,8 @@ export const PermissionsRoutes: Routes = [
       },
       {
         path: 'new',
-        title: 'New Project',
-        component: PermissionsAdminComponent,
+        title: 'New Permission',
+        component: PermissionAdminNewComponent,
         data: {
           breadcrumb: 'New',
         },
@@ -33,12 +36,14 @@ export const PermissionsRoutes: Routes = [
       },
       {
         path: ':id',
-        title: 'Edit Project',
+        title: 'Edit Permission',
         data: {
-          breadcrumbRouteDataProperty: 'item.title',
+          breadcrumb: 'Edit',
         },
-        component: PermissionsAdminComponent,
-        resolve: {},
+        component: PermissionAdminEditComponent,
+        resolve: {
+          item: permissionResolver,
+        },
       },
     ],
   },

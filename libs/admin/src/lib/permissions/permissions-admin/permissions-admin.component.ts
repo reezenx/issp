@@ -35,7 +35,7 @@ export class PermissionsAdminComponent implements OnInit {
   gridPageSettings: PageSettingsModel = new GridDefaults();
   resizeSettings: ResizeSettingsModel = { mode: 'Normal' };
   filterSettings: FilterSettingsModel = { type: 'Excel' };
-  sortSettings = { columns: [{ field: 'createdAt', direction: 'Descending' }] };
+  sortSettings = { columns: [{ field: 'subject', direction: 'Descending' }] };
   toolbar: ToolbarItems[] = [
     'Print',
     'Search',
