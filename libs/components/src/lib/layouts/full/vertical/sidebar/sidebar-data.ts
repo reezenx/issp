@@ -72,7 +72,7 @@ export const navItems: NavItem[] = [
   },
   {
     name: 'Budget Types',
-    icon: 'cash',
+    icon: 'cash-banknote',
     route: 'admin/budget-types',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
@@ -101,9 +101,9 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Pivot Table',
+    name: 'Reports',
     icon: 'table-plus',
-    route: 'admin/pivot',
+    route: 'admin/reports',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {

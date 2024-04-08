@@ -13,7 +13,7 @@ import { AdminRoutes } from './admin.routes';
 import { ControlsModule, PivotTableComponent } from '@issp/components';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PipesModule } from '@issp/common';
-import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
     PivotTableComponent,
     DashboardComponent,
   ],
-  declarations: [PivotTableAdvComponent],
+  declarations: [ReportsComponent],
   providers: [DatePipe],
 })
 export class AdminModule {}

@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DiagramComponent } from './diagram/diagram.component';
 import { DocumentEditorComponent } from './document-editor/document-editor.component';
-import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
+import { ReportsComponent } from './reports/reports.component';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -16,11 +16,11 @@ export const AdminRoutes: Routes = [
     },
   },
   {
-    path: 'pivot',
+    path: 'reports',
     title: 'Reports',
-    component: PivotTableAdvComponent,
+    component: ReportsComponent,
     data: {
-      breadcrumb: 'Pivot Table',
+      breadcrumb: 'Reports',
     },
   },
   {
@@ -89,14 +89,6 @@ export const AdminRoutes: Routes = [
       ),
     data: {
       breadcrumb: 'Implementation Type',
-    },
-  },
-  {
-    path: 'categories',
-    loadChildren: () =>
-      import('./categories/categories.module').then((m) => m.CategoriesModule),
-    data: {
-      breadcrumb: 'Categories',
     },
   },
   {
