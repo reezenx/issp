@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MaterialModule,
   SyncfusionGridModule,
 } from '@issp/common/ui/libraries';
+import { ControlsModule } from '@issp/components';
+import { PipesModule } from '@issp/common';
+
+// icons
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
-import { AdminRoutes } from './admin.routes';
-import { ControlsModule, PivotTableComponent } from '@issp/components';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { PipesModule } from '@issp/common';
-import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
+import { UserRolesRoutes } from './user-roles.routes';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminRoutes),
+    RouterModule.forChild(UserRolesRoutes),
     MaterialModule,
     SyncfusionGridModule,
     PipesModule,
@@ -26,10 +26,7 @@ import { PivotTableAdvComponent } from './pivot-table/pivot-table.component';
     ControlsModule,
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
-    PivotTableComponent,
-    DashboardComponent,
   ],
-  declarations: [PivotTableAdvComponent],
-  providers: [DatePipe],
+  declarations: [],
 })
-export class AdminModule {}
+export class UsersModule {}
