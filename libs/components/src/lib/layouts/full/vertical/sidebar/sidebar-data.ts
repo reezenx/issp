@@ -95,6 +95,12 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
+    name: 'Permissions',
+    icon: 'shield-lock',
+    route: 'admin/permissions',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
     name: 'Pivot Table',
     icon: 'table-plus',
     route: 'admin/pivot',

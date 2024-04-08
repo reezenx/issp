@@ -127,14 +127,14 @@ export const AdminRoutes: Routes = [
       breadcrumb: 'Budget Sources',
     },
   },
-  // {
-  //   path: 'permissions',
-  //   loadChildren: () =>
-  //     import('./permissions/permissions.module').then(
-  //       (m) => m.PermissionsModule
-  //     ),
-  //   data: {
-  //     breadcrumb: 'Permissions',
-  //   },
-  // },
+  {
+    path: 'permissions',
+    loadChildren: () =>
+      import('./permissions/permissions.module').then(
+        (m) => m.PermissionsModule
+      ),
+    data: {
+      breadcrumb: 'Permissions',
+    },
+  },
 ];
