@@ -16,8 +16,8 @@ import { BudgetSourceEntity } from './entities/budget-source.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 
-@ApiTags('admin/budget-types')
-@Controller('budget-sources')
+@ApiTags('admin/budget-sources')
+@Controller('admin/budget-sources')
 export class BudgetSourcesController {
   constructor(private readonly budgetSourcesService: BudgetSourcesService) {}
 
@@ -38,8 +38,17 @@ export class BudgetSourcesController {
   @ApiCreatedResponse({ type: BudgetSourceEntity, isArray: true })
   @Get()
   async findAll() {
-    const budgetTypes = await this.budgetSourcesService.findAll();
-    return budgetTypes.map((item) => new BudgetSourceEntity(item));
+    const budgetSources = await this.budgetSourcesService.findAll();
+    return budgetSources.map((item) => new BudgetSourceEntity(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: BudgetSourceEntity })
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return new BudgetSourceEntity(await this.budgetSourcesService.findOne(id));
   }
 
   @checkAbilities({ action: 'update', subject: 'BudgetSource' })
@@ -49,10 +58,10 @@ export class BudgetSourcesController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() UpdateBudgetTypeDto: UpdateBudgetSourceDto
+    @Body() UpdateBudgetSourceDto: UpdateBudgetSourceDto
   ) {
     return new BudgetSourceEntity(
-      await this.budgetSourcesService.update(id, UpdateBudgetTypeDto)
+      await this.budgetSourcesService.update(id, UpdateBudgetSourceDto)
     );
   }
 

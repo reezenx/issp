@@ -10,7 +10,7 @@ import { API, Environment } from '@issp/common';
   providedIn: 'root',
 })
 export class BudgetSourceService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.BUDGET_TYPES}`;
+  route = `${this.env.url.api}${API.BASE}${API.ADMIN.BUDGET_SOURCES}`;
   constructor(private http: HttpClient, private env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<BudgetSourceDetails>> =
