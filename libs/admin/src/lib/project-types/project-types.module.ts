@@ -14,6 +14,10 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { ProjectTypesRoutes } from './project-types.routes';
+import { ProjectTypeAdminEditComponent } from './project-type-admin-edit/project-type-admin-edit.component';
+import { ProjectTypeAdminNewComponent } from './project-type-admin-new/project-type-admin-new.component';
+import { ProjectTypesAdminComponent } from './project-types-admin/project-types-admin.component';
+import { ProjectTypeAdminShellComponent } from './project-type-admin-shell/project-type-admin-shell.component';
 
 @NgModule({
   imports: [
@@ -27,6 +31,11 @@ import { ProjectTypesRoutes } from './project-types.routes';
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
   ],
-  declarations: [],
+  declarations: [
+    ProjectTypeAdminEditComponent,
+    ProjectTypeAdminNewComponent,
+    ProjectTypesAdminComponent,
+    ProjectTypeAdminShellComponent,
+  ],
 })
-export class UsersModule {}
+export class ProjectTypesModule {}

@@ -46,6 +46,16 @@ export const AdminRoutes: Routes = [
     },
   },
   {
+    path: 'project-types',
+    loadChildren: () =>
+      import('./project-types/project-types.module').then(
+        (m) => m.ProjectTypesModule
+      ),
+    data: {
+      breadcrumb: 'Project Types',
+    },
+  },
+  {
     path: 'departments',
     loadChildren: () =>
       import('./departments/departments.module').then(
