@@ -10,6 +10,7 @@ export const API = {
     PERMISSIONS: '/admin/permissions',
     PROJECT_CATEGORIES: '/admin/project-categories',
     PROJECT_TYPES: '/admin/project-types',
+    PROJECT_TYPES_GROUPS: '/admin/project-type-groups',
     PROJECTS: '/admin/projects',
     USER_ROLES: '/admin/user-roles',
     USERS: '/admin/users',

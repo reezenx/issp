@@ -56,6 +56,16 @@ export const AdminRoutes: Routes = [
     },
   },
   {
+    path: 'project-type-groups',
+    loadChildren: () =>
+      import('./project-type-groups/project-type-groups.module').then(
+        (m) => m.ProjectTypeGroupsModule
+      ),
+    data: {
+      breadcrumb: 'Project Type Groups',
+    },
+  },
+  {
     path: 'departments',
     loadChildren: () =>
       import('./departments/departments.module').then(

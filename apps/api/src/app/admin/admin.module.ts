@@ -12,6 +12,7 @@ import { ProjectsModule } from './projects/projects.module';
 import { ProjectTypesModule } from './project-types/project-types.module';
 import { UserRolesModule } from './user-roles/user-roles.module';
 import { UsersModule } from './users/users.module';
+import { ProjectTypeGroupsModule } from './project-type-groups/project-type-groups.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { UsersModule } from './users/users.module';
     ProjectTypesModule,
     UserRolesModule,
     UsersModule,
+    ProjectTypeGroupsModule,
   ],
 })
 export class AdminModule {}
