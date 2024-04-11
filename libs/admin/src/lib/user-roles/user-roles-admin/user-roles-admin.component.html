@@ -1,10 +1,10 @@
 <mat-card class="cardWithShadow m-b-4">
   <mat-card-content>
     <div class="d-flex align-items-center">
-      <mat-card-title class="m-b-0">Departments</mat-card-title>
+      <mat-card-title class="m-b-0">User Roles</mat-card-title>
       <div class="m-l-auto">
         <button mat-flat-button color="primary" (click)="addNew()">
-          Add Department
+          Add User Role
         </button>
       </div>
     </div>
@@ -41,14 +41,12 @@
         <e-column headerText="Name" field="name">
           <ng-template #template let-data>
             <a
-              [routerLink]="['/', 'admin', 'departments', data.id]"
+              [routerLink]="['/', 'admin', 'user-roles', data.id]"
             >
               {{ data.name }}
             </a>
           </ng-template>
         </e-column>
-        <e-column headerText="Code" field="code"></e-column>
-         <e-column headerText="UACS" field="uacs"></e-column>
         <e-column headerText="Created By" field="createdBy" [visible]="false">
         </e-column>
         <e-column headerText="Created At" field="createdAt" [visible]="false">
@@ -70,7 +68,7 @@
               color="primary"
               type="button"
               (click)="editItem(data.id)"
-              matTooltip="Edit Department"
+              matTooltip="Edit User Role"
             >
               <mat-icon matSuffix>
                 <i-tabler name="pencil" class="icon-20"></i-tabler>
@@ -82,4 +80,5 @@
     </ejs-grid>
   </mat-card-content>
 </mat-card>
+
 

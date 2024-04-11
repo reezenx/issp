@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="save()">
   <mat-card class="cardWithShadow theme-card m-b-0">
     <mat-card-header>
-      <mat-card-title class="m-b-0">Create New Department</mat-card-title>
+      <mat-card-title class="m-b-0">Create New User Role</mat-card-title>
     </mat-card-header>
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
@@ -10,14 +10,15 @@
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
             <input #name matInput type="text" formControlName="name" />
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
-            <input #code matInput type="text" formControlName="code" />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">UACS</mat-label>
-            <input #uacs matInput type="text" formControlName="uacs" />
-          </mat-form-field>
+          <issp-item-picker-control
+            placeholder="Search & Select Permission"
+            formControlName="permissionIds"
+            fieldName="Permission"
+            [required]="true"
+            [displayCode]="false"
+            [sentenceCase]="true"
+            [itemsDropdown]="permissionsDropdown"
+          ></issp-item-picker-control>
         </div>
       </div>
     </mat-card-content>
@@ -44,3 +45,4 @@
     </mat-card-actions>
   </mat-card>
 </form>
+

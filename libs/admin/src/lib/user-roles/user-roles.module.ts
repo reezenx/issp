@@ -14,6 +14,10 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
 import { UserRolesRoutes } from './user-roles.routes';
+import { UserRolesAdminShellComponent } from './user-roles-admin-shell/user-roles-admin-shell.component';
+import { UserRolesAdminComponent } from './user-roles-admin/user-roles-admin.component';
+import { UserRoleAdminNewComponent } from './user-role-admin-new/user-role-admin-new.component';
+import { UserRoleAdminEditComponent } from './user-role-admin-edit/user-role-admin-edit.component';
 
 @NgModule({
   imports: [
@@ -27,6 +31,11 @@ import { UserRolesRoutes } from './user-roles.routes';
     ReactiveFormsModule,
     TablerIconsModule.pick(TablerIcons),
   ],
-  declarations: [],
+  declarations: [
+    UserRolesAdminShellComponent,
+    UserRolesAdminComponent,
+    UserRoleAdminNewComponent,
+    UserRoleAdminEditComponent,
+  ],
 })
-export class UsersModule {}
+export class UserRolesModule {}

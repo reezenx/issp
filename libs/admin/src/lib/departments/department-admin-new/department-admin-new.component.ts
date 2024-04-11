@@ -10,7 +10,9 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy({ arrayName: 'subs' })
 @Component({
   selector: 'issp-department-admin-new',
   templateUrl: './department-admin-new.component.html',

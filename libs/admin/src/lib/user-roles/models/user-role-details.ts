@@ -38,6 +38,7 @@ export class UserRoleDetails extends Assign implements UserRole {
   name: string;
   readOnly: boolean;
   tags: string[];
+  permissionIds: string[]
 
   createdBy: string;
   updatedBy: string;

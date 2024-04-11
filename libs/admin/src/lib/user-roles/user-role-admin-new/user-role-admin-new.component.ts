@@ -1,42 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProjectCategoriesService } from '../services/project-categories.service';
+import { UserRolesService } from '../services/user-roles.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { ProjectCategoryDetails } from '../models/project-category-details';
+import { UserRoleDetails } from '../models/user-role-details';
 import { Subscription, take } from 'rxjs';
 import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { ItemDropdown } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
-  selector: 'issp-project-category-admin-new',
-  templateUrl: './project-category-admin-new.component.html',
-  styleUrl: './project-category-admin-new.component.scss',
+  selector: 'issp-user-role-admin-new',
+  templateUrl: './user-role-admin-new.component.html',
+  styleUrl: './user-role-admin-new.component.scss',
 })
-export class ProjectCategoryAdminNewComponent implements OnInit {
+export class UserRoleAdminNewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private readonly router: Router,
-    private readonly projectCategoriesService: ProjectCategoriesService,
+    private readonly userRolesService: UserRolesService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
+  permissionsDropdown: ItemDropdown[] = [];
   form: FormGroup;
-  issp: ProjectCategoryDetails;
+  issp: UserRoleDetails;
   subs: Subscription[] = [];
 
   ngOnInit(): void {
+    this.initSubs();
     this.initForm();
+  }
+
+  initSubs() {
+    const routeSub = this.route.data.subscribe(
+      ({ permissionsDropdown }) => {
+        this.permissionsDropdown = permissionsDropdown;
+      }
+    );
+    this.subs.push(routeSub);
   }
 
   initForm() {
     this.form = this.formBuilder.group({
       name: new FormControl<string>('', [Validators.required]),
-      code: new FormControl<string>('', [Validators.required]),
+      permissionIds: new FormControl<string[]>([]),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
@@ -45,11 +57,11 @@ export class ProjectCategoryAdminNewComponent implements OnInit {
 
   save() {
     if (this.form.valid && this.form.dirty) {
-      this.projectCategoriesService
+      this.userRolesService
         .createOne(this.form.value)
         .pipe(take(1))
         .subscribe((data) => {
-          this.snackBar.open('Department successfully created!', 'Ok', {
+          this.snackBar.open('User Role successfully created!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,

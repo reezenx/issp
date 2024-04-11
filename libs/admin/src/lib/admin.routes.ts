@@ -92,6 +92,14 @@ export const AdminRoutes: Routes = [
     },
   },
   {
+    path: 'user-roles',
+    loadChildren: () =>
+      import('./user-roles/user-roles.module').then((m) => m.UserRolesModule),
+    data: {
+      breadcrumb: 'User Roles',
+    },
+  },
+  {
     path: 'impl-types',
     loadChildren: () =>
       import('./project-impl-types/project-impl-types.module').then(
