@@ -7,6 +7,12 @@ export class BudgetTypeEntity implements BudgetType {
   }
 
   @ApiProperty()
+  readOnly: boolean;
+
+  @ApiProperty()
+  tags: string[];
+
+  @ApiProperty()
   id: string;
 
   @ApiProperty()

@@ -15,6 +15,7 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { BudgetSourceEntity } from './entities/budget-source.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 
 @ApiTags('admin/budget-sources')
 @Controller('admin/budget-sources')
@@ -38,8 +39,18 @@ export class BudgetSourcesController {
   @ApiCreatedResponse({ type: BudgetSourceEntity, isArray: true })
   @Get()
   async findAll() {
-    const budgetSources = await this.budgetSourcesService.findAll();
-    return budgetSources.map((item) => new BudgetSourceEntity(item));
+    const budgetTypes = await this.budgetSourcesService.findAll();
+    return budgetTypes.map((item) => new BudgetSourceEntity(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
+  @Get('dropdown')
+  async findAllDropdown() {
+    const items = await this.budgetSourcesService.findAllDropdown();
+    return items.map((item) => new ItemEntityDropdown(item));
   }
 
   @checkAbilities({ action: 'read', subject: 'BudgetSource' })
@@ -58,10 +69,10 @@ export class BudgetSourcesController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() UpdateBudgetSourceDto: UpdateBudgetSourceDto
+    @Body() UpdateBudgetTypeDto: UpdateBudgetSourceDto
   ) {
     return new BudgetSourceEntity(
-      await this.budgetSourcesService.update(id, UpdateBudgetSourceDto)
+      await this.budgetSourcesService.update(id, UpdateBudgetTypeDto)
     );
   }
 

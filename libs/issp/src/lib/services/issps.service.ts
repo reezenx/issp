@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { API, Environment, ISSPDetails } from '@issp/common';
+import { API, Environment, ISSPDetails, IsspDropdown } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -17,6 +17,10 @@ export class IsspsService {
     Array<ISSPDetails>
   >(new Array<ISSPDetails>());
   allItems$ = this.#emitAllItems.asObservable();
+
+  #emitDropdownItems: BehaviorSubject<Array<IsspDropdown>> =
+    new BehaviorSubject<Array<IsspDropdown>>(new Array<IsspDropdown>());
+  dropdownItems$ = this.#emitDropdownItems.asObservable();
 
   #emitCurrentContextItem = new Subject<ISSPDetails>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
@@ -40,6 +44,24 @@ export class IsspsService {
       }),
       tap((data) => {
         this.#emitAllItems.next(data);
+      })
+    );
+  }
+
+  findAllDropdowns() {
+    const uri = `${this.route}/dropdown`;
+    return this.http.get<IsspDropdown[]>(uri).pipe(
+      map((data) => {
+        let list = new Array<IsspDropdown>();
+        list = data.map((e) => {
+          const entity = new IsspDropdown();
+          entity.assign(e);
+          return entity;
+        });
+        return list;
+      }),
+      tap((data) => {
+        this.#emitDropdownItems.next(data);
       })
     );
   }

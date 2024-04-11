@@ -62,23 +62,22 @@
                 [attr.aria-label]="'Clear Email'"
                 [disabled]="!email.value"
               >
-                <mat-icon matPrefix class="op-5">
+                <mat-icon class="op-5">
                   <i-tabler name="backspace" class="icon-20 d-flex"></i-tabler>
                 </mat-icon>
               </button>
               @if(f['email'].touched && f['email'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['email'].errors && f['email'].errors['required']) {
                 <div class="text-error">Email is required.</div>
                 } @if(f['email'].errors && f['email'].errors['email']) {
                 <div class="text-error">
-                  Email should be in format (name&#64;email.com)
+                  Email should be in format (name&#64;agency.com)
                 </div>
                 }
               </mat-hint>
               }
             </mat-form-field>
-            <!-- password -->
             <mat-form-field
               appearance="outline"
               class="w-100 m-b-20"
@@ -110,7 +109,7 @@
                 }}</mat-icon>
               </button>
               @if(f['password'].touched && f['password'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['password'].errors && f['password'].errors['required']) {
                 <div class="text-error">Password is required.</div>
                 }

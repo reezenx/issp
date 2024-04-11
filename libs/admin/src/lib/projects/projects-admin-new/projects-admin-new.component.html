@@ -1,1 +1,291 @@
-<p>projects-admin-new works!</p>
+<mat-card class="cardWithShadow m-b-4">
+  <mat-card-content>
+    <div class="d-flex align-items-center">
+      <mat-card-title class="m-b-0 d-flex align-items-center">
+        <mat-icon class="op-5 m-r-6 m-b-0 rounded-0">
+          <i-tabler name="list-details" class="icon-25 d-flex"></i-tabler>
+        </mat-icon>
+        <div>Create New Project</div>
+      </mat-card-title>
+    </div>
+  </mat-card-content>
+</mat-card>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-card class="cardWithShadow theme-card m-b-0">
+    <mat-card-content class="b-t-1">
+      <div class="row m-t-20">
+        <div class="col-lg-12">
+          <mat-form-field
+            hintLabel="Min {{ titleMinLength }} characters [{{
+              title.value?.length || 0
+            }}/{{ titleMaxLength }}]"
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
+            <mat-label class="mat-subtitle-2 f-w-600">Title</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler
+                name="clipboard-typography"
+                class="icon-18 d-flex"
+              ></i-tabler>
+            </mat-icon>
+            <input #title matInput type="text" formControlName="title" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['title'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!title.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['title'].touched && f['title'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['title'].errors && f['title'].errors['required']) {
+              <div class="text-error">Title is required.</div>
+              }
+            </mat-hint>
+            }
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
+            <mat-label class="mat-subtitle-2 f-w-600">Description</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="list" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <textarea
+              #description
+              matInput
+              rows="1"
+              formControlName="description"
+            ></textarea>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['description'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!description.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['description'].touched && f['description'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['description'].errors &&
+              f['description'].errors['required']) {
+              <div class="text-error">Description is required.</div>
+              }
+            </mat-hint>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
+            <mat-label class="mat-subtitle-2 f-w-600">Quantity</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="clipboard-data" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <input
+              #quantity
+              matInput
+              type="number"
+              formControlName="quantity"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['quantity'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!quantity.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['quantity'].touched && f['quantity'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['quantity'].errors && f['quantity'].errors['required']) {
+              <div class="text-error">Quantity is required.</div>
+              } @if(f['quantity'].errors && f['quantity'].errors['min']) {
+              <div class="text-error">Quantity minimum value is 1.</div>
+              }
+            </mat-hint>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
+            <mat-label class="mat-subtitle-2 f-w-600">Unit</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="atom-2" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <input #unit matInput type="text" formControlName="unit" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['unit'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!unit.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['unit'].touched && f['unit'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['unit'].errors && f['unit'].errors['required']) {
+              <div class="text-error">Unit is required.</div>
+              }
+            </mat-hint>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
+            <mat-label class="mat-subtitle-2 f-w-600">Cost</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="currency-peso" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <input #cost matInput type="number" formControlName="cost" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['cost'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!cost.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['cost'].touched && f['cost'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['cost'].errors && f['cost'].errors['required']) {
+              <div class="text-error">Cost is required.</div>
+              } @if(f['cost'].errors && f['cost'].errors['min']) {
+              <div class="text-error">Cost minimum value is 1.</div>
+              }
+            </mat-hint>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+          <issp-item-picker-control
+            placeholder="Search & Select ISSP"
+            formControlName="isspId"
+            fieldName="ISSP"
+            [required]="true"
+            [displayCode]="false"
+            [sentenceCase]="false"
+            [itemsDropdown]="isspsDropdown"
+          ></issp-item-picker-control>
+        </div>
+        <div class="col-lg-6">
+          <issp-item-picker-control
+            placeholder="Search & Select Agency"
+            formControlName="agencyId"
+            fieldName="Agency"
+            [required]="true"
+            [itemsDropdown]="agenciesDropdown"
+          ></issp-item-picker-control>
+        </div>
+        <div class="col-lg-6">
+          <issp-item-picker-control
+            placeholder="Search & Select Type"
+            formControlName="typeId"
+            fieldName="Type"
+            [required]="true"
+            [displayCode]="false"
+            [itemsDropdown]="projectTypesDropdown"
+          ></issp-item-picker-control>
+        </div>
+        <div class="col-lg-6">
+          <issp-item-picker-control
+            placeholder="Search & Select Category"
+            formControlName="categoryId"
+            fieldName="Category"
+            [required]="true"
+            [itemsDropdown]="projectCategoriesDropdown"
+          ></issp-item-picker-control>
+        </div>
+        <div class="col-lg-6">
+          <issp-item-picker-control
+            placeholder="Search & Select Implementation Type"
+            formControlName="implementationTypeId"
+            fieldName="Implementation Type"
+            [required]="true"
+            [itemsDropdown]="implementationTypesDropdown"
+          ></issp-item-picker-control>
+        </div>
+        <div class="col-lg-6">
+          <issp-item-picker-control
+            placeholder="Search & Select Budget Type"
+            formControlName="budgetTypeId"
+            fieldName="Budget Type"
+            [required]="true"
+            [itemsDropdown]="budgetTypesDropdown"
+          ></issp-item-picker-control>
+        </div>
+        <div class="col-lg-6">
+          <issp-item-picker-control
+            placeholder="Search & Select Budget Source"
+            formControlName="budgetSourceId"
+            fieldName="Budget Source"
+            [required]="true"
+            [itemsDropdown]="budgetSourcesDropdown"
+          ></issp-item-picker-control>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions class="b-t-1">
+      <div class="w-100 m-t-12 text-right">
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid || !form.dirty"
+        >
+          Save
+        </button>
+        <button
+          mat-flat-button
+          color="warn"
+          type="button"
+          (click)="discardChanges()"
+          class="m-l-8"
+        >
+          Cancel
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</form>

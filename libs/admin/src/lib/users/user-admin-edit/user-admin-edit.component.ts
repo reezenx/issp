@@ -16,8 +16,14 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { Role, UserStatus } from '@prisma/client';
-import { AgencyDropdown, User_Roles, User_Statuses } from '@issp/common';
+import { UserStatus } from '@prisma/client';
+import {
+  IsKeyUniqueValidatorOptions,
+  ItemDropdown,
+  UniqueKeyValidator,
+  User_Roles,
+  User_Statuses,
+} from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -37,7 +43,8 @@ export class UserAdminEditComponent implements OnInit {
 
   form: FormGroup;
   item: UserDetails;
-  agenciesDropdown: AgencyDropdown[] = [];
+  agenciesDropdown: ItemDropdown[] = [];
+  userRolesDropdown: ItemDropdown[] = [];
   rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
   subs: Subscription[] = [];
@@ -48,11 +55,14 @@ export class UserAdminEditComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ user, agenciesDropdown }) => {
-      this.item = user;
-      this.agenciesDropdown = agenciesDropdown;
-      this.form.patchValue(this.item);
-    });
+    const routeSub = this.route.data.subscribe(
+      ({ item, agenciesDropdown, userRolesDropdown }) => {
+        this.item = item;
+        this.agenciesDropdown = agenciesDropdown;
+        this.userRolesDropdown = userRolesDropdown;
+        this.form.patchValue(this.item);
+      }
+    );
     this.subs.push(routeSub);
 
     const currentIsspSub = this.usersService.currentContextItem$.subscribe(
@@ -69,14 +79,24 @@ export class UserAdminEditComponent implements OnInit {
       firstName: new FormControl<string>('', [Validators.required]),
       lastName: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
-      email: new FormControl<string>('', [
-        Validators.required,
-        Validators.email,
-      ]),
+      email: new FormControl<string>('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.usersService.isEmailUnique,
+            {}
+          ),
+        ],
+      }),
       agencyId: new FormControl<string>('', [Validators.required]),
-      status: new FormControl<UserStatus>(null),
-      role: new FormControl<Role[]>(null, [Validators.required]),
+      status: new FormControl<UserStatus>(null, [Validators.required]),
+      roleId: new FormControl<string>(null, [Validators.required]),
+      tags: new FormControl<string[]>([]),
     });
+  }
+
+  get f() {
+    return this.form.controls;
   }
 
   save() {
@@ -90,6 +110,7 @@ export class UserAdminEditComponent implements OnInit {
             verticalPosition: 'bottom',
             duration: 5000,
           });
+          this.form.markAsPristine();
         });
     }
   }
@@ -113,6 +134,11 @@ export class UserAdminEditComponent implements OnInit {
     } else {
       this.navigateToList();
     }
+  }
+
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
   }
 
   navigateToList() {

@@ -1,10 +1,17 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { ProjectImplementationType } from "@prisma/client";
+import { ApiProperty } from '@nestjs/swagger';
+import { ProjectImplementationType } from '@prisma/client';
 
-export class ProjectImplementationTypeEntity implements ProjectImplementationType {
+export class ProjectImplementationTypeEntity
+  implements ProjectImplementationType
+{
   constructor(projectImplementationType: ProjectImplementationTypeEntity) {
     Object.assign(this, projectImplementationType);
   }
+  @ApiProperty()
+  readOnly: boolean;
+
+  @ApiProperty()
+  tags: string[];
 
   @ApiProperty()
   id: string;

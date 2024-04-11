@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API, Environment } from '@issp/common';
+import { API, Environment, ItemDropdown } from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectImplementationTypeDetails } from '../models/project-impl-type-details';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class ProjectImplementationTypeService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.CATEGORIES}`;
+  route = `${this.env.url.api}${API.BASE}${API.ADMIN.IMPL_TYPES}`;
   constructor(private http: HttpClient, private readonly env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<ProjectImplementationTypeDetails>> =
@@ -19,9 +19,9 @@ export class ProjectImplementationTypeService {
     );
   allItems$ = this.#emitAllItems.asObservable();
 
-  // #emitDropdownItems: BehaviorSubject<Array<CategoryDropdown>> =
-  //   new BehaviorSubject<Array<CategoryDropdown>>(new Array<CategoryDropdown>());
-  // dropdownItems$ = this.#emitDropdownItems.asObservable();
+  #emitDropdownItems: BehaviorSubject<Array<ItemDropdown>> =
+    new BehaviorSubject<Array<ItemDropdown>>(new Array<ItemDropdown>());
+  dropdownItems$ = this.#emitDropdownItems.asObservable();
 
   #emitCurrentContextItem = new Subject<ProjectImplementationTypeDetails>();
   currentContextItem$ = this.#emitCurrentContextItem.asObservable();
@@ -45,6 +45,24 @@ export class ProjectImplementationTypeService {
       }),
       tap((data) => {
         this.#emitAllItems.next(data);
+      })
+    );
+  }
+
+  findAllDropdowns() {
+    const uri = `${this.route}/dropdown`;
+    return this.http.get<ItemDropdown[]>(uri).pipe(
+      map((data) => {
+        let list = new Array<ItemDropdown>();
+        list = data.map((e) => {
+          const entity = new ItemDropdown();
+          entity.assign(e);
+          return entity;
+        });
+        return list;
+      }),
+      tap((data) => {
+        this.#emitDropdownItems.next(data);
       })
     );
   }

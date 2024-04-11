@@ -83,7 +83,7 @@
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput formControlName="uname" />
               @if(f['uname'].touched && f['uname'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['uname'].errors && f['uname'].errors['required']) {
                 <div class="text-error">Name is required.</div>
                 } @if(f['uname'].errors && f['uname'].errors['minlength']) {
@@ -98,7 +98,7 @@
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput type="email" formControlName="email" />
               @if(f['email'].touched && f['email'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['email'].errors && f['email'].errors['required']) {
                 <div class="text-error">Email is required.</div>
                 }
@@ -112,7 +112,7 @@
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <input matInput type="password" formControlName="password" />
               @if(f['password'].touched && f['password'].invalid) {
-              <mat-hint class="m-b-16 error-msg">
+              <mat-hint [align]="'end'" class="m-b-16 error-msg">
                 @if(f['password'].errors && f['password'].errors['required']) {
                 <div class="text-error">Password is required.</div>
                 }

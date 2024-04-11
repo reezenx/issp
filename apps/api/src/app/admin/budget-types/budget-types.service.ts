@@ -17,6 +17,16 @@ export class BudgetTypesService {
     return this.prisma.budgetType.findMany();
   }
 
+  findAllDropdown() {
+    return this.prisma.budgetType.findMany({
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+    });
+  }
+
   findOne(id: string) {
     return this.prisma.budgetType.findUnique({ where: { id } });
   }

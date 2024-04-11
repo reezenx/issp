@@ -1,7 +1,6 @@
 import { Subscription, take } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserDetails } from '../models/user-details';
 import {
   FormGroup,
   FormBuilder,
@@ -16,8 +15,13 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { UserStatus, Role } from '@prisma/client';
-import { AgencyDropdown, User_Roles, User_Statuses } from '@issp/common';
+import { UserStatus } from '@prisma/client';
+import {
+  IsKeyUniqueValidatorOptions,
+  ItemDropdown,
+  UniqueKeyValidator,
+  User_Statuses,
+} from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -35,10 +39,9 @@ export class UserAdminNewComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  agenciesDropdown: AgencyDropdown[] = [];
+  agenciesDropdown: ItemDropdown[] = [];
+  userRolesDropdown: ItemDropdown[] = [];
   form: FormGroup;
-  issp: UserDetails;
-  rolesList = Object.entries(User_Roles).map(([key]) => key);
   statusList = Object.entries(User_Statuses).map(([key]) => key);
   subs: Subscription[] = [];
 
@@ -48,9 +51,12 @@ export class UserAdminNewComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ agenciesDropdown }) => {
-      this.agenciesDropdown = agenciesDropdown;
-    });
+    const routeSub = this.route.data.subscribe(
+      ({ agenciesDropdown, userRolesDropdown }) => {
+        this.agenciesDropdown = agenciesDropdown;
+        this.userRolesDropdown = userRolesDropdown;
+      }
+    );
     this.subs.push(routeSub);
   }
 
@@ -60,20 +66,26 @@ export class UserAdminNewComponent implements OnInit {
       lastName: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
       password: new FormControl<string>('ChangeM3!', [Validators.required]),
-      email: new FormControl<string>('', [
-        Validators.required,
-        Validators.email,
-      ]),
+      email: new FormControl<string>('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.usersService.isEmailUnique,
+            {}
+          ),
+        ],
+      }),
       agencyId: new FormControl<string>('', [Validators.required]),
-      status: new FormControl<UserStatus>(UserStatus.ACTIVE, [
-        Validators.required,
-      ]),
-      role: new FormControl<Role[]>([Role.VIEWER], [Validators.required]),
+      roleId: new FormControl<string>('', [Validators.required]),
+      status: new FormControl<UserStatus>(null, [Validators.required]),
       tags: new FormControl<string[]>([]),
-      createdBy: new FormControl<string>('System'),
-      updatedBy: new FormControl<string>('System'),
     });
   }
+
+  get f() {
+    return this.form.controls;
+  }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.usersService

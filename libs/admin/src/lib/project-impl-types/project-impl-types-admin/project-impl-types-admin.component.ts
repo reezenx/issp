@@ -56,8 +56,8 @@ export class ProjectImplTypesAdminComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ implementationtypes }) => {
-      this.gridData = implementationtypes;
+    const routeSub = this.route.data.subscribe(({ items }) => {
+      this.gridData = items;
     });
     this.subs.push(routeSub);
   }

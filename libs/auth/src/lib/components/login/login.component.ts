@@ -65,10 +65,6 @@ export class IsspLoginComponent {
         () => this.authService.redirectToCallback(),
         () => {
           this.loading = false;
-
-          this.form.patchValue({
-            password: '',
-          });
         }
       );
   }

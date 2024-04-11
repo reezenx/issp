@@ -17,6 +17,16 @@ export class ProjectImplTypesService {
     return this.prisma.projectImplementationType.findMany();
   }
 
+  findAllDropdown() {
+    return this.prisma.projectImplementationType.findMany({
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+    });
+  }
+
   findOne(id: string) {
     return this.prisma.projectImplementationType.findUnique({ where: { id } });
   }

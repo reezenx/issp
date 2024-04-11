@@ -13,9 +13,9 @@ import { CreateAgencyDto } from './dto/create-agency.dto';
 import { UpdateAgencyDto } from './dto/update-agency.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { AgencyEntity } from './entities/agency.entity';
-import { AgencyEntityDropdown } from './entities/agency-dropdown.entity';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
+import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 
 @ApiTags('admin/agencies')
 @Controller('admin/agencies')
@@ -42,11 +42,11 @@ export class AgenciesController {
   @checkAbilities({ action: 'read', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
-  @ApiCreatedResponse({ type: AgencyEntity, isArray: true })
+  @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
   @Get('dropdown')
   async findAllDropdown() {
     const items = await this.agenciesService.findAllDropdown();
-    return items.map((item) => new AgencyEntityDropdown(item));
+    return items.map((item) => new ItemEntityDropdown(item));
   }
 
   @checkAbilities({ action: 'read', subject: 'Agency' })

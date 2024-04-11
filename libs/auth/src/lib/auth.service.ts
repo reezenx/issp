@@ -116,11 +116,11 @@ export class AuthService {
         this.logout();
       }
     } else {
-      this.snackBar.open('Invalid Session!', 'Ok', {
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-        duration: 5000,
-      });
+      // this.snackBar.open('Invalid Session!', 'Ok', {
+      //   horizontalPosition: 'center',
+      //   verticalPosition: 'bottom',
+      //   duration: 5000,
+      // });
       this.clearSession();
     }
   }

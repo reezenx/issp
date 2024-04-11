@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'nestjs-prisma';
+import { User } from '@prisma/client';
 
 export const roundsOfHashing = 10;
 
@@ -10,7 +11,7 @@ export const roundsOfHashing = 10;
 export class UsersService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto, user: User) {
     const hashedPassword = await bcrypt.hash(
       createUserDto.password,
       roundsOfHashing
@@ -21,28 +22,22 @@ export class UsersService {
     return this.prisma.user.create({
       data: {
         ...userData,
+        createdBy: `${user.firstName} ${user.lastName}`,
         agency: { connect: { id: agencyId } },
-        userRole: { connect: { id: roleId } },
+        role: { connect: { id: roleId } },
       },
     });
   }
 
   findAll() {
     return this.prisma.user.findMany({
-      where: {
-        NOT: {
-          role: {
-            has: 'SUPER_ADMIN',
-          },
-        },
-      },
       include: {
         agency: {
           select: {
             name: true,
           },
         },
-        roles: {
+        role: {
           select: {
             name: true,
           },
@@ -60,7 +55,7 @@ export class UsersService {
             name: true,
           },
         },
-        roles: {
+        role: {
           select: {
             name: true,
           },
@@ -69,7 +64,15 @@ export class UsersService {
     });
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async isEmailExist(email: string) {
+    const r = await this.prisma.user.findFirst({
+      where: { email },
+      select: { email: true },
+    });
+    return Boolean(r);
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto, user: User) {
     if (updateUserDto.password) {
       updateUserDto.password = await bcrypt.hash(
         updateUserDto.password,
@@ -78,7 +81,10 @@ export class UsersService {
     }
     return this.prisma.user.update({
       where: { id },
-      data: updateUserDto,
+      data: {
+        ...updateUserDto,
+        updatedBy: `${user.firstName} ${user.lastName}`,
+      },
     });
   }
 

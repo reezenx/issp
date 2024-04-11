@@ -37,22 +37,31 @@ export class AgencyDetails extends Assign implements Agency {
       get: () => this.category?.name,
       enumerable: true,
     });
+
+    Object.defineProperty(this, 'departmentName', {
+      get: () => this.department?.name,
+      enumerable: true,
+    });
   }
 
-  status: Status;
-  uacs: string;
-  departmentId: string;
-  id: string;
-  code: string;
   categoryId: string;
-  name: string;
+  code: string;
+  departmentId: string;
   email: string;
+  id: string;
+  name: string;
   phone: string;
+  readOnly: boolean;
+  status: Status;
   tags: string[];
+  uacs: string;
 
   category: {
     name: string;
-    id: string;
+  };
+
+  department: {
+    name: string;
   };
 
   createdBy: string;

@@ -27,8 +27,8 @@ export class ProjectsService {
         issp: { connect: { id: isspId } },
         type: { connect: { id: typeId } },
         category: { connect: { id: categoryId } },
-        budgetSource: { connect: { id: budgetTypeId } },
-        budgetType: { connect: { id: budgetSourceId } },
+        budgetSource: { connect: { id: budgetSourceId } },
+        budgetType: { connect: { id: budgetTypeId } },
         implementationType: { connect: { id: implementationTypeId } },
       },
     });

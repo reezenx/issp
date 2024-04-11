@@ -5,6 +5,10 @@ export class AgencyEntity implements Agency {
   constructor(agency: AgencyEntity) {
     Object.assign(this, agency);
   }
+
+  @ApiProperty()
+  readOnly: boolean;
+
   @ApiProperty()
   status: Status;
 

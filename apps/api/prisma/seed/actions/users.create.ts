@@ -140,7 +140,7 @@ export async function createUsers(prisma: PrismaClient) {
               },
             },
           },
-          userRole: {
+          role: {
             connectOrCreate: {
               where: {
                 id: role.id,

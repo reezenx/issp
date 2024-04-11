@@ -1,9 +1,14 @@
 <mat-card class="cardWithShadow m-b-4">
   <mat-card-content>
     <div class="d-flex align-items-center">
-      <mat-card-title class="m-b-0">{{ item?.name }} </mat-card-title>
+      <mat-card-title class="m-b-0 d-flex align-items-center">
+        <mat-icon matPrefix class="op-5 m-r-10">
+          <i-tabler name="user" class="icon-25 d-flex"></i-tabler>
+        </mat-icon>
+        {{ item?.name }}
+      </mat-card-title>
       <div class="m-l-auto">
-        <button mat-flat-button color="primary">Suspend</button>
+        <button mat-flat-button color="primary">Disable</button>
       </div>
     </div>
   </mat-card-content>
@@ -13,46 +18,195 @@
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
             <mat-label class="mat-subtitle-2 f-w-600">First Name</mat-label>
-            <input #firstNam matInput type="text" formControlName="firstName" />
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
+            <input
+              #firstName
+              matInput
+              type="text"
+              formControlName="firstName"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['firstName'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!firstName.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['firstName'].touched && f['firstName'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['firstName'].errors && f['firstName'].errors['required']) {
+              <div class="text-error">First Name is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
-          <issp-agency-picker-control
+          <issp-item-picker-control
             placeholder="Search & Select Agency"
             formControlName="agencyId"
             fieldName="Agency"
-            [agenciesDropdown]="agenciesDropdown"
-          ></issp-agency-picker-control>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+            [required]="true"
+            [itemsDropdown]="agenciesDropdown"
+          ></issp-item-picker-control>
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
             <mat-label class="mat-subtitle-2 f-w-600">Status</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="circle-check" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
             <mat-select #status matInput formControlName="status">
               @for (item of statusList; track $index) {
               <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
               }
             </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Roles</mat-label>
-            <mat-select formControlName="role" multiple>
-              @for (item of rolesList; track item) {
-              <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['status'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!status.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['status'].touched && f['status'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['status'].errors && f['status'].errors['required']) {
+              <div class="text-error">Status is required.</div>
               }
-            </mat-select>
+            </mat-hint>
+            }
           </mat-form-field>
+          <issp-item-picker-control
+            placeholder="Search & Select Role"
+            formControlName="roleId"
+            fieldName="Role"
+            [required]="true"
+            [displayCode]="false"
+            [sentenceCase]="true"
+            [itemsDropdown]="userRolesDropdown"
+          ></issp-item-picker-control>
         </div>
         <div class="col-lg-6">
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
             <mat-label class="mat-subtitle-2 f-w-600">Last Name</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
             <input #lastName matInput type="text" formControlName="lastName" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['lastName'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!lastName.value"
+            >
+              <mat-icon matPrefix class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['lastName'].touched && f['lastName'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['lastName'].errors && f['lastName'].errors['required']) {
+              <div class="text-error">Last Name is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
             <mat-label class="mat-subtitle-2 f-w-600">Phone</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="phone" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
             <input #phone matInput type="text" formControlName="phone" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['phone'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!phone.value"
+            >
+              <mat-icon matPrefix class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['phone'].touched && f['phone'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['phone'].errors && f['phone'].errors['required']) {
+              <div class="text-error">Phone is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
             <mat-label class="mat-subtitle-2 f-w-600">Email</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="mail" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
             <input #email matInput type="text" formControlName="email" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['email'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!email.value"
+            >
+              <mat-icon matPrefix class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['email'].touched && f['email'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['email'].errors && f['email'].errors['required']) {
+              <div class="text-error">Email is required.</div>
+              } @if(f['email'].errors && f['email'].errors['email']) {
+              <div class="text-error">
+                Email should be in format (name&#64;agency.com)
+              </div>
+              } @if(f['email'].errors && f['email'].errors['notUnique']) {
+              <div class="text-error">Email already exists.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
+          <issp-tags-control formControlName="tags"></issp-tags-control>
         </div>
       </div>
     </mat-card-content>
@@ -65,6 +219,16 @@
           [disabled]="!form.valid || !form.dirty"
         >
           Save
+        </button>
+        <button
+          mat-flat-button
+          color="accent"
+          type="button"
+          class="m-l-8"
+          (click)="reset()"
+          [disabled]="!form.dirty"
+        >
+          Reset
         </button>
         <button
           mat-flat-button

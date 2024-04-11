@@ -1,11 +1,14 @@
-import { Assign } from "@issp/common";
-import { ProjectImplementationType } from "@prisma/client";
+import { Assign } from '@issp/common';
+import { ProjectImplementationType } from '@prisma/client';
 
-export class ProjectImplementationTypeDetails extends Assign implements ProjectImplementationType {
+export class ProjectImplementationTypeDetails
+  extends Assign
+  implements ProjectImplementationType
+{
   constructor() {
     super();
 
-  Object.defineProperty(this, 'createdAt', {
+    Object.defineProperty(this, 'createdAt', {
       enumerable: true,
       get(): Date {
         return this._createdAt;
@@ -32,16 +35,14 @@ export class ProjectImplementationTypeDetails extends Assign implements ProjectI
           : new Date(val);
       },
     });
-
-    // Object.defineProperty(this, 'categoryName', {
-    //   get: () => this.category?.name,
-    //   enumerable: true,
-    // });
   }
 
-  id: string;
   code: string;
+  id: string;
   name: string;
+  readOnly: boolean;
+  tags: string[];
+
   createdBy: string;
   updatedBy: string;
   createdAt: Date;

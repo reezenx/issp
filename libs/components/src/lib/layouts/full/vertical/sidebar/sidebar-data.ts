@@ -47,15 +47,27 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
+    name: 'User Roles',
+    icon: 'users-group',
+    route: 'admin/user-roles',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
     name: 'Categories',
     icon: 'category',
     route: 'admin/categories',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Implementation Type',
+    name: 'Implementation Types',
     icon: 'browser-check',
-    route: 'admin/implementationtypes',
+    route: 'admin/impl-types',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Departments',
+    icon: 'brand-redux',
+    route: 'admin/departments',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
@@ -66,7 +78,7 @@ export const navItems: NavItem[] = [
   },
   {
     name: 'Budget Types',
-    icon: 'cash',
+    icon: 'cash-banknote',
     route: 'admin/budget-types',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
@@ -83,9 +95,27 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Pivot Table',
+    name: 'Project Types',
+    icon: 'layout-list',
+    route: 'admin/project-types',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Project Categories',
+    icon: 'category',
+    route: 'admin/project-categories',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Permissions',
+    icon: 'shield-lock',
+    route: 'admin/permissions',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Reports',
     icon: 'table-plus',
-    route: 'admin/pivot',
+    route: 'admin/reports',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {

@@ -15,6 +15,7 @@ import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { BudgetTypeEntity } from './entities/budget-type.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
+import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 
 @ApiTags('admin/budget-types')
 @Controller('admin/budget-types')
@@ -40,6 +41,16 @@ export class BudgetTypesController {
   async findAll() {
     const budgetTypes = await this.budgetTypesService.findAll();
     return budgetTypes.map((item) => new BudgetTypeEntity(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'BudgetType' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
+  @Get('dropdown')
+  async findAllDropdown() {
+    const items = await this.budgetTypesService.findAllDropdown();
+    return items.map((item) => new ItemEntityDropdown(item));
   }
 
   @checkAbilities({ action: 'read', subject: 'BudgetType' })

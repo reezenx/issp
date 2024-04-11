@@ -49,7 +49,16 @@ export class UserService {
   }
 
   getUserById(id: string) {
-    return this.prisma.user.findUnique({ where: { id } });
+    return this.prisma.user.findUnique({
+      where: { id },
+      include: {
+        roles: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
   }
 
   async validateUserById(id: string) {
