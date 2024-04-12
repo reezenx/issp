@@ -59,7 +59,6 @@ export class ProjectTypeAdminEditComponent implements OnInit {
       id: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
-      // uacs: new FormControl<string>('', [Validators.required]),
       updatedBy: new FormControl<string>('System'),
     });
   }

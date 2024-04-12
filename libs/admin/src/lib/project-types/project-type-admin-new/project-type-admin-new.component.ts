@@ -43,7 +43,6 @@ export class ProjectTypeAdminNewComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
-      // uacs: new FormControl<string>('', [Validators.required]),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),

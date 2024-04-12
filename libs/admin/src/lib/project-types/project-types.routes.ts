@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ProjectTypeAdminShellComponent } from './project-type-admin-shell/project-type-admin-shell.component';
+import { ProjectTypeAdminShellComponent } from './project-types-admin-shell/project-types-admin-shell.component';
 import { ProjectTypesAdminComponent } from './project-types-admin/project-types-admin.component';
 import { projectTypesResolver } from './resolvers/project-types.resolver';
 import { ProjectTypeAdminNewComponent } from './project-type-admin-new/project-type-admin-new.component';
@@ -39,7 +39,7 @@ export const ProjectTypesRoutes: Routes = [
         path: ':id',
         title: 'Edit Project Type',
         data: {
-          breadcrumbRouteDataProperty: 'item.title',
+          breadcrumbRouteDataProperty: 'item.name',
         },
         component: ProjectTypeAdminEditComponent,
         resolve: {

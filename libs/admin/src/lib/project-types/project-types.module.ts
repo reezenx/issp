@@ -17,7 +17,7 @@ import { ProjectTypesRoutes } from './project-types.routes';
 import { ProjectTypeAdminEditComponent } from './project-type-admin-edit/project-type-admin-edit.component';
 import { ProjectTypeAdminNewComponent } from './project-type-admin-new/project-type-admin-new.component';
 import { ProjectTypesAdminComponent } from './project-types-admin/project-types-admin.component';
-import { ProjectTypeAdminShellComponent } from './project-type-admin-shell/project-type-admin-shell.component';
+import { ProjectTypeAdminShellComponent } from './project-types-admin-shell/project-types-admin-shell.component';
 
 @NgModule({
   imports: [
