@@ -4,4 +4,5 @@ export class ItemDropdown extends Assign {
   id!: string;
   name!: string;
   code!: string;
+  selected!: boolean;
 }

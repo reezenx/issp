@@ -15,12 +15,13 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { ISSPStatus } from '@prisma/client';
+import { ISSPStatus, User } from '@prisma/client';
 import {
   ISSP_Statuses,
   ISSPDetails,
   startYearMustBeLessThanEndYearValidator,
 } from '@issp/common';
+import { AuthService } from '@issp/auth';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -34,12 +35,14 @@ export class IsspItemNewComponent implements OnInit {
     private formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly isspService: IsspsService,
+    private readonly authService: AuthService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
 
   form: FormGroup;
   issp: ISSPDetails;
+  currentUser: User;
   subs: Subscription[] = [];
   statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
   titleMinLength = 6;
@@ -47,6 +50,7 @@ export class IsspItemNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.initCurrentUser();
   }
 
   initForm() {
@@ -62,14 +66,22 @@ export class IsspItemNewComponent implements OnInit {
         startYear: new FormControl<number>(null, [Validators.required]),
         status: new FormControl<ISSPStatus>(ISSP_Statuses.NOT_STARTED),
         version: new FormControl<number>(1),
+        agencyId: new FormControl<string>(null, [Validators.required]),
+        authorId: new FormControl<string>(null, [Validators.required]),
         tags: new FormControl<string[]>([]),
-        createdBy: new FormControl<string>('System'),
-        updatedBy: new FormControl<string>('System'),
-        agencyId: new FormControl<string>('y5w93vwal49inqe9wb2lr6yx'),
-        authorId: new FormControl<string>('q41jy6v1s8jbl95wez13wo9m'),
       },
       { validator: startYearMustBeLessThanEndYearValidator }
     );
+  }
+
+  initCurrentUser() {
+    this.currentUser = this.authService.user;
+    this.form.controls.agencyId.patchValue(this.currentUser.agencyId);
+    this.form.controls.authorId.patchValue(this.currentUser.id);
+  }
+
+  get f() {
+    return this.form.controls;
   }
 
   save() {

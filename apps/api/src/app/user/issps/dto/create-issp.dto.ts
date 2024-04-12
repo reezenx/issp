@@ -44,22 +44,7 @@ export class CreateIsspDto {
   @ApiProperty()
   authorId: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  @ApiProperty()
-  version: number;
-
   @IsArray()
   @ApiProperty()
   tags: string[];
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  createdBy: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  updatedBy: string;
 }

@@ -29,7 +29,12 @@
             #startYear
             formControlName="startYear"
             label="Start Year"
+            [required]="true"
             [invalid]="form.errors?.startYearMustBeGreaterThanEndYear !== null"
+            [error]="{
+              startYearMustBeGreaterThanEndYear:
+                form.errors?.startYearMustBeGreaterThanEndYear
+            }"
           ></issp-year-picker-control>
         </div>
         <div class="col-lg-6">
@@ -37,14 +42,10 @@
             #endYear
             formControlName="endYear"
             label="End Year"
+            [required]="true"
             [invalid]="form.errors?.startYearMustBeGreaterThanEndYear !== null"
           ></issp-year-picker-control>
         </div>
-        @if(form.errors?.startYearMustBeGreaterThanEndYear) {
-        <div class="col-lg-12 m-b-20">
-          <div class="text-error">Start year must be less than end year.</div>
-        </div>
-        }
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Agency Name</mat-label>
@@ -56,15 +57,6 @@
             />
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Created At</mat-label>
-            <input
-              #createdAt
-              matInput
-              type="text"
-              formControlName="createdAt"
-            />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Status</mat-label>
             <mat-select #status matInput formControlName="status">
               @for (item of statusList; track $index) {
@@ -72,6 +64,7 @@
               }
             </mat-select>
           </mat-form-field>
+          <issp-tags-control formControlName="tags"></issp-tags-control>
         </div>
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -81,15 +74,6 @@
               matInput
               type="text"
               formControlName="authorName"
-            />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="w-100" color="primary">
-            <mat-label class="mat-subtitle-2 f-w-600">Updated At</mat-label>
-            <input
-              #updatedAt
-              matInput
-              type="text"
-              formControlName="updatedAt"
             />
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">

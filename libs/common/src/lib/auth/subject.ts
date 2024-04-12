@@ -13,6 +13,7 @@ export type SubjectType =
   | 'ActionHistory'
   | 'Project'
   | 'ProjectType'
+  | 'ProjectTypeGroup'
   | 'ImplementationType'
   | 'ProjectCategory'
   | 'BudgetType'
@@ -29,6 +30,7 @@ export const Subject: { [key: string]: SubjectType } = {
   ActionHistory: 'ActionHistory',
   Project: 'Project',
   ProjectType: 'ProjectType',
+  ProjectTypeGroup: 'ProjectTypeGroup',
   ImplementationType: 'ImplementationType',
   ProjectCategory: 'ProjectCategory',
   BudgetType: 'BudgetType',

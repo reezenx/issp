@@ -3,4 +3,5 @@ export * from './lib/auth';
 export * from './lib/ui';
 export * from './lib/api';
 export * from './lib/models';
+export * from './lib/utils';
 export * from './lib/environment';

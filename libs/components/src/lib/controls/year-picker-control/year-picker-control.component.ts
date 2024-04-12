@@ -1,8 +1,10 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, forwardRef, Input, ViewChild } from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import {
@@ -13,6 +15,7 @@ import {
 import { MatDatepicker } from '@angular/material/datepicker';
 
 import moment from 'moment';
+import { Subject } from 'rxjs';
 
 export const YEAR_MODE_FORMATS = {
   parse: {
@@ -46,9 +49,34 @@ export const YEAR_MODE_FORMATS = {
   ],
 })
 export class YearPickerControlComponent implements ControlValueAccessor {
+  static nextId = 0;
+  /**
+   * Stream that emits whenever the state of the control changes such that the parent `MatFormField`
+   * needs to run change detection.
+   */
+  stateChanges = new Subject<void>();
+  focused = false;
+  touched = false;
+  controlType = 'key-value-input';
+  id = `key-value-input-${YearPickerControlComponent.nextId++}`;
+
   @Input() customClass = '';
 
   @Input() label = 'Year';
+
+  @Input()
+  class = 'w-100 m-b-10';
+
+  @Input()
+  prefixIcon = 'calendar-time';
+
+  @Input()
+  suffixIcon = 'backspace';
+
+  @Input()
+  error = {
+    startYearMustBeGreaterThanEndYear: false,
+  };
 
   _max: moment.Moment;
   @Input()
@@ -77,6 +105,16 @@ export class YearPickerControlComponent implements ControlValueAccessor {
   }
 
   @Input()
+  get placeholder(): string {
+    return this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+    this.stateChanges.next();
+  }
+  private _placeholder = 'Select Year';
+
+  @Input()
   set invalid(val: boolean) {
     const error = val
       ? {
@@ -85,6 +123,21 @@ export class YearPickerControlComponent implements ControlValueAccessor {
       : null;
     this._inputCtrl.setErrors(error);
   }
+
+  @Input()
+  get required(): boolean {
+    return this._required;
+  }
+  set required(value: boolean) {
+    this._required = coerceBooleanProperty(value);
+    if (this._required) {
+      this._inputCtrl.setValidators([Validators.required]);
+    } else {
+      this._inputCtrl.clearValidators();
+    }
+    this.stateChanges.next();
+  }
+  private _required = false;
 
   @Input() touchUi = false;
 
@@ -171,5 +224,9 @@ export class YearPickerControlComponent implements ControlValueAccessor {
     }
 
     return true;
+  }
+
+  discardChanges() {
+    this._inputCtrl.setValue(null);
   }
 }

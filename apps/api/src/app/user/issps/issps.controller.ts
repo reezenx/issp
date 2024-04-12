@@ -16,6 +16,8 @@ import { IsspEntity } from './entities/issp.entity';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { IsspEntityDropdown } from '../../shared/models/issp-dropdown.entity';
+import { CurrentUser } from '@issp/api-auth';
+import { User } from '@prisma/client';
 
 @ApiTags('user/issps')
 @Controller('user/issps')
@@ -27,8 +29,11 @@ export class IsspController {
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   @Post()
-  async create(@Body() createIsspDto: CreateIsspDto) {
-    return new IsspEntity(await this.isspService.create(createIsspDto));
+  async create(
+    @Body() createIsspDto: CreateIsspDto,
+    @CurrentUser() user: User
+  ) {
+    return new IsspEntity(await this.isspService.create(createIsspDto, user));
   }
 
   @checkAbilities({ action: 'read', subject: 'ISSP' })
@@ -65,8 +70,14 @@ export class IsspController {
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: IsspEntity })
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updateIsspDto: UpdateIsspDto) {
-    return new IsspEntity(await this.isspService.update(id, updateIsspDto));
+  async update(
+    @Param('id') id: string,
+    @Body() updateIsspDto: UpdateIsspDto,
+    @CurrentUser() user: User
+  ) {
+    return new IsspEntity(
+      await this.isspService.update(id, updateIsspDto, user)
+    );
   }
 
   @checkAbilities({ action: 'delete', subject: 'ISSP' })

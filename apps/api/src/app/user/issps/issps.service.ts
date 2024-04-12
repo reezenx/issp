@@ -2,12 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { CreateIsspDto } from './dto/create-issp.dto';
 import { UpdateIsspDto } from './dto/update-issp.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class IsspService {
   constructor(private prisma: PrismaService) {}
-  create(createIsspDto: CreateIsspDto) {
-    return this.prisma.iSSP.create({ data: createIsspDto });
+  create(createIsspDto: CreateIsspDto, user: User) {
+    return this.prisma.iSSP.create({
+      data: {
+        ...createIsspDto,
+        createdBy: `${user.firstName} ${user.lastName}`,
+      },
+    });
   }
 
   findAll() {
@@ -72,10 +78,13 @@ export class IsspService {
     });
   }
 
-  update(id: string, updateIsspDto: UpdateIsspDto) {
+  update(id: string, updateIsspDto: UpdateIsspDto, user: User) {
     return this.prisma.iSSP.update({
       where: { id },
-      data: updateIsspDto,
+      data: {
+        ...updateIsspDto,
+        updatedBy: `${user.firstName} ${user.lastName}`,
+      },
     });
   }
 

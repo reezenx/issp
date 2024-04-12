@@ -77,8 +77,7 @@ export class IsspItemEditMetadataComponent implements OnInit {
           disabled: true,
         }),
         version: new FormControl<number>({ value: null, disabled: true }),
-        createdAt: new FormControl<Date>({ value: null, disabled: true }),
-        updatedAt: new FormControl<Date>({ value: null, disabled: true }),
+        tags: new FormControl<string[]>([]),
       },
       { validator: startYearMustBeLessThanEndYearValidator }
     );
