@@ -10,7 +10,8 @@
     "e2e:portal": "nx e2e client-e2e --ui",
     "e2e:api": "nx e2e api-e2e",
     "serve": "nx run-many --target=serve --projects=api,client",
-    "build": "nx run-many --target=build --projects=api,client --skip-nx-cache",
+    "build": "nx run-many --target=build --projects=api,client",
+    "build:prod": "nx run-many --target=build --projects=api,client --prod",
     "db:studio": "prisma studio --schema apps/api/prisma/schema.prisma",
     "db:migrate": "npx prisma migrate dev",
     "db:reset": "npx prisma migrate reset",
@@ -26,7 +27,7 @@
     "lint": "nx run-many -t lint",
     "format": "nx format:write --all",
     "commit": "nx affected --target=build && cz-cust",
-    "start:inspect": "nest start --debug 0.0.0.0:9229 --watch --exec 'node --inspect-brk'"
+    "production:buid": "npx prisma generate && npx prisma migrate deploy && npm run build:prod"
   },
   "private": true,
   "dependencies": {

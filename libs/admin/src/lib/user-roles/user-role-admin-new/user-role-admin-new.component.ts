@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRolesService } from '../services/user-roles.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { UserRoleDetails } from '../models/user-role-details';
 import { Subscription, take } from 'rxjs';
-import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogComponentData,
+} from '@issp/components';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ItemDropdown } from '@issp/common';
 
@@ -37,11 +45,9 @@ export class UserRoleAdminNewComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(
-      ({ permissionsDropdown }) => {
-        this.permissionsDropdown = permissionsDropdown;
-      }
-    );
+    const routeSub = this.route.data.subscribe(({ permissionsDropdown }) => {
+      this.permissionsDropdown = permissionsDropdown;
+    });
     this.subs.push(routeSub);
   }
 
@@ -50,8 +56,6 @@ export class UserRoleAdminNewComponent implements OnInit {
       name: new FormControl<string>('', [Validators.required]),
       permissionIds: new FormControl<string[]>([]),
       tags: new FormControl<string[]>([]),
-      createdBy: new FormControl<string>('System'),
-      updatedBy: new FormControl<string>('System'),
     });
   }
 

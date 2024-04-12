@@ -38,7 +38,7 @@ export class UserRolesController {
     );
   }
 
-  @checkAbilities({ action: 'read', subject: 'User' })
+  @checkAbilities({ action: 'read', subject: 'UserRole' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserRoleEntity, isArray: true })
@@ -48,7 +48,7 @@ export class UserRolesController {
     return users.map((user) => new UserRoleEntity(user));
   }
 
-  @checkAbilities({ action: 'read', subject: 'Category' })
+  @checkAbilities({ action: 'read', subject: 'UserRole' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
@@ -58,7 +58,7 @@ export class UserRolesController {
     return items.map((item) => new ItemEntityDropdown(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'User' })
+  @checkAbilities({ action: 'read', subject: 'UserRole' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserRoleEntity })
@@ -67,7 +67,7 @@ export class UserRolesController {
     return new UserRoleEntity(await this.userRolesService.findOne(id));
   }
 
-  @checkAbilities({ action: 'update', subject: 'User' })
+  @checkAbilities({ action: 'update', subject: 'UserRole' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserRoleEntity })
@@ -82,7 +82,7 @@ export class UserRolesController {
     );
   }
 
-  @checkAbilities({ action: 'delete', subject: 'User' })
+  @checkAbilities({ action: 'delete', subject: 'UserRole' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: UserRoleEntity })

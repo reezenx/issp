@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
 import { ItemDropdown } from '@issp/common';
-import { ProjectTypesService } from '../services/permissions.service';
+import { PermissionsService } from '../services/permissions.service';
 
-export const projectTypesDropdownResolver: ResolveFn<ItemDropdown[]> = () => {
-  return inject(ProjectTypesService).findAllDropdowns();
+export const permissionsDropdownResolver: ResolveFn<ItemDropdown[]> = () => {
+  return inject(PermissionsService).findAllDropdowns();
 };

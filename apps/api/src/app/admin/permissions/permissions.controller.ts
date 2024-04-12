@@ -55,7 +55,13 @@ export class PermissionsController {
   @Get('dropdown')
   async findAllDropdown() {
     const items = await this.permissionsService.findAllDropdown();
-    return items.map((item) => new ItemEntityDropdown(item));
+    return items.map(
+      (item) =>
+        new ItemEntityDropdown({
+          id: item.id,
+          name: `${item.action} ${item.subject}`,
+        })
+    );
   }
 
   @checkAbilities({ action: 'read', subject: 'Permission' })

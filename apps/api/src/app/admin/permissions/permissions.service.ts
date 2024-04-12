@@ -39,10 +39,11 @@ export class PermissionsService {
   }
 
   findAllDropdown() {
-    return this.prisma.userRole.findMany({
+    return this.prisma.permission.findMany({
       select: {
         id: true,
-        name: true,
+        action: true,
+        subject: true,
       },
     });
   }

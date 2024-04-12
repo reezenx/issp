@@ -5,7 +5,7 @@ import { UserRoleAdminNewComponent } from './user-role-admin-new/user-role-admin
 import { usersResolver } from './resolvers/user-roles.resolver';
 import { UserRoleAdminEditComponent } from './user-role-admin-edit/user-role-admin-edit.component';
 import { userResolver } from './resolvers/user-role.resolver';
-import { userRolesDropdownResolver } from './resolvers/user-roles-dropdown.resolver';
+import { permissionsDropdownResolver } from '../permissions/resolvers/permissions-dropdown.resolver';
 
 export const UserRolesRoutes: Routes = [
   {
@@ -34,7 +34,7 @@ export const UserRolesRoutes: Routes = [
           breadcrumb: 'New',
         },
         resolve: {
-          permissionsDropdown: userRolesDropdownResolver,
+          permissionsDropdown: permissionsDropdownResolver,
         },
       },
       {
