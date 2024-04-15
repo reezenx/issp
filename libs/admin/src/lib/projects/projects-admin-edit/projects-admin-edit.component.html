@@ -206,6 +206,7 @@
             placeholder="Search & Select ISSP"
             formControlName="isspId"
             fieldName="ISSP"
+            prefixIcon="certificate"
             [required]="true"
             [displayCode]="false"
             [sentenceCase]="false"
@@ -217,6 +218,7 @@
             placeholder="Search & Select Agency"
             formControlName="agencyId"
             fieldName="Agency"
+            prefixIcon="building"
             [required]="true"
             [itemsDropdown]="agenciesDropdown"
           ></issp-item-picker-control>
@@ -226,6 +228,7 @@
             placeholder="Search & Select Type"
             formControlName="typeId"
             fieldName="Type"
+            prefixIcon="layout-list"
             [required]="true"
             [displayCode]="false"
             [itemsDropdown]="projectTypesDropdown"
@@ -236,6 +239,7 @@
             placeholder="Search & Select Category"
             formControlName="categoryId"
             fieldName="Category"
+            prefixIcon="category"
             [required]="true"
             [itemsDropdown]="projectCategoriesDropdown"
           ></issp-item-picker-control>
@@ -245,6 +249,7 @@
             placeholder="Search & Select Implementation Type"
             formControlName="implementationTypeId"
             fieldName="Implementation Type"
+            prefixIcon="browser-check"
             [required]="true"
             [itemsDropdown]="implementationTypesDropdown"
           ></issp-item-picker-control>
@@ -254,6 +259,7 @@
             placeholder="Search & Select Budget Type"
             formControlName="budgetTypeId"
             fieldName="Budget Type"
+            prefixIcon="cash-banknote"
             [required]="true"
             [itemsDropdown]="budgetTypesDropdown"
           ></issp-item-picker-control>
@@ -263,6 +269,7 @@
             placeholder="Search & Select Budget Source"
             formControlName="budgetSourceId"
             fieldName="Budget Source"
+            prefixIcon="cash"
             [required]="true"
             [itemsDropdown]="budgetSourcesDropdown"
           ></issp-item-picker-control>

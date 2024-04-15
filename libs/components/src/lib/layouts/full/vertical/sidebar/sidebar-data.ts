@@ -53,7 +53,7 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Categories',
+    name: 'Agency Categories',
     icon: 'category',
     route: 'admin/categories',
     roles: ['ADMIN', 'SUPER_ADMIN'],
