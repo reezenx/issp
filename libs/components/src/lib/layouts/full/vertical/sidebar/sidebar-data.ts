@@ -102,7 +102,7 @@ export const navItems: NavItem[] = [
   },
   {
     name: 'Project Type Groups',
-    icon: 'layout-list',
+    icon: 'layout-rows',
     route: 'admin/project-type-groups',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },

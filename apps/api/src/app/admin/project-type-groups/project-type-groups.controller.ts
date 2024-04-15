@@ -16,7 +16,6 @@ import { ProjectTypeGroupEntity } from './entities/project-type-group.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
-import { Portal } from '@angular/cdk/portal';
 
 @ApiTags('admin/project-type-groups')
 @Controller('admin/project-type-groups')

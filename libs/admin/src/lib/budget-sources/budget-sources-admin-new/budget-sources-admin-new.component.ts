@@ -47,6 +47,7 @@ export class BudgetSourcesAdminNewComponent implements OnInit {
       name: new FormControl<string>('', [Validators.required]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
+      tags: new FormControl<string[]>([]),
     });
   }
 

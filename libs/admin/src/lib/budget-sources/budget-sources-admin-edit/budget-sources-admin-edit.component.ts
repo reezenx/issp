@@ -47,6 +47,7 @@ export class BudgetSourcesAdminEditComponent implements OnInit {
       id: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
+      tags: new FormControl<string[]>([]),
     });
   }
 
