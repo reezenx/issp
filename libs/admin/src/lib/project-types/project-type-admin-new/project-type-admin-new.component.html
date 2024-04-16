@@ -1,18 +1,33 @@
+<mat-card class="cardWithShadow m-b-4">
+  <mat-card-content>
+    <div class="d-flex align-items-center">
+      <mat-card-title class="m-b-0 d-flex align-items-center">
+        <mat-icon class="op-5 m-r-6 m-b-0 rounded-0">
+          <i-tabler name="layout-list" class="icon-25 d-flex"></i-tabler>
+        </mat-icon>
+        <div>Create New Project Type</div>
+      </mat-card-title>
+    </div>
+  </mat-card-content>
+</mat-card>
+
 <form [formGroup]="form" (ngSubmit)="save()">
   <mat-card class="cardWithShadow theme-card m-b-0">
-    <mat-card-header>
-      <mat-card-title class="m-b-0">Create New Project Type</mat-card-title>
-    </mat-card-header>
-
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
             <mat-form-field appearance="outline" class="w-100" color="primary">
                 <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
+                <mat-icon matPrefix class="op-5">
+                  <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+                </mat-icon>
                 <input #name matInput type="text" formControlName="name" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="w-100" color="primary">
               <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
+              <mat-icon matPrefix class="op-5">
+                <i-tabler name="id" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
               <input #code matInput type="text" formControlName="code" />
             </mat-form-field>
         </div>
