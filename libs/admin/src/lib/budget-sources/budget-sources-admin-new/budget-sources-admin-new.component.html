@@ -1,24 +1,76 @@
-<form [formGroup]="form" (ngSubmit)="save()">
-  <mat-card class="cardWithShadow theme-card m-b-0">
-    <mat-card-header>
+<mat-card class="cardWithShadow m-b-4">
+  <mat-card-content>
+    <div class="d-flex align-items-center">
       <mat-card-title class="m-b-0 d-flex align-items-center">
         <mat-icon class="op-5 m-r-6 m-b-0 rounded-0">
           <i-tabler name="cash" class="icon-25 d-flex"></i-tabler>
         </mat-icon>
         <div>Create New Budget Source</div>
       </mat-card-title>
-    </mat-card-header>
+    </div>
+  </mat-card-content>
+</mat-card>
 
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-card class="cardWithShadow theme-card m-b-0">
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="forms" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
             <input #code matInput type="text" formControlName="code" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['code'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!code.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['code'].touched && f['code'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['code'].errors && f['code'].errors['required']) {
+              <div class="text-error">Code is required.</div>
+              } @if(f['code'].errors && f['code'].errors['notUnique']) {
+              <div class="text-error">Code already exists.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
+            <mat-icon matPrefix class="op-5">
+              <i-tabler name="forms" class="icon-18 d-flex"></i-tabler>
+            </mat-icon>
             <input #name matInput type="text" formControlName="name" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['name'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!name.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['name'].touched && f['name'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['name'].errors && f['name'].errors['required']) {
+              <div class="text-error">Name is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
           <issp-tags-control formControlName="tags"></issp-tags-control>
         </div>

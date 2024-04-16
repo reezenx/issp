@@ -62,6 +62,15 @@ export class BudgetSourcesController {
     return new BudgetSourceEntity(await this.budgetSourcesService.findOne(id));
   }
 
+  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.budgetSourcesService.isCodeExist(code);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'BudgetSource' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

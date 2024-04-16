@@ -16,6 +16,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
+import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -43,12 +44,25 @@ export class BudgetSourcesAdminNewComponent implements OnInit {
 
   initForm() {
     this.form = this.formBuilder.group({
-      code: new FormControl<string>('', [Validators.required]),
+      //code: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.budgetSourceService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
       name: new FormControl<string>('', [Validators.required]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
       tags: new FormControl<string[]>([]),
     });
+  }
+
+  get f() {
+    return this.form.controls;
   }
 
   save() {

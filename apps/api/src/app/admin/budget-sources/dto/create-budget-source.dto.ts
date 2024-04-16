@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsArray } from 'class-validator';
 
 export class CreateBudgetSourceDto {
   @IsString()
@@ -21,4 +21,8 @@ export class CreateBudgetSourceDto {
   @IsNotEmpty()
   @ApiProperty()
   updatedBy: string;
+
+  @IsArray()
+  @ApiProperty()
+  tags: string[];
 }

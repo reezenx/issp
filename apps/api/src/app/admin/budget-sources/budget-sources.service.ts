@@ -31,6 +31,14 @@ export class BudgetSourcesService {
     return this.prisma.budgetSource.findUnique({ where: { id } });
   }
 
+  async isCodeExist(code: string) {
+    const r = await this.prisma.budgetSource.findFirst({
+      where: { code },
+      select: { code: true },
+    });
+    return Boolean(r);
+  }
+
   update(id: string, updateBudgetSourceDto: UpdateBudgetSourceDto) {
     return this.prisma.budgetSource.update({
       where: { id },
