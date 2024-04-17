@@ -66,7 +66,7 @@ export const navItems: NavItem[] = [
   },
   {
     name: 'Departments',
-    icon: 'brand-redux',
+    icon: 'building-bank',
     route: 'admin/departments',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
@@ -108,7 +108,7 @@ export const navItems: NavItem[] = [
   },
   {
     name: 'Project Categories',
-    icon: 'category',
+    icon: 'category-2',
     route: 'admin/project-categories',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },

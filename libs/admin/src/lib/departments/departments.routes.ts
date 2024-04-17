@@ -38,7 +38,7 @@ export const DepartmentsRoutes: Routes = [
         path: ':id',
         title: 'Edit Department',
         data: {
-          breadcrumb: 'Edit',
+          breadcrumbRouteDataProperty: 'item.code',
         },
         component: DepartmentsAdminEditComponent,
         resolve: {

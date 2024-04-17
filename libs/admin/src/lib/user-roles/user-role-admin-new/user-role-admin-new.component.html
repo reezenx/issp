@@ -1,8 +1,17 @@
+<mat-card class="cardWithShadow m-b-4">
+  <mat-card-content>
+    <div class="d-flex align-items-center">
+      <mat-card-title class="m-b-0 d-flex align-items-center">
+        <mat-icon class="op-5 m-r-6 m-b-0 rounded-0">
+          <i-tabler name="users-group" class="icon-25 d-flex"></i-tabler>
+        </mat-icon>
+        <div>Create New User Role</div>
+      </mat-card-title>
+    </div>
+  </mat-card-content>
+</mat-card>
 <form [formGroup]="form" (ngSubmit)="save()">
   <mat-card class="cardWithShadow theme-card m-b-0">
-    <mat-card-header>
-      <mat-card-title class="m-b-0">Create New User Role</mat-card-title>
-    </mat-card-header>
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
@@ -16,7 +25,8 @@
             fieldName="Permission"
             [required]="true"
             [displayCode]="false"
-            [sentenceCase]="true"
+            [multiple]="true"
+            [prefixIcon]="'shield-lock'"
             [itemsDropdown]="permissionsDropdown"
           ></issp-item-picker-control>
         </div>
@@ -45,4 +55,3 @@
     </mat-card-actions>
   </mat-card>
 </form>
-
