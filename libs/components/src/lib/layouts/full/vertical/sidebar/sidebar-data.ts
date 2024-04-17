@@ -12,12 +12,6 @@ export const navItems: NavItem[] = [
     roles: ['PLANNER', 'SUPER_ADMIN'],
   },
   {
-    name: 'ISSP',
-    icon: 'certificate',
-    route: 'user/issps',
-    roles: ['PLANNER', 'SUPER_ADMIN'],
-  },
-  {
     name: 'Calendar',
     icon: 'calendar-event',
     route: 'user/calendar',
@@ -29,7 +23,12 @@ export const navItems: NavItem[] = [
     route: 'user/chat',
     roles: ['PLANNER', 'SUPER_ADMIN'],
   },
-
+  {
+    name: 'ISSP',
+    icon: 'certificate',
+    route: 'user/issps',
+    roles: ['PLANNER', 'SUPER_ADMIN'],
+  },
   {
     navCap: 'Admin',
     roles: ['SUPER_ADMIN'],
@@ -41,39 +40,15 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Users',
-    icon: 'user',
-    route: 'admin/users',
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-  },
-  {
-    name: 'User Roles',
-    icon: 'users-group',
-    route: 'admin/user-roles',
+    name: 'Agencies',
+    icon: 'building',
+    route: 'admin/agencies',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
     name: 'Agency Categories',
     icon: 'category',
     route: 'admin/categories',
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-  },
-  {
-    name: 'Implementation Types',
-    icon: 'browser-check',
-    route: 'admin/impl-types',
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-  },
-  {
-    name: 'Departments',
-    icon: 'building-bank',
-    route: 'admin/departments',
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-  },
-  {
-    name: 'Agencies',
-    icon: 'building',
-    route: 'admin/agencies',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
@@ -89,27 +64,15 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Projects',
-    icon: 'list-details',
-    route: 'admin/projects',
+    name: 'Departments',
+    icon: 'building-bank',
+    route: 'admin/departments',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
-    name: 'Project Types',
-    icon: 'layout-list',
-    route: 'admin/project-types',
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-  },
-  {
-    name: 'Project Type Groups',
-    icon: 'layout-rows',
-    route: 'admin/project-type-groups',
-    roles: ['ADMIN', 'SUPER_ADMIN'],
-  },
-  {
-    name: 'Project Categories',
-    icon: 'category-2',
-    route: 'admin/project-categories',
+    name: 'Implementation Types',
+    icon: 'browser-check',
+    route: 'admin/impl-types',
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
@@ -119,10 +82,50 @@ export const navItems: NavItem[] = [
     roles: ['ADMIN', 'SUPER_ADMIN'],
   },
   {
+    name: 'Projects',
+    icon: 'list-details',
+    route: 'admin/projects',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Project Categories',
+    icon: 'category-2',
+    route: 'admin/project-categories',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Project Type Groups',
+    icon: 'layout-rows',
+    route: 'admin/project-type-groups',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Project Types',
+    icon: 'layout-list',
+    route: 'admin/project-types',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
     name: 'Reports',
     icon: 'table-plus',
     route: 'admin/reports',
     roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'Users',
+    icon: 'user',
+    route: 'admin/users',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    name: 'User Roles',
+    icon: 'users-group',
+    route: 'admin/user-roles',
+    roles: ['ADMIN', 'SUPER_ADMIN'],
+  },
+  {
+    navCap: 'Controls',
+    roles: ['SUPER_ADMIN'],
   },
   {
     name: 'Rich Text',
