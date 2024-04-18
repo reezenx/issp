@@ -16,8 +16,9 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-// import { CategoryDropdown } from '@issp/common';
+import { ItemDropdown } from '@issp/common';
 
+@UntilDestroy({ arrayName: 'subs' })
 @Component({
   selector: 'issp-agency-admin-new',
   templateUrl: './agency-admin-new.component.html',
@@ -33,21 +34,23 @@ export class AgencyAdminNewComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  // categoriesDropdown: CategoryDropdown[] = [];
+  categoriesDropdown: ItemDropdown[] = [];
+
   form: FormGroup;
   issp: AgencyDetails;
   subs: Subscription[] = [];
 
   ngOnInit(): void {
     this.initForm();
+    this.initSubs();
   }
 
-  /* initSubs() {
+  initSubs() {
     const routeSub = this.route.data.subscribe(({ categoriesDropdown }) => {
       this.categoriesDropdown = categoriesDropdown;
     });
     this.subs.push(routeSub);
-  } */
+  }
 
   initForm() {
     this.form = this.formBuilder.group({
@@ -58,7 +61,7 @@ export class AgencyAdminNewComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      // categoryId: new FormControl<string>('cluapmrpz000908juao9a7bub', [Validators.required]),
+      categoryId: new FormControl<string>('', [Validators.required]),
       // uacs: new FormControl<string>('12345', [Validators.required]),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),

@@ -5,6 +5,7 @@ import { AgencyAdminEditComponent } from './agency-admin-edit/agency-admin-edit.
 import { AgencyAdminNewComponent } from './agency-admin-new/agency-admin-new.component';
 import { agenciesResolver } from './resolvers/agencies.resolver';
 import { agencyResolver } from './resolvers/agency.resolver';
+import { categoriesDropdownResolver } from '../categories/resolvers/category-dropdown.resolver';
 
 export const AgenciesRoutes: Routes = [
   {
@@ -32,6 +33,9 @@ export const AgenciesRoutes: Routes = [
         data: {
           breadcrumb: 'New',
         },
+        resolve: {
+          categoriesDropdown: categoriesDropdownResolver,
+        },
       },
       {
         path: ':id',
@@ -42,6 +46,7 @@ export const AgenciesRoutes: Routes = [
         component: AgencyAdminEditComponent,
         resolve: {
           item: agencyResolver,
+          categoriesDropdown: categoriesDropdownResolver,
         },
       },
     ],

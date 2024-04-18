@@ -55,8 +55,8 @@ export class CategoriesAdminComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ categories }) => {
-      this.gridData = categories;
+    const routeSub = this.route.data.subscribe(({ items }) => {
+      this.gridData = items;
     });
     this.subs.push(routeSub);
   }

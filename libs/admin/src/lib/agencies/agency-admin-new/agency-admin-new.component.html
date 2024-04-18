@@ -23,19 +23,7 @@
                         </mat-icon>
                         <input #name matInput type="text" formControlName="name" />
                     </mat-form-field>
-
-                    <!-- <issp-agency-picker-control placeholder="Search & Select Category" formControlName="categoryId"
-                        fieldName="Category" [categoriesDropdown]="categoriesDropdown"></issp-agency-picker-control> -->
-
-                    <!-- <mat-form-field appearance="outline" class="w-100" color="primary">
-                        <mat-label class="mat-subtitle-2 f-w-600">Status</mat-label>
-                        <mat-select #status matInput formControlName="status">
-                            @for (item of statusList; track $index) {
-                            <mat-option [value]="item">{{ item | sentenceCase }}</mat-option>
-                            }
-                        </mat-select>
-                    </mat-form-field> -->
-
+                    
                     <mat-form-field appearance="outline" class="w-100" color="primary">
                         <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
                         <mat-icon matPrefix class="op-5">
@@ -44,14 +32,14 @@
                         <input #code matInput type="text" formControlName="code" />
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" class="w-100" color="primary">
-                        <mat-label class="mat-subtitle-2 f-w-600">Category</mat-label>
-                        <mat-icon matPrefix class="op-5">
-                            <i-tabler name="category" class="icon-18 d-flex"></i-tabler>
-                        </mat-icon>
-                        <input #category matInput type="text" formControlName="agency" />
-                    </mat-form-field>
-
+                    <issp-item-picker-control
+                    placeholder="Search & Select Category"
+                    formControlName="categoryId"
+                    fieldName="Category"
+                    prefixIcon="category"
+                    [required]="true"
+                    [itemsDropdown]="categoriesDropdown"
+                    ></issp-item-picker-control>
 
                 </div>
                 <div class="col-lg-6">

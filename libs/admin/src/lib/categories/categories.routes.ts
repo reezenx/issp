@@ -23,7 +23,7 @@ export const UsersRoutes: Routes = [
           breadcrumbSkipNode: true,
         },
         resolve: {
-          categories: categoriesResolver,
+          items: categoriesResolver,
         },
       },
       {
