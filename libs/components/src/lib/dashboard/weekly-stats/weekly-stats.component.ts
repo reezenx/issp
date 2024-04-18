@@ -89,23 +89,23 @@ export class WeeklyStatsComponent {
     {
       id: 1,
       color: 'primary',
-      title: 'Top Sales',
-      subtitle: 'Johnathan Doe',
+      title: 'Top Planner',
+      subtitle: 'Juan Dela Cruz',
       percent: '68',
     },
     {
       id: 2,
       color: 'success',
-      title: 'Best Seller',
-      subtitle: 'Footware',
+      title: 'Top Implementor',
+      subtitle: 'Gina Dela Cruz',
       percent: '45',
     },
     {
       id: 3,
       color: 'error',
-      title: 'Most Commented',
-      subtitle: 'Fashionware',
-      percent: '14',
+      title: 'Most Commented Projects',
+      subtitle: 'Cybersecurity Web and Mobile Development',
+      percent: '140',
     },
   ];
 }

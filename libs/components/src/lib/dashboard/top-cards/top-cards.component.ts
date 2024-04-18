@@ -18,18 +18,11 @@ interface topcards {
 export class TopCardsComponent {
   topcards: topcards[] = [
     {
-      id: 1,
-      color: 'primary',
-      img: '/assets/images/svgs/icon-user-male.svg',
-      title: 'Employees',
-      subtitle: '96',
-    },
-    {
       id: 2,
       color: 'warning',
       img: '/assets/images/svgs/icon-briefcase.svg',
-      title: 'Clients',
-      subtitle: '3,650',
+      title: 'ISSPs',
+      subtitle: '5',
     },
     {
       id: 3,
@@ -42,15 +35,15 @@ export class TopCardsComponent {
       id: 4,
       color: 'error',
       img: '/assets/images/svgs/icon-favorites.svg',
-      title: 'Events',
-      subtitle: '696',
+      title: 'Tier 1',
+      subtitle: '300',
     },
     {
       id: 5,
       color: 'success',
       img: '/assets/images/svgs/icon-speech-bubble.svg',
-      title: 'Payroll',
-      subtitle: '₱96k',
+      title: 'Tier 2',
+      subtitle: '56',
     },
     {
       id: 6,
@@ -58,6 +51,13 @@ export class TopCardsComponent {
       img: '/assets/images/svgs/icon-connect.svg',
       title: 'Reports',
       subtitle: '59',
+    },
+    {
+      id: 1,
+      color: 'primary',
+      img: '/assets/images/svgs/icon-user-male.svg',
+      title: 'Employees',
+      subtitle: '1576',
     },
   ];
 }
