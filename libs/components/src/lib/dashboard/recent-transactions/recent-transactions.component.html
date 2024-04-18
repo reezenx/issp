@@ -1,6 +1,6 @@
 <mat-card class="cardWithShadow">
   <mat-card-content>
-    <mat-card-title>Recent Transactions</mat-card-title>
+    <mat-card-title>Recent Activities</mat-card-title>
 
     <div class="timeline m-t-24">
       @for(stat of stats; track stat.title) {
@@ -13,18 +13,15 @@
         <div class="desc">
           @if(stat.subtext) {
           <span class="mat-subtitle-1 f-s-14 lh-20">{{ stat.subtext }}</span>
-          }
-
-          @if(stat.title) {
+          } @if(stat.title) {
           <span class="mat-subtitle-1 f-s-14 lh-20 f-w-600 d-block">{{
             stat.title
-            }}</span>
+          }}</span>
+          } @if(stat.link) {
+          <a href="#" class="text-primary text-decoration-none mat-body-1"
+            >#ISSP-3467</a
+          >
           }
-
-          @if(stat.link) {
-          <a href="#" class="text-primary text-decoration-none mat-body-1">#ML-3467</a>
-          }
-
         </div>
       </div>
       }

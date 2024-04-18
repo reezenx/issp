@@ -21,6 +21,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ItemDropdown } from '@issp/common';
 import { SentenceCasePipe } from 'libs/common/src/lib/ui/pipes/sentence-case.pipe';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const ITEM_PICKER_FORM_CONTROL_VALUE_ACCESSOR: any = {
@@ -43,7 +45,7 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     formBuilder: UntypedFormBuilder,
     private sentenceCasePipe: SentenceCasePipe
   ) {
-    this.itemsFilteredOptions$ = this.searchControl.valueChanges.pipe(
+    this.itemsFilteredOptions$ = this.inputControl.valueChanges.pipe(
       startWith(''),
       map((value: string) => this.searchFilterItems(value || ''))
     );
@@ -59,9 +61,9 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     });
   }
 
-  @ViewChild('cnt') cntInput: HTMLInputElement;
+  @ViewChild('cnt') cnt: HTMLInputElement;
   valueChangesSubscription: Subscription = null;
-  searchControl: FormControl = new FormControl('');
+  inputControl: FormControl = new FormControl('');
   form: FormGroup;
   /**
    * Stream that emits whenever the state of the control changes such that the parent `MatFormField`
@@ -78,6 +80,9 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
   onTouched = () => {};
 
   itemsFilteredOptions$: Observable<ItemDropdown[]>;
+  addOnBlur = true;
+  items: string[] = [];
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   get empty() {
     return (
@@ -96,6 +101,9 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
   class: string = 'w-100 m-b-10';
 
   @Input()
+  ariaLabel: string = 'Enter items';
+
+  @Input()
   prefixIcon: string = 'search';
 
   @Input()
@@ -103,6 +111,9 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
 
   @Input()
   displayCode = true;
+
+  @Input()
+  multiple = false;
 
   @Input()
   sentenceCase = false;
@@ -131,9 +142,9 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
     if (this._required) {
-      this.searchControl.setValidators([Validators.required]);
+      this.inputControl.setValidators([Validators.required]);
     } else {
-      this.searchControl.clearValidators();
+      this.inputControl.clearValidators();
     }
     this.stateChanges.next();
   }
@@ -145,7 +156,7 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
   }
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
-    this._disabled ? this.searchControl.disable() : this.searchControl.enable();
+    this._disabled ? this.inputControl.disable() : this.inputControl.enable();
     this.stateChanges.next();
   }
   private _disabled = false;
@@ -163,7 +174,7 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     this.form.setValue({
       cnt: cnt,
     });
-    this.searchControl.setValue(this.displayFn(item));
+    this.inputControl.setValue(this.displayFn(item));
     this.stateChanges.next();
   }
 
@@ -258,8 +269,49 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     );
   }
 
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      this.items.push(value);
+    }
+
+    event.chipInput?.clear();
+    // this.itemsControl.patchValue(this.items);
+    this.form.controls['cnt'].patchValue(this.items);
+    this.stateChanges.next();
+  }
+
+  edit(tag: string, event: MatChipEditedEvent) {
+    const value = event.value.trim();
+
+    if (!value) {
+      this.remove(tag);
+      return;
+    }
+
+    const index = this.items.indexOf(tag);
+    if (index >= 0) {
+      this.items[index] = value;
+    }
+    // this.itemsControl.patchValue(this.items);
+    this.form.controls['cnt'].patchValue(this.items);
+    this.stateChanges.next();
+  }
+
+  remove(tag: string): void {
+    const index = this.items.indexOf(tag);
+
+    if (index >= 0) {
+      this.items.splice(index, 1);
+    }
+    // this.itemsControl.patchValue(this.items);
+    this.form.controls['cnt'].patchValue(this.items);
+    this.stateChanges.next();
+  }
+
   discardChanges() {
-    this.searchControl.setValue(null);
+    this.inputControl.setValue(null);
     this.form.controls['cnt'].patchValue(null);
   }
 }

@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 
 export interface performanceData {
   id: number;
-  imagePath: string;
   pname: string;
   category: string;
   progress: number;
@@ -17,38 +16,34 @@ export interface performanceData {
 const ELEMENT_DATA: performanceData[] = [
   {
     id: 1,
-    imagePath: 'assets/images/products/s6.jpg',
-    pname: 'Gaming Console',
-    category: 'Electronics',
+    pname: 'Data Center Lease',
+    category: 'Rent/Lease Expenses',
     progress: 78.5,
-    sales: 3.9,
+    sales: 3456.9,
     status: 'low',
   },
   {
     id: 2,
-    imagePath: 'assets/images/products/s9.jpg',
-    pname: 'Leather Purse',
-    category: 'Fashion',
+    pname: 'AWS RDS',
+    category: 'Subscription Expenses',
     progress: 58.6,
-    sales: 3.5,
+    sales: 367.5,
     status: 'medium',
   },
   {
     id: 3,
-    imagePath: 'assets/images/products/s7.jpg',
-    pname: 'Red Velvate Dress',
-    category: 'Womens Fashion',
+    pname: 'VOOP Integration and Support',
+    category: 'Communication Expenses',
     progress: 25,
-    sales: 3.8,
+    sales: 300.8,
     status: 'high',
   },
   {
     id: 4,
-    imagePath: 'assets/images/products/s4.jpg',
-    pname: 'Headphone Boat',
-    category: 'Electronics',
+    pname: 'Bataan Data Center',
+    category: 'Infrastructure Outlay',
     progress: 96.3,
-    sales: 3.54,
+    sales: 31278.54,
     status: 'critical',
   },
 ];
