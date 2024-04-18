@@ -148,7 +148,7 @@ export class YearPickerControlComponent implements ControlValueAccessor {
 
   // Function to call when the date changes.
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  onChange = (year: Date) => {};
+  onChange = (year: number) => {};
 
   // Function to call when the input is touched (when a star is clicked).
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -201,7 +201,7 @@ export class YearPickerControlComponent implements ControlValueAccessor {
     chosenDate.set({ date: 1 });
 
     this._inputCtrl.setValue(chosenDate, { emitEvent: false });
-    this.onChange(chosenDate.toDate());
+    this.onChange(chosenDate.toDate().getFullYear());
     this.onTouched();
   }
 

@@ -82,8 +82,6 @@ export class IsspsService {
 
   updateOne(issp: ISSPDetails): Observable<ISSPDetails> {
     const uri = `${this.route}/${issp.id}`;
-    issp.startYear = new Date(issp.startYear).getFullYear();
-    issp.endYear = new Date(issp.endYear).getFullYear();
     return this.http.put<ISSPDetails>(uri, issp).pipe(
       map((e) => {
         const entity = new ISSPDetails();
