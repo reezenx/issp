@@ -16,6 +16,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
+import { ItemDropdown } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -33,6 +34,8 @@ export class AgencyAdminEditComponent implements OnInit {
     private readonly dialog: MatDialog
   ) {}
 
+  categoriesDropdown: ItemDropdown[] = [];
+
   form: FormGroup;
   item: AgencyDetails;
   subs: Subscription[] = [];
@@ -43,10 +46,13 @@ export class AgencyAdminEditComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ item }) => {
-      this.item = item;
-      this.form.patchValue(this.item);
-    });
+    const routeSub = this.route.data.subscribe(
+      ({ item, categoriesDropdown }) => {
+        this.item = item;
+        this.form.patchValue(this.item);
+        this.categoriesDropdown = categoriesDropdown;
+      }
+    );
     this.subs.push(routeSub);
 
     const currentIsspSub = this.agenciesService.currentContextItem$.subscribe(
@@ -66,6 +72,7 @@ export class AgencyAdminEditComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
+      categoryId: new FormControl<string>('', [Validators.required]),
       updatedBy: new FormControl<string>('System'),
     });
   }
