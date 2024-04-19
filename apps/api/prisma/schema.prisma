@@ -203,7 +203,7 @@ model ProjectTypeGroup {
   updatedAt    DateTime?     @updatedAt()
   projectTypes ProjectType[]
 
-  @@map("project-sub-types")
+  @@map("project-type-groups")
 }
 
 model ProjectCategory {
@@ -267,28 +267,112 @@ model BudgetSource {
 }
 
 model ISSP {
-  id          String          @id @default(cuid())
-  title       String
-  description String?
-  status      ISSPStatus      @default(NOT_STARTED)
-  startYear   Int
-  endYear     Int
-  tags        String[]
-  users       User[]          @relation("ISSPUsers")
-  agency      Agency          @relation(fields: [agencyId], references: [id])
-  agencyId    String
-  author      User            @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
-  authorId    String
-  version     Int?            @default(1)
-  readOnly    Boolean         @default(true)
-  createdAt   DateTime        @default(now())
-  createdBy   String
-  updatedBy   String?
-  updatedAt   DateTime?       @updatedAt
-  history     ActionHistory[]
-  projects    Project[]
+  id               String              @id @default(cuid())
+  title            String
+  description      String?
+  status           ISSPStatus          @default(NOT_STARTED)
+  startYear        Int
+  endYear          Int
+  tags             String[]
+  users            User[]              @relation("ISSPUsers")
+  agency           Agency              @relation(fields: [agencyId], references: [id])
+  agencyId         String
+  author           User                @relation(name: "ISSPAuthor", fields: [authorId], references: [id])
+  authorId         String
+  version          Int?                @default(1)
+  readOnly         Boolean             @default(true)
+  createdAt        DateTime            @default(now())
+  createdBy        String
+  updatedBy        String?
+  updatedAt        DateTime?           @updatedAt
+  history          ActionHistory[]
+  projects         Project[]
+  p1OrgProfileS1   ISSPP1OrgProfileS1? @relation(fields: [p1OrgProfileS1Id], references: [id])
+  p1OrgProfileS1Id String?             @unique
+  p1OrgProfileS2   ISSPP1OrgProfileS2? @relation(fields: [p1OrgProfileS2Id], references: [id])
+  p1OrgProfileS2Id String?             @unique
 
   @@map("issps")
+}
+
+// PART I. ORGANIZATIONAL PROFILE (P1)
+/// A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT (S1)
+model ISSPP1OrgProfileS1 {
+  id             String    @id @default(cuid())
+  name           String
+  a1Mandate      String
+  a2Vision       String
+  a3Mission      String
+  a4FinalOutputs String[]
+  order          Int       @default(1)
+  part           Int       @default(1)
+  readOnly       Boolean?  @default(false)
+  tags           String[]
+  issp           ISSP?
+  isspId         String?
+  createdBy      String
+  updatedBy      String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt()
+
+  @@map("issp-p1-org-profiles-s1")
+}
+
+/// A. DEPARTMENT/AGENCY PROFILE
+model ISSPP1OrgProfileS2 {
+  id                  String    @id @default(cuid())
+  name                String
+  b1PlantillaPosition String
+  b1OrgUnit           String
+  b1Email             String
+  b1Contacts          String[]
+  b2OtherSources      String
+  b3TotalNoEmp        String
+  b3NoRegionalOffices String
+  b3NoProvOffices     String
+  b3NoOthersOffices   String
+  order               Int       @default(2)
+  part                Int       @default(1)
+  readOnly            Boolean?  @default(false)
+  tags                String[]
+  issp                ISSP?
+  isspId              String?
+  createdBy           String
+  updatedBy           String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime? @updatedAt()
+
+  @@map("issp-p1-org-profiles-s2")
+}
+
+model ISSPPart {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  order     Int
+  readOnly  Boolean?  @default(true)
+  tags      String[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("issp-parts")
+}
+
+model ISSPSubPart {
+  id        String    @id @default(cuid())
+  code      String    @unique
+  name      String
+  order     Int
+  readOnly  Boolean?  @default(true)
+  tags      String[]
+  createdBy String
+  updatedBy String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt()
+
+  @@map("issp-sub-parts")
 }
 
 model ActionHistory {
