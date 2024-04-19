@@ -17,11 +17,21 @@
   <mat-card class="cardWithShadow theme-card m-b-0">
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
             <input #name matInput type="text" formControlName="name" />
           </mat-form-field>
+          <issp-item-picker-control
+            placeholder="Search & Select Permission"
+            formControlName="permissionIds"
+            fieldName="Permissions"
+            [required]="true"
+            [displayCode]="false"
+            [multiple]="true"
+            [prefixIcon]="'shield-lock'"
+            [itemsDropdown]="permissionsDropdown"
+          ></issp-item-picker-control>
         </div>
       </div>
     </mat-card-content>
@@ -34,6 +44,16 @@
           [disabled]="!form.valid || !form.dirty"
         >
           Save
+        </button>
+        <button
+          mat-flat-button
+          color="accent"
+          type="button"
+          class="m-l-8"
+          (click)="reset()"
+          [disabled]="!form.dirty"
+        >
+          Reset
         </button>
         <button
           mat-flat-button

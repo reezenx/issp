@@ -80,9 +80,9 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
   onTouched = () => {};
 
   itemsFilteredOptions$: Observable<ItemDropdown[]>;
-  addOnBlur = true;
-  items: string[] = [];
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  selectedItems: Array<ItemDropdown> = [];
+  @Output() result = new EventEmitter<{ key: string; data: Array<string> }>();
 
   get empty() {
     return (
@@ -168,13 +168,23 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     }
     return null;
   }
-  set value(value: ItemDropdown | string) {
-    const item = this.itemsDropdown.find((a) => a.id === value);
-    const cnt = value || null;
-    this.form.setValue({
-      cnt: cnt,
-    });
-    this.inputControl.setValue(this.displayFn(item));
+  set value(value: ItemDropdown | string | string[]) {
+    if (this.multiple) {
+      const values = value as string[];
+      this.selectedItems = this.itemsDropdown.filter((a) => {
+        const selected = values.indexOf(a.id) !== -1;
+        a.selected = selected;
+        return selected;
+      });
+    } else {
+      const value_ = value as string;
+      const item = this.itemsDropdown.find((a) => a.id === value_);
+      const cnt = value_ || null;
+      this.form.setValue({
+        cnt: cnt,
+      });
+      this.inputControl.setValue(this.displayFn(item));
+    }
     this.stateChanges.next();
   }
 
@@ -269,49 +279,75 @@ export class ItemPickerControlComponent implements ControlValueAccessor {
     );
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    if (value) {
-      this.items.push(value);
+  toggleSelection(data: ItemDropdown): void {
+    data.selected = !data.selected;
+    if (data.selected === true) {
+      this.selectedItems.push(data);
+    } else {
+      const i = this.selectedItems.findIndex(
+        (value: ItemDropdown) => value.name === data.name
+      );
+      this.selectedItems.splice(i, 1);
     }
-
-    event.chipInput?.clear();
-    // this.itemsControl.patchValue(this.items);
-    this.form.controls['cnt'].patchValue(this.items);
-    this.stateChanges.next();
+    this.emitAdjustedData();
   }
 
-  edit(tag: string, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-
-    if (!value) {
-      this.remove(tag);
-      return;
+  emitAdjustedData() {
+    const results: Array<string> = [];
+    this.selectedItems.forEach((data: ItemDropdown) => {
+      results.push(data.id);
+    });
+    const invalid = results.length === 0;
+    if (invalid) {
+      this.inputControl.setErrors({
+        required: invalid,
+      });
+      this.inputControl.markAsDirty();
+      this.inputControl.updateValueAndValidity();
+      this.itemsDropdown.forEach((i) => (i.selected = false));
     }
-
-    const index = this.items.indexOf(tag);
-    if (index >= 0) {
-      this.items[index] = value;
-    }
-    // this.itemsControl.patchValue(this.items);
-    this.form.controls['cnt'].patchValue(this.items);
-    this.stateChanges.next();
+    this.form.controls['cnt'].patchValue(results);
   }
 
-  remove(tag: string): void {
-    const index = this.items.indexOf(tag);
-
-    if (index >= 0) {
-      this.items.splice(index, 1);
-    }
-    // this.itemsControl.patchValue(this.items);
-    this.form.controls['cnt'].patchValue(this.items);
-    this.stateChanges.next();
+  removeChip(data: ItemDropdown) {
+    this.toggleSelection(data);
   }
+
+  optionClicked(event: Event, data: ItemDropdown) {
+    event.stopPropagation();
+    this.toggleSelection(data);
+  }
+
+  // add(event: MatChipInputEvent): void {
+  //   const value = (event.value || '').trim();
+
+  //   if (value) {
+  //     this.items.push(value);
+  //   }
+
+  //   event.chipInput?.clear();
+  //   // this.itemsControl.patchValue(this.items);
+  //   this.form.controls['cnt'].patchValue(this.items);
+  //   this.stateChanges.next();
+  // }
+
+  // remove(tag: string): void {
+  //   const index = this.items.indexOf(tag);
+
+  //   if (index >= 0) {
+  //     this.items.splice(index, 1);
+  //   }
+  //   // this.itemsControl.patchValue(this.items);
+  //   this.form.controls['cnt'].patchValue(this.items);
+  //   this.stateChanges.next();
+  // }
 
   discardChanges() {
     this.inputControl.setValue(null);
     this.form.controls['cnt'].patchValue(null);
+    if (this.multiple) {
+      this.selectedItems = [];
+      this.emitAdjustedData();
+    }
   }
 }

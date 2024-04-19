@@ -24,7 +24,7 @@ export class ProjectTypeGroupsController {
     private readonly projectTypeGroupsService: ProjectTypeGroupsService
   ) {}
 
-  @checkAbilities({ action: 'create', subject: 'BudgetSource' })
+  @checkAbilities({ action: 'create', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectTypeGroupEntity })
@@ -35,7 +35,7 @@ export class ProjectTypeGroupsController {
     );
   }
 
-  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @checkAbilities({ action: 'read', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectTypeGroupEntity, isArray: true })
@@ -45,7 +45,7 @@ export class ProjectTypeGroupsController {
     return projectTypeGroup.map((item) => new ProjectTypeGroupEntity(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @checkAbilities({ action: 'read', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
@@ -55,7 +55,7 @@ export class ProjectTypeGroupsController {
     return items.map((item) => new ItemEntityDropdown(item));
   }
 
-  @checkAbilities({ action: 'read', subject: 'BudgetSource' })
+  @checkAbilities({ action: 'read', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectTypeGroupEntity })
@@ -66,7 +66,7 @@ export class ProjectTypeGroupsController {
     );
   }
 
-  @checkAbilities({ action: 'update', subject: 'BudgetSource' })
+  @checkAbilities({ action: 'update', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectTypeGroupEntity })
@@ -80,7 +80,7 @@ export class ProjectTypeGroupsController {
     );
   }
 
-  @checkAbilities({ action: 'delete', subject: 'BudgetSource' })
+  @checkAbilities({ action: 'delete', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectTypeGroupEntity })

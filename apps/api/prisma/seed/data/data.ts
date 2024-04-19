@@ -338,30 +338,30 @@ export const PERMISSION = {
     action: 'delete',
     subject: 'ProjectType',
   },
-  MANAGE_PROJECT_SUB_TYPE: {
+  MANAGE_PROJECT_TYPE_GROUP: {
     id: 'lf7x4hperobak4nhyngxl7wm',
     action: 'manage',
-    subject: 'ProjectSubType',
+    subject: 'ProjectTypeGroup',
   },
-  CREATE_PROJECT_SUB_TYPE: {
+  CREATE_PROJECT_TYPE_GROUP: {
     id: 'z6ibouujq4874vfgrkoak9vp',
     action: 'create',
-    subject: 'ProjectSubType',
+    subject: 'ProjectTypeGroup',
   },
-  READ_PROJECT_SUB_TYPE: {
+  READ_PROJECT_TYPE_GROUP: {
     id: 'zeekscdzed2nzf3w248h7dfo',
     action: 'read',
-    subject: 'ProjectSubType',
+    subject: 'ProjectTypeGroup',
   },
-  UPDATE_PROJECT_SUB_TYPE: {
+  UPDATE_PROJECT_TYPE_GROUP: {
     id: 'minla78zsntte0hji2bgr50f',
     action: 'update',
-    subject: 'ProjectSubType',
+    subject: 'ProjectTypeGroup',
   },
-  DELETE_PROJECT_SUB_TYPE: {
+  DELETE_PROJECT_TYPE_GROUP: {
     id: 'uonfi8ozj5a842mxyfjhrzef',
     action: 'delete',
-    subject: 'ProjectSubType',
+    subject: 'ProjectTypeGroup',
   },
   MANAGE_PROJECT_IMPL_TYPE: {
     id: 'r1cffv1zyc4qi64niuoud8uk',

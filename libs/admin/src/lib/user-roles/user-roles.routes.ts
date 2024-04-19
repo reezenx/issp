@@ -46,6 +46,7 @@ export const UserRolesRoutes: Routes = [
         component: UserRoleAdminEditComponent,
         resolve: {
           item: userResolver,
+          permissionsDropdown: permissionsDropdownResolver,
         },
       },
     ],

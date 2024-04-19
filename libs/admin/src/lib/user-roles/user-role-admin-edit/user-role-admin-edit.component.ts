@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { UserRolesService } from '../services/user-roles.service';
@@ -7,7 +12,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { UserRoleDetails } from '../models/user-role-details';
 import { Subscription, take } from 'rxjs';
-import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogComponentData,
+} from '@issp/components';
+import { ItemDropdown } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -27,6 +36,7 @@ export class UserRoleAdminEditComponent implements OnInit {
 
   form: FormGroup;
   item: UserRoleDetails;
+  permissionsDropdown: ItemDropdown[] = [];
   subs: Subscription[] = [];
 
   ngOnInit(): void {
@@ -35,10 +45,14 @@ export class UserRoleAdminEditComponent implements OnInit {
   }
 
   initSubs() {
-    const routeSub = this.route.data.subscribe(({ item }) => {
-      this.item = item;
-      this.form.patchValue(this.item);
-    });
+    const routeSub = this.route.data.subscribe(
+      ({ item, permissionsDropdown }) => {
+        this.item = item;
+        this.permissionsDropdown = permissionsDropdown;
+
+        this.form.patchValue(this.item);
+      }
+    );
     this.subs.push(routeSub);
 
     const currentIsspSub = this.userRolesService.currentContextItem$.subscribe(
@@ -53,9 +67,7 @@ export class UserRoleAdminEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
-      tags: new FormControl<string[]>([]),
-      createdBy: new FormControl<string>('System'),
-      updatedBy: new FormControl<string>('System'),
+      permissionIds: new FormControl<string[]>([]),
     });
   }
 
@@ -97,5 +109,10 @@ export class UserRoleAdminEditComponent implements OnInit {
 
   navigateToList() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
   }
 }

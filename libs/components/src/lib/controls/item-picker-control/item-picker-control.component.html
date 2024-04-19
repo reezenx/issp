@@ -8,35 +8,30 @@
   <mat-icon matPrefix class="op-5">
     <i-tabler [name]="prefixIcon" class="icon-18 d-flex"></i-tabler>
   </mat-icon>
-  <ng-container *ngIf="multiple; else single">
+  <ng-container *ngIf="multiple; else singleInput">
     <mat-chip-grid #chipGrid>
-      @for(item of items; track item) {
-      <mat-chip-row
-        (removed)="remove(item)"
-        [editable]="true"
-        (edited)="edit(item, $event)"
-        [aria-description]="'press enter to edit ' + item"
-        class="f-s-14"
-      >
-        {{ item }}
-        <button matChipRemove [attr.aria-label]="'remove ' + item">
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip-row>
-      }
-
-      <input
-        #cnt
-        [formControl]="inputControl"
-        [placeholder]="placeholder"
-        [matChipInputFor]="chipGrid"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        [matChipInputAddOnBlur]="addOnBlur"
-        (matChipInputTokenEnd)="add($event)"
-      />
+      <ng-container *ngFor="let item of selectedItems">
+        <mat-chip-row (click)="removeChip(item)">
+          {{ item.name }}
+          <button matChipRemove [attr.aria-label]="'remove ' + item.name">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </ng-container>
     </mat-chip-grid>
+
+    <input
+      [attr.data-test]="id"
+      type="text"
+      matInput
+      [formControl]="inputControl"
+      [matAutocomplete]="itemAutoComplete"
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [placeholder]="placeholder"
+    />
   </ng-container>
-  <ng-template #single>
+  <ng-template #singleInput>
     <input
       [attr.data-test]="id"
       type="text"
@@ -54,19 +49,22 @@
     class="m-r-4"
     (click)="discardChanges()"
     [attr.aria-label]="'Clear'"
-    [disabled]="!inputControl.value"
+    [disabled]="multiple ? selectedItems === [] : !inputControl.value"
   >
     <mat-icon matPrefix class="op-5">
       <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
     </mat-icon>
   </button>
+
   @if(inputControl.touched && inputControl.invalid) {
   <mat-hint [align]="'end'" class="m-b-16 error-msg">
-    @if(inputControl.errors && inputControl.errors['required']) {
+    @if(inputControl.errors && (multiple ? selectedItems.length == 0 :
+    inputControl.errors['required'])) {
     <div class="text-error">{{ fieldName }} is required.</div>
     }
   </mat-hint>
   }
+
   <mat-autocomplete
     #itemAutoComplete="matAutocomplete"
     [displayWith]="displayFn"
@@ -74,8 +72,23 @@
   >
     @for(option of itemsFilteredOptions$ | async; track option.id) {
     <mat-option [value]="option">
-      {{ displayCode ? '(' + option.code + ')' : '' }}
-      {{ sentenceCase ? (option.name | sentenceCase) : option.name }}
+      <ng-container *ngIf="multiple; else singleOption">
+        <div (click)="optionClicked($event, option)">
+          <mat-checkbox
+            color="primary"
+            [checked]="option.selected"
+            (change)="toggleSelection(option)"
+            (click)="$event.stopPropagation()"
+          >
+            {{ displayCode ? '(' + option.code + ')' : '' }}
+            {{ sentenceCase ? (option.name | sentenceCase) : option.name }}
+          </mat-checkbox>
+        </div>
+      </ng-container>
+      <ng-template #singleOption>
+        {{ displayCode ? '(' + option.code + ')' : '' }}
+        {{ sentenceCase ? (option.name | sentenceCase) : option.name }}
+      </ng-template>
     </mat-option>
     }
   </mat-autocomplete>

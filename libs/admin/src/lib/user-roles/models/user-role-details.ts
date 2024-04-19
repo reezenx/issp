@@ -32,13 +32,23 @@ export class UserRoleDetails extends Assign implements UserRole {
           : new Date(val);
       },
     });
+
+    Object.defineProperty(this, 'permissionIds', {
+      get: () => this.permissions?.map((p) => p.id),
+      enumerable: true,
+    });
   }
 
   id: string;
   name: string;
   readOnly: boolean;
   tags: string[];
-  permissionIds: string[]
+
+  permissions: {
+    id: string;
+    action: string;
+    subject: string;
+  }[];
 
   createdBy: string;
   updatedBy: string;

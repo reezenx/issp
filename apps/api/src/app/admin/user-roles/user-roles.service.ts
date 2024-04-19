@@ -40,16 +40,26 @@ export class UserRolesService {
     return this.prisma.userRole.findUnique({
       where: { id },
       include: {
-        permissions: true,
+        permissions: {
+          select: {
+            id: true,
+            action: true,
+            subject: true,
+          },
+        },
       },
     });
   }
 
   async update(id: string, updateUserDto: UpdateUserRoleDto, user: User) {
+    const { permissionIds, ...userRoleData } = updateUserDto;
+    const permissionObjIds = permissionIds.map((id) => ({ id }));
+
     return this.prisma.userRole.update({
       where: { id },
       data: {
-        ...updateUserDto,
+        ...userRoleData,
+        permissions: { connect: permissionObjIds },
         updatedBy: `${user.firstName} ${user.lastName}`,
       },
     });
