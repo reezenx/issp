@@ -203,7 +203,7 @@ export class AuthService {
     ls.set(LocalStorageKey.refreshToken, token, { encrypt: true });
   }
 
-  getLoginCallbackUrl() {
+  getLoginCallbackUrl(): string {
     return ls.get('loginCallbackUrl');
   }
 
@@ -212,7 +212,11 @@ export class AuthService {
   }
 
   async redirectToCallback() {
-    const url = this.getLoginCallbackUrl() ?? '/';
+    let defaultCallbackUrl = URLS.USER.ACCOUNT_DASHBOARD;
+    if (this.hasRole([Role.ADMIN]) || this.hasRole([Role.SUPER_ADMIN])) {
+      defaultCallbackUrl = URLS.ADMIN.DASHBOARD;
+    }
+    const url: string = this.getLoginCallbackUrl() ?? defaultCallbackUrl;
     const output = await this.router.navigate([url]);
 
     this.setLoginCallbackUrl(null);
