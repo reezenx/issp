@@ -13,6 +13,7 @@ export const URLS = {
   USER: {
     ISSPS: '/user/issps',
     ACCOUNT: '/user/account',
+    ACCOUNT_DASHBOARD: '/user/account/dashboard',
   },
   AUTH: {
     LOGIN: '/auth/login',
@@ -21,4 +22,7 @@ export const URLS = {
     ERROR: '/auth/error',
     MAINTENANCE: '/auth/maintenance',
   },
+  // DEFAULT: {
+  //   PLANNER: URLS.USER.ACCOUNT,
+  // },
 };
