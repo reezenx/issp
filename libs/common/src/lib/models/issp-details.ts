@@ -46,6 +46,8 @@ export class ISSPDetails extends Assign implements ISSP {
 
   agencyId: string;
   authorId: string;
+  p1OrgProfileS1Id: string;
+  p1OrgProfileS2Id: string;
   createdAt: Date;
   createdBy: string;
   description: string;

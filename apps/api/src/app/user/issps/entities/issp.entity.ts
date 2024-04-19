@@ -7,6 +7,12 @@ export class IsspEntity implements ISSP {
   }
 
   @ApiProperty()
+  p1OrgProfileS1Id: string;
+
+  @ApiProperty()
+  p1OrgProfileS2Id: string;
+
+  @ApiProperty()
   readOnly: boolean;
 
   @ApiProperty()
