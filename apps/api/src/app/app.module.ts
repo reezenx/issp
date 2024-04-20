@@ -17,7 +17,6 @@ import { UserService } from './user/user.service';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { CaslModule } from './auth/casl/casl.module';
 import { AbilitiesGuard } from './auth/guard/abilities.guard';
-// import { ConfigModule } from './config';
 
 @Module({
   imports: [

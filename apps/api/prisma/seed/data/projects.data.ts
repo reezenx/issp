@@ -1,5 +1,4 @@
 import { AGENCY, ISSP_ } from './data';
-import { IDS } from './ids';
 import {
   PROJECT_TYPE,
   PROJECT_CATEGORY,
@@ -53,8 +52,7 @@ export const unit = {
 const getRandomElement = (array: string[]) =>
   array[Math.floor(Math.random() * array.length)];
 
-const generateRandomProject = (i: number) => {
-  // const projectId = IDS[i];
+const generateRandomProject = () => {
   const projectId = createId();
   const projectType = getRandomElement(PROJECT_TYPES);
   const projectCategory = getRandomElement(PROJECT_CATEGORIES);
@@ -95,7 +93,7 @@ const generateRandomProject = (i: number) => {
 
 export const generateRandomProjects = async (numProjects: number) => {
   for (let i = 0; i < numProjects; i++) {
-    const proj = generateRandomProject(i);
+    const proj = generateRandomProject();
     PROJECT[proj.title] = proj;
   }
 

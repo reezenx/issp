@@ -2,15 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FullComponent } from '@issp/components';
 import { BlankComponent } from '@issp/components';
-import { AuthGuard, AuthRoutes, RolesGuard, UserGuard } from '@issp/auth';
+import { AuthGuard, AuthRoutes, RolesGuard } from '@issp/auth';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   canActivate: [UserGuard],
-  //   redirectTo: 'user/account',
-  //   pathMatch: 'full',
-  // },
   {
     path: '',
     component: FullComponent,
