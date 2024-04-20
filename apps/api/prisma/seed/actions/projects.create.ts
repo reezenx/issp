@@ -1,11 +1,19 @@
 import { PrismaClient } from '@prisma/client';
-import { PROJECT } from '../data/projects.data';
+import { PROJECT, generateRandomProjects } from '../data/projects.data';
 import { faker } from '@faker-js/faker';
 import { findDuplicates } from './helper.create';
+import fs from 'fs';
 
 export async function createProjects(prisma: PrismaClient) {
+  await generateRandomProjects(3000);
   findDuplicates(PROJECT);
+  // fs.writeFileSync('projects.json', JSON.stringify(PROJECT, null, 2), 'utf-8');
+  await prisma.project.deleteMany();
+  createProjectItems(prisma);
+  connectProjectToTypes(prisma);
+}
 
+export async function createProjectItems(prisma: PrismaClient) {
   Object.entries(PROJECT).forEach(
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -13,7 +21,7 @@ export async function createProjects(prisma: PrismaClient) {
       { id, title, cost, quantity, unit },
     ]) => {
       const description = faker.commerce.productDescription();
-      const tags = ['new', 'dict'];
+      const tags = ['new'];
       const item = {
         id,
         title,
@@ -40,8 +48,6 @@ export async function createProjects(prisma: PrismaClient) {
       });
     }
   );
-
-  connectProjectToTypes(prisma);
 }
 
 export async function connectProjectToTypes(prisma: PrismaClient) {
@@ -60,6 +66,7 @@ export async function connectProjectToTypes(prisma: PrismaClient) {
         issp,
       },
     ]) => {
+      console.log(id, issp.id);
       await prisma.project.update({
         where: { id },
         data: {
@@ -93,11 +100,11 @@ export async function connectProjectToTypes(prisma: PrismaClient) {
               id: agency.id,
             },
           },
-          issp: {
-            connect: {
-              id: issp.id,
-            },
-          },
+          // issp: {
+          //   connect: {
+          //     id: issp.id,
+          //   },
+          // },
         },
       });
     }

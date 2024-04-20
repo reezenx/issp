@@ -38,6 +38,16 @@ export class ProjectDetails extends Assign implements Project {
       enumerable: true,
     });
 
+    Object.defineProperty(this, 'agencyCategoryName', {
+      get: () => this.agency.category.name,
+      enumerable: true,
+    });
+
+    Object.defineProperty(this, 'departmentName', {
+      get: () => this.agency.department?.name,
+      enumerable: true,
+    });
+
     Object.defineProperty(this, 'typeName', {
       get: () => this.type?.name,
       enumerable: true,
@@ -87,6 +97,12 @@ export class ProjectDetails extends Assign implements Project {
 
   agency: {
     name: string;
+    category: {
+      name: string;
+    };
+    department: {
+      name: string;
+    };
   };
 
   issp: {

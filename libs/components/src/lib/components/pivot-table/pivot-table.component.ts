@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ViewChild,
+  Input,
+} from '@angular/core';
 import {
   IDataOptions,
   PivotView,
@@ -27,11 +33,6 @@ import { ILoadedEventArgs, ChartTheme } from '@syncfusion/ej2-charts';
 import { ExcelQueryCellInfoEventArgs } from '@syncfusion/ej2-grids';
 import { Observable } from 'rxjs';
 enableRipple(false);
-/**
- * Pivot Table Overview Sample
- */
-declare const require: any;
-const Universitydata: IDataSet[] = require('./universitydata.json');
 
 @Component({
   selector: 'issp-pivot-table',
@@ -53,7 +54,7 @@ const Universitydata: IDataSet[] = require('./universitydata.json');
   ],
   imports: [PivotViewModule],
 })
-export class PivotTableComponent {
+export class PivotTableComponent implements OnInit {
   public dataSourceSettings: IDataOptions;
   public gridSettings: GridSettings;
   public toolbarOptions: ToolbarItems[];
@@ -61,8 +62,15 @@ export class PivotTableComponent {
   public displayOption: DisplayOption;
   public observable = new Observable();
 
+  @Input()
+  data: IDataSet[];
+
   @ViewChild('pivotview')
   public pivotObj: PivotView;
+
+  applyFormat(e: Event): void {
+    this.pivotObj.conditionalFormattingModule.showConditionalFormattingDialog();
+  }
 
   queryCell(args: QueryCellInfoEventArgs): void {
     (this.pivotObj.renderModule as any).rowCellBoundEvent(args);
@@ -83,23 +91,23 @@ export class PivotTableComponent {
     if (
       cellInfo &&
       cellInfo.axis === 'row' &&
-      cellInfo.valueSort.axis === 'university'
+      cellInfo.valueSort.axis === 'agencyName'
     ) {
-      const imgElement: Element = createElement('img', {
-        className: 'university-logo',
-        attrs: {
-          src: Universitydata[cellInfo.index[0]].logo as string,
-          alt: cellInfo.formattedText as string,
-          width: '0',
-          height: '0',
-        },
-      });
-      const cellValue: Element = select('.e-cellvalue', args.cell);
-      cellValue.classList.add('e-hyperlinkcell');
-      cellValue.addEventListener(
-        'click',
-        this.hyperlinkCellClick.bind(this.pivotObj)
-      );
+      // const imgElement: Element = createElement('img', {
+      //   className: 'university-logo',
+      //   attrs: {
+      //     src: Universitydata[cellInfo.index[0]].logo as string,
+      //     alt: cellInfo.formattedText as string,
+      //     width: '0',
+      //     height: '0',
+      //   },
+      // });
+      // const cellValue: Element = select('.e-cellvalue', args.cell);
+      // cellValue.classList.add('e-hyperlinkcell');
+      // cellValue.addEventListener(
+      //   'click',
+      //   this.hyperlinkCellClick.bind(this.pivotObj)
+      // );
       // args.cell.insertBefore(imgElement, cellValue);
     }
   }
@@ -108,14 +116,14 @@ export class PivotTableComponent {
     this.pivotObj.grid.queryCellInfo = this.queryCell.bind(this);
   }
 
-  hyperlinkCellClick(args: MouseEvent) {
-    const cell: Element = (args.target as Element).parentElement;
-    const pivotValue: IAxisSet = this.pivotObj.pivotValues[
-      Number(cell.getAttribute('index'))
-    ][Number(cell.getAttribute('data-colindex'))] as IAxisSet;
-    const link: string = Universitydata[pivotValue.index[0]].link as string;
-    window.open(link, '_blank');
-  }
+  // hyperlinkCellClick(args: MouseEvent) {
+  //   const cell: Element = (args.target as Element).parentElement;
+  //   const pivotValue: IAxisSet = this.pivotObj.pivotValues[
+  //     Number(cell.getAttribute('index'))
+  //   ][Number(cell.getAttribute('data-colindex'))] as IAxisSet;
+  //   // const link: string = Universitydata[pivotValue.index[0]].link as string;
+  //   // window.open(link, '_blank');
+  // }
 
   saveReport(args: any) {
     let reports = [];
@@ -206,7 +214,27 @@ export class PivotTableComponent {
   newReport() {
     this.pivotObj.setProperties(
       {
-        dataSourceSettings: { columns: [], rows: [], values: [], filters: [] },
+        dataSourceSettings: {
+          columns: [
+            { name: 'typeName', caption: 'Project Type', expandAll: true },
+          ],
+          rows: [
+            {
+              name: 'departmentName',
+              caption: 'Department',
+              expandAll: true,
+              allowDragAndDrop: true,
+            },
+            {
+              name: 'agencyName',
+              caption: 'Agency',
+              expandAll: true,
+              allowDragAndDrop: true,
+            },
+          ],
+          values: [{ name: 'cost', caption: 'Cost' }],
+          filters: [],
+        },
       },
       false
     );
@@ -228,7 +256,7 @@ export class PivotTableComponent {
 
   ngOnInit(): void {
     this.chartSettings = {
-      title: 'Top Universities Analysis',
+      title: 'Top Projects Analysis',
       chartSeries: { type: 'Column' },
       load: this.observable.subscribe((args) => {
         let selectedTheme: string = location.hash.split('/')[1];
@@ -243,7 +271,7 @@ export class PivotTableComponent {
 
     this.displayOption = { view: 'Both' } as DisplayOption;
     this.gridSettings = {
-      columnWidth: 120,
+      columnWidth: 150,
       allowSelection: true,
       rowHeight: 36,
       selectionSettings: {
@@ -282,107 +310,134 @@ export class PivotTableComponent {
     this.dataSourceSettings = {
       enableSorting: true,
       columns: [
-        { name: 'region', caption: 'Region' },
-        { name: 'country', caption: 'Country' },
+        { name: 'budgetTypeName', caption: 'Budget Type', expandAll: true },
+        { name: 'budgetSourceName', caption: 'Budget Source', expandAll: true },
+        { name: 'implementationTypeName', caption: 'Implementation Type' },
       ],
       rows: [
         {
-          name: 'rank_display',
-          caption: 'Rank',
+          name: 'departmentName',
+          caption: 'Department',
           expandAll: true,
-          allowDragAndDrop: false,
+          allowDragAndDrop: true,
         },
         {
-          name: 'university',
-          caption: 'University',
+          name: 'agencyName',
+          caption: 'Agency',
           expandAll: true,
-          allowDragAndDrop: false,
+          allowDragAndDrop: true,
+        },
+        {
+          name: 'categoryName',
+          caption: 'Category',
+          expandAll: true,
+          allowDragAndDrop: true,
         },
       ],
-      formatSettings: [
-        { name: 'international_students', format: 'N0' },
-        { name: 'faculty_count', format: 'N0' },
-      ],
-      dataSource: Universitydata,
+      formatSettings: [{ name: 'cost', format: '₱ ###,###,###,###.##' }],
+      dataSource: this.data,
       expandAll: false,
-      values: [
-        { name: 'international_students', caption: 'Students' },
-        { name: 'faculty_count', caption: 'Faculty' },
-      ],
-      filters: [{ name: 'type', caption: 'University Type' }],
-      filterSettings: [
-        {
-          name: 'region',
-          type: 'Exclude',
-          items: ['Africa', 'Latin America'],
-        },
-      ],
+      values: [{ name: 'cost', caption: 'Cost' }],
+      filters: [{ name: 'typeName', caption: 'Project Type' }],
       fieldMapping: [
-        { name: 'rank_display', dataType: 'number' },
-        { name: 'country', caption: 'Country' },
-        { name: 'city', caption: 'City' },
-        { name: 'region', caption: 'Region' },
-        { name: 'research_output', caption: 'Research Output' },
-        { name: 'student_faculty_ratio', caption: 'Student faculty ratio' },
-      ],
-      groupSettings: [
-        { name: 'rank_display', type: 'Number', rangeInterval: 100 },
+        { name: 'agencyName', caption: 'Agency' },
+        { name: 'departmentName', caption: 'Department' },
+        { name: 'agencyCategoryName', caption: 'Agency Category Name' },
+        { name: 'agencyName', caption: 'Agency' },
+        { name: 'typeName', caption: 'Type' },
+        { name: 'categoryName', caption: 'Category' },
+        { name: 'budgetTypeName', caption: 'Budget Type' },
+        { name: 'budgetSourceName', caption: 'Budget Source' },
+        { name: 'implementationTypeName', caption: 'Implementation Type' },
+        { name: 'isspName', caption: 'ISSP' },
+        { name: 'unit', caption: 'Unit' },
+        { name: 'quantity', caption: 'Quantity' },
+        { name: 'department', caption: 'Department' },
       ],
       conditionalFormatSettings: [
         {
-          measure: 'international_students',
-          value1: 1,
-          value2: 5000,
+          measure: 'cost',
+          value1: 1000000,
+          value2: 100000000,
+          conditions: 'Between',
+          style: {
+            backgroundColor: '#008000',
+            color: 'white',
+            fontFamily: 'Tahoma',
+            fontSize: '14px',
+          },
+          applyGrandTotals: false,
+        },
+        {
+          measure: 'cost',
+          value1: 100000001,
+          value2: 500000000,
+          conditions: 'Between',
+          style: {
+            backgroundColor: '#0040e6',
+            color: 'white',
+            fontFamily: 'Tahoma',
+            fontSize: '14px',
+          },
+          applyGrandTotals: false,
+        },
+        {
+          measure: 'cost',
+          value1: 500000001,
+          value2: 9900000000,
           conditions: 'Between',
           style: {
             backgroundColor: '#E10000',
             color: 'white',
             fontFamily: 'Tahoma',
-            fontSize: '12px',
+            fontSize: '14px',
           },
           applyGrandTotals: false,
         },
         {
-          measure: 'international_students',
-          value1: 50000,
+          measure: 'cost',
+          value1: 9900000000,
           conditions: 'GreaterThan',
-          style: {
-            backgroundColor: '#0C860C',
-            color: 'white',
-            fontFamily: 'Tahoma',
-            fontSize: '12px',
-          },
-          applyGrandTotals: false,
-        },
-        {
-          measure: 'faculty_count',
-          value1: 1,
-          value2: 1000,
-          conditions: 'Between',
           style: {
             backgroundColor: '#E10000',
             color: 'white',
             fontFamily: 'Tahoma',
-            fontSize: '12px',
-          },
-          applyGrandTotals: false,
-        },
-        {
-          measure: 'faculty_count',
-          value1: 10000,
-          conditions: 'GreaterThan',
-          style: {
-            backgroundColor: '#0C860C',
-            color: 'white',
-            fontFamily: 'Tahoma',
-            fontSize: '12px',
+            fontSize: '14px',
           },
           applyGrandTotals: false,
         },
       ],
       showHeaderWhenEmpty: false,
       emptyCellsTextContent: '-',
-      excludeFields: ['link', 'logo'],
+      excludeFields: [
+        'updatedAt',
+        '_updatedAt',
+        'updatedBy',
+        'createdBy',
+        'createdAt',
+        '_createdAt',
+        'id',
+        'title',
+        'description',
+        'tags',
+        'readOnly',
+        'typeId',
+        'type',
+        'implementationId',
+        'implementation',
+        'implementationTypeId',
+        'implementationType',
+        'categoryId',
+        'category',
+        'budgetTypeId',
+        'budgetType',
+        'budgetSourceId',
+        'budgetSource',
+        'agencyId',
+        'agency',
+        'isspId',
+        'issp',
+      ],
     };
   }
 }

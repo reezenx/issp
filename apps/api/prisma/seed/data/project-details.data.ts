@@ -284,7 +284,7 @@ export const BUDGET_SOURCE: ItemObj = {
   BY: {
     id: 'cluc0eesg000o08jqbn2t69mv',
     code: 'BY',
-    name: 'Budget year',
+    name: 'Budget Year',
   },
 };
 

@@ -86,3 +86,14 @@ lsof -i :5432
 sudo kill -9 <PID>
 sudo pkill -u postgres
 ```
+
+1. Port 3000 already in use
+
+```
+Windows
+npx kill-port 3000
+
+MacOS
+lsof -i :3000
+sudo kill -9 <PID>
+```

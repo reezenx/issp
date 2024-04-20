@@ -45,6 +45,16 @@ export class ProjectsService {
         agency: {
           select: {
             name: true,
+            category: {
+              select: {
+                name: true,
+              },
+            },
+            department: {
+              select: {
+                name: true,
+              },
+            },
           },
         },
         type: {

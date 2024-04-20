@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DiagramComponent } from './diagram/diagram.component';
 import { DocumentEditorComponent } from './document-editor/document-editor.component';
 import { ReportsComponent } from './reports/reports.component';
+import { projectsResolver } from './projects/resolvers/projects.resolver';
 
 export const AdminRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -21,6 +22,9 @@ export const AdminRoutes: Routes = [
     component: ReportsComponent,
     data: {
       breadcrumb: 'Reports',
+    },
+    resolve: {
+      items: projectsResolver,
     },
   },
   {
