@@ -69,7 +69,7 @@ export class ProjectImplTypeAdminEditComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.projectImplementationTypeService
@@ -112,5 +112,10 @@ export class ProjectImplTypeAdminEditComponent implements OnInit {
 
   navigateToList() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
   }
 }

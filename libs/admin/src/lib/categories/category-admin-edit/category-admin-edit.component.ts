@@ -108,4 +108,9 @@ export class CategoryAdminEditComponent implements OnInit {
   navigateToList() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
+  
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
+  }
 }
