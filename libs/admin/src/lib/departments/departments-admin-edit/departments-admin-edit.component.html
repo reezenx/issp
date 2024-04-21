@@ -18,17 +18,81 @@
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
-          <mat-form-field appearance="outline" class="w-100" color="primary">
+          <mat-form-field
+            appearance="outline"
+            class="w-100 m-b-10"
+            color="primary"
+          >
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
             <input #name matInput type="text" formControlName="name" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['name'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!name.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['name'].touched && f['name'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['name'].errors && f['name'].errors['required']) {
+              <div class="text-error">Name is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
             <input #code matInput type="text" formControlName="code" />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['code'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!code.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['code'].touched && f['code'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['code'].errors && f['code'].errors['required']) {
+              <div class="text-error">Code is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">UACS</mat-label>
             <input #uacs matInput type="text" formControlName="uacs" />
+             <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              class="m-r-4"
+              (click)="f['uacs'].patchValue('')"
+              [attr.aria-label]="'Clear'"
+              [disabled]="!uacs.value"
+            >
+              <mat-icon class="op-5">
+                <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+              </mat-icon>
+            </button>
+            @if(f['uacs'].touched && f['uacs'].invalid) {
+            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+              @if(f['uacs'].errors && f['uacs'].errors['required']) {
+              <div class="text-error">UACS is required.</div>
+              }
+            </mat-hint>
+            }
           </mat-form-field>
         </div>
       </div>

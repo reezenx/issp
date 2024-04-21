@@ -58,6 +58,10 @@ export class DepartmentsAdminEditComponent implements OnInit {
     });
   }
 
+  get f() {
+    return this.form.controls;
+  }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.departmentsService

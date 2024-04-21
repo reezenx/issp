@@ -65,6 +65,10 @@ export class CategoryAdminEditComponent implements OnInit {
     this.subs.push(currentIsspSub);
   }
 
+  get f() {
+    return this.form.controls;
+  }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.categoriesService
