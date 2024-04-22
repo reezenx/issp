@@ -5,8 +5,9 @@
   "scripts": {
     "start": "nx serve client",
     "start:api": "nx serve api",
-    "start:prod": "nx serve client --prod --skip-nx-cache",
-    "start:api:prod": "nx serve api --prod --skip-nx-cache",
+    "start:client:prod": "nx serve client --prod",
+    "start:api:prod": "nx serve api --prod",
+    "start:prod": "start:client:prod && start:api:prod",
     "e2e:portal": "nx e2e client-e2e --ui",
     "e2e:api": "nx e2e api-e2e",
     "serve": "nx run-many --target=serve --projects=api,client",
