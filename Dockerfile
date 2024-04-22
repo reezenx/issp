@@ -1,5 +1,7 @@
 
 FROM node:18-alpine
+
+ARG DATABASE_URL
  
 WORKDIR /user/src/app
  
