@@ -80,13 +80,6 @@
       "options": {
         "targetName": "test"
       }
-    },
-    {
-      "plugin": "@nx/cypress/plugin",
-      "options": {
-        "targetName": "e2e",
-        "componentTestingTargetName": "component-test"
-      }
     }
   ]
 }
