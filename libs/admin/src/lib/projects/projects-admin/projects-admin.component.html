@@ -26,7 +26,6 @@
       [allowPdfExport]="true"
       [allowResizing]="true"
       [allowSorting]="true"
-      [allowTextWrap]="true"
       [allowGrouping]="true"
       [autoFit]="true"
       [showColumnChooser]="true"
@@ -65,7 +64,7 @@
         </e-column>
         <e-column headerText="Cost" field="cost">
           <ng-template #template let-data>
-            {{ data.cost | number : '1.0-2' }}
+            {{ data.cost | currency : 'PHP' }}
           </ng-template>
         </e-column>
         <e-column headerText="ISSP" field="isspName"></e-column>
