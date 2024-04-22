@@ -1,4 +1,4 @@
-const { NxWebpackPlugin } = require('@nx/webpack');
+const { NxWebpackPlugin, withNx } = require('@nx/webpack');
 const { join } = require('path');
 
 module.exports = {
@@ -14,6 +14,9 @@ module.exports = {
       assets: ['./src/assets'],
       optimization: false,
       outputHashing: 'none',
+    }),
+    withNx({
+      tsConfig: join(__dirname, 'tsconfig.app.json'),
     }),
   ],
 };
