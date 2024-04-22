@@ -11,4 +11,4 @@ RUN npm run production:build
  
 USER node
  
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "serve:prod"]
