@@ -24,12 +24,13 @@
     "docker:down": "docker-compose down",
     "prod:portal": "nx build client --prod",
     "prod:api": "nx build api --prod",
+    "prod:build": "npm run prod:portal && npm run prod:api",
     "graph": "nx graph",
     "test": "nx run-many -t test",
     "lint": "nx run-many -t lint",
     "format": "nx format:write --all",
     "commit": "nx affected --target=build && cz-cust",
-    "production:build": "npx prisma migrate deploy && npm run build:prod"
+    "production:build": "npx prisma migrate deploy && npm run prod:build"
   },
   "private": true,
   "dependencies": {

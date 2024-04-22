@@ -15,8 +15,5 @@ module.exports = {
       optimization: false,
       outputHashing: 'none',
     }),
-    withNx({
-      tsConfig: join(__dirname, 'tsconfig.app.json'),
-    }),
   ],
 };
