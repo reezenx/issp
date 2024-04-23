@@ -74,6 +74,17 @@ export class IsspService {
             id: true,
           },
         },
+        p1OrgProfileS1: {
+          select: {
+            id: true,
+            a1MandateFunctions: true,
+            a1MandateLegal: true,
+            a2Vision: true,
+            a3Mission: true,
+            a4FinalOutputs: true,
+            readOnly: true,
+          },
+        },
       },
     });
   }

@@ -298,22 +298,22 @@ model ISSP {
 // PART I. ORGANIZATIONAL PROFILE (P1)
 /// A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT (S1)
 model ISSPP1OrgProfileS1 {
-  id             String    @id @default(cuid())
-  name           String
-  a1Mandate      String
-  a2Vision       String
-  a3Mission      String
-  a4FinalOutputs String[]
-  order          Int       @default(1)
-  part           Int       @default(1)
-  readOnly       Boolean?  @default(false)
-  tags           String[]
-  issp           ISSP?
-  isspId         String?
-  createdBy      String
-  updatedBy      String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime? @updatedAt()
+  id                 String    @id @default(cuid())
+  a1MandateLegal     String
+  a1MandateFunctions String
+  a2Vision           String
+  a3Mission          String
+  a4FinalOutputs     String[]
+  order              Int       @default(1)
+  part               Int       @default(1)
+  issp               ISSP?
+  isspId             String?
+  readOnly           Boolean?  @default(false)
+  tags               String[]
+  createdBy          String
+  updatedBy          String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime? @updatedAt()
 
   @@map("issp-p1-org-profiles-s1")
 }
@@ -333,10 +333,10 @@ model ISSPP1OrgProfileS2 {
   b3NoOthersOffices   String
   order               Int       @default(2)
   part                Int       @default(1)
-  readOnly            Boolean?  @default(false)
-  tags                String[]
   issp                ISSP?
   isspId              String?
+  readOnly            Boolean?  @default(false)
+  tags                String[]
   createdBy           String
   updatedBy           String?
   createdAt           DateTime  @default(now())

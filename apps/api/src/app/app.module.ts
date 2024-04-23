@@ -25,7 +25,7 @@ import { AbilitiesGuard } from './auth/guard/abilities.guard';
     ThrottlerModule.forRoot([
       {
         ttl: 60000,
-        limit: 10,
+        limit: 100,
       },
     ]),
     AuthModule,
