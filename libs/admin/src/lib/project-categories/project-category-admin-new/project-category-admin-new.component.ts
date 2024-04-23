@@ -8,6 +8,7 @@ import { ProjectCategoryDetails } from '../models/project-category-details';
 import { Subscription, take } from 'rxjs';
 import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -36,7 +37,15 @@ export class ProjectCategoryAdminNewComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       name: new FormControl<string>('', [Validators.required]),
-      code: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.projectCategoriesService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),

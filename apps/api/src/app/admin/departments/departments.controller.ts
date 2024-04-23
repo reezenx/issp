@@ -62,6 +62,24 @@ export class DepartmentsController {
     return new DepartmentEntity(await this.departmentsService.findOne(id));
   }
 
+  @checkAbilities({ action: 'read', subject: 'Department' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.departmentsService.isCodeExist(code);
+    return data;
+  }
+
+  @checkAbilities({ action: 'read', subject: 'Department' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exist/:uacs')
+  async isUACSExist(@Param('uacs') uacs: string) {
+    const data = await this.departmentsService.isUACSExist(uacs);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'Department' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

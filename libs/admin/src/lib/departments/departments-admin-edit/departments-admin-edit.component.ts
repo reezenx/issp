@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { DepartmentDetails } from '../models/department-details';
 import { Subscription, take } from 'rxjs';
 import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
+import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -52,8 +53,24 @@ export class DepartmentsAdminEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
-      code: new FormControl<string>('', [Validators.required]),
-      uacs: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.departmentsService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
+      uacs: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.departmentsService.isUACSUnique,
+            {}
+          ),
+        ],
+      }),
       updatedBy: new FormControl<string>('System'),
     });
   }
@@ -101,7 +118,7 @@ export class DepartmentsAdminEditComponent implements OnInit {
   navigateToList() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-  
+
   reset() {
     this.form.patchValue(this.item);
     this.form.markAsPristine();

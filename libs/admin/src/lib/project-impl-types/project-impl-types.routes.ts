@@ -17,7 +17,7 @@ export const ProjectImplTypesRoutes: Routes = [
     children: [
       {
         path: '',
-        title: 'Implementation Type',
+        title: 'Implementation Types',
         component: ProjectImplTypesAdminComponent,
         data: {
           breadcrumbSkipNode: true,

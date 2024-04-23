@@ -62,6 +62,15 @@ export class CategoriesController {
     return new CategoryEntity(await this.categoriesService.findOne(id));
   }
 
+  @checkAbilities({ action: 'read', subject: 'Category' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.categoriesService.isCodeExist(code);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'Category' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

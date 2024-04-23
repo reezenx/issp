@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProjectCategoryDto } from './dto/create-project-category.dto';
-import { UpdateProjectTypeDto } from './dto/update-project-type.dto';
+import { UpdateProjectCategoryDto } from './dto/update-project-category.dto';
 import { PrismaService } from 'nestjs-prisma';
 
 @Injectable()
@@ -27,14 +27,22 @@ export class ProjectCategoriesService {
     });
   }
 
+  async isCodeExist(code: string) {
+    const r = await this.prisma.projectCategory.findFirst({
+      where: { code },
+      select: { code: true },
+    });
+    return Boolean(r);
+  }
+
   findOne(id: string) {
     return this.prisma.projectCategory.findUnique({ where: { id } });
   }
 
-  update(id: string, updateProjectTypeDto: UpdateProjectTypeDto) {
+  update(id: string, updateProjectCategoryDto: UpdateProjectCategoryDto) {
     return this.prisma.projectCategory.update({
       where: { id },
-      data: updateProjectTypeDto,
+      data: updateProjectCategoryDto,
     });
   }
 

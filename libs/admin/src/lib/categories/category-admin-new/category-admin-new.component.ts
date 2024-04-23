@@ -16,6 +16,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
+import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -43,7 +44,15 @@ export class CategoryAdminNewComponent implements OnInit {
 
   initForm() {
     this.form = this.formBuilder.group({
-      code: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.categoriesService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
       name: new FormControl<string>('', [Validators.required]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
@@ -53,7 +62,7 @@ export class CategoryAdminNewComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.categoriesService

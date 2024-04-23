@@ -21,7 +21,7 @@
             color="primary"
           >
             <mat-icon matPrefix class="op-5">
-              <i-tabler name="user" class="icon-18 d-flex"></i-tabler>
+              <i-tabler name="article" class="icon-18 d-flex"></i-tabler>
             </mat-icon>
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
             <input #name matInput type="text" formControlName="name" />
@@ -69,6 +69,8 @@
             <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['code'].errors && f['code'].errors['required']) {
               <div class="text-error">Code is required.</div>
+              }@if(f['code'].errors && f['code'].errors['notUnique']) {
+              <div class="text-error">Code already exists.</div>
               }
             </mat-hint>
             }
@@ -96,6 +98,8 @@
             <mat-hint [align]="'end'" class="m-b-16 error-msg">
               @if(f['uacs'].errors && f['uacs'].errors['required']) {
               <div class="text-error">UACS is required.</div>
+              }@if(f['uacs'].errors && f['uacs'].errors['notUnique']) {
+              <div class="text-error">UACS already exists.</div>
               }
             </mat-hint>
             }

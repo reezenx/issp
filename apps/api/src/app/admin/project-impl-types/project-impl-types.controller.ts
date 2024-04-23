@@ -61,6 +61,15 @@ export class ProjectImplTypesController {
   @checkAbilities({ action: 'read', subject: 'ImplementationType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.projectImplTypesService.isCodeExist(code);
+    return data;
+  }
+
+  @checkAbilities({ action: 'read', subject: 'ImplementationType' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
   @ApiCreatedResponse({ type: ProjectImplementationTypeEntity })
   @Get(':id')
   async findOne(@Param('id') id: string) {

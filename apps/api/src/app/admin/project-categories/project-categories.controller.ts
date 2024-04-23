@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { ProjectCategoriesService } from './project-categories.service';
 import { CreateProjectCategoryDto } from './dto/create-project-category.dto';
-import { UpdateProjectTypeDto } from './dto/update-project-type.dto';
+import { UpdateProjectCategoryDto } from './dto/update-project-category.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ProjectCategoryEntity } from './entities/project-category.entity';
@@ -20,7 +20,9 @@ import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
 @ApiTags('admin/project-categories')
 @Controller('admin/project-categories')
 export class ProjectCategoriesController {
-  constructor(private readonly projectTypeService: ProjectCategoriesService) {}
+  constructor(
+    private readonly projectCategoriesService: ProjectCategoriesService
+  ) {}
 
   @checkAbilities({ action: 'create', subject: 'ProjectCategory' })
   @UseGuards(AbilitiesGuard)
@@ -29,7 +31,7 @@ export class ProjectCategoriesController {
   @Post()
   async create(@Body() createProjectTypeDto: CreateProjectCategoryDto) {
     return new ProjectCategoryEntity(
-      await this.projectTypeService.create(createProjectTypeDto)
+      await this.projectCategoriesService.create(createProjectTypeDto)
     );
   }
 
@@ -39,7 +41,7 @@ export class ProjectCategoriesController {
   @ApiCreatedResponse({ type: ProjectCategoryEntity, isArray: true })
   @Get()
   async findAll() {
-    const projectType = await this.projectTypeService.findAll();
+    const projectType = await this.projectCategoriesService.findAll();
     return projectType.map((item) => new ProjectCategoryEntity(item));
   }
 
@@ -49,8 +51,17 @@ export class ProjectCategoriesController {
   @ApiCreatedResponse({ type: ItemEntityDropdown, isArray: true })
   @Get('dropdown')
   async findAllDropdown() {
-    const items = await this.projectTypeService.findAllDropdown();
+    const items = await this.projectCategoriesService.findAllDropdown();
     return items.map((item) => new ItemEntityDropdown(item));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'ProjectCategory' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.projectCategoriesService.isCodeExist(code);
+    return data;
   }
 
   @checkAbilities({ action: 'read', subject: 'ProjectCategory' })
@@ -59,7 +70,9 @@ export class ProjectCategoriesController {
   @ApiCreatedResponse({ type: ProjectCategoryEntity })
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return new ProjectCategoryEntity(await this.projectTypeService.findOne(id));
+    return new ProjectCategoryEntity(
+      await this.projectCategoriesService.findOne(id)
+    );
   }
 
   @checkAbilities({ action: 'update', subject: 'ProjectCategory' })
@@ -69,10 +82,10 @@ export class ProjectCategoriesController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateProjectTypeDto: UpdateProjectTypeDto
+    @Body() updateProjectCategoryDto: UpdateProjectCategoryDto
   ) {
     return new ProjectCategoryEntity(
-      await this.projectTypeService.update(id, updateProjectTypeDto)
+      await this.projectCategoriesService.update(id, updateProjectCategoryDto)
     );
   }
 
@@ -82,6 +95,8 @@ export class ProjectCategoriesController {
   @ApiCreatedResponse({ type: ProjectCategoryEntity })
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    return new ProjectCategoryEntity(await this.projectTypeService.remove(id));
+    return new ProjectCategoryEntity(
+      await this.projectCategoriesService.remove(id)
+    );
   }
 }

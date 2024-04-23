@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { DepartmentDetails } from '../models/department-details';
 import { HttpClient } from '@angular/common/http';
-import { API, Environment, ItemDropdown } from '@issp/common';
+import { API, Environment, IsKeyUniqueValidatorOptions, ItemDropdown, ValidateUniqueKeyFn } from '@issp/common';
 import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
@@ -15,7 +15,8 @@ export class DepartmentsService {
 
   #emitAllItems: BehaviorSubject<Array<DepartmentDetails>> =
     new BehaviorSubject<Array<DepartmentDetails>>(
-      new Array<DepartmentDetails>());
+      new Array<DepartmentDetails>()
+    );
   allItems$ = this.#emitAllItems.asObservable();
 
   #emitDropdownItems: BehaviorSubject<Array<ItemDropdown>> =
@@ -79,6 +80,30 @@ export class DepartmentsService {
       })
     );
   }
+
+  isCodeUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    code: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exists/${code}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
+
+  isUACSUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    uacs: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exist/${uacs}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
 
   updateOne(item: DepartmentDetails): Observable<DepartmentDetails> {
     const uri = `${this.route}/${item.id}`;

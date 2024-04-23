@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectCategoryDetails } from '../models/project-category-details';
-import { API, Environment, ItemDropdown } from '@issp/common';
+import { API, Environment, IsKeyUniqueValidatorOptions, ItemDropdown, ValidateUniqueKeyFn } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -68,6 +68,18 @@ export class ProjectCategoriesService {
     );
   }
 
+  isCodeUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    code: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exists/${code}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
+  
   findOne(id: string): Observable<ProjectCategoryDetails> {
     const uri = `${this.route}/${id}`;
     return this.http.get<ProjectCategoryDetails>(uri).pipe(

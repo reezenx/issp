@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProjectCategoryDetails } from '../models/project-category-details';
 import { Subscription, take } from 'rxjs';
 import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
+import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -52,7 +53,15 @@ export class ProjectCategoryAdminEditComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: new FormControl<string>('', [Validators.required]),
       name: new FormControl<string>('', [Validators.required]),
-      code: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.projectCategoriesService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
       updatedBy: new FormControl<string>('System'),
     });
   }

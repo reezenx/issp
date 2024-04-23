@@ -11,6 +11,7 @@ import {
   ConfirmationDialogComponentData,
 } from '@issp/components';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -39,8 +40,24 @@ export class DepartmentAdminNewComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       name: new FormControl<string>('', [Validators.required]),
-      code: new FormControl<string>('', [Validators.required]),
-      uacs: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.departmentsService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
+      uacs: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.departmentsService.isUACSUnique,
+            {}
+          ),
+        ],
+      }),
       tags: new FormControl<string[]>([]),
       createdBy: new FormControl<string>('System'),
       updatedBy: new FormControl<string>('System'),
@@ -50,7 +67,7 @@ export class DepartmentAdminNewComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.departmentsService

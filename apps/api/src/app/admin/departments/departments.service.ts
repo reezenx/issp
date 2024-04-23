@@ -27,6 +27,22 @@ export class DepartmentsService {
     });
   }
 
+  async isCodeExist(code: string) {
+    const r = await this.prisma.department.findFirst({
+      where: { code },
+      select: { code: true },
+    });
+    return Boolean(r);
+  }
+
+  async isUACSExist(uacs: string) {
+    const u = await this.prisma.department.findFirst({
+      where: { uacs },
+      select: { uacs: true },
+    });
+    return Boolean(u);
+  }
+
   findOne(id: string) {
     return this.prisma.department.findUnique({ where: { id } });
   }

@@ -27,6 +27,14 @@ export class CategoriesService {
     });
   }
 
+  async isCodeExist(code: string) {
+    const r = await this.prisma.category.findFirst({
+      where: { code },
+      select: { code: true },
+    });
+    return Boolean(r);
+  }
+
   findOne(id: string) {
     return this.prisma.category.findUnique({ where: { id } });
   }

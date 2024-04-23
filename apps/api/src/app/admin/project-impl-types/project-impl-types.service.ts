@@ -27,6 +27,14 @@ export class ProjectImplTypesService {
     });
   }
 
+  async isCodeExist(code: string) {
+    const r = await this.prisma.projectImplementationType.findFirst({
+      where: { code },
+      select: { code: true },
+    });
+    return Boolean(r);
+  }
+
   findOne(id: string) {
     return this.prisma.projectImplementationType.findUnique({ where: { id } });
   }

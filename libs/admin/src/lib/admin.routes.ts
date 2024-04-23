@@ -120,7 +120,7 @@ export const AdminRoutes: Routes = [
         (m) => m.ProjectImplementationTypesModule
       ),
     data: {
-      breadcrumb: 'Implementation Type',
+      breadcrumb: 'Implementation Types',
     },
   },
   {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API, Environment, ItemDropdown } from '@issp/common';
+import { API, Environment, IsKeyUniqueValidatorOptions, ItemDropdown, ValidateUniqueKeyFn } from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectImplementationTypeDetails } from '../models/project-impl-type-details';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
@@ -80,6 +80,18 @@ export class ProjectImplementationTypeService {
       })
     );
   }
+
+  isCodeUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    code: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exists/${code}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
 
   updateOne(
     item: ProjectImplementationTypeDetails
