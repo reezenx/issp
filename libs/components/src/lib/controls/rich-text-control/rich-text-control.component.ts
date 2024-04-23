@@ -303,6 +303,7 @@ export class RichTextControlComponent
       'Indent',
       'Outdent',
       '|',
+      'SourceCode',
     ],
   };
 

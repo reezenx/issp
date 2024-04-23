@@ -1,4 +1,4 @@
-import { ItemDropdown } from './item-dropdown';
+import { ItemDropdown } from '../item-dropdown';
 
 export class IsspDropdown extends ItemDropdown {
   title!: string;

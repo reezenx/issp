@@ -1,0 +1,84 @@
+<div [formGroup]="form" (ngSubmit)="save()">
+  <h4>A.1. Mandate</h4>
+  <ul>
+    <li>Legal Bases</li>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea
+        rows="3"
+        matInput
+        formControlName="a1MandateLegal"
+        placeholder="Enter Legal Bases"
+      ></textarea>
+    </mat-form-field>
+    <li>Function</li>
+    <mat-form-field appearance="outline" class="w-100">
+      <textarea
+        rows="3"
+        matInput
+        formControlName="a1MandateFunctions"
+        placeholder="Enter Function"
+      ></textarea>
+    </mat-form-field>
+  </ul>
+  <h4>A.2. Vision Statement</h4>
+  <mat-form-field
+    hintLabel="Max 2000 characters"
+    appearance="outline"
+    class="w-100"
+    color="primary"
+    floatLabel="always"
+  >
+    <mat-label class="mat-subtitle-2 f-w-600">Vision</mat-label>
+    <issp-rich-text-control
+      #question
+      required
+      [keepEditorOpen]="false"
+      placeholder="Mission (Required)"
+      hintLabel="Max 2000 characters"
+      fieldName="Rich Text"
+      formControlName="a2Vision"
+    ></issp-rich-text-control>
+    <mat-hint [align]="'end'">{{ question.value?.length || 0 }}/2000</mat-hint>
+  </mat-form-field>
+  <h4>A.3. Mission Statement</h4>
+  <mat-form-field
+    hintLabel="Max 2000 characters"
+    appearance="outline"
+    class="w-100"
+    color="primary"
+    floatLabel="always"
+  >
+    <mat-label class="mat-subtitle-2 f-w-600">Mission</mat-label>
+    <issp-rich-text-control
+      #question
+      required
+      [keepEditorOpen]="false"
+      placeholder="Mission (Required)"
+      hintLabel="Max 2000 characters"
+      fieldName="Rich Text"
+      formControlName="a3Mission"
+    ></issp-rich-text-control>
+    <mat-hint [align]="'end'">{{ question.value?.length || 0 }}/2000</mat-hint>
+  </mat-form-field>
+
+  <h4>A.4. Major Final Outputs</h4>
+  <mat-form-field
+    hintLabel="Max 2000 characters"
+    appearance="outline"
+    class="w-100"
+    color="primary"
+    floatLabel="always"
+  >
+    <mat-label class="mat-subtitle-2 f-w-600">Outputs</mat-label>
+    <issp-rich-text-control
+      #question
+      required
+      [keepEditorOpen]="false"
+      placeholder="Output"
+      hintLabel="Max 2000 characters"
+      fieldName="Rich Text"
+      formControlName="a4FinalOutputs"
+    ></issp-rich-text-control>
+    <mat-hint [align]="'end'">{{ question.value?.length || 0 }}/2000</mat-hint>
+  </mat-form-field>
+</div>

@@ -26,6 +26,8 @@ export class RichtextComponent {
       '|',
       'Indent',
       'Outdent',
+      '|',
+      'SourceCode',
     ],
   };
   public iframe: object = { enable: true };

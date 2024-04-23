@@ -43,97 +43,13 @@
             </mat-expansion-panel-header>
 
             <ng-template matExpansionPanelContent>
-              <h4>A.1. Mandate</h4>
-              <ul>
-                <li>Legal Bases</li>
-                <mat-form-field appearance="outline" class="w-100">
-                  <textarea
-                    rows="3"
-                    matInput
-                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."
-                  ></textarea>
-                </mat-form-field>
-                <li>Function</li>
-                <mat-form-field appearance="outline" class="w-100">
-                  <textarea
-                    rows="3"
-                    matInput
-                    placeholder="The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016."
-                  ></textarea>
-                </mat-form-field>
-              </ul>
-              <h4>A.2. Vision Statement</h4>
-              <issp-richtext></issp-richtext>
-              <h4>A.3. Mission Statement</h4>
-              <issp-rich-text-control
-                [keepEditorOpen]="false"
-              ></issp-rich-text-control>
-
-              <h4>A.4. Major Final Outputs</h4>
-              <mat-form-field
-                hintLabel="Max 2000 characters"
-                appearance="outline"
-                class="w-100"
-                color="primary"
-                floatLabel="always"
-              >
-                <mat-label class="mat-subtitle-2 f-w-600">Outputs</mat-label>
-                <issp-rich-text-control
-                  #question
-                  required
-                  [keepEditorOpen]="false"
-                  placeholder="Mission (Required)"
-                  hintLabel="Max 2000 characters"
-                  fieldName="Rich Text"
-                ></issp-rich-text-control>
-                <!-- <app-rich-text-control
-                  [attr.data-test]="_field.controlType + '-question-name'"
-                  #question
-                  formControlName="question"
-                  placeholder="{{ configData.questionFieldLabel }} (Required)"
-                  [tools]="questionTools"
-                  [fontFamily]="fontFamily"
-                  required
-                  [keepEditorOpen]="false"
-                  maxlength="2000"
-                ></app-rich-text-control>-->
-                <mat-hint align="end"
-                  >{{ question.value?.length || 0 }}/2000</mat-hint
-                >
-              </mat-form-field>
-              <issp-rich-text-control
-                [keepEditorOpen]="false"
-              ></issp-rich-text-control>
-
-              <small>
-                <strong>Fill-in Instructions:</strong>
-                <p class="m-0">
-                  A.1 - State the legal basis for the creation of the
-                  organization and should likewise describe the major functions
-                  as indicated/mandated in the legal basis.
-                </p>
-                <p class="m-0">
-                  A.2 - State the wishful projection of the organization into
-                  the future; a statement of what your organization wants to
-                  become; an intuitive picture of an end state.
-                </p>
-                <p class="m-0">
-                  A.3 - State the organization’s scope and operations that
-                  assert its basic purpose, specify its principal
-                  products/services that set it apart/distinguish it from
-                  others.
-                </p>
-                <p class="m-0">
-                  A.4 - Enumerate the MFOs as prescribed in the Organizational
-                  Performance Indicator Framework(OPIF). An MFO is a good or
-                  service that a department/agency is mandated to deliver to
-                  external clients through the implementation of programs,
-                  activities and projects. Emphasis should be on the MFOs that
-                  are aligned with the Philippine Development Plan’s Key Result
-                  Areas and the critical indicators and results presented in the
-                  PDP Results Matrices.
-                </p>
-              </small>
+              <issp-p1-org-profile-s1-form
+                [item]="iSSPP1OrgProfileS1Form"
+              ></issp-p1-org-profile-s1-form>
+              <issp-form-instructions
+                customClass="m-t-10"
+                [items]="p1OrgProfileS1Instructions"
+              ></issp-form-instructions>
             </ng-template>
 
             <mat-action-row>

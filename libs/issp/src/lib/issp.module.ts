@@ -8,6 +8,7 @@ import {
 } from '@issp/common/ui/libraries';
 
 import { isspRoutes } from './issp.routes';
+import { IsspDetailsModule } from './issp-details/issp-details.module';
 
 import { IsspItemEditShellComponent } from './issp-item-edit-shell/issp-item-edit-shell.component';
 import { IsspItemEditDetailsComponent } from './issp-item-edit-details/issp-item-edit-details.component';
@@ -18,7 +19,11 @@ import { IsspItemsComponent } from './issp-items/issp-items.component';
 import { IsspItemsShellComponent } from './issp-items-shell/issp-items-shell.component';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import * as TablerIcons from 'angular-tabler-icons/icons';
-import { ControlsModule, RichtextComponent } from '@issp/components';
+import {
+  ControlsModule,
+  FormInstructionsComponent,
+  RichtextComponent,
+} from '@issp/components';
 import { AppAbility, PipesModule } from '@issp/common';
 import { PureAbility } from '@casl/ability';
 import { AbilityService } from '@casl/angular';
@@ -35,6 +40,8 @@ import { AbilityService } from '@casl/angular';
     FormsModule,
     ReactiveFormsModule,
     RichtextComponent,
+    IsspDetailsModule,
+    FormInstructionsComponent,
   ],
   declarations: [
     IsspItemEditShellComponent,

@@ -1,0 +1,8 @@
+<div [ngClass]="customClass">
+  <small>
+    <strong>{{ title }}</strong>
+    @for (item of items; track $index) {
+    <p class="m-0" [innerHTML]="item"></p>
+    }
+  </small>
+</div>
