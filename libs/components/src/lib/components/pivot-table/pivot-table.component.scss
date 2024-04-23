@@ -4,6 +4,14 @@
   display: block;
 }
 
+::ng-deep {
+  #PivotView_grid,
+  .e-pivot-toolbar,
+  .e-pivot-grouping-bar {
+    width: 100% !important;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   #pivot-table-section {
     overflow: auto;
