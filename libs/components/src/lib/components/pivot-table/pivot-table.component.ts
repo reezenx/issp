@@ -25,6 +25,7 @@ import {
   QueryCellInfoEventArgs,
   PDFExportService,
   ExcelExportService,
+  PivotChartService,
 } from '@syncfusion/ej2-angular-pivotview';
 import { GridSettings } from '@syncfusion/ej2-pivotview/src/pivotview/model/gridsettings';
 import { enableRipple, createElement, select } from '@syncfusion/ej2-base';
@@ -51,6 +52,7 @@ enableRipple(false);
     DrillThroughService,
     PDFExportService,
     ExcelExportService,
+    PivotChartService,
   ],
   imports: [PivotViewModule],
 })
@@ -67,10 +69,6 @@ export class PivotTableComponent implements OnInit {
 
   @ViewChild('pivotview')
   public pivotObj: PivotView;
-
-  applyFormat(e: Event): void {
-    this.pivotObj.conditionalFormattingModule.showConditionalFormattingDialog();
-  }
 
   queryCell(args: QueryCellInfoEventArgs): void {
     (this.pivotObj.renderModule as any).rowCellBoundEvent(args);
@@ -116,15 +114,6 @@ export class PivotTableComponent implements OnInit {
     this.pivotObj.grid.queryCellInfo = this.queryCell.bind(this);
   }
 
-  // hyperlinkCellClick(args: MouseEvent) {
-  //   const cell: Element = (args.target as Element).parentElement;
-  //   const pivotValue: IAxisSet = this.pivotObj.pivotValues[
-  //     Number(cell.getAttribute('index'))
-  //   ][Number(cell.getAttribute('data-colindex'))] as IAxisSet;
-  //   // const link: string = Universitydata[pivotValue.index[0]].link as string;
-  //   // window.open(link, '_blank');
-  // }
-
   saveReport(args: any) {
     let reports = [];
     let isSaved = false;
@@ -148,6 +137,7 @@ export class PivotTableComponent implements OnInit {
       localStorage.pivotviewReports = JSON.stringify(reports);
     }
   }
+
   fetchReport(args: any) {
     let reportCollection: string[] = [];
     const reeportList: string[] = [];
@@ -159,6 +149,7 @@ export class PivotTableComponent implements OnInit {
     });
     args.reportName = reeportList;
   }
+
   loadReport(args: any) {
     let reportCollection: string[] = [];
     if (localStorage.pivotviewReports && localStorage.pivotviewReports !== '') {
@@ -176,6 +167,7 @@ export class PivotTableComponent implements OnInit {
       this.pivotObj.dataSourceSettings = report.dataSourceSettings;
     }
   }
+
   removeReport(args: any) {
     let reportCollection: any[] = [];
     if (localStorage.pivotviewReports && localStorage.pivotviewReports !== '') {
@@ -190,6 +182,7 @@ export class PivotTableComponent implements OnInit {
       localStorage.pivotviewReports = JSON.stringify(reportCollection);
     }
   }
+
   renameReport(args: any) {
     let reportsCollection: any[] = [];
     if (localStorage.pivotviewReports && localStorage.pivotviewReports !== '') {
@@ -211,6 +204,7 @@ export class PivotTableComponent implements OnInit {
       localStorage.pivotviewReports = JSON.stringify(reportsCollection);
     }
   }
+
   newReport() {
     this.pivotObj.setProperties(
       {
@@ -239,12 +233,14 @@ export class PivotTableComponent implements OnInit {
       false
     );
   }
+
   chartSeriesCreated() {
     this.pivotObj.chartSettings.chartSeries.legendShape =
       this.pivotObj.chartSettings.chartSeries.type === 'Polar'
         ? 'Rectangle'
         : 'SeriesType';
   }
+
   beforeToolbarRender(args: any) {
     args.customToolbar.splice(6, 0, {
       type: 'Separator',
@@ -256,7 +252,7 @@ export class PivotTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.chartSettings = {
-      title: 'Top Projects Analysis',
+      title: 'Projects Analysis',
       chartSeries: { type: 'Column' },
       load: this.observable.subscribe((args) => {
         let selectedTheme: string = location.hash.split('/')[1];
@@ -334,7 +330,8 @@ export class PivotTableComponent implements OnInit {
           allowDragAndDrop: true,
         },
       ],
-      formatSettings: [{ name: 'cost', format: '₱ ###,###,###,###.##' }],
+      formatSettings: [{ name: 'cost', format: 'C2' }],
+      // formatSettings: [{ name: 'cost', format: '₱ ###,###,###,###.##' }],
       dataSource: this.data,
       expandAll: false,
       values: [{ name: 'cost', caption: 'Cost' }],
@@ -342,7 +339,7 @@ export class PivotTableComponent implements OnInit {
       fieldMapping: [
         { name: 'agencyName', caption: 'Agency' },
         { name: 'departmentName', caption: 'Department' },
-        { name: 'agencyCategoryName', caption: 'Agency Category Name' },
+        { name: 'agencyCategoryName', caption: 'Agency Category' },
         { name: 'agencyName', caption: 'Agency' },
         { name: 'typeName', caption: 'Type' },
         { name: 'categoryName', caption: 'Category' },
@@ -363,7 +360,7 @@ export class PivotTableComponent implements OnInit {
           style: {
             backgroundColor: '#008000',
             color: 'white',
-            fontFamily: 'Tahoma',
+            fontFamily: 'Arial',
             fontSize: '14px',
           },
           applyGrandTotals: false,
@@ -376,7 +373,7 @@ export class PivotTableComponent implements OnInit {
           style: {
             backgroundColor: '#0040e6',
             color: 'white',
-            fontFamily: 'Tahoma',
+            fontFamily: 'Arial',
             fontSize: '14px',
           },
           applyGrandTotals: false,
@@ -389,7 +386,7 @@ export class PivotTableComponent implements OnInit {
           style: {
             backgroundColor: '#E10000',
             color: 'white',
-            fontFamily: 'Tahoma',
+            fontFamily: 'Arial',
             fontSize: '14px',
           },
           applyGrandTotals: false,
@@ -401,7 +398,7 @@ export class PivotTableComponent implements OnInit {
           style: {
             backgroundColor: '#E10000',
             color: 'white',
-            fontFamily: 'Tahoma',
+            fontFamily: 'Arial',
             fontSize: '14px',
           },
           applyGrandTotals: false,
@@ -437,6 +434,7 @@ export class PivotTableComponent implements OnInit {
         'agency',
         'isspId',
         'issp',
+        'isspName',
       ],
     };
   }
