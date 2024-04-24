@@ -3,7 +3,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { AgencyDetails } from '../models/agency-details';
-import { ItemDropdown, API, Environment } from '@issp/common';
+import {
+  ItemDropdown,
+  API,
+  Environment,
+  IsKeyUniqueValidatorOptions,
+  ValidateUniqueKeyFn,
+} from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -80,6 +86,18 @@ export class AgenciesService {
       })
     );
   }
+
+  isEmailUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    email: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exists/${email}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
 
   updateOne(item: AgencyDetails): Observable<AgencyDetails> {
     const uri = `${this.route}/${item.id}`;

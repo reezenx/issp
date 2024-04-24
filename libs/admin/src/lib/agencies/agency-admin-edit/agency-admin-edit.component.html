@@ -25,6 +25,23 @@
                         </mat-icon>
                         <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
                         <input #name matInput type="text" formControlName="name" />
+                        <button mat-icon-button matSuffix type="button"
+                        class="m-r-4"
+                        (click)="f['name'].patchValue('')"
+                        [attr.aria-label]="'Clear'"
+                        [disabled]="!name.value"
+                        >
+                        <mat-icon class="op-5">
+                            <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+                        </mat-icon>
+                        </button>
+                        @if(f['name'].touched && f['name'].invalid) {
+                            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+                            @if(f['name'].errors && f['name'].errors['required']) {
+                            <div class="text-error">Name is required.</div>
+                            }
+                            </mat-hint>
+                        }
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -33,6 +50,23 @@
                             <i-tabler name="id" class="icon-18 d-flex"></i-tabler>
                         </mat-icon>
                         <input #code matInput type="text" formControlName="code" />
+                        <button mat-icon-button matSuffix type="button"
+                        class="m-r-4"
+                        (click)="f['code'].patchValue('')"
+                        [attr.aria-label]="'Clear'"
+                        [disabled]="!code.value"
+                        >
+                        <mat-icon class="op-5">
+                            <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+                        </mat-icon>
+                        </button>
+                        @if(f['code'].touched && f['code'].invalid) {
+                            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+                            @if(f['code'].errors && f['code'].errors['required']) {
+                            <div class="text-error">Code is required.</div>
+                            }
+                            </mat-hint>
+                        }
                     </mat-form-field>
 
                     <issp-item-picker-control
@@ -53,6 +87,23 @@
                             <i-tabler name="phone" class="icon-18 d-flex"></i-tabler>
                         </mat-icon>
                         <input #phone matInput type="text" formControlName="phone" />
+                        <button mat-icon-button matSuffix type="button"
+                        class="m-r-4"
+                        (click)="f['phone'].patchValue('')"
+                        [attr.aria-label]="'Clear'"
+                        [disabled]="!phone.value"
+                        >
+                        <mat-icon class="op-5">
+                            <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+                        </mat-icon>
+                        </button>
+                        @if(f['phone'].touched && f['phone'].invalid) {
+                            <mat-hint [align]="'end'" class="m-b-16 error-msg">
+                            @if(f['phone'].errors && f['phone'].errors['required']) {
+                            <div class="text-error">Phone is required.</div>
+                            }
+                            </mat-hint>
+                        }
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="w-100" color="primary">
@@ -61,6 +112,29 @@
                             <i-tabler name="mail" class="icon-18 d-flex"></i-tabler>
                         </mat-icon>
                         <input #email matInput type="text" formControlName="email" />
+                        <button mat-icon-button matSuffix type="button"
+                        class="m-r-4"
+                        (click)="f['email'].patchValue('')"
+                        [attr.aria-label]="'Clear'"
+                        [disabled]="!email.value"
+                        >
+                        <mat-icon class="op-5">
+                            <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+                        </mat-icon>
+                        </button>
+                        @if(f['email'].touched && f['email'].invalid) {
+                        <mat-hint [align]="'end'" class="m-b-16 error-msg">
+                            @if(f['email'].errors && f['email'].errors['required']) {
+                            <div class="text-error">Email is required.</div>
+                                } @if(f['email'].errors && f['email'].errors['email']) {
+                                <div class="text-error">
+                                    Email should be in format (name&#64;agency.com)
+                                </div>
+                            } @if(f['email'].errors && f['email'].errors['notUnique']) {
+                            <div class="text-error">Email already exists.</div>
+                            }
+                        </mat-hint>
+                        }
                     </mat-form-field>
                 </div>
             </div>
