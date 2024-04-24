@@ -39,7 +39,6 @@ export class BudgetTypeDetails extends Assign implements BudgetType {
   name: string;
   readOnly: boolean;
   tags: string[];
-
   createdBy: string;
   updatedBy: string;
   createdAt: Date;

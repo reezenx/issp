@@ -66,6 +66,15 @@ export class ProjectTypeGroupsController {
     );
   }
 
+  @checkAbilities({ action: 'read', subject: 'ProjectTypeGroup' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.projectTypeGroupsService.isCodeExist(code);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'ProjectTypeGroup' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

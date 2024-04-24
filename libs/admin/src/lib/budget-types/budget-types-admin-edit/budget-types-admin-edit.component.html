@@ -1,7 +1,12 @@
 <mat-card class="cardWithShadow m-b-4">
   <mat-card-content>
     <div class="d-flex align-items-center">
-      <mat-card-title class="m-b-0">{{ item?.name }} </mat-card-title>
+      <mat-card-title class="m-b-0 d-flex align-items-center">
+        <mat-icon class="op-5 m-r-6 m-b-0 rounded-0">
+          <i-tabler name="cash-banknote" class="icon-25 d-flex"></i-tabler>
+        </mat-icon>
+        <div>{{ item?.name }}</div>
+      </mat-card-title>
       <div class="m-l-auto">
         <button mat-flat-button color="primary">Suspend</button>
       </div>
@@ -21,6 +26,7 @@
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
             <input #name matInput type="text" formControlName="name" />
           </mat-form-field>
+          <issp-tags-control formControlName="tags"></issp-tags-control>
         </div>
       </div>
     </mat-card-content>

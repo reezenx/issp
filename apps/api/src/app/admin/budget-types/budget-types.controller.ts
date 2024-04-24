@@ -62,6 +62,15 @@ export class BudgetTypesController {
     return new BudgetTypeEntity(await this.budgetTypesService.findOne(id));
   }
 
+  @checkAbilities({ action: 'read', subject: 'BudgetType' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(@Param('code') code: string) {
+    const data = await this.budgetTypesService.isCodeExist(code);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'BudgetType' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

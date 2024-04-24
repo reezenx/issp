@@ -31,6 +31,14 @@ export class ProjectTypeGroupsService {
     return this.prisma.projectTypeGroup.findUnique({ where: { id } });
   }
 
+  async isCodeExist(code: string) {
+    const r = await this.prisma.projectTypeGroup.findFirst({
+      where: { code },
+      select: { code: true },
+    });
+    return Boolean(r);
+  }
+
   update(id: string, updateProjectTypeGroupDto: UpdateProjectTypeGroupDto) {
     return this.prisma.projectTypeGroup.update({
       where: { id },

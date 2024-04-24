@@ -3,7 +3,13 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { BudgetTypeDetails } from '../models/budget-type-details';
-import { API, Environment, ItemDropdown } from '@issp/common';
+import {
+  API,
+  Environment,
+  IsKeyUniqueValidatorOptions,
+  ValidateUniqueKeyFn,
+  ItemDropdown,
+} from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -80,6 +86,18 @@ export class BudgetTypeService {
       })
     );
   }
+
+  isCodeUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    code: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exists/${code}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
 
   updateOne(item: BudgetTypeDetails): Observable<BudgetTypeDetails> {
     const uri = `${this.route}/${item.id}`;
