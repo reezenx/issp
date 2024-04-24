@@ -6,7 +6,7 @@
         <ng-template matStepLabel>
           <div class="d-flex align-items-center justify-content-between">
             <strong>
-              <h2 class="part-title">PART I. ORGANIZATIONAL PROFILE</h2>
+              <h3 class="part-title">I. Organizational Profile</h3>
             </strong>
             <div class="d-flex align-items-center">
               <span>Click to save</span>
@@ -28,9 +28,9 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT
-                </h3>
+                <h4 class="part-subtitle">
+                  A. Department/Agency Vision/Mission Statement
+                </h4>
               </mat-panel-title>
               <mat-panel-description>
                 <div class="d-flex align-items-center">
@@ -44,16 +44,38 @@
 
             <ng-template matExpansionPanelContent>
               <issp-p1-org-profile-s1-form
-                [item]="iSSPP1OrgProfileS1Form"
+                [item]="iSSPP1OrgProfileS1Info"
               ></issp-p1-org-profile-s1-form>
-              <issp-form-instructions
-                customClass="m-t-10"
-                [items]="p1OrgProfileS1Instructions"
-              ></issp-form-instructions>
             </ng-template>
 
             <mat-action-row>
-              <button mat-flat-button color="primary" (click)="nextStep()">
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="saveISSPP1OrgProfileS1Form()"
+                [disabled]="
+                  !iSSPP1OrgProfileS1CompForm?.valid ||
+                  !iSSPP1OrgProfileS1CompForm?.dirty
+                "
+              >
+                Save
+              </button>
+              <button
+                mat-flat-button
+                color="accent"
+                type="button"
+                class="m-l-8"
+                (click)="resetISSPP1OrgProfileS1Form()"
+                [disabled]="!iSSPP1OrgProfileS1CompForm?.dirty"
+              >
+                Reset
+              </button>
+              <button
+                mat-flat-button
+                color="primary"
+                [disabled]="!iSSPP1OrgProfileS1CompForm?.valid"
+                (click)="nextStep()"
+              >
                 Next
               </button>
             </mat-action-row>
@@ -62,7 +84,7 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">B. DEPARTMENT/AGENCY PROFILE</h3>
+                <h4 class="part-subtitle">B. Department/Agency Profile</h4>
               </mat-panel-title>
               <mat-panel-description>
                 <div class="d-flex align-items-center">
@@ -89,9 +111,9 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  TABLE B-1 (FOR DEPARTMENT-WIDE ORGANIZATIONS ONLY)
-                </h3>
+                <h4 class="part-subtitle">
+                  Table B-1 (For Department-wide Organizations Only)
+                </h4>
               </mat-panel-title>
               <mat-panel-description>
                 <div class="d-flex align-items-center">
@@ -118,10 +140,9 @@
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  C. THE DEPARTMENT/AGENCY AND ITS ENVIRONMENT (FUNCTIONAL
-                  INTERFACE CHART)
-                </h3>
+                <h4 class="part-subtitle">
+                  C. The Department/Agency and Its Environment
+                </h4>
               </mat-panel-title>
               <mat-panel-description>
                 <div class="d-flex align-items-center">
@@ -148,9 +169,9 @@
           <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(5)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  D. PRESENT ICT SITUATION (STRATEGIC CHALLENGES)
-                </h3>
+                <h4 class="part-subtitle">
+                  D. Present ICT Situation (Strategic Challenges)
+                </h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -169,7 +190,7 @@
           <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">E. STRATEGIC CONCERNS FOR ICT USE</h3>
+                <h4 class="part-subtitle">E. Strategic Concerns for ICT Use</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -196,7 +217,7 @@
         <ng-template matStepLabel>
           <div class="d-flex align-items-center justify-content-between">
             <strong>
-              <h2 class="part-title">PART II. INFORMATION SYSTEMS STRATEGY</h2>
+              <h3 class="part-title">II. Information Systems Strategy</h3>
             </strong>
             <div class="d-flex align-items-center">
               <span class="text-muted"> Readonly </span>
@@ -219,10 +240,9 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  A. CONCEPTUAL FRAMEWORK FOR INFORMATION SYSTEMS (DIAGRAM OF IS
-                  INTERFACE)
-                </h3>
+                <h4 class="part-subtitle">
+                  A. Conceptual Framework for Information Systems
+                </h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -293,9 +313,9 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  B. DETAILED DESCRIPTION OF PROPOSED INFORMATION SYSTEMS
-                </h3>
+                <h4 class="part-subtitle">
+                  B. Detailed Description of Proposed Information Systems
+                </h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -314,7 +334,7 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">C. DATABASES REQUIRED</h3>
+                <h4 class="part-subtitle">C. Databases Required</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -333,7 +353,7 @@
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">D. NETWORK LAYOUT</h3>
+                <h4 class="part-subtitle">D. Network Layout</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -363,9 +383,9 @@
         <ng-template matStepLabel>
           <div class="d-flex align-items-center justify-content-between">
             <strong>
-              <h2 class="part-title">
-                PART III. DETAILED DESCRIPTION OF ICT PROJECTS
-              </h2>
+              <h3 class="part-title">
+                III. Detailed Description of ICT Projects
+              </h3>
             </strong>
             <div class="d-flex align-items-center">
               <span> Changes saved </span>
@@ -387,7 +407,7 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">A. INTERNAL ICT PROJECTS</h3>
+                <h4 class="part-subtitle">A. Internal ICT Projects</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -458,7 +478,7 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">B. CROSS-AGENCY ICT PROJECTS</h3>
+                <h4 class="part-subtitle">B. Cross-Agency ICT Projects</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -477,9 +497,9 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  C. PERFORMANCE MEASUREMENT FRAMEWORK
-                </h3>
+                <h4 class="part-subtitle">
+                  C. Performance Measurement Framework
+                </h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -511,7 +531,7 @@
       <mat-step>
         <ng-template matStepLabel>
           <strong>
-            <h2 class="part-title">PART IV. RESOURCE REQUIREMENTS</h2>
+            <h3 class="part-title">IV. Resource Requirements</h3>
           </strong>
         </ng-template>
 
@@ -519,9 +539,9 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  A. DEPLOYMENT OF ICT EQUIPMENT AND SERVICES
-                </h3>
+                <h4 class="part-subtitle">
+                  A. Deployment of ICT Equipment and Services
+                </h4>
               </mat-panel-title>
               <mat-panel-description>*Required Fields</mat-panel-description>
             </mat-expansion-panel-header>
@@ -593,7 +613,7 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">B. ICT ORGANIZATIONAL STRUCTURE</h3>
+                <h4 class="part-subtitle">B. ICT Organizational Structure</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -627,9 +647,7 @@
       <mat-step>
         <ng-template matStepLabel>
           <strong>
-            <h2 class="part-title">
-              PART V. DEVELOPMENT AND INVESTMENT PROGRAM
-            </h2>
+            <h3 class="part-title">V. Development and Investment Program</h3>
           </strong>
         </ng-template>
 
@@ -637,9 +655,9 @@
           <mat-expansion-panel (opened)="setStep(0)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  A. ICT PROJECTS IMPLEMENTATION SCHEDULE
-                </h3>
+                <h4 class="part-subtitle">
+                  A. ICT Projects Implementation Schedule
+                </h4>
               </mat-panel-title>
               <mat-panel-description>*Required Fields</mat-panel-description>
             </mat-expansion-panel-header>
@@ -711,9 +729,9 @@
           <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">
-                  B. INFORMATION SYSTEMS (IS) IMPLEMENTATION SCHEDULE
-                </h3>
+                <h4 class="part-subtitle">
+                  B. Information Systems (IS) Implementation Schedule
+                </h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -732,7 +750,7 @@
           <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">C. SUMMARY OF INVESTMENTS</h3>
+                <h4 class="part-subtitle">C. Summary of Investments</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
@@ -751,7 +769,7 @@
           <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <h3 class="part-subtitle">D. YEAR 1 COST BREAKDOWN</h3>
+                <h4 class="part-subtitle">D. Year 1 Cost Breakdown</h4>
               </mat-panel-title>
             </mat-expansion-panel-header>
 

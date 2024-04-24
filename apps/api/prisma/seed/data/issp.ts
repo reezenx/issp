@@ -8,14 +8,11 @@ export const ISSPP1OrgProfileS1 = {
     a1MandateFunctions:
       'The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016.',
     a2Vision:
-      '<p>“An innovative, safe and happy nation that thrives through and is enabled by Information and Communications</p><p>Technology”</p>',
+      '<p>“An innovative, safe and happy nation that thrives through and is enabled by Information and Communications Technology”</p>',
     a3Mission:
       '<p>“DICT of the People, DICT for the People”.</p><p>The DICT commits to:</p><ul><li>Provide every Filipino access to vital ICT infostructure and services;</li><li>Ensure sustainable growth of Philippine ICT-enabled industries resulting to creation of more jobs;</li><li>Establish a one digitized government, one nation;</li><li>Support the National Government in fully achieving its goals; and</li><li>Make the DICT as the enabler, innovator, achiever, and leader in pushing the country’s development and transition towards a world-class digital economy.</li></ul>',
-    a4FinalOutputs: [
-      'Government-wide ICT Policy Services',
-      'Technical Advisory Services',
-      'ICT Training Services',
-    ],
+    a4FinalOutputs:
+      '<p>MFO 1: Government-wide ICT Policy Services</p><p>MFO 2: Technical Advisory Services</p><p>MFO 3: ICT Training Services</p>',
     issp: ISSP_['DICT'],
   },
   OPS2: {
@@ -28,11 +25,9 @@ export const ISSPP1OrgProfileS1 = {
       '<p>“An innovative, safe and happy nation that thrives through and is enabled by Information and Communications</p><p>Technology”</p>',
     a3Mission:
       '<p>“DE of the People, DE for the People”.</p><p>The DE commits to:</p><ul><li>Provide every Filipino access to vital DE infostructure and services;</li><li>Ensure sustainable growth of Philippine DE-enabled industries resulting to creation of more jobs;</li><li>Establish a one digitized government, one nation;</li><li>Support the National Government in fully achieving its goals; and</li><li>Make the DE as the enabler, innovator, achiever, and leader in pushing the country’s development and transition towards a world-class digital economy.</li></ul>',
-    a4FinalOutputs: [
-      'Government-wide ICT Policy Services',
-      'Technical Advisory Services',
-      'ICT Training Services',
-    ],
+    a4FinalOutputs:
+      '<p>MFO 1: Government-wide ICT Policy Services</p><p>MFO 2: Technical Advisory Services</p><p>MFO 3: ICT Training Services</p>',
+
     issp: ISSP_['DE'],
   },
 };

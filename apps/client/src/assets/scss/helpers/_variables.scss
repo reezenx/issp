@@ -22,6 +22,7 @@ $spacers: (
   30: 30px,
   32: $spacer * 2,
   48: $spacer * 3,
+  64: $spacer * 4,
 ) !default;
 $negative-spacers: negativify-map($spacers) !default;
 

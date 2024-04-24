@@ -10,6 +10,7 @@ export type SubjectType =
   | 'Profile'
   | 'Permission'
   | 'ISSP'
+  | 'ISSPP1OrgProfileS1'
   | 'ActionHistory'
   | 'Project'
   | 'ProjectType'
@@ -27,6 +28,7 @@ export const Subject: { [key: string]: SubjectType } = {
   Profile: 'Profile',
   Permission: 'Permission',
   ISSP: 'ISSP',
+  ISSPP1OrgProfileS1: 'ISSPP1OrgProfileS1',
   ActionHistory: 'ActionHistory',
   Project: 'Project',
   ProjectType: 'ProjectType',

@@ -19,6 +19,7 @@ export const API = {
     ACCOUNTS: '/user/accounts',
     ACTION_HISTORY: '/user/action-history',
     ISSPS: '/user/issps',
+    ISSP_P1ORGPROFILES1: '/user/issps/p1-org-profile-s1',
   },
   AUTH: {
     LOGIN: '/auth/login',

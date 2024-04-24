@@ -8,10 +8,12 @@ import { User } from '@prisma/client';
 export class P1OrgProfileS1Service {
   constructor(private prisma: PrismaService) {}
   create(createP1OrgProfileS1Dto: CreateP1OrgProfileS1Dto, user: User) {
+    const { isspId, ...p1OrgProfileS1Data } = createP1OrgProfileS1Dto;
     return this.prisma.iSSPP1OrgProfileS1.create({
       data: {
-        ...createP1OrgProfileS1Dto,
+        ...p1OrgProfileS1Data,
         createdBy: `${user.firstName} ${user.lastName}`,
+        issp: { connect: { id: isspId } },
       },
     });
   }

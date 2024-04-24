@@ -303,7 +303,7 @@ model ISSPP1OrgProfileS1 {
   a1MandateFunctions String
   a2Vision           String
   a3Mission          String
-  a4FinalOutputs     String[]
+  a4FinalOutputs     String
   order              Int       @default(1)
   part               Int       @default(1)
   issp               ISSP?

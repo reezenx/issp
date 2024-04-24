@@ -1,5 +1,6 @@
 import { Permission, PrismaClient, Role, UserRole } from '@prisma/client';
-import { PERMISSION, ROLE } from '../data/data';
+import { ROLE } from '../data/data';
+import { PERMISSION } from '../data/permissions';
 import { findDuplicates } from './helper.create';
 
 export const PERMISSIONS: Record<
@@ -50,6 +51,26 @@ export const PERMISSIONS: Record<
   },
   DELETE_ISSP: {
     ...PERMISSION.DELETE_ISSP,
+    role: ROLE.SUPER_ADMIN,
+  },
+  MANAGE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.MANAGE_ISSP_P1ORGPROFILES1,
+    role: ROLE.SUPER_ADMIN,
+  },
+  CREATE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.CREATE_ISSP_P1ORGPROFILES1,
+    role: ROLE.PLANNER,
+  },
+  READ_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.READ_ISSP_P1ORGPROFILES1,
+    role: ROLE.PLANNER,
+  },
+  UPDATE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.UPDATE_ISSP_P1ORGPROFILES1,
+    role: ROLE.PLANNER,
+  },
+  DELETE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.DELETE_ISSP_P1ORGPROFILES1,
     role: ROLE.SUPER_ADMIN,
   },
   MANAGE_PROJECT: {
@@ -256,6 +277,8 @@ export const PERMISSIONS: Record<
 
 export async function createPermissions(prisma: PrismaClient) {
   findDuplicates(PERMISSIONS);
+
+  // await prisma.permission.deleteMany();
 
   Object.entries(PERMISSIONS).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
   UseGuards,
@@ -22,7 +22,7 @@ import { User } from '@prisma/client';
 export class P1OrgProfileS1Controller {
   constructor(private readonly p1OrgProfileS1Service: P1OrgProfileS1Service) {}
 
-  @checkAbilities({ action: 'create', subject: 'ISSP' })
+  @checkAbilities({ action: 'create', subject: 'ISSPP1OrgProfileS1' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Post()
@@ -33,7 +33,7 @@ export class P1OrgProfileS1Controller {
     return this.p1OrgProfileS1Service.create(createP1OrgProfileS1Dto, user);
   }
 
-  @checkAbilities({ action: 'read', subject: 'ISSP' })
+  @checkAbilities({ action: 'read', subject: 'ISSPP1OrgProfileS1' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get()
@@ -41,7 +41,7 @@ export class P1OrgProfileS1Controller {
     return this.p1OrgProfileS1Service.findAll();
   }
 
-  @checkAbilities({ action: 'read', subject: 'ISSP' })
+  @checkAbilities({ action: 'read', subject: 'ISSPP1OrgProfileS1' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get(':id')
@@ -49,10 +49,10 @@ export class P1OrgProfileS1Controller {
     return this.p1OrgProfileS1Service.findOne(id);
   }
 
-  @checkAbilities({ action: 'update', subject: 'ISSP' })
+  @checkAbilities({ action: 'update', subject: 'ISSPP1OrgProfileS1' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('id') id: string,
     @Body() updateP1OrgProfileS1Dto: UpdateP1OrgProfileS1Dto,
@@ -61,7 +61,7 @@ export class P1OrgProfileS1Controller {
     return this.p1OrgProfileS1Service.update(id, updateP1OrgProfileS1Dto, user);
   }
 
-  @checkAbilities({ action: 'delete', subject: 'ISSP' })
+  @checkAbilities({ action: 'delete', subject: 'ISSPP1OrgProfileS1' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Delete(':id')

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ISSPDetails, ISSPP1OrgProfileS1Form } from '@issp/common';
+import { ISSPDetails, ISSPP1OrgProfileS1Info } from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
+import { P1OrgProfileS1FormComponent } from '../issp-details/p1-org-profile-s1-form/p1-org-profile-s1-form.component';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -14,13 +15,6 @@ export class IsspItemEditDetailsComponent implements OnInit {
   item: ISSPDetails;
   subs: Subscription[] = [];
   step = 0;
-  iSSPP1OrgProfileS1Form: ISSPP1OrgProfileS1Form;
-  p1OrgProfileS1Instructions: string[] = [
-    'A.1 - State the legal basis for the creation of the organization and should likewise describe the major functions as indicated/mandated in the legal basis.',
-    'A.2 - State the wishful projection of the organization into the future; a statement of what your organization wants to become; an intuitive picture of an end state.',
-    'A.3 - State the organization’s scope and operations that assert its basic purpose, specify its principal products/services that set it apart/distinguish it from others.',
-    'A.4 - Enumerate the MFOs as prescribed in the Organizational Performance Indicator Framework(OPIF). An MFO is a good or service that a department/agency is mandated to deliver to external clients through the implementation of programs, activities and projects. Emphasis should be on the MFOs that are aligned with the Philippine Development Plan’s Key Result Areas and the critical indicators and results presented in the PDP Results Matrices.',
-  ];
 
   constructor(private route: ActivatedRoute) {}
 
@@ -31,7 +25,8 @@ export class IsspItemEditDetailsComponent implements OnInit {
   initSubs() {
     const routeSub = this.route.parent.data.subscribe(({ item }) => {
       this.item = item;
-      this.iSSPP1OrgProfileS1Form = this.item.p1OrgProfileS1;
+      this.iSSPP1OrgProfileS1Info = this.item.p1OrgProfileS1 ?? {};
+      this.iSSPP1OrgProfileS1Info.isspId = this.item.id;
     });
     this.subs.push(routeSub);
   }
@@ -46,5 +41,24 @@ export class IsspItemEditDetailsComponent implements OnInit {
 
   prevStep() {
     this.step--;
+  }
+
+  // PART I. ORGANIZATIONAL PROFILE (P1)
+  /// A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT (S1)
+  iSSPP1OrgProfileS1Info: ISSPP1OrgProfileS1Info = {};
+  @ViewChild(P1OrgProfileS1FormComponent)
+  iSSPP1OrgProfileS1Comp: P1OrgProfileS1FormComponent;
+
+  get iSSPP1OrgProfileS1CompForm() {
+    return this.iSSPP1OrgProfileS1Comp?.form;
+  }
+
+  resetISSPP1OrgProfileS1Form() {
+    this.iSSPP1OrgProfileS1CompForm.patchValue(this.iSSPP1OrgProfileS1Info);
+    this.iSSPP1OrgProfileS1CompForm.markAsPristine();
+  }
+
+  saveISSPP1OrgProfileS1Form() {
+    this.iSSPP1OrgProfileS1Comp.save();
   }
 }

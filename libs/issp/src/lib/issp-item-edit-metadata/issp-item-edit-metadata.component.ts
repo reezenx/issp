@@ -29,6 +29,13 @@ import {
   styleUrl: './issp-item-edit-metadata.component.scss',
 })
 export class IsspItemEditMetadataComponent implements OnInit {
+  form: FormGroup;
+  item: ISSPDetails;
+  subs: Subscription[] = [];
+  statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
+  titleMinLength = 6;
+  titleMaxLength = 100;
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly formBuilder: FormBuilder,
@@ -37,13 +44,6 @@ export class IsspItemEditMetadataComponent implements OnInit {
     private readonly snackBar: MatSnackBar,
     private readonly dialog: MatDialog
   ) {}
-
-  form: FormGroup;
-  item: ISSPDetails;
-  subs: Subscription[] = [];
-  statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
-  titleMinLength = 6;
-  titleMaxLength = 100;
 
   ngOnInit(): void {
     this.initForm();

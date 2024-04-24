@@ -43,7 +43,7 @@ export class ISSPP1OrgProfileS1Details
   a1MandateLegal: string;
   a2Vision: string;
   a3Mission: string;
-  a4FinalOutputs: string[];
+  a4FinalOutputs: string;
   order: number;
   part: number;
   isspId: string | null;
@@ -60,12 +60,15 @@ export class ISSPP1OrgProfileS1Details
   private _updatedAt: Date = new Date('0001-01-01T00:00:00Z');
 }
 
-export type ISSPP1OrgProfileS1Form = Pick<
-  ISSPP1OrgProfileS1Details,
-  | 'id'
-  | 'a1MandateFunctions'
-  | 'a1MandateLegal'
-  | 'a2Vision'
-  | 'a3Mission'
-  | 'a4FinalOutputs'
+export type ISSPP1OrgProfileS1Info = Partial<
+  Pick<
+    ISSPP1OrgProfileS1Details,
+    | 'id'
+    | 'isspId'
+    | 'a1MandateFunctions'
+    | 'a1MandateLegal'
+    | 'a2Vision'
+    | 'a3Mission'
+    | 'a4FinalOutputs'
+  >
 >;

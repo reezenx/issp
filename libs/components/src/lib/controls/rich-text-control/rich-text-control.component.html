@@ -25,13 +25,8 @@
   <ng-container *ngIf="displayEditor !== true && keepEditorOpen === false">
     <div class="value-container d-flex align-items-start flex-fill">
       <div [innerHtml]="value" class="flex-grow-1"></div>
-      <mat-icon
-        fontSet="fa-solid"
-        fontIcon="fa-pen-to-square"
-        class="d-flex flex-grow-0"
-      ></mat-icon>
       <div class="control">
-        <input #cnt formControlName="cnt" placeholder="Enter value" />
+        <input #cnt formControlName="cnt" [placeholder]="placeholder" />
       </div>
     </div>
   </ng-container>

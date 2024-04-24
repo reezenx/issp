@@ -1,84 +1,183 @@
 <div [formGroup]="form" (ngSubmit)="save()">
-  <h4>A.1. Mandate</h4>
-  <ul>
-    <li>Legal Bases</li>
-    <mat-form-field appearance="outline" class="w-100">
-      <textarea
-        rows="3"
-        matInput
-        formControlName="a1MandateLegal"
-        placeholder="Enter Legal Bases"
-      ></textarea>
-    </mat-form-field>
-    <li>Function</li>
-    <mat-form-field appearance="outline" class="w-100">
-      <textarea
-        rows="3"
-        matInput
-        formControlName="a1MandateFunctions"
-        placeholder="Enter Function"
-      ></textarea>
-    </mat-form-field>
-  </ul>
-  <h4>A.2. Vision Statement</h4>
+  <h5>A.1. Mandate</h5>
+  <mat-form-field appearance="outline" class="w-100 m-b-32" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Legal Bases</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="gavel" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <textarea
+      #a1MandateLegal
+      rows="3"
+      matInput
+      formControlName="a1MandateLegal"
+      placeholder="Enter Legal Bases"
+    ></textarea>
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['a1MandateLegal'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!a1MandateLegal.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    <mat-hint [align]="'start'" class="m-b-16 w-80">
+      State the legal basis for the creation of the organization and should
+      likewise describe the major functions as indicated/mandated in the legal
+      basis.
+    </mat-hint>
+    @if(f['a1MandateLegal'].touched && f['a1MandateLegal'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['a1MandateLegal'].errors && f['a1MandateLegal'].errors['required'])
+      {
+      <div class="text-error">Legal Bases is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-32" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Function</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="function" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <textarea
+      #a1MandateFunctions
+      rows="3"
+      matInput
+      formControlName="a1MandateFunctions"
+      placeholder="Enter Function"
+    ></textarea>
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['a1MandateFunctions'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!a1MandateFunctions.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    <mat-hint [align]="'start'" class="m-b-16 w-80">
+      State the wishful projection of the organization into the future; a
+      statement of what your organization wants to become; an intuitive picture
+      of an end state.
+    </mat-hint>
+    @if(f['a1MandateFunctions'].touched && f['a1MandateFunctions'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['a1MandateFunctions'].errors &&
+      f['a1MandateFunctions'].errors['required']) {
+      <div class="text-error">Function is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <h5>A.2. Vision Statement</h5>
   <mat-form-field
-    hintLabel="Max 2000 characters"
     appearance="outline"
-    class="w-100"
+    class="w-100 m-b-32"
     color="primary"
     floatLabel="always"
   >
     <mat-label class="mat-subtitle-2 f-w-600">Vision</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="eye" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
     <issp-rich-text-control
       #question
       required
       [keepEditorOpen]="false"
       placeholder="Mission (Required)"
-      hintLabel="Max 2000 characters"
       fieldName="Rich Text"
       formControlName="a2Vision"
     ></issp-rich-text-control>
-    <mat-hint [align]="'end'">{{ question.value?.length || 0 }}/2000</mat-hint>
+    <mat-hint [align]="'start'" class="m-b-16 w-80">
+      State the wishful projection of the organization into the future; a
+      statement of what your organization wants to become; an intuitive picture
+      of an end state.
+    </mat-hint>
+    @if(f['a2Vision'].touched && f['a2Vision'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['a2Vision'].errors && f['a2Vision'].errors['required']) {
+      <div class="text-error">Vision is required.</div>
+      }
+    </mat-hint>
+    }
   </mat-form-field>
-  <h4>A.3. Mission Statement</h4>
+  <h5>A.3. Mission Statement</h5>
   <mat-form-field
-    hintLabel="Max 2000 characters"
     appearance="outline"
-    class="w-100"
+    class="w-100 m-b-32"
     color="primary"
     floatLabel="always"
   >
     <mat-label class="mat-subtitle-2 f-w-600">Mission</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="eye-edit" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
     <issp-rich-text-control
-      #question
+      #a3Mission
       required
       [keepEditorOpen]="false"
       placeholder="Mission (Required)"
-      hintLabel="Max 2000 characters"
       fieldName="Rich Text"
       formControlName="a3Mission"
     ></issp-rich-text-control>
-    <mat-hint [align]="'end'">{{ question.value?.length || 0 }}/2000</mat-hint>
+    <mat-hint [align]="'start'" class="m-b-16 w-80">
+      State the organization’s scope and operations that assert its basic
+      purpose, specify its principal products/services that set it
+      apart/distinguish it from others.
+    </mat-hint>
+    @if(f['a3Mission'].touched && f['a3Mission'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['a3Mission'].errors && f['a3Mission'].errors['required']) {
+      <div class="text-error">Mission is required.</div>
+      }
+    </mat-hint>
+    }
   </mat-form-field>
 
-  <h4>A.4. Major Final Outputs</h4>
+  <h5>A.4. Major Final Outputs</h5>
   <mat-form-field
-    hintLabel="Max 2000 characters"
     appearance="outline"
-    class="w-100"
+    class="w-100 m-b-64"
     color="primary"
     floatLabel="always"
   >
     <mat-label class="mat-subtitle-2 f-w-600">Outputs</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="transfer-out" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
     <issp-rich-text-control
-      #question
+      #a4FinalOutputs
       required
       [keepEditorOpen]="false"
       placeholder="Output"
-      hintLabel="Max 2000 characters"
       fieldName="Rich Text"
       formControlName="a4FinalOutputs"
     ></issp-rich-text-control>
-    <mat-hint [align]="'end'">{{ question.value?.length || 0 }}/2000</mat-hint>
+    <mat-hint [align]="'start'" class="m-b-16 w-80">
+      Enumerate the MFOs as prescribed in the Organizational Performance
+      Indicator Framework(OPIF). An MFO is a good or service that a
+      department/agency is mandated to deliver to external clients through the
+      implementation of programs, activities and projects. Emphasis should be on
+      the MFOs that are aligned with the Philippine Development Plan's Key
+      Result Areas and the critical indicators and results presented in the PDP
+      Results Matrices.
+    </mat-hint>
+    @if(f['a4FinalOutputs'].touched && f['a4FinalOutputs'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['a4FinalOutputs'].errors && f['a4FinalOutputs'].errors['required'])
+      {
+      <div class="text-error">Outputs are required.</div>
+      }
+    </mat-hint>
+    }
   </mat-form-field>
 </div>

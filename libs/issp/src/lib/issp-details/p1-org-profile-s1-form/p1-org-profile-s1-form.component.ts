@@ -1,18 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '@issp/auth';
-import { ISSPDetails, ISSPP1OrgProfileS1Form } from '@issp/common';
+import { ISSPDetails, ISSPP1OrgProfileS1Info } from '@issp/common';
 import { User } from '@prisma/client';
 import { Subscription, take } from 'rxjs';
-import { IsspsService } from '../../services/issps.service';
+import { IsspP1OrgProfileS1Service } from '../../services/issp.p1-org-profile-s1.service';
 
 @Component({
   selector: 'issp-p1-org-profile-s1-form',
@@ -25,35 +22,33 @@ export class P1OrgProfileS1FormComponent {
   currentUser: User;
   subs: Subscription[] = [];
 
-  _item: ISSPP1OrgProfileS1Form;
+  _item: ISSPP1OrgProfileS1Info;
   @Input()
   get item() {
     return this._item;
   }
-  set item(val: ISSPP1OrgProfileS1Form) {
+  set item(val: ISSPP1OrgProfileS1Info) {
     this._item = val;
     this.form.patchValue(val);
   }
 
   constructor(
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private readonly router: Router,
-    private readonly isspService: IsspsService,
-    private readonly authService: AuthService,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private readonly isspP1OrgProfileS1Service: IsspP1OrgProfileS1Service,
+    private snackBar: MatSnackBar
   ) {
     this.initForm();
   }
 
   initForm() {
     this.form = this.formBuilder.group({
-      a1MandateFunctions: new FormControl<string>('', [Validators.required]),
+      id: new FormControl<string>(null),
+      isspId: new FormControl<string>(null),
+      a1MandateFunctions: new FormControl<string>(null, [Validators.required]),
       a1MandateLegal: new FormControl<string>(null, [Validators.required]),
       a2Vision: new FormControl<string>(null, [Validators.required]),
       a3Mission: new FormControl<string>(null, [Validators.required]),
-      a4FinalOutputs: new FormControl<string[]>([], [Validators.required]),
+      a4FinalOutputs: new FormControl<string>(null, [Validators.required]),
     });
   }
 
@@ -63,16 +58,21 @@ export class P1OrgProfileS1FormComponent {
 
   save() {
     if (this.form.valid && this.form.dirty) {
-      this.isspService
-        .createOne(this.form.value)
-        .pipe(take(1))
-        .subscribe((data) => {
-          this.snackBar.open('ISSP successfully created!', 'Ok', {
+      const obs = this.form.value.id
+        ? this.isspP1OrgProfileS1Service.updateOne(this.form.value)
+        : this.isspP1OrgProfileS1Service.createOne(this.form.value);
+      obs.pipe(take(1)).subscribe(() => {
+        this.form.markAsPristine();
+        this.snackBar.open(
+          'P1 - Department/Agency Vision / Mission Statement (S1) successfully saved!',
+          'Ok',
+          {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
             duration: 5000,
-          });
-        });
+          }
+        );
+      });
     }
   }
 }
