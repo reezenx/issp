@@ -68,6 +68,7 @@ export const ISSPS: {
 
 export async function createISSPs(prisma: PrismaClient) {
   findDuplicates(ISSPS);
+  await prisma.iSSP.deleteMany();
   Object.entries(ISSPS).forEach(
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

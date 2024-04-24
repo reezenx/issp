@@ -278,7 +278,7 @@ export const PERMISSIONS: Record<
 export async function createPermissions(prisma: PrismaClient) {
   findDuplicates(PERMISSIONS);
 
-  // await prisma.permission.deleteMany();
+  await prisma.permission.deleteMany();
 
   Object.entries(PERMISSIONS).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

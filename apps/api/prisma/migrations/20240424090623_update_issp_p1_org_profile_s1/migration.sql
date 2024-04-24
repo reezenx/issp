@@ -11,4 +11,6 @@
 ALTER TABLE "issp-p1-org-profiles-s1" DROP COLUMN "a1Mandate",
 DROP COLUMN "name",
 ADD COLUMN     "a1MandateFunctions" TEXT NOT NULL,
-ADD COLUMN     "a1MandateLegal" TEXT NOT NULL;
+ADD COLUMN     "a1MandateLegal" TEXT NOT NULL,
+ALTER COLUMN "a4FinalOutputs" SET NOT NULL,
+ALTER COLUMN "a4FinalOutputs" SET DATA TYPE TEXT;
