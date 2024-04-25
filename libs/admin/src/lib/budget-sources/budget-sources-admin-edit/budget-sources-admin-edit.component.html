@@ -43,6 +43,16 @@
         </button>
         <button
           mat-flat-button
+          color="accent"
+          type="button"
+          class="m-l-8"
+          (click)="reset()"
+          [disabled]="!form.dirty"
+        >
+          Reset
+        </button>
+        <button
+          mat-flat-button
           color="warn"
           type="button"
           (click)="discardChanges()"
