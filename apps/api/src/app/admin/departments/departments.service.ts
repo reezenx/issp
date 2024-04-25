@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @Injectable()
 export class DepartmentsService {
@@ -27,17 +28,27 @@ export class DepartmentsService {
     });
   }
 
-  async isCodeExist(code: string) {
+  async isCodeExist(code: string, query: UniqueValidatorOptionsQuery) {
     const r = await this.prisma.department.findFirst({
-      where: { code },
+      where: {
+        code,
+        id: {
+          not: query.ignoreId,
+        },
+      },
       select: { code: true },
     });
     return Boolean(r);
   }
 
-  async isUACSExist(uacs: string) {
+  async isUACSExist(uacs: string, query: UniqueValidatorOptionsQuery) {
     const u = await this.prisma.department.findFirst({
-      where: { uacs },
+      where: {
+        uacs,
+        id: {
+          not: query.ignoreId,
+        },
+      },
       select: { uacs: true },
     });
     return Boolean(u);

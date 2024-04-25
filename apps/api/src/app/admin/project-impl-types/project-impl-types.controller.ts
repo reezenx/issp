@@ -3,11 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   UseGuards,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ProjectImplTypesService } from './project-impl-types.service';
 import { CreateProjectImplTypeDto } from './dto/create-project-impl-type.dto';
@@ -17,6 +17,7 @@ import { ProjectImplementationTypeEntity } from './entities/project-impl-type.en
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @ApiTags('admin/project-impl-types')
 @Controller('admin/project-impl-types')
@@ -62,8 +63,11 @@ export class ProjectImplTypesController {
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get('exists/:code')
-  async isCodeExist(@Param('code') code: string) {
-    const data = await this.projectImplTypesService.isCodeExist(code);
+  async isCodeExist(
+    @Param('code') code: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.projectImplTypesService.isCodeExist(code, query);
     return data;
   }
 

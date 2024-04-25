@@ -1,7 +1,13 @@
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { DepartmentDetails } from '../models/department-details';
 import { HttpClient } from '@angular/common/http';
-import { API, Environment, IsKeyUniqueValidatorOptions, ItemDropdown, ValidateUniqueKeyFn } from '@issp/common';
+import {
+  API,
+  Environment,
+  IsKeyUniqueValidatorOptions,
+  ItemDropdown,
+  ValidateUniqueKeyFn,
+} from '@issp/common';
 import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
@@ -85,7 +91,7 @@ export class DepartmentsService {
     code: string,
     props: IsKeyUniqueValidatorOptions
   ): Observable<boolean> => {
-    const uri = `${this.route}/exists/${code}`;
+    const uri = `${this.route}/exists/${code}?ignoreId=${props.ignoreId}`;
     return this.http.get<boolean>(uri).pipe(
       map((data) => {
         return !data;
@@ -97,7 +103,7 @@ export class DepartmentsService {
     uacs: string,
     props: IsKeyUniqueValidatorOptions
   ): Observable<boolean> => {
-    const uri = `${this.route}/exist/${uacs}`;
+    const uri = `${this.route}/exist/${uacs}?ignoreId=${props.ignoreId}`;
     return this.http.get<boolean>(uri).pipe(
       map((data) => {
         return !data;

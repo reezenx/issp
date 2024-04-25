@@ -39,7 +39,6 @@ export class CategoryAdminEditComponent implements OnInit {
   subs: Subscription[] = [];
 
   ngOnInit(): void {
-    this.initForm();
     this.initSubs();
   }
 
@@ -51,7 +50,7 @@ export class CategoryAdminEditComponent implements OnInit {
         asyncValidators: [
           UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
             this.categoriesService.isCodeUnique,
-            {}
+            { ignoreId: this.item?.id }
           ),
         ],
       }),
@@ -62,6 +61,7 @@ export class CategoryAdminEditComponent implements OnInit {
   initSubs() {
     const routeSub = this.route.data.subscribe(({ item }) => {
       this.item = item;
+      this.initForm();
       this.form.patchValue(this.item);
     });
     this.subs.push(routeSub);

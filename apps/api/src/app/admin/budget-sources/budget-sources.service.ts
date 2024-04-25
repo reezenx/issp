@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateBudgetSourceDto } from './dto/create-budget-source.dto';
 import { UpdateBudgetSourceDto } from './dto/update-budget-source.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @Injectable()
 export class BudgetSourcesService {
@@ -31,9 +32,14 @@ export class BudgetSourcesService {
     return this.prisma.budgetSource.findUnique({ where: { id } });
   }
 
-  async isCodeExist(code: string) {
+  async isCodeExist(code: string, query: UniqueValidatorOptionsQuery) {
     const r = await this.prisma.budgetSource.findFirst({
-      where: { code },
+      where: {
+        code,
+        id: {
+          not: query.ignoreId,
+        },
+      },
       select: { code: true },
     });
     return Boolean(r);

@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -16,6 +17,7 @@ import { CategoryEntity } from './entities/category.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @ApiTags('admin/categories')
 @Controller('admin/categories')
@@ -66,8 +68,11 @@ export class CategoriesController {
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get('exists/:code')
-  async isCodeExist(@Param('code') code: string) {
-    const data = await this.categoriesService.isCodeExist(code);
+  async isCodeExist(
+    @Param('code') code: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.categoriesService.isCodeExist(code, query);
     return data;
   }
 

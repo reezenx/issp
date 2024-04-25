@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateProjectTypeGroupDto } from './dto/create-project-type-group.dto';
 import { UpdateProjectTypeGroupDto } from './dto/update-project-type-group.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @Injectable()
 export class ProjectTypeGroupsService {
@@ -31,9 +32,14 @@ export class ProjectTypeGroupsService {
     return this.prisma.projectTypeGroup.findUnique({ where: { id } });
   }
 
-  async isCodeExist(code: string) {
+  async isCodeExist(code: string, query: UniqueValidatorOptionsQuery) {
     const r = await this.prisma.projectTypeGroup.findFirst({
-      where: { code },
+      where: {
+        code,
+        id: {
+          not: query.ignoreId,
+        },
+      },
       select: { code: true },
     });
     return Boolean(r);

@@ -4,10 +4,18 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { Component, OnInit } from '@angular/core';
 import { DepartmentsService } from '../services/departments.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { DepartmentDetails } from '../models/department-details';
 import { Subscription, take } from 'rxjs';
-import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogComponentData,
+} from '@issp/components';
 import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
@@ -31,13 +39,13 @@ export class DepartmentsAdminEditComponent implements OnInit {
   subs: Subscription[] = [];
 
   ngOnInit(): void {
-    this.initForm();
     this.initSubs();
   }
 
   initSubs() {
     const routeSub = this.route.data.subscribe(({ item }) => {
       this.item = item;
+      this.initForm();
       this.form.patchValue(this.item);
     });
     this.subs.push(routeSub);
@@ -58,7 +66,7 @@ export class DepartmentsAdminEditComponent implements OnInit {
         asyncValidators: [
           UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
             this.departmentsService.isCodeUnique,
-            {}
+            { ignoreId: this.item?.id }
           ),
         ],
       }),
@@ -67,7 +75,7 @@ export class DepartmentsAdminEditComponent implements OnInit {
         asyncValidators: [
           UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
             this.departmentsService.isUACSUnique,
-            {}
+            { ignoreId: this.item?.id }
           ),
         ],
       }),

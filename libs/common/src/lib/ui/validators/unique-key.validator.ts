@@ -5,10 +5,11 @@ import {
 } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { UniqueValidatorOptions } from '../../models/unique-validator-options';
 
-export class IsKeyUniqueValidatorOptions {
+export class IsKeyUniqueValidatorOptions implements UniqueValidatorOptions {
+  ignoreId?: string = null;
   agencyId?: string = null;
-  departmentId?: string = null;
 }
 
 export type ValidateUniqueKeyFn<T> = (

@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { BudgetTypesService } from './budget-types.service';
 import { CreateBudgetTypeDto } from './dto/create-budget-type.dto';
@@ -16,6 +17,7 @@ import { BudgetTypeEntity } from './entities/budget-type.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @ApiTags('admin/budget-types')
 @Controller('admin/budget-types')
@@ -66,8 +68,11 @@ export class BudgetTypesController {
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get('exists/:code')
-  async isCodeExist(@Param('code') code: string) {
-    const data = await this.budgetTypesService.isCodeExist(code);
+  async isCodeExist(
+    @Param('code') code: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.budgetTypesService.isCodeExist(code, query);
     return data;
   }
 

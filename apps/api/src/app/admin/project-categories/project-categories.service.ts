@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateProjectCategoryDto } from './dto/create-project-category.dto';
 import { UpdateProjectCategoryDto } from './dto/update-project-category.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @Injectable()
 export class ProjectCategoriesService {
@@ -27,9 +28,14 @@ export class ProjectCategoriesService {
     });
   }
 
-  async isCodeExist(code: string) {
+  async isCodeExist(code: string, query: UniqueValidatorOptionsQuery) {
     const r = await this.prisma.projectCategory.findFirst({
-      where: { code },
+      where: {
+        code,
+        id: {
+          not: query.ignoreId,
+        },
+      },
       select: { code: true },
     });
     return Boolean(r);

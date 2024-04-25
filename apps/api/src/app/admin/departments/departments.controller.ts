@@ -11,12 +11,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { DepartmentsService } from './departments.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { DepartmentEntity } from './entities/department.entity';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 @ApiTags('admin/departments')
 @Controller('admin/departments')
 export class DepartmentsController {
@@ -66,8 +68,11 @@ export class DepartmentsController {
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get('exists/:code')
-  async isCodeExist(@Param('code') code: string) {
-    const data = await this.departmentsService.isCodeExist(code);
+  async isCodeExist(
+    @Param('code') code: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.departmentsService.isCodeExist(code, query);
     return data;
   }
 
@@ -75,8 +80,11 @@ export class DepartmentsController {
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get('exist/:uacs')
-  async isUACSExist(@Param('uacs') uacs: string) {
-    const data = await this.departmentsService.isUACSExist(uacs);
+  async isUACSExist(
+    @Param('uacs') uacs: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.departmentsService.isUACSExist(uacs, query);
     return data;
   }
 

@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API, Environment, IsKeyUniqueValidatorOptions, ItemDropdown, ValidateUniqueKeyFn } from '@issp/common';
+import {
+  API,
+  Environment,
+  IsKeyUniqueValidatorOptions,
+  ItemDropdown,
+  ValidateUniqueKeyFn,
+} from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectImplementationTypeDetails } from '../models/project-impl-type-details';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
@@ -85,7 +91,7 @@ export class ProjectImplementationTypeService {
     code: string,
     props: IsKeyUniqueValidatorOptions
   ): Observable<boolean> => {
-    const uri = `${this.route}/exists/${code}`;
+    const uri = `${this.route}/exists/${code}?ignoreId=${props.ignoreId}`;
     return this.http.get<boolean>(uri).pipe(
       map((data) => {
         return !data;

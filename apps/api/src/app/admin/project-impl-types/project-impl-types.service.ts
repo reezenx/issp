@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateProjectImplTypeDto } from './dto/create-project-impl-type.dto';
 import { UpdateProjectImplTypeDto } from './dto/update-project-impl-type.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
+// import { IsKeyUniqueValidatorOptions } from '@issp/common';
 
 @Injectable()
 export class ProjectImplTypesService {
@@ -27,9 +29,14 @@ export class ProjectImplTypesService {
     });
   }
 
-  async isCodeExist(code: string) {
+  async isCodeExist(code: string, query: UniqueValidatorOptionsQuery) {
     const r = await this.prisma.projectImplementationType.findFirst({
-      where: { code },
+      where: {
+        code,
+        id: {
+          not: query.ignoreId,
+        },
+      },
       select: { code: true },
     });
     return Boolean(r);

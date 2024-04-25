@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { ProjectTypeGroupsService } from './project-type-groups.service';
 import { CreateProjectTypeGroupDto } from './dto/create-project-type-group.dto';
@@ -16,6 +17,7 @@ import { ProjectTypeGroupEntity } from './entities/project-type-group.entity';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @ApiTags('admin/project-type-groups')
 @Controller('admin/project-type-groups')
@@ -70,8 +72,11 @@ export class ProjectTypeGroupsController {
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()
   @Get('exists/:code')
-  async isCodeExist(@Param('code') code: string) {
-    const data = await this.projectTypeGroupsService.isCodeExist(code);
+  async isCodeExist(
+    @Param('code') code: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.projectTypeGroupsService.isCodeExist(code, query);
     return data;
   }
 

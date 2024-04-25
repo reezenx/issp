@@ -3,7 +3,13 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { CategoryDetails } from '../models/category-details';
-import { API, ItemDropdown, Environment, ValidateUniqueKeyFn, IsKeyUniqueValidatorOptions } from '@issp/common';
+import {
+  API,
+  ItemDropdown,
+  Environment,
+  ValidateUniqueKeyFn,
+  IsKeyUniqueValidatorOptions,
+} from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
@@ -84,7 +90,7 @@ export class CategoriesService {
     code: string,
     props: IsKeyUniqueValidatorOptions
   ): Observable<boolean> => {
-    const uri = `${this.route}/exists/${code}`;
+    const uri = `${this.route}/exists/${code}?ignoreId=${props.ignoreId}`;
     return this.http.get<boolean>(uri).pipe(
       map((data) => {
         return !data;

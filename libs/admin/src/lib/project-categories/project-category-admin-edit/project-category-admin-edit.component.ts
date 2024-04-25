@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectCategoriesService } from '../services/project-categories.service';
@@ -7,7 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectCategoryDetails } from '../models/project-category-details';
 import { Subscription, take } from 'rxjs';
-import { ConfirmationDialogComponent, ConfirmationDialogComponentData } from '@issp/components';
+import {
+  ConfirmationDialogComponent,
+  ConfirmationDialogComponentData,
+} from '@issp/components';
 import { IsKeyUniqueValidatorOptions, UniqueKeyValidator } from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
@@ -31,13 +39,13 @@ export class ProjectCategoryAdminEditComponent implements OnInit {
   subs: Subscription[] = [];
 
   ngOnInit(): void {
-    this.initForm();
     this.initSubs();
   }
 
   initSubs() {
     const routeSub = this.route.data.subscribe(({ item }) => {
       this.item = item;
+      this.initForm();
       this.form.patchValue(this.item);
     });
     this.subs.push(routeSub);
@@ -58,7 +66,7 @@ export class ProjectCategoryAdminEditComponent implements OnInit {
         asyncValidators: [
           UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
             this.projectCategoriesService.isCodeUnique,
-            {}
+            { ignoreId: this.item?.id }
           ),
         ],
       }),

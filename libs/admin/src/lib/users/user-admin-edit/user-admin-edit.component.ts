@@ -50,7 +50,6 @@ export class UserAdminEditComponent implements OnInit {
   subs: Subscription[] = [];
 
   ngOnInit(): void {
-    this.initForm();
     this.initSubs();
   }
 
@@ -60,6 +59,7 @@ export class UserAdminEditComponent implements OnInit {
         this.item = item;
         this.agenciesDropdown = agenciesDropdown;
         this.userRolesDropdown = userRolesDropdown;
+        this.initForm();
         this.form.patchValue(this.item);
       }
     );
@@ -84,7 +84,7 @@ export class UserAdminEditComponent implements OnInit {
         asyncValidators: [
           UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
             this.usersService.isEmailUnique,
-            {}
+            { ignoreId: this.item?.id }
           ),
         ],
       }),
