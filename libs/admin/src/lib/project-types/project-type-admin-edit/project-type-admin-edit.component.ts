@@ -63,6 +63,10 @@ export class ProjectTypeAdminEditComponent implements OnInit {
     });
   }
 
+  get f() {
+    return this.form.controls;
+  }
+
   save() {
     if (this.form.valid && this.form.dirty) {
       this.projectTypesService
@@ -97,6 +101,11 @@ export class ProjectTypeAdminEditComponent implements OnInit {
     } else {
       this.navigateToList();
     }
+  }
+
+  reset() {
+    this.form.patchValue(this.item);
+    this.form.markAsPristine();
   }
 
   navigateToList() {
