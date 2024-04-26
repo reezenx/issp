@@ -7,6 +7,7 @@ import {
   Delete,
   Put,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { AgenciesService } from './agencies.service';
 import { CreateAgencyDto } from './dto/create-agency.dto';
@@ -16,6 +17,7 @@ import { AgencyEntity } from './entities/agency.entity';
 import { checkAbilities } from '../../auth/decorators/abilities.decorator';
 import { AbilitiesGuard } from '../../auth/guard/abilities.guard';
 import { ItemEntityDropdown } from '../../shared/models/item-dropdown.entity';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @ApiTags('admin/agencies')
 @Controller('admin/agencies')
@@ -56,6 +58,18 @@ export class AgenciesController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return new AgencyEntity(await this.agenciesService.findOne(id));
+  }
+
+  @checkAbilities({ action: 'read', subject: 'Agency' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:code')
+  async isCodeExist(
+    @Param('code') code: string,
+    @Query() query: UniqueValidatorOptionsQuery
+  ) {
+    const data = await this.agenciesService.isCodeExist(code, query);
+    return data;
   }
 
   @checkAbilities({ action: 'read', subject: 'Agency' })

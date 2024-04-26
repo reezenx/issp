@@ -88,6 +88,18 @@ export class AgenciesService {
     );
   }
 
+  isCodeUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
+    code: string,
+    props: IsKeyUniqueValidatorOptions
+  ): Observable<boolean> => {
+    const uri = `${this.route}/exists/${code}?ignoreId=${props.ignoreId}`;
+    return this.http.get<boolean>(uri).pipe(
+      map((data) => {
+        return !data;
+      })
+    );
+  };
+
   isEmailUnique: ValidateUniqueKeyFn<IsKeyUniqueValidatorOptions> = (
     email: string,
     props: IsKeyUniqueValidatorOptions

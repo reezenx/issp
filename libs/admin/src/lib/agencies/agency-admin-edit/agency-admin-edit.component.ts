@@ -70,7 +70,15 @@ export class AgencyAdminEditComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       name: new FormControl<string>('', [Validators.required]),
-      code: new FormControl<string>('', [Validators.required]),
+      code: new FormControl<string>('', {
+        validators: [Validators.required],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.agenciesService.isCodeUnique,
+            {}
+          ),
+        ],
+      }),
       phone: new FormControl<string>('', [Validators.required]),
       email: new FormControl<string>('', {
         validators: [Validators.required, Validators.email],

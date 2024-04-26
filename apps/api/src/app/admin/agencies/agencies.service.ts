@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAgencyDto } from './dto/create-agency.dto';
 import { UpdateAgencyDto } from './dto/update-agency.dto';
 import { PrismaService } from 'nestjs-prisma';
+import { UniqueValidatorOptionsQuery } from '../../shared/models/unique-validator-options.query';
 
 @Injectable()
 export class AgenciesService {
@@ -38,6 +39,19 @@ export class AgenciesService {
 
   findOne(id: string) {
     return this.prisma.agency.findUnique({ where: { id } });
+  }
+
+  async isCodeExist(code: string, query: UniqueValidatorOptionsQuery) {
+    const r = await this.prisma.agency.findFirst({
+      where: {
+        code,
+        id: {
+          not: query.ignoreId,
+        },
+      },
+      select: { code: true },
+    });
+    return Boolean(r);
   }
 
   async isEmailExist(email: string) {
