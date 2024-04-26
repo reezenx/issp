@@ -52,8 +52,9 @@ export class AppHorizontalHeaderComponent {
 
   showFiller = false;
 
-  constructor(public dialog: MatDialog, private translate: TranslateService) {
-    translate.setDefaultLang('en');
+  constructor(public dialog: MatDialog) // private translate: TranslateService
+  {
+    // translate.setDefaultLang('en');
   }
 
   openDialog() {

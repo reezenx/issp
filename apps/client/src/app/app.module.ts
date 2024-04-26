@@ -26,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullComponent } from '@issp/components';
 import { BlankComponent } from '@issp/components';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -65,13 +65,13 @@ const initialize = (authService: AuthService) => async () => {
     ReactiveFormsModule,
     MaterialModule,
     TablerIconsModule.pick(TablerIcons),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: HttpLoaderFactory,
+    //     deps: [HttpClient],
+    //   },
+    // }),
     NgScrollbarModule,
     FullComponent,
     AbilityModule,

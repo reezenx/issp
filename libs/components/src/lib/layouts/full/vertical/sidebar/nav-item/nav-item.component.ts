@@ -14,7 +14,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { TranslateModule } from '@ngx-translate/core';
+// import { TranslateModule } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { CommonModule } from '@angular/common';
 import { NavService } from '@issp/common/ui/services';
@@ -24,7 +24,12 @@ import { NavItem } from '@issp/common';
 @Component({
   selector: 'issp-nav-item',
   standalone: true,
-  imports: [TranslateModule, TablerIconsModule, MaterialModule, CommonModule],
+  imports: [
+    // TranslateModule,
+    TablerIconsModule,
+    MaterialModule,
+    CommonModule,
+  ],
   templateUrl: './nav-item.component.html',
   styleUrls: [],
   animations: [

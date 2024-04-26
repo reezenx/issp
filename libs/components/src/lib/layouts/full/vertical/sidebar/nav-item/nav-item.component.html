@@ -16,7 +16,8 @@
   class="menu-list-item"
 >
   <i-tabler class="routeIcon" name="{{ item.icon }}" matListItemIcon></i-tabler>
-  <span class="hide-menu">{{ item.name | translate }}</span>
+  <!-- <span class="hide-menu">{{ item.name | translate }}</span> -->
+  <span class="hide-menu">{{ item.name }}</span>
   @if(item.children && item.children.length) {
   <span class="arrow-icon" fxFlex>
     <span fxFlex></span>
@@ -48,7 +49,8 @@
     name="{{ item.iconName }}"
     matListItemIcon
   ></i-tabler>
-  <span class="hide-menu">{{ item.displayName | translate }}</span>
+  <!-- <span class="hide-menu">{{ item.displayName | translate }}</span> -->
+  <span class="hide-menu">{{ item.displayName }}</span>
 </mat-list-item>
 }
 

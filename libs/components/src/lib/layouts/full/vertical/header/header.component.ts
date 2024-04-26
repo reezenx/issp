@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { navItems } from '../sidebar/sidebar-data';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { CoreService } from '@issp/common/ui/services';
+// import { CoreService } from '@issp/common/ui/services';
 import { MaterialModule } from '@issp/common/ui/libraries';
 
 import { take } from 'rxjs';
@@ -76,12 +76,12 @@ export class HeaderComponent {
   showFiller = false;
 
   constructor(
-    private translate: TranslateService,
+    // private translate: TranslateService,
     private readonly dialog: MatDialog,
     private readonly authService: AuthService,
     private readonly snackBar: MatSnackBar
   ) {
-    translate.setDefaultLang('en');
+    // translate.setDefaultLang('en');
   }
 
   openDialog() {
