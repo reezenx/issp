@@ -1,5 +1,5 @@
 import { Ability } from '@casl/ability';
-import { AbilityRule, Environment } from '@issp/common';
+import { AbilityRule, Environment, getAPIURL } from '@issp/common';
 import { API, AuthSession, LocalStorageKey, URLS } from '@issp/common';
 import { AuthTokenInterceptor } from './interceptor/auth-token.interceptor';
 import {
@@ -128,25 +128,19 @@ export class AuthService {
   login(user: Partial<User>) {
     console.log(this.env);
     return this.http
-      .post<AuthSession>(
-        `${this.env.url.api}${API.BASE}${API.AUTH.LOGIN}`,
-        user
-      )
+      .post<AuthSession>(getAPIURL(this.env, API.AUTH.LOGIN), user)
       .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   register(user: Partial<User>) {
     return this.http
-      .post<AuthSession>(
-        `${this.env.url.api}${API.BASE}${API.AUTH.REGISTER}`,
-        user
-      )
+      .post<AuthSession>(getAPIURL(this.env, API.AUTH.REGISTER), user)
       .pipe(mergeMap((authSession) => this.setSessionTokens(authSession)));
   }
 
   getProfile() {
     return this.http
-      .get<User>(`${this.env.url.api}${API.BASE}${API.AUTH.ME}`, {
+      .get<User>(getAPIURL(this.env, API.AUTH.ME), {
         headers: {
           [ErrorDialogInterceptor.skipHeader]: 'true',
         },
@@ -157,7 +151,7 @@ export class AuthService {
   loginWithRefreshToken() {
     return this.http
       .post<AuthSession>(
-        `${this.env.url.api}${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
+        getAPIURL(this.env, API.AUTH.REFRESH_TOKEN),
         {
           refreshToken: this.getRefreshToken(),
         },
@@ -172,9 +166,7 @@ export class AuthService {
 
   logoutFromAllDevices() {
     return this.http
-      .delete<AuthSession>(
-        `${this.env.url.api}${API.BASE}${API.AUTH.LOGOUT_ALL}`
-      )
+      .delete<AuthSession>(getAPIURL(this.env, API.AUTH.LOGOUT_ALL))
       .pipe(
         mergeMap((authSession) => this.setSessionTokens(authSession))
         // tap(() => this.subscriptionService.requestSubscription())
@@ -336,7 +328,7 @@ export class AuthService {
   private exchangeToken() {
     this.http
       .post<AuthSession>(
-        `${this.env.url.api}${API.BASE}${API.AUTH.REFRESH_TOKEN}`,
+        getAPIURL(this.env, API.AUTH.REFRESH_TOKEN),
         {
           refreshToken: this.getRefreshToken(),
         },

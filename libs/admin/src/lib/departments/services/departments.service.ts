@@ -7,6 +7,7 @@ import {
   IsKeyUniqueValidatorOptions,
   ItemDropdown,
   ValidateUniqueKeyFn,
+  getAPIURL,
 } from '@issp/common';
 import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -16,7 +17,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   providedIn: 'root',
 })
 export class DepartmentsService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.DEPARTMENTS}`;
+  route = getAPIURL(this.env, API.ADMIN.DEPARTMENTS);
   constructor(private http: HttpClient, private readonly env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<DepartmentDetails>> =

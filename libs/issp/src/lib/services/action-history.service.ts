@@ -2,14 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ActionHistoryInfo, API, Environment, ISSPDetails } from '@issp/common';
+import {
+  ActionHistoryInfo,
+  API,
+  Environment,
+  getAPIURL,
+  ISSPDetails,
+} from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class ActionHistoryService {
-  route = `${this.env.url.api}${API.BASE}${API.USER.ACTION_HISTORY}`;
+  route = getAPIURL(this.env, API.USER.ACTION_HISTORY);
 
   constructor(private http: HttpClient, private env: Environment) {}
 

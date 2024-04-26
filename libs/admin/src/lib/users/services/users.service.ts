@@ -6,6 +6,7 @@ import { UserDetails } from '../models/user-details';
 import {
   API,
   Environment,
+  getAPIURL,
   IsKeyUniqueValidatorOptions,
   ValidateUniqueKeyFn,
 } from '@issp/common';
@@ -15,7 +16,7 @@ import {
   providedIn: 'root',
 })
 export class UsersService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.USERS}`;
+  route = getAPIURL(this.env, API.ADMIN.USERS);
 
   constructor(private http: HttpClient, private env: Environment) {}
 

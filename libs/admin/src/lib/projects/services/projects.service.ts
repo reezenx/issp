@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { ProjectDetails } from '../models/project-details';
-import { API, ItemDropdown, Environment } from '@issp/common';
+import { API, ItemDropdown, Environment, getAPIURL } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectsService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.PROJECTS}`;
+  route = getAPIURL(this.env, API.ADMIN.PROJECTS);
   constructor(private http: HttpClient, private readonly env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<ProjectDetails>> = new BehaviorSubject<

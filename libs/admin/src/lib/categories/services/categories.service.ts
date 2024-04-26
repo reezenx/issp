@@ -9,6 +9,7 @@ import {
   Environment,
   ValidateUniqueKeyFn,
   IsKeyUniqueValidatorOptions,
+  getAPIURL,
 } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
@@ -16,7 +17,7 @@ import {
   providedIn: 'root',
 })
 export class CategoriesService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.CATEGORIES}`;
+  route = getAPIURL(this.env, API.ADMIN.CATEGORIES);
   constructor(private http: HttpClient, private readonly env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<CategoryDetails>> = new BehaviorSubject<

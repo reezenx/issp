@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { UserRoleDetails } from '../models/user-role-details';
-import { API, Environment, ItemDropdown } from '@issp/common';
+import { API, Environment, getAPIURL, ItemDropdown } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class UserRolesService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.USER_ROLES}`;
+  route = getAPIURL(this.env, API.ADMIN.USER_ROLES);
 
   constructor(private http: HttpClient, private env: Environment) {}
 

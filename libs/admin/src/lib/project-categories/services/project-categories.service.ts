@@ -6,6 +6,7 @@ import { ProjectCategoryDetails } from '../models/project-category-details';
 import {
   API,
   Environment,
+  getAPIURL,
   IsKeyUniqueValidatorOptions,
   ItemDropdown,
   ValidateUniqueKeyFn,
@@ -16,7 +17,7 @@ import {
   providedIn: 'root',
 })
 export class ProjectCategoriesService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.PROJECT_CATEGORIES}`;
+  route = getAPIURL(this.env, API.ADMIN.PROJECT_CATEGORIES);
 
   constructor(private http: HttpClient, private env: Environment) {}
 

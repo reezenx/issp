@@ -9,6 +9,7 @@ import {
   IsKeyUniqueValidatorOptions,
   ValidateUniqueKeyFn,
   ItemDropdown,
+  getAPIURL,
 } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
@@ -16,7 +17,7 @@ import {
   providedIn: 'root',
 })
 export class ProjectTypeGroupsService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.PROJECT_TYPES_GROUPS}`;
+  route = getAPIURL(this.env, API.ADMIN.PROJECT_TYPES_GROUPS);
   constructor(private http: HttpClient, private env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<ProjectTypeGroupDetails>> =

@@ -6,6 +6,7 @@ import {
   IsKeyUniqueValidatorOptions,
   ItemDropdown,
   ValidateUniqueKeyFn,
+  getAPIURL,
 } from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ProjectImplementationTypeDetails } from '../models/project-impl-type-details';
@@ -16,7 +17,7 @@ import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class ProjectImplementationTypeService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.IMPL_TYPES}`;
+  route = getAPIURL(this.env, API.ADMIN.IMPL_TYPES);
   constructor(private http: HttpClient, private readonly env: Environment) {}
 
   #emitAllItems: BehaviorSubject<Array<ProjectImplementationTypeDetails>> =

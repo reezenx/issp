@@ -2,14 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { API, Environment, ISSPDetails, IsspDropdown } from '@issp/common';
+import {
+  API,
+  Environment,
+  getAPIURL,
+  ISSPDetails,
+  IsspDropdown,
+} from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
 @Injectable({
   providedIn: 'root',
 })
 export class IsspsService {
-  route = `${this.env.url.api}${API.BASE}${API.USER.ISSPS}`;
+  route = getAPIURL(this.env, API.USER.ISSPS);
 
   constructor(private http: HttpClient, private env: Environment) {}
 

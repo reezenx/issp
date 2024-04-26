@@ -9,6 +9,7 @@ import {
   Environment,
   IsKeyUniqueValidatorOptions,
   ValidateUniqueKeyFn,
+  getAPIURL,
 } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
@@ -16,7 +17,7 @@ import {
   providedIn: 'root',
 })
 export class AgenciesService {
-  route = `${this.env.url.api}${API.BASE}${API.ADMIN.AGENCIES}`;
+  route = getAPIURL(this.env, API.ADMIN.AGENCIES);
 
   constructor(private http: HttpClient, private env: Environment) {}
 
@@ -91,7 +92,7 @@ export class AgenciesService {
     email: string,
     props: IsKeyUniqueValidatorOptions
   ): Observable<boolean> => {
-    const uri = `${this.route}/exists/${email}`;
+    const uri = `${this.route}/exists/${email}?ignoreId=${props.ignoreId}`;
     return this.http.get<boolean>(uri).pipe(
       map((data) => {
         return !data;
