@@ -7,7 +7,8 @@ import {
 } from '@prisma/client';
 import { DateTime } from 'luxon';
 import { ISSPS } from './issps.create';
-import { ACTION_HISTORY, AGENCY, ROLE, USER } from '../data/data';
+import { AGENCY, ROLE, USER } from '../data/data';
+import { ACTION_HISTORY } from '../data/issps';
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
 import { DEFAULT, roundsOfHashing } from './users.create';

@@ -85,6 +85,20 @@ export class IsspService {
             readOnly: true,
           },
         },
+        p1OrgProfileS2: {
+          select: {
+            id: true,
+            b1PlantillaPosition: true,
+            b1OrgUnit: true,
+            b1Email: true,
+            b1Contacts: true,
+            b2OtherSources: true,
+            b3TotalNoEmp: true,
+            b3NoRegionalOffices: true,
+            b3NoProvOffices: true,
+            b3NoOthersOffices: true,
+          },
+        },
       },
     });
   }

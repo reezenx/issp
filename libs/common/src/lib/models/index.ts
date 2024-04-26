@@ -10,3 +10,4 @@ export * from './unique-validator-options';
 export * from './issp/issp-details';
 export * from './issp/issp-dropdown';
 export * from './issp/issp-p1-org-profile-s1-details';
+export * from './issp/issp-p1-org-profile-s2-details';

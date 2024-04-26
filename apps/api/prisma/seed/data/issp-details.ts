@@ -1,7 +1,7 @@
-import { ISSP_ } from './data';
+import { ISSP_ } from './issps';
 
 export const ISSPP1OrgProfileS1 = {
-  OPS1: {
+  P1OrgProfileS1_1: {
     id: 'gawheonfa67ipcw2we1u75tb',
     a1MandateLegal:
       'The Department of Information and Communications Technology (DICT) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016.',
@@ -15,7 +15,7 @@ export const ISSPP1OrgProfileS1 = {
       '<p>MFO 1: Government-wide ICT Policy Services</p><p>MFO 2: Technical Advisory Services</p><p>MFO 3: ICT Training Services</p>',
     issp: ISSP_['DICT'],
   },
-  OPS2: {
+  P1OrgProfileS1_2: {
     id: 'viwkt9qapk2v567unii1mkyu',
     a1MandateLegal:
       'The Department of Education (DE) was created through Republic Act No. 10844 “An Act Creating the Department of Information and Communications Technology, Defining its Powers and Functions, Appropriating Funds Therefore and for Other Purposes” which was issued on 23 May 2016.',
@@ -28,6 +28,35 @@ export const ISSPP1OrgProfileS1 = {
     a4FinalOutputs:
       '<p>MFO 1: Government-wide ICT Policy Services</p><p>MFO 2: Technical Advisory Services</p><p>MFO 3: ICT Training Services</p>',
 
+    issp: ISSP_['DE'],
+  },
+};
+
+export const ISSPP1OrgProfileS2 = {
+  P1OrgProfileS2_1: {
+    id: 'gawheonfa67ipcw2we1u75tb',
+    b1PlantillaPosition: 'DICT Officer 1',
+    b1OrgUnit: 'DICT Org Unit 1',
+    b1Email: 'dict.officer1@dict.gov.ph',
+    b1Contacts: ['09988507274'],
+    b2OtherSources: 'DICT Other Sources 1',
+    b3TotalNoEmp: 20,
+    b3NoRegionalOffices: 2,
+    b3NoProvOffices: 4,
+    b3NoOthersOffices: 5,
+    issp: ISSP_['DICT'],
+  },
+  P1OrgProfileS2_2: {
+    id: 'viwkt9qapk2v567unii1mkyu',
+    b1PlantillaPosition: 'DICT Officer 2',
+    b1OrgUnit: 'DICT Org Unit 2',
+    b1Email: 'dict.officer2@dict.gov.ph',
+    b1Contacts: ['09988507370'],
+    b2OtherSources: 'DICT Other Sources 2',
+    b3TotalNoEmp: 30,
+    b3NoRegionalOffices: 2,
+    b3NoProvOffices: 4,
+    b3NoOthersOffices: 5,
     issp: ISSP_['DE'],
   },
 };

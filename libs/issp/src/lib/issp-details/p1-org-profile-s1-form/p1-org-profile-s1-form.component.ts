@@ -6,8 +6,7 @@ import {
   FormBuilder,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ISSPDetails, ISSPP1OrgProfileS1Info } from '@issp/common';
-import { User } from '@prisma/client';
+import { ISSPP1OrgProfileS1Info } from '@issp/common';
 import { Subscription, take } from 'rxjs';
 import { IsspP1OrgProfileS1Service } from '../../services/issp.p1-org-profile-s1.service';
 
@@ -18,8 +17,6 @@ import { IsspP1OrgProfileS1Service } from '../../services/issp.p1-org-profile-s1
 })
 export class P1OrgProfileS1FormComponent {
   form: FormGroup;
-  issp: ISSPDetails;
-  currentUser: User;
   subs: Subscription[] = [];
 
   _item: ISSPP1OrgProfileS1Info;
@@ -64,7 +61,7 @@ export class P1OrgProfileS1FormComponent {
       obs.pipe(take(1)).subscribe(() => {
         this.form.markAsPristine();
         this.snackBar.open(
-          'P1 - Department/Agency Vision / Mission Statement (S1) successfully saved!',
+          'Department/Agency Vision / Mission Statement (P1S1) successfully saved!',
           'Ok',
           {
             horizontalPosition: 'center',

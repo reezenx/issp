@@ -1,4 +1,5 @@
-import { AGENCY, ISSP_ } from './data';
+import { AGENCY } from './data';
+import { ISSP_ } from './issps';
 import {
   PROJECT_TYPE,
   PROJECT_CATEGORY,

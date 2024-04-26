@@ -1,3 +1,5 @@
+import { Environment } from '../environment';
+
 export const API = {
   BASE: 'api/v1',
   ADMIN: {
@@ -20,6 +22,10 @@ export const API = {
     ACTION_HISTORY: '/user/action-history',
     ISSPS: '/user/issps',
     ISSP_P1ORGPROFILES1: '/user/issps/p1-org-profile-s1',
+    ISSP_P1ORGPROFILES2: '/user/issps/p1-org-profile-s2',
+    ISSP_P1ORGPROFILES3: '/user/issps/p1-org-profile-s3',
+    ISSP_P1ORGPROFILES4: '/user/issps/p1-org-profile-s4',
+    ISSP_P1ORGPROFILES5: '/user/issps/p1-org-profile-s5',
   },
   AUTH: {
     LOGIN: '/auth/login',
@@ -30,3 +36,7 @@ export const API = {
     ACTION_HISTORY: '/user/action-history',
   },
 };
+
+export function getAPIURL(env: Environment, url: string) {
+  return `${env.url.api}${API.BASE}${url}`;
+}

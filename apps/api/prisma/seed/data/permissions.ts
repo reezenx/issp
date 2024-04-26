@@ -329,4 +329,29 @@ export const PERMISSION = {
     action: 'delete',
     subject: 'ISSPP1OrgProfileS1',
   },
+  MANAGE_ISSP_P1ORGPROFILES2: {
+    id: 'nmqoad8pd83u3lbwdaqhjfns',
+    action: 'manage',
+    subject: 'ISSPP1OrgProfileS2',
+  },
+  CREATE_ISSP_P1ORGPROFILES2: {
+    id: 'dr8qmk8skvn3pssz1f3nttrw',
+    action: 'create',
+    subject: 'ISSPP1OrgProfileS2',
+  },
+  READ_ISSP_P1ORGPROFILES2: {
+    id: 'tyj87zxecxox3j590kaz1yzm',
+    action: 'read',
+    subject: 'ISSPP1OrgProfileS2',
+  },
+  UPDATE_ISSP_P1ORGPROFILES2: {
+    id: 's4pdn7clkspsm09l807wt2gr',
+    action: 'update',
+    subject: 'ISSPP1OrgProfileS2',
+  },
+  DELETE_ISSP_P1ORGPROFILES2: {
+    id: 'n1ej1o2cjro3iywpiefi3l4g',
+    action: 'delete',
+    subject: 'ISSPP1OrgProfileS2',
+  },
 };

@@ -10,7 +10,8 @@ import {
   Department,
 } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { AGENCY, CATEGORY, DEPARTMENT, ISSP_, ROLE, USER } from '../data/data';
+import { AGENCY, CATEGORY, DEPARTMENT, ROLE, USER } from '../data/data';
+import { ISSP_ } from '../data/issps';
 import * as bcrypt from 'bcrypt';
 import { DEFAULT, roundsOfHashing } from './users.create';
 import { findDuplicates } from './helper.create';

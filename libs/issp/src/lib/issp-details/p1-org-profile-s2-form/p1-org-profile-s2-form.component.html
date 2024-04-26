@@ -1,0 +1,335 @@
+<div [formGroup]="form" (ngSubmit)="save()">
+  <div class="f-s-12 m-b-16 font-italic">
+    Provide all data being asked in Part I B.1 to B.3. For those preparing a
+    department-wide ISSP, proceed to Part I Table B-1 page 3.
+  </div>
+  <h5 class="m-b-0">B.1. Name of Designated IS Planner</h5>
+  <div class="f-s-12 m-b-16 font-italic">
+    Please refer to page ii-c no. 17 for the definition of IS Planner.
+  </div>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Plantilla Position</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="user-hexagon" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b1PlantillaPosition
+      matInput
+      formControlName="b1PlantillaPosition"
+      placeholder="Enter Position"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b1PlantillaPosition'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b1PlantillaPosition.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b1PlantillaPosition'].touched && f['b1PlantillaPosition'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b1PlantillaPosition'].errors &&
+      f['b1PlantillaPosition'].errors['required']) {
+      <div class="text-error">Plantilla Position is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Organizational Unit</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="affiliate" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b1OrgUnit
+      matInput
+      formControlName="b1OrgUnit"
+      placeholder="Enter Organization Unit"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b1OrgUnit'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b1OrgUnit.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b1OrgUnit'].touched && f['b1OrgUnit'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b1OrgUnit'].errors && f['b1OrgUnit'].errors['required']) {
+      <div class="text-error">Organizational Unit is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">E-mail Address</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="mail" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b1Email
+      matInput
+      formControlName="b1Email"
+      placeholder="Enter Position"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b1Email'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b1Email.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b1Email'].touched && f['b1Email'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b1Email'].errors && f['b1Email'].errors['required']) {
+      <div class="text-error">Email is required.</div>
+      }@if(f['b1Email'].errors && f['b1Email'].errors['b1Email']) {
+      <div class="text-error">
+        Email should be in format (name&#64;agency.com)
+      </div>
+      } @if(f['b1Email'].errors && f['b1Email'].errors['notUnique']) {
+      <div class="text-error">b1Email already exists.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Contact Number/s</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="phone" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b1Contacts
+      matInput
+      formControlName="b1Contacts"
+      placeholder="Enter Contacts"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b1Contacts'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b1Contacts.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b1Contacts'].touched && f['b1Contacts'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b1Contacts'].errors && f['b1Contacts'].errors['required']) {
+      <div class="text-error">Contact is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+
+  <h5 class="m-b-0">B.2. Current Annual ICT Budget</h5>
+  <div class="f-s-12 m-b-16 font-italic">
+    Indicate the Total Annual ICT Budget for the current fiscal year. Other
+    possible sources of funds should be indicated separately
+  </div>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Other Sources of Funds</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="brand-bitbucket" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b2OtherSources
+      matInput
+      formControlName="b2OtherSources"
+      placeholder="Enter Contacts"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b2OtherSources'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b2OtherSources.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b2OtherSources'].touched && f['b2OtherSources'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b2OtherSources'].errors && f['b2OtherSources'].errors['required'])
+      {
+      <div class="text-error">Other Sources of Funds is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+
+  <h5 class="m-b-0">B.3. Organizational Structure</h5>
+  <div class="f-s-12 m-b-16 font-italic">
+    Indicate the total number of employees including those on part-time or
+    full-time basis, regular, contractual and casual employees and those
+    assigned to regional/extension, provincial and other offices. Indicate the
+    number of regional offices, provincial offices and other offices, if any.
+  </div>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600">Total No. of Employees</mat-label>
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="user-hexagon" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b3TotalNoEmp
+      matInput
+      type="number"
+      formControlName="b3TotalNoEmp"
+      placeholder="Enter Position"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b3TotalNoEmp'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b3TotalNoEmp.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b3TotalNoEmp'].touched && f['b3TotalNoEmp'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b3TotalNoEmp'].errors && f['b3TotalNoEmp'].errors['required']) {
+      <div class="text-error">Total No. of Employees is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600"
+      >No. of Regional/Extension Offices</mat-label
+    >
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="building" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b3NoRegionalOffices
+      matInput
+      type="number"
+      formControlName="b3NoRegionalOffices"
+      placeholder="Enter Organization Unit"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b3NoRegionalOffices'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b3NoRegionalOffices.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b3NoRegionalOffices'].touched && f['b3NoRegionalOffices'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b3NoRegionalOffices'].errors &&
+      f['b3NoRegionalOffices'].errors['required']) {
+      <div class="text-error">
+        No. of Regional/Extension Offices is required.
+      </div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600"
+      >No. of Provincial Offices</mat-label
+    >
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="building-arch" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b3NoProvOffices
+      matInput
+      type="number"
+      formControlName="b3NoProvOffices"
+      placeholder="Enter Position"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b3NoProvOffices'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b3NoProvOffices.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b3NoProvOffices'].touched && f['b3NoProvOffices'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b3NoProvOffices'].errors &&
+      f['b3NoProvOffices'].errors['required']) {
+      <div class="text-error">Email is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
+    <mat-label class="mat-subtitle-2 f-w-600"
+      >No. of Other Offices (e.g. District, Field, etc.)</mat-label
+    >
+    <mat-icon matPrefix class="op-5">
+      <i-tabler name="building-estate" class="icon-18 d-flex"></i-tabler>
+    </mat-icon>
+    <input
+      #b3NoOthersOffices
+      matInput
+      type="number"
+      formControlName="b3NoOthersOffices"
+      placeholder="Enter Contacts"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="m-r-4"
+      (click)="f['b3NoOthersOffices'].patchValue('')"
+      [attr.aria-label]="'Clear'"
+      [disabled]="!b3NoOthersOffices.value"
+    >
+      <mat-icon class="op-5">
+        <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
+      </mat-icon>
+    </button>
+    @if(f['b3NoOthersOffices'].touched && f['b3NoOthersOffices'].invalid) {
+    <mat-hint [align]="'end'" class="m-b-16 error-msg">
+      @if(f['b3NoOthersOffices'].errors &&
+      f['b3NoOthersOffices'].errors['required']) {
+      <div class="text-error">No. of Other Offices is required.</div>
+      }
+    </mat-hint>
+    }
+  </mat-form-field>
+</div>

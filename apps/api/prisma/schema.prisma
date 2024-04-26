@@ -318,19 +318,18 @@ model ISSPP1OrgProfileS1 {
   @@map("issp-p1-org-profiles-s1")
 }
 
-/// A. DEPARTMENT/AGENCY PROFILE
+/// B. DEPARTMENT/AGENCY PROFILE
 model ISSPP1OrgProfileS2 {
   id                  String    @id @default(cuid())
-  name                String
   b1PlantillaPosition String
   b1OrgUnit           String
   b1Email             String
   b1Contacts          String[]
   b2OtherSources      String
-  b3TotalNoEmp        String
-  b3NoRegionalOffices String
-  b3NoProvOffices     String
-  b3NoOthersOffices   String
+  b3TotalNoEmp        Int
+  b3NoRegionalOffices Int
+  b3NoProvOffices     Int
+  b3NoOthersOffices   Int
   order               Int       @default(2)
   part                Int       @default(1)
   issp                ISSP?

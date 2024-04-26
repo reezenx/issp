@@ -1,9 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ISSPDetails, ISSPP1OrgProfileS1Info } from '@issp/common';
+import {
+  ISSPDetails,
+  ISSPP1OrgProfileS1Info,
+  ISSPP1OrgProfileS2Info,
+} from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
+
 import { P1OrgProfileS1FormComponent } from '../issp-details/p1-org-profile-s1-form/p1-org-profile-s1-form.component';
+import { P1OrgProfileS2FormComponent } from '../issp-details/p1-org-profile-s2-form/p1-org-profile-s2-form.component';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -26,7 +32,9 @@ export class IsspItemEditDetailsComponent implements OnInit {
     const routeSub = this.route.parent.data.subscribe(({ item }) => {
       this.item = item;
       this.iSSPP1OrgProfileS1Info = this.item.p1OrgProfileS1 ?? {};
+      this.iSSPP1OrgProfileS2Info = this.item.p1OrgProfileS2 ?? {};
       this.iSSPP1OrgProfileS1Info.isspId = this.item.id;
+      this.iSSPP1OrgProfileS2Info.isspId = this.item.id;
     });
     this.subs.push(routeSub);
   }
@@ -44,7 +52,7 @@ export class IsspItemEditDetailsComponent implements OnInit {
   }
 
   // PART I. ORGANIZATIONAL PROFILE (P1)
-  /// A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT (S1)
+  /// A. DEPARTMENT/AGENCY VISION / MISSION STATEMENT (P1S1)
   iSSPP1OrgProfileS1Info: ISSPP1OrgProfileS1Info = {};
   @ViewChild(P1OrgProfileS1FormComponent)
   iSSPP1OrgProfileS1Comp: P1OrgProfileS1FormComponent;
@@ -60,5 +68,23 @@ export class IsspItemEditDetailsComponent implements OnInit {
 
   saveISSPP1OrgProfileS1Form() {
     this.iSSPP1OrgProfileS1Comp.save();
+  }
+
+  /// B. DEPARTMENT/AGENCY PROFILE (P1S1)
+  iSSPP1OrgProfileS2Info: ISSPP1OrgProfileS2Info = {};
+  @ViewChild(P1OrgProfileS2FormComponent)
+  iSSPP1OrgProfileS2Comp: P1OrgProfileS2FormComponent;
+
+  get iSSPP1OrgProfileS2CompForm() {
+    return this.iSSPP1OrgProfileS2Comp?.form;
+  }
+
+  resetISSPP1OrgProfileS2Form() {
+    this.iSSPP1OrgProfileS2CompForm.patchValue(this.iSSPP1OrgProfileS2Info);
+    this.iSSPP1OrgProfileS2CompForm.markAsPristine();
+  }
+
+  saveISSPP1OrgProfileS2Form() {
+    this.iSSPP1OrgProfileS2Comp.save();
   }
 }

@@ -33,46 +33,6 @@ export const PERMISSIONS: Record<
     ...PERMISSION.DELETE_USER,
     role: ROLE.SUPER_ADMIN,
   },
-  MANAGE_ISSP: {
-    ...PERMISSION.MANAGE_ISSP,
-    role: ROLE.SUPER_ADMIN,
-  },
-  CREATE_ISSP: {
-    ...PERMISSION.CREATE_ISSP,
-    role: ROLE.PLANNER,
-  },
-  READ_ISSP: {
-    ...PERMISSION.READ_ISSP,
-    role: ROLE.PLANNER,
-  },
-  UPDATE_ISSP: {
-    ...PERMISSION.UPDATE_ISSP,
-    role: ROLE.PLANNER,
-  },
-  DELETE_ISSP: {
-    ...PERMISSION.DELETE_ISSP,
-    role: ROLE.SUPER_ADMIN,
-  },
-  MANAGE_ISSP_P1ORGPROFILES1: {
-    ...PERMISSION.MANAGE_ISSP_P1ORGPROFILES1,
-    role: ROLE.SUPER_ADMIN,
-  },
-  CREATE_ISSP_P1ORGPROFILES1: {
-    ...PERMISSION.CREATE_ISSP_P1ORGPROFILES1,
-    role: ROLE.PLANNER,
-  },
-  READ_ISSP_P1ORGPROFILES1: {
-    ...PERMISSION.READ_ISSP_P1ORGPROFILES1,
-    role: ROLE.PLANNER,
-  },
-  UPDATE_ISSP_P1ORGPROFILES1: {
-    ...PERMISSION.UPDATE_ISSP_P1ORGPROFILES1,
-    role: ROLE.PLANNER,
-  },
-  DELETE_ISSP_P1ORGPROFILES1: {
-    ...PERMISSION.DELETE_ISSP_P1ORGPROFILES1,
-    role: ROLE.SUPER_ADMIN,
-  },
   MANAGE_PROJECT: {
     ...PERMISSION.MANAGE_PROJECT,
     role: ROLE.SUPER_ADMIN,
@@ -273,6 +233,67 @@ export const PERMISSIONS: Record<
     ...PERMISSION.DELETE_BUDGET_SOURCE,
     role: ROLE.SUPER_ADMIN,
   },
+
+  MANAGE_ISSP: {
+    ...PERMISSION.MANAGE_ISSP,
+    role: ROLE.SUPER_ADMIN,
+  },
+  CREATE_ISSP: {
+    ...PERMISSION.CREATE_ISSP,
+    role: ROLE.PLANNER,
+  },
+  READ_ISSP: {
+    ...PERMISSION.READ_ISSP,
+    role: ROLE.PLANNER,
+  },
+  UPDATE_ISSP: {
+    ...PERMISSION.UPDATE_ISSP,
+    role: ROLE.PLANNER,
+  },
+  DELETE_ISSP: {
+    ...PERMISSION.DELETE_ISSP,
+    role: ROLE.SUPER_ADMIN,
+  },
+  MANAGE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.MANAGE_ISSP_P1ORGPROFILES1,
+    role: ROLE.SUPER_ADMIN,
+  },
+  CREATE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.CREATE_ISSP_P1ORGPROFILES1,
+    role: ROLE.PLANNER,
+  },
+  READ_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.READ_ISSP_P1ORGPROFILES1,
+    role: ROLE.PLANNER,
+  },
+  UPDATE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.UPDATE_ISSP_P1ORGPROFILES1,
+    role: ROLE.PLANNER,
+  },
+  DELETE_ISSP_P1ORGPROFILES1: {
+    ...PERMISSION.DELETE_ISSP_P1ORGPROFILES1,
+    role: ROLE.SUPER_ADMIN,
+  },
+  MANAGE_ISSP_P1ORGPROFILES2: {
+    ...PERMISSION.MANAGE_ISSP_P1ORGPROFILES2,
+    role: ROLE.SUPER_ADMIN,
+  },
+  CREATE_ISSP_P1ORGPROFILES2: {
+    ...PERMISSION.CREATE_ISSP_P1ORGPROFILES2,
+    role: ROLE.PLANNER,
+  },
+  READ_ISSP_P1ORGPROFILES2: {
+    ...PERMISSION.READ_ISSP_P1ORGPROFILES2,
+    role: ROLE.PLANNER,
+  },
+  UPDATE_ISSP_P1ORGPROFILES2: {
+    ...PERMISSION.UPDATE_ISSP_P1ORGPROFILES2,
+    role: ROLE.PLANNER,
+  },
+  DELETE_ISSP_P1ORGPROFILES2: {
+    ...PERMISSION.DELETE_ISSP_P1ORGPROFILES2,
+    role: ROLE.SUPER_ADMIN,
+  },
 };
 
 export async function createPermissions(prisma: PrismaClient) {
@@ -280,6 +301,8 @@ export async function createPermissions(prisma: PrismaClient) {
 
   await prisma.permission.deleteMany();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const updates: any[] = [];
   Object.entries(PERMISSIONS).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async ([key, { id, role, action, subject }]) => {
@@ -290,7 +313,7 @@ export async function createPermissions(prisma: PrismaClient) {
         createdAt: new Date(),
         createdBy: 'System',
       };
-      await prisma.permission.upsert({
+      const update = prisma.permission.upsert({
         where: { id },
         update: {
           action,
@@ -311,6 +334,8 @@ export async function createPermissions(prisma: PrismaClient) {
           },
         },
       });
+      updates.push(update);
     }
   );
+  await prisma.$transaction(updates);
 }
