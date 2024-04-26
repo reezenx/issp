@@ -40,6 +40,14 @@ export class AgenciesService {
     return this.prisma.agency.findUnique({ where: { id } });
   }
 
+  async isEmailExist(email: string) {
+    const r = await this.prisma.agency.findFirst({
+      where: { email },
+      select: { email: true },
+    });
+    return Boolean(r);
+  }
+
   update(id: string, updateAgencyDto: UpdateAgencyDto) {
     return this.prisma.agency.update({
       where: { id },

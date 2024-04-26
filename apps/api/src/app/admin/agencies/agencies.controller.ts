@@ -58,6 +58,15 @@ export class AgenciesController {
     return new AgencyEntity(await this.agenciesService.findOne(id));
   }
 
+  @checkAbilities({ action: 'read', subject: 'Agency' })
+  @UseGuards(AbilitiesGuard)
+  @ApiBearerAuth()
+  @Get('exists/:email')
+  async isEmailExist(@Param('email') email: string) {
+    const data = await this.agenciesService.isEmailExist(email);
+    return data;
+  }
+
   @checkAbilities({ action: 'update', subject: 'Agency' })
   @UseGuards(AbilitiesGuard)
   @ApiBearerAuth()

@@ -16,7 +16,11 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { ItemDropdown } from '@issp/common';
+import {
+  ItemDropdown,
+  UniqueKeyValidator,
+  IsKeyUniqueValidatorOptions,
+} from '@issp/common';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -68,10 +72,15 @@ export class AgencyAdminEditComponent implements OnInit {
       name: new FormControl<string>('', [Validators.required]),
       code: new FormControl<string>('', [Validators.required]),
       phone: new FormControl<string>('', [Validators.required]),
-      email: new FormControl<string>('', [
-        Validators.required,
-        Validators.email,
-      ]),
+      email: new FormControl<string>('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [
+          UniqueKeyValidator<IsKeyUniqueValidatorOptions>(
+            this.agenciesService.isEmailUnique,
+            {}
+          ),
+        ],
+      }),
       categoryId: new FormControl<string>('', [Validators.required]),
       updatedBy: new FormControl<string>('System'),
     });
