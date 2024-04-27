@@ -1,7 +1,9 @@
 <div [formGroup]="form" (ngSubmit)="save()">
+  <span class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+    Fill-in Instructions:
+  </span>
   <div class="f-s-12 m-b-16 font-italic">
-    Provide all data being asked in Part I B.1 to B.3. For those preparing a
-    department-wide ISSP, proceed to Part I Table B-1 page 3.
+    Provide all data being asked in Part I B.1 to B.3.
   </div>
   <h5 class="m-b-0">B.1. Name of Designated IS Planner</h5>
   <div class="f-s-12 m-b-16 font-italic">
@@ -332,4 +334,25 @@
     </mat-hint>
     }
   </mat-form-field>
+</div>
+
+<div [formGroup]="form" (ngSubmit)="save()">
+  <h5 class="m-b-0">Table B-1 (For Department-Wide Organizations Only)</h5>
+  <span class="bg-light-accent text-accent rounded f-w-600 p-6 p-y-4 f-s-12">
+    Fill-in Instructions:
+  </span>
+  <div class="f-s-12 m-b-16 font-italic">
+    For each organizational unit: <br />
+    1 - List all bureaus, attached agencies, and
+    regional/extension/field/provincial offices (if any) under the control and
+    supervision of the department. <br />
+    2 - Indicate the complete name of the agency head. <br />
+    3 - Indicate the complete name of the IS Planner of each unit, their
+    respective plantilla position, e-mail address/es and contact number/s.
+    <br />
+    4 - Indicate the total number of employees to include part-time or full-time
+    basis, regular, contractual and casual employees. <br />
+    5 - State the Total Annual ICT Budget (as reported per GAA) for the current
+    fiscal year. <br />
+  </div>
 </div>

@@ -62,7 +62,7 @@
               </button>
               <button
                 mat-flat-button
-                color="accent"
+                color="warn"
                 type="button"
                 class="m-l-8"
                 (click)="resetISSPP1OrgProfileS1Form()"
@@ -72,11 +72,17 @@
               </button>
               <button
                 mat-flat-button
-                color="primary"
+                color="accent"
                 [disabled]="!iSSPP1OrgProfileS1CompForm?.valid"
                 (click)="nextStep()"
               >
-                Next
+                <div class="d-flex align-items-center">
+                  <i-tabler
+                    class="icon-20 m-r-4"
+                    name="chevron-right"
+                  ></i-tabler
+                  ><span> Next</span>
+                </div>
               </button>
             </mat-action-row>
           </mat-expansion-panel>
@@ -124,11 +130,20 @@
               >
                 Reset
               </button>
-              <button mat-flat-button color="warn" (click)="prevStep()">
-                Previous
+              <button mat-flat-button color="accent" (click)="prevStep()">
+                <div class="d-flex align-items-center">
+                  <i-tabler class="icon-20 m-r-4" name="chevron-left"></i-tabler
+                  ><span> Previous</span>
+                </div>
               </button>
-              <button mat-flat-button color="primary" (click)="nextStep()">
-                Next
+              <button mat-flat-button color="accent" (click)="nextStep()">
+                <div class="d-flex align-items-center">
+                  <span> Next</span>
+                  <i-tabler
+                    class="icon-20 m-r-4"
+                    name="chevron-right"
+                  ></i-tabler>
+                </div>
               </button>
             </mat-action-row>
           </mat-expansion-panel>
@@ -548,7 +563,9 @@
 
         <div class="m-t-30">
           <button mat-flat-button color="warn" matStepperPrevious>Back</button>
-          <button mat-flat-button color="primary" matStepperNext>Next</button>
+          <button mat-flat-button color="primary" matStepperNext class="m-l-10">
+            Next
+          </button>
         </div>
       </mat-step>
 

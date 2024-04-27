@@ -18,14 +18,16 @@ import {
   UntypedFormGroup,
   NgControl,
   Validators,
-  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import {
   MAT_FORM_FIELD,
   MatFormField,
   MatFormFieldControl,
 } from '@angular/material/form-field';
-import { FormatModel } from '@syncfusion/ej2-angular-richtexteditor';
+import {
+  FormatModel,
+  RichTextEditorComponent,
+} from '@syncfusion/ej2-angular-richtexteditor';
 import { Subscription } from 'rxjs';
 import { Subject } from 'rxjs';
 
@@ -77,6 +79,9 @@ export class RichTextControlComponent
 
   @ViewChild('cnt')
   cntInput: HTMLInputElement;
+
+  @ViewChild('rte')
+  public rteObj: RichTextEditorComponent;
 
   valueChangesSubscription: Subscription;
   form: UntypedFormGroup;
@@ -253,15 +258,19 @@ export class RichTextControlComponent
     if (this.displayEditor !== true) {
       this.displayEditor = true;
       setTimeout(() => {
-        this._focusMonitor.focusVia(this.cntInput, 'program');
+        this.rteObj.focusIn();
       }, 500);
     } else {
-      this._focusMonitor.focusVia(this.cntInput, 'program');
+      this.rteObj.focusIn();
     }
   }
 
-  writeValue(tel: string | null): void {
-    this.value = tel;
+  writeValue(val: string | null): void {
+    this.value = val;
+  }
+
+  clear() {
+    this.value = null;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

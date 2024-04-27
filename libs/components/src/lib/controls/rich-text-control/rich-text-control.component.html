@@ -12,7 +12,7 @@
     <ejs-richtexteditor
       data-test="rich-text-editor"
       class="mt-3"
-      #cnt
+      #rte
       formControlName="cnt"
       [toolbarSettings]="tools"
       [format]="formats"
@@ -24,10 +24,7 @@
   </ng-container>
   <ng-container *ngIf="displayEditor !== true && keepEditorOpen === false">
     <div class="value-container d-flex align-items-start flex-fill">
-      <div [innerHtml]="value" class="flex-grow-1"></div>
-      <div class="control">
-        <input #cnt formControlName="cnt" [placeholder]="placeholder" />
-      </div>
+      <div [innerHtml]="value ?? placeholder" class="flex-grow-1"></div>
     </div>
   </ng-container>
 </div>
