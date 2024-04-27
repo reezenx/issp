@@ -80,10 +80,12 @@ export async function createISSPP1OrgProfileS2(prisma: PrismaClient) {
       key,
       {
         id,
+        b1PlannerName,
         b1PlantillaPosition,
         b1OrgUnit,
         b1Email,
         b1Contacts,
+        b2AnnualICTBudget,
         b2OtherSources,
         b3TotalNoEmp,
         b3NoRegionalOffices,
@@ -95,10 +97,12 @@ export async function createISSPP1OrgProfileS2(prisma: PrismaClient) {
       const tags = ['new'];
       const item = {
         id,
+        b1PlannerName,
         b1PlantillaPosition,
         b1OrgUnit,
         b1Email,
         b1Contacts,
+        b2AnnualICTBudget,
         b2OtherSources,
         b3TotalNoEmp,
         b3NoRegionalOffices,

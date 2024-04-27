@@ -1,10 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 export class CreateP1OrgProfileS2Dto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
   isspId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  b1PlannerName: string;
 
   @IsString()
   @IsNotEmpty()
@@ -25,6 +36,11 @@ export class CreateP1OrgProfileS2Dto {
   @IsNotEmpty()
   @ApiProperty()
   b1Contacts: string[];
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty()
+  b2AnnualICTBudget: number;
 
   @IsString()
   @IsNotEmpty()

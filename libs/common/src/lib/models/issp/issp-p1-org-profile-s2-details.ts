@@ -39,10 +39,12 @@ export class ISSPP1OrgProfileS2Details
   }
 
   id: string;
+  b1PlannerName: string;
   b1PlantillaPosition: string;
   b1OrgUnit: string;
   b1Email: string;
   b1Contacts: string[];
+  b2AnnualICTBudget: number;
   b2OtherSources: string;
   b3TotalNoEmp: number;
   b3NoRegionalOffices: number;
@@ -69,10 +71,12 @@ export type ISSPP1OrgProfileS2Info = Partial<
     ISSPP1OrgProfileS2Details,
     | 'id'
     | 'isspId'
+    | 'b1PlannerName'
     | 'b1PlantillaPosition'
     | 'b1OrgUnit'
     | 'b1Email'
     | 'b1Contacts'
+    | 'b2AnnualICTBudget'
     | 'b2OtherSources'
     | 'b3TotalNoEmp'
     | 'b3NoRegionalOffices'

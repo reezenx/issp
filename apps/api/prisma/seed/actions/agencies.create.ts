@@ -45,7 +45,7 @@ export async function createAgencies(prisma: PrismaClient) {
   const phone = faker.helpers.fromRegExp('09[0-9]{9}');
 
   findDuplicates(AGENCIES);
-
+  const upserts: any[] = [];
   Object.entries(AGENCIES).forEach(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async ([key, { id, name, code, email, category, uacs, department }]) => {
@@ -61,7 +61,7 @@ export async function createAgencies(prisma: PrismaClient) {
         tags: ['new'],
       };
 
-      await prisma.agency.upsert({
+      const upsert = prisma.agency.upsert({
         where: { id },
         update: {
           name,
@@ -96,6 +96,8 @@ export async function createAgencies(prisma: PrismaClient) {
           },
         },
       });
+      upserts.push(upsert);
     }
   );
+  await prisma.$transaction(upserts);
 }

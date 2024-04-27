@@ -52,6 +52,8 @@ export const ACTION_HISTORIES: {
 
 export async function createActionHistory(prisma: PrismaClient) {
   findDuplicates(ACTION_HISTORIES);
+  prisma.actionHistory.deleteMany();
+  const upserts: any[] = [];
   Object.entries(ACTION_HISTORIES).forEach(
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -79,7 +81,7 @@ export async function createActionHistory(prisma: PrismaClient) {
         tags: ['actions'],
       };
 
-      await prisma.actionHistory.upsert({
+      const upsert = prisma.actionHistory.upsert({
         where: { id },
         update: item,
         create: {
@@ -110,6 +112,9 @@ export async function createActionHistory(prisma: PrismaClient) {
           },
         },
       });
+
+      upserts.push(upsert);
     }
   );
+  await prisma.$transaction(upserts);
 }

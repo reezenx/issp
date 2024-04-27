@@ -321,10 +321,12 @@ model ISSPP1OrgProfileS1 {
 /// B. DEPARTMENT/AGENCY PROFILE
 model ISSPP1OrgProfileS2 {
   id                  String    @id @default(cuid())
+  b1PlannerName       String
   b1PlantillaPosition String
   b1OrgUnit           String
   b1Email             String
   b1Contacts          String[]
+  b2AnnualICTBudget   Float
   b2OtherSources      String
   b3TotalNoEmp        Int
   b3NoRegionalOffices Int

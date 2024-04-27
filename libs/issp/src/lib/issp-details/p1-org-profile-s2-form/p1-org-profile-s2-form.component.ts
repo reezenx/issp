@@ -41,6 +41,7 @@ export class P1OrgProfileS2FormComponent {
     this.form = this.formBuilder.group({
       id: new FormControl<string>(null),
       isspId: new FormControl<string>(null),
+      b1PlannerName: new FormControl<string>(null, [Validators.required]),
       b1PlantillaPosition: new FormControl<string>(null, [Validators.required]),
       b1OrgUnit: new FormControl<string>(null, [Validators.required]),
       b1Email: new FormControl<string>(null, [
@@ -48,6 +49,10 @@ export class P1OrgProfileS2FormComponent {
         Validators.email,
       ]),
       b1Contacts: new FormControl<string[]>(null, [Validators.required]),
+      b2AnnualICTBudget: new FormControl<number>(0, [
+        Validators.required,
+        Validators.min(1),
+      ]),
       b2OtherSources: new FormControl<string>(null, [Validators.required]),
       b3TotalNoEmp: new FormControl<number>(null, [Validators.required]),
       b3NoRegionalOffices: new FormControl<number>(null, [Validators.required]),

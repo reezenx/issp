@@ -52,8 +52,9 @@ export async function createProjectDetails(prisma: PrismaClient) {
 
 export async function connectProjectTypeToGroup(prisma: PrismaClient) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const updates: any[] = [];
   Object.entries(PROJECT_TYPE).forEach(async ([key, { id, group }]) => {
-    await prisma.projectType.update({
+    const update = prisma.projectType.update({
       where: { id },
       data: {
         projectTypeGroup: {
@@ -64,4 +65,5 @@ export async function connectProjectTypeToGroup(prisma: PrismaClient) {
       },
     });
   });
+  await prisma.$transaction(updates);
 }

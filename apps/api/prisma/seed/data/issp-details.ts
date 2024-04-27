@@ -35,10 +35,12 @@ export const ISSPP1OrgProfileS1 = {
 export const ISSPP1OrgProfileS2 = {
   P1OrgProfileS2_1: {
     id: 'gawheonfa67ipcw2we1u75tb',
+    b1PlannerName: 'DICT Officer Name 1',
     b1PlantillaPosition: 'DICT Officer 1',
     b1OrgUnit: 'DICT Org Unit 1',
     b1Email: 'dict.officer1@dict.gov.ph',
     b1Contacts: ['09988507274'],
+    b2AnnualICTBudget: 310332785.0,
     b2OtherSources: 'DICT Other Sources 1',
     b3TotalNoEmp: 20,
     b3NoRegionalOffices: 2,
@@ -48,10 +50,12 @@ export const ISSPP1OrgProfileS2 = {
   },
   P1OrgProfileS2_2: {
     id: 'viwkt9qapk2v567unii1mkyu',
+    b1PlannerName: 'DICT Officer Name 2',
     b1PlantillaPosition: 'DICT Officer 2',
     b1OrgUnit: 'DICT Org Unit 2',
     b1Email: 'dict.officer2@dict.gov.ph',
     b1Contacts: ['09988507370'],
+    b2AnnualICTBudget: 129332785.0,
     b2OtherSources: 'DICT Other Sources 2',
     b3TotalNoEmp: 30,
     b3NoRegionalOffices: 2,

@@ -88,10 +88,12 @@ export class IsspService {
         p1OrgProfileS2: {
           select: {
             id: true,
+            b1PlannerName: true,
             b1PlantillaPosition: true,
             b1OrgUnit: true,
             b1Email: true,
             b1Contacts: true,
+            b2AnnualICTBudget: true,
             b2OtherSources: true,
             b3TotalNoEmp: true,
             b3NoRegionalOffices: true,

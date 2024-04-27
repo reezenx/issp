@@ -70,6 +70,7 @@ export const ISSPS: {
 export async function createISSPs(prisma: PrismaClient) {
   findDuplicates(ISSPS);
   await prisma.iSSP.deleteMany();
+  const upserts: any[] = [];
   Object.entries(ISSPS).forEach(
     async ([
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -103,7 +104,7 @@ export async function createISSPs(prisma: PrismaClient) {
         readOnly: false,
       };
 
-      await prisma.iSSP.upsert({
+      const upsert = await prisma.iSSP.upsert({
         where: { id },
         update: {
           title,
@@ -171,6 +172,8 @@ export async function createISSPs(prisma: PrismaClient) {
           },
         },
       });
+      upserts.push(upsert);
     }
   );
+  // await prisma.$transaction(upserts);
 }
