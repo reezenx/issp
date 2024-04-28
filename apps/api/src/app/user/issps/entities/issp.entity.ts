@@ -31,6 +31,12 @@ export class IsspEntity implements ISSP {
   status: $Enums.ISSPStatus;
 
   @ApiProperty()
+  scope: $Enums.ISSPScope;
+
+  @ApiProperty()
+  subScope: $Enums.ISSPSubScope;
+
+  @ApiProperty()
   startYear: number;
 
   @ApiProperty()

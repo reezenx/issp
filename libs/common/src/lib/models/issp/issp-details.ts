@@ -55,6 +55,8 @@ export class ISSPDetails extends Assign implements ISSP {
   readOnly: boolean;
   startYear: number;
   status: $Enums.ISSPStatus;
+  scope: $Enums.ISSPScope;
+  subScope: $Enums.ISSPSubScope;
   tags: string[];
   title: string;
   updatedAt: Date;

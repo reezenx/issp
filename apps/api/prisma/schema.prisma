@@ -271,6 +271,8 @@ model ISSP {
   title            String
   description      String?
   status           ISSPStatus          @default(NOT_STARTED)
+  scope            ISSPScope?
+  subScope         ISSPSubScope?
   startYear        Int
   endYear          Int
   tags             String[]
@@ -393,8 +395,10 @@ model ActionHistory {
 }
 
 model Temp {
-  id   String @id @default(cuid())
-  role Role?
+  id       String        @id @default(cuid())
+  role     Role?
+  scope    ISSPScope?
+  subScope ISSPSubScope?
 }
 
 enum Role {
@@ -415,6 +419,18 @@ enum ISSPStatus {
   FOR_VALIDATION
   FOR_ENDORSEMENT
   APPROVED
+}
+
+enum ISSPScope {
+  DEPARTMENT_WIDE
+  DEPARTMENT_CENTRAL_HEAD_OFFICE
+  AGENCY_WIDE
+}
+
+enum ISSPSubScope {
+  CENTRAL_OFFICE_ONLY
+  WITH_REGIONAL_FIELD_OFFICES
+  WITH_BUREAUS
 }
 
 enum UserStatus {

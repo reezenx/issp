@@ -17,7 +17,10 @@ import { DEFAULT, roundsOfHashing } from './users.create';
 import { findDuplicates } from './helper.create';
 
 export const ISSPS: {
-  [key: string]: Pick<ISSP, 'id' | 'title' | 'startYear' | 'endYear'> & {
+  [key: string]: Pick<
+    ISSP,
+    'id' | 'title' | 'startYear' | 'endYear' | 'scope' | 'subScope'
+  > & {
     agency: Pick<Agency, 'id' | 'name' | 'email' | 'code' | 'uacs'>;
     role: Pick<UserRole, 'id' | 'name'>;
     author: Pick<User, 'id' | 'email'>;
@@ -69,6 +72,7 @@ export const ISSPS: {
 
 export async function createISSPs(prisma: PrismaClient) {
   findDuplicates(ISSPS);
+  await prisma.actionHistory.deleteMany();
   await prisma.iSSP.deleteMany();
   const upserts: any[] = [];
   Object.entries(ISSPS).forEach(
@@ -80,6 +84,8 @@ export async function createISSPs(prisma: PrismaClient) {
         title,
         startYear,
         endYear,
+        scope,
+        subScope,
         agency,
         author,
         role,
@@ -95,6 +101,8 @@ export async function createISSPs(prisma: PrismaClient) {
         title,
         startYear,
         endYear,
+        scope,
+        subScope,
         description,
         tags,
         version,
@@ -175,5 +183,5 @@ export async function createISSPs(prisma: PrismaClient) {
       upserts.push(upsert);
     }
   );
-  // await prisma.$transaction(upserts);
+  await prisma.$transaction(upserts);
 }

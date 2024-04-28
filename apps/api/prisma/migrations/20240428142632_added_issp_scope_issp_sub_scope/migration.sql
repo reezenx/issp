@@ -1,0 +1,13 @@
+-- CreateEnum
+CREATE TYPE "ISSPScope" AS ENUM ('DEPARTMENT_WIDE', 'DEPARTMENT_CENTRAL_HEAD_OFFICE', 'AGENCY_WIDE');
+
+-- CreateEnum
+CREATE TYPE "ISSPSubScope" AS ENUM ('CENTRAL_OFFICE_ONLY', 'WITH_REGIONAL_FIELD_OFFICES', 'WITH_BUREAUS');
+
+-- AlterTable
+ALTER TABLE "Temp" ADD COLUMN     "scope" "ISSPScope",
+ADD COLUMN     "subScope" "ISSPSubScope";
+
+-- AlterTable
+ALTER TABLE "issps" ADD COLUMN     "scope" "ISSPScope",
+ADD COLUMN     "subScope" "ISSPSubScope";

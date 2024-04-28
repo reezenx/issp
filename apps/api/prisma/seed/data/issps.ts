@@ -1,4 +1,4 @@
-import { ISSPAction } from '@prisma/client';
+import { ISSPAction, ISSPScope, ISSPSubScope } from '@prisma/client';
 
 export const ISSP_ = {
   DICT: {
@@ -6,36 +6,48 @@ export const ISSP_ = {
     title: 'DICT Information System Strategic Plan 2018-2020 ',
     startYear: 2018,
     endYear: 2020,
+    scope: ISSPScope.AGENCY_WIDE,
+    subScope: ISSPSubScope.WITH_REGIONAL_FIELD_OFFICES,
   },
   DILG: {
     id: 'cluapq16y000i08juhr1zbbq8',
     title: 'DILG Information System Strategic Plan 2018-2020 ',
     startYear: 2020,
     endYear: 2023,
+    scope: ISSPScope.DEPARTMENT_CENTRAL_HEAD_OFFICE,
+    subScope: ISSPSubScope.CENTRAL_OFFICE_ONLY,
   },
   DAR: {
     id: 'cluapq16y000j08jufc8a7ai6',
     title: 'DAR Information System Strategic Plan 2018-2020 ',
     startYear: 2017,
     endYear: 2019,
+    scope: ISSPScope.DEPARTMENT_CENTRAL_HEAD_OFFICE,
+    subScope: ISSPSubScope.WITH_BUREAUS,
   },
   DA: {
     id: 'cluapq16y000k08juh7qrcm8t',
     title: 'DA Information System Strategic Plan 2018-2020 ',
     startYear: 2019,
     endYear: 2021,
+    scope: ISSPScope.DEPARTMENT_CENTRAL_HEAD_OFFICE,
+    subScope: ISSPSubScope.CENTRAL_OFFICE_ONLY,
   },
   DBM: {
     id: 'cluapq16y000l08juaco067tj',
     title: 'DBM Information System Strategic Plan 2018-2020 ',
     startYear: 2005,
     endYear: 2007,
+    scope: ISSPScope.AGENCY_WIDE,
+    subScope: ISSPSubScope.CENTRAL_OFFICE_ONLY,
   },
   DE: {
     id: 'cluapq16y000m08jugibq8gse',
     title: 'DE Information System Strategic Plan 2018-2020 ',
     startYear: 2019,
     endYear: 2021,
+    scope: ISSPScope.DEPARTMENT_WIDE,
+    subScope: null,
   },
 };
 

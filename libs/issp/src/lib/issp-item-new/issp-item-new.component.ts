@@ -15,9 +15,11 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { ISSPStatus, User } from '@prisma/client';
+import { $Enums, ISSPScope, ISSPStatus, User } from '@prisma/client';
 import {
+  ISSP_Scopes,
   ISSP_Statuses,
+  ISSP_SubScopes,
   ISSPDetails,
   startYearMustBeLessThanEndYearValidator,
 } from '@issp/common';
@@ -44,12 +46,15 @@ export class IsspItemNewComponent implements OnInit {
   issp: ISSPDetails;
   currentUser: User;
   subs: Subscription[] = [];
-  statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
+  scopeList = Object.entries(ISSP_Scopes).map(([key]) => key);
+  subScopeList = Object.entries(ISSP_SubScopes).map(([key]) => key);
+  filteredSubScopeList: string[] = [];
   titleMinLength = 6;
   titleMaxLength = 100;
 
   ngOnInit(): void {
     this.initForm();
+    this.initSubs();
     this.initCurrentUser();
   }
 
@@ -65,6 +70,8 @@ export class IsspItemNewComponent implements OnInit {
         endYear: new FormControl<number>(null, [Validators.required]),
         startYear: new FormControl<number>(null, [Validators.required]),
         status: new FormControl<ISSPStatus>(ISSP_Statuses.NOT_STARTED),
+        scope: new FormControl<string>(null, [Validators.required]),
+        subScope: new FormControl<string>(null, [Validators.required]),
         version: new FormControl<number>(1),
         agencyId: new FormControl<string>(null, [Validators.required]),
         authorId: new FormControl<string>(null, [Validators.required]),
@@ -78,6 +85,29 @@ export class IsspItemNewComponent implements OnInit {
     this.currentUser = this.authService.user;
     this.form.controls.agencyId.patchValue(this.currentUser.agencyId);
     this.form.controls.authorId.patchValue(this.currentUser.id);
+  }
+
+  initSubs() {
+    const valueSub = this.form.controls.scope.valueChanges.subscribe((data) => {
+      if (data === $Enums.ISSPScope.DEPARTMENT_WIDE) {
+        this.form.controls.subScope.disable();
+        this.form.controls.subScope.setValue(null);
+        this.form.controls.subScope.clearValidators();
+      } else {
+        this.form.controls.subScope.enable();
+        this.form.controls.subScope.addValidators([Validators.required]);
+        this.form.controls.subScope.updateValueAndValidity();
+      }
+
+      if (data === $Enums.ISSPScope.AGENCY_WIDE) {
+        this.filteredSubScopeList = this.subScopeList.filter(
+          (s) => s !== $Enums.ISSPSubScope.WITH_BUREAUS
+        );
+      } else {
+        this.filteredSubScopeList = this.subScopeList;
+      }
+    });
+    this.subs.push(valueSub);
   }
 
   get f() {

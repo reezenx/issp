@@ -8,10 +8,13 @@ import { User } from '@prisma/client';
 export class IsspService {
   constructor(private prisma: PrismaService) {}
   create(createIsspDto: CreateIsspDto, user: User) {
+    const { agencyId, authorId, ...isspData } = createIsspDto;
     return this.prisma.iSSP.create({
       data: {
-        ...createIsspDto,
+        ...isspData,
         createdBy: `${user.firstName} ${user.lastName}`,
+        agency: { connect: { id: agencyId } },
+        author: { connect: { id: authorId } },
       },
     });
   }

@@ -15,9 +15,11 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogComponentData,
 } from '@issp/components';
-import { ISSPStatus } from '@prisma/client';
+import { $Enums, ISSPStatus } from '@prisma/client';
 import {
+  ISSP_Scopes,
   ISSP_Statuses,
+  ISSP_SubScopes,
   ISSPDetails,
   startYearMustBeLessThanEndYearValidator,
 } from '@issp/common';
@@ -33,6 +35,9 @@ export class IsspItemEditMetadataComponent implements OnInit {
   item: ISSPDetails;
   subs: Subscription[] = [];
   statusList = Object.entries(ISSP_Statuses).map(([key]) => key);
+  scopeList = Object.entries(ISSP_Scopes).map(([key]) => key);
+  subScopeList = Object.entries(ISSP_SubScopes).map(([key]) => key);
+  filteredSubScopeList: string[] = this.subScopeList;
   titleMinLength = 6;
   titleMaxLength = 100;
 
@@ -51,6 +56,27 @@ export class IsspItemEditMetadataComponent implements OnInit {
   }
 
   initSubs() {
+    const valueSub = this.form.controls.scope.valueChanges.subscribe((data) => {
+      if (data === $Enums.ISSPScope.DEPARTMENT_WIDE) {
+        this.form.controls.subScope.disable();
+        this.form.controls.subScope.setValue(null);
+        this.form.controls.subScope.clearValidators();
+      } else {
+        this.form.controls.subScope.enable();
+        this.form.controls.subScope.addValidators([Validators.required]);
+        this.form.controls.subScope.updateValueAndValidity();
+      }
+
+      if (data === $Enums.ISSPScope.AGENCY_WIDE) {
+        this.filteredSubScopeList = this.subScopeList.filter(
+          (s) => s !== $Enums.ISSPSubScope.WITH_BUREAUS
+        );
+      } else {
+        this.filteredSubScopeList = this.subScopeList;
+      }
+    });
+    this.subs.push(valueSub);
+
     const routeSub = this.route.parent.data.subscribe(({ item }) => {
       this.item = item;
       this.form.patchValue(this.item);
@@ -76,6 +102,8 @@ export class IsspItemEditMetadataComponent implements OnInit {
           value: ISSP_Statuses.NOT_STARTED,
           disabled: true,
         }),
+        scope: new FormControl<string>(null, [Validators.required]),
+        subScope: new FormControl<string>(null, [Validators.required]),
         version: new FormControl<number>({ value: null, disabled: true }),
         tags: new FormControl<string[]>([]),
       },
@@ -93,6 +121,7 @@ export class IsspItemEditMetadataComponent implements OnInit {
         .updateOne(this.form.value)
         .pipe(take(1))
         .subscribe(() => {
+          this.form.markAsPristine();
           this.snackBar.open('ISSP Metadata successfully updated!', 'Ok', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
