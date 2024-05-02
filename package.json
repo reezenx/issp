@@ -30,7 +30,7 @@
     "lint": "nx run-many -t lint",
     "format": "nx format:write --all",
     "commit": "nx affected --target=build && cz-cust",
-    "production:build": "npx prisma migrate deploy && nx reset && npm run prod:build"
+    "production:build": "npx prisma generate && npx prisma migrate deploy && nx reset && npm run prod:build"
   },
   "private": true,
   "dependencies": {
