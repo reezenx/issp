@@ -43,35 +43,44 @@ export class IsspP1OrgProfileS2Service {
   }
 
   updateOne(
-    issp: ISSPP1OrgProfileS2Info
+    isspP1OrgProfileS2: ISSPP1OrgProfileS2Info
   ): Observable<ISSPP1OrgProfileS2Details> {
-    const uri = `${this.route}/${issp.id}`;
-    return this.http.put<ISSPP1OrgProfileS2Details>(uri, issp).pipe(
-      map((e) => {
-        const entity = new ISSPP1OrgProfileS2Details();
-        entity.assign(e);
-        return entity;
-      }),
-      tap((data) => {
-        this.#emitLastUpdatedItem.next(data);
-        this.#emitCurrentContextItem.next(data);
-      })
-    );
+    const uri = `${this.route}/${isspP1OrgProfileS2.id}`;
+    return this.http
+      .put<ISSPP1OrgProfileS2Details>(uri, isspP1OrgProfileS2)
+      .pipe(
+        map((e) => {
+          const entity = new ISSPP1OrgProfileS2Details();
+          entity.assign(e);
+          return entity;
+        }),
+        tap((data) => {
+          this.#emitLastUpdatedItem.next(data);
+          this.#emitCurrentContextItem.next(data);
+        })
+      );
   }
 
   createOne(
-    issp: ISSPP1OrgProfileS2Info
+    isspP1OrgProfileS2: ISSPP1OrgProfileS2Info
   ): Observable<ISSPP1OrgProfileS2Details> {
     const uri = `${this.route}`;
-    return this.http.post<ISSPP1OrgProfileS2Details>(uri, issp).pipe(
-      map((e) => {
-        const entity = new ISSPP1OrgProfileS2Details();
-        entity.assign(e);
-        return entity;
-      }),
-      tap((data) => {
-        this.#emitLastAddedItem.next(data);
-      })
-    );
+    return this.http
+      .post<ISSPP1OrgProfileS2Details>(uri, isspP1OrgProfileS2)
+      .pipe(
+        map((e) => {
+          const entity = new ISSPP1OrgProfileS2Details();
+          entity.assign(e);
+          return entity;
+        }),
+        tap((data) => {
+          this.#emitLastAddedItem.next(data);
+        })
+      );
+  }
+
+  remove(id: string): Observable<ISSPP1OrgProfileS2Details> {
+    const uri = `${this.route}/${id}`;
+    return this.http.delete<ISSPP1OrgProfileS2Details>(uri);
   }
 }

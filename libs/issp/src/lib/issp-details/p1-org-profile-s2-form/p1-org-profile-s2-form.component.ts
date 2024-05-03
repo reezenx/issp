@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ISSPP1OrgProfileS2Info } from '@issp/common';
-import { Subscription, take } from 'rxjs';
+import { Observable, Subscription, take, zip } from 'rxjs';
 import { IsspP1OrgProfileS2Service } from '../../services/issp.p1-org-profile-s2.service';
 import { $Enums } from '@prisma/client';
 
@@ -258,6 +258,26 @@ export class P1OrgProfileS2FormComponent implements OnInit {
     });
   }
 
+  delete(items: ISSPP1OrgProfileS2Info[]) {
+    const subArray: Observable<ISSPP1OrgProfileS2Info>[] = [];
+    items.forEach((item) => {
+      subArray.push(this.isspP1OrgProfileS2Service.remove(item.id));
+    });
+    zip(...subArray)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.snackBar.open(
+          'Department/Agency Profile (P1S2) successfully deleted!',
+          'Ok',
+          {
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            duration: 5000,
+          }
+        );
+      });
+  }
+
   isDepartmentWide(): boolean {
     return this.scope === this.SCOPES.DEPARTMENT_WIDE;
   }
@@ -302,29 +322,17 @@ export class P1OrgProfileS2FormComponent implements OnInit {
       this.submitClicked = true;
       const data = args.data as ISSPP1OrgProfileS2Info;
       this.createUpdate(data.id, data);
-
-      // if (this.form.valid) {
-      // args.data = this.form.value;
-      // } else {
-      //   args.cancel = true;
-      // }
+    }
+    if (args.requestType === 'delete') {
+      this.submitClicked = true;
+      const data = args.data as ISSPP1OrgProfileS2Info[];
+      this.delete(data);
     }
   }
 
   actionComplete(args: DialogEditEventArgs): void {
     if (args.requestType === 'beginEdit' || args.requestType === 'add') {
-      // if (Browser.isDevice) {
-      //   args.dialog.height = window.innerHeight - 90 + 'px';
-      //   (<Dialog>args.dialog).dataBind();
-      // }
-      // // Set initail Focus
-      // if (args.requestType === 'beginEdit') {
-      //   (
-      //     args.form.elements.namedItem('CustomerName') as HTMLInputElement
-      //   ).focus();
-      // } else if (args.requestType === 'add') {
-      //   (args.form.elements.namedItem('OrderID') as HTMLInputElement).focus();
-      // }
+      //empty
     }
   }
 }
