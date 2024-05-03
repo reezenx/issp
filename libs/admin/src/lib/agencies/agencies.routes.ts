@@ -6,6 +6,7 @@ import { AgencyAdminNewComponent } from './agency-admin-new/agency-admin-new.com
 import { agenciesResolver } from './resolvers/agencies.resolver';
 import { agencyResolver } from './resolvers/agency.resolver';
 import { categoriesDropdownResolver } from '../categories/resolvers/category-dropdown.resolver';
+import { departmentsDropdownResolver } from '../departments/resolvers/department-dropdown.resolver';
 
 export const AgenciesRoutes: Routes = [
   {
@@ -35,6 +36,7 @@ export const AgenciesRoutes: Routes = [
         },
         resolve: {
           categoriesDropdown: categoriesDropdownResolver,
+          departmentsDropdown: departmentsDropdownResolver,
         },
       },
       {
@@ -47,6 +49,7 @@ export const AgenciesRoutes: Routes = [
         resolve: {
           item: agencyResolver,
           categoriesDropdown: categoriesDropdownResolver,
+          departmentsDropdown: departmentsDropdownResolver,
         },
       },
     ],

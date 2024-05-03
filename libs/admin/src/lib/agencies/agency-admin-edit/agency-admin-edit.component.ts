@@ -39,6 +39,7 @@ export class AgencyAdminEditComponent implements OnInit {
   ) {}
 
   categoriesDropdown: ItemDropdown[] = [];
+  departmentsDropdown: ItemDropdown[] = [];
 
   form: FormGroup;
   item: AgencyDetails;
@@ -51,10 +52,11 @@ export class AgencyAdminEditComponent implements OnInit {
 
   initSubs() {
     const routeSub = this.route.data.subscribe(
-      ({ item, categoriesDropdown }) => {
+      ({ item, categoriesDropdown, departmentsDropdown }) => {
         this.item = item;
         this.form.patchValue(this.item);
         this.categoriesDropdown = categoriesDropdown;
+        this.departmentsDropdown = departmentsDropdown;
       }
     );
     this.subs.push(routeSub);
@@ -90,6 +92,7 @@ export class AgencyAdminEditComponent implements OnInit {
         ],
       }),
       categoryId: new FormControl<string>('', [Validators.required]),
+      departmentId: new FormControl<string>('', [Validators.required]),
       updatedBy: new FormControl<string>('System'),
     });
   }

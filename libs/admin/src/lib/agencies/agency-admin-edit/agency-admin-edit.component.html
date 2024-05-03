@@ -18,25 +18,14 @@
     <mat-card-content class="b-t-1">
       <div class="row m-t-20">
         <div class="col-lg-6">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-10"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
             <mat-icon matPrefix class="op-5">
               <i-tabler name="article" class="icon-18 d-flex"></i-tabler>
             </mat-icon>
             <mat-label class="mat-subtitle-2 f-w-600">Name</mat-label>
             <input #name matInput type="text" formControlName="name" />
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              class="m-r-4"
-              (click)="f['name'].patchValue('')"
-              [attr.aria-label]="'Clear'"
-              [disabled]="!name.value"
-            >
+            <button mat-icon-button matSuffix type="button" class="m-r-4" (click)="f['name'].patchValue('')"
+              [attr.aria-label]="'Clear'" [disabled]="!name.value">
               <mat-icon class="op-5">
                 <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
               </mat-icon>
@@ -50,25 +39,14 @@
             }
           </mat-form-field>
 
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-10"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Code</mat-label>
             <mat-icon matPrefix class="op-5">
               <i-tabler name="id" class="icon-18 d-flex"></i-tabler>
             </mat-icon>
             <input #code matInput type="text" formControlName="code" />
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              class="m-r-4"
-              (click)="f['code'].patchValue('')"
-              [attr.aria-label]="'Clear'"
-              [disabled]="!code.value"
-            >
+            <button mat-icon-button matSuffix type="button" class="m-r-4" (click)="f['code'].patchValue('')"
+              [attr.aria-label]="'Clear'" [disabled]="!code.value">
               <mat-icon class="op-5">
                 <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
               </mat-icon>
@@ -84,35 +62,19 @@
             }
           </mat-form-field>
 
-          <issp-item-picker-control
-            placeholder="Search & Select Category"
-            formControlName="categoryId"
-            fieldName="Category"
-            prefixIcon="category"
-            [required]="true"
-            [itemsDropdown]="categoriesDropdown"
-          ></issp-item-picker-control>
+          <issp-item-picker-control placeholder="Search & Select Category" formControlName="categoryId"
+            fieldName="Category" prefixIcon="category" [required]="true"
+            [itemsDropdown]="categoriesDropdown"></issp-item-picker-control>
         </div>
         <div class="col-lg-6">
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-10"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Phone</mat-label>
             <mat-icon matPrefix class="op-5">
               <i-tabler name="phone" class="icon-18 d-flex"></i-tabler>
             </mat-icon>
             <input #phone matInput type="text" formControlName="phone" />
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              class="m-r-4"
-              (click)="f['phone'].patchValue('')"
-              [attr.aria-label]="'Clear'"
-              [disabled]="!phone.value"
-            >
+            <button mat-icon-button matSuffix type="button" class="m-r-4" (click)="f['phone'].patchValue('')"
+              [attr.aria-label]="'Clear'" [disabled]="!phone.value">
               <mat-icon class="op-5">
                 <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
               </mat-icon>
@@ -126,25 +88,14 @@
             }
           </mat-form-field>
 
-          <mat-form-field
-            appearance="outline"
-            class="w-100 m-b-10"
-            color="primary"
-          >
+          <mat-form-field appearance="outline" class="w-100 m-b-10" color="primary">
             <mat-label class="mat-subtitle-2 f-w-600">Email</mat-label>
             <mat-icon matPrefix class="op-5">
               <i-tabler name="mail" class="icon-18 d-flex"></i-tabler>
             </mat-icon>
             <input #email matInput type="text" formControlName="email" />
-            <button
-              mat-icon-button
-              matSuffix
-              type="button"
-              class="m-r-4"
-              (click)="f['email'].patchValue('')"
-              [attr.aria-label]="'Clear'"
-              [disabled]="!email.value"
-            >
+            <button mat-icon-button matSuffix type="button" class="m-r-4" (click)="f['email'].patchValue('')"
+              [attr.aria-label]="'Clear'" [disabled]="!email.value">
               <mat-icon class="op-5">
                 <i-tabler name="backspace" class="icon-18 d-flex"></i-tabler>
               </mat-icon>
@@ -163,26 +114,20 @@
             </mat-hint>
             }
           </mat-form-field>
+
+          <issp-item-picker-control placeholder="Search & Select Department" formControlName="departmentId"
+            fieldName="Department" prefixIcon="building-bank" [required]="true"
+            [itemsDropdown]="departmentsDropdown"></issp-item-picker-control>
+
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions class="b-t-1">
       <div class="w-100 m-t-12 text-right">
-        <button
-          mat-flat-button
-          color="primary"
-          type="submit"
-          [disabled]="!form.valid || !form.dirty"
-        >
+        <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || !form.dirty">
           Save
         </button>
-        <button
-          mat-flat-button
-          color="warn"
-          type="button"
-          (click)="discardChanges()"
-          class="m-l-8"
-        >
+        <button mat-flat-button color="warn" type="button" (click)="discardChanges()" class="m-l-8">
           Cancel
         </button>
       </div>
