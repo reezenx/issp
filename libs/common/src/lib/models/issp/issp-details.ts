@@ -1,6 +1,8 @@
 import { $Enums, ISSP } from '@prisma/client';
 import { Assign } from '../assign';
 import { ISSPP1OrgProfileS1Info } from './issp-p1-org-profile-s1-details';
+import { ISSPP1OrgProfileS2Info } from './issp-p1-org-profile-s2-details';
+import { ISSPP1OrgProfileS3Info } from './issp-p1-org-profile-s3-details';
 
 export class ISSPDetails extends Assign implements ISSP {
   constructor() {
@@ -73,9 +75,10 @@ export class ISSPDetails extends Assign implements ISSP {
   };
 
   p1OrgProfileS1Id: string;
-  p1OrgProfileS2Id: string;
 
   p1OrgProfileS1: ISSPP1OrgProfileS1Info;
+  p1OrgProfileS2: ISSPP1OrgProfileS2Info[];
+  p1OrgProfileS3: ISSPP1OrgProfileS3Info;
 
   private _createdAt: Date = new Date('0001-01-01T00:00:00Z');
   private _updatedAt: Date = new Date('0001-01-01T00:00:00Z');

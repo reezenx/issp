@@ -175,9 +175,35 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <ng-template matExpansionPanelContent> </ng-template>
+            <ng-template matExpansionPanelContent>
+              <issp-p1-org-profile-s3-form
+                [isspId]="item.id"
+                [item]="iSSPP1OrgProfileS3Info"
+              ></issp-p1-org-profile-s3-form>
+            </ng-template>
 
             <mat-action-row>
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="saveISSPP1OrgProfileS3Form()"
+                [disabled]="
+                  !iSSPP1OrgProfileS3CompForm?.valid ||
+                  !iSSPP1OrgProfileS3CompForm?.dirty
+                "
+              >
+                Save
+              </button>
+              <button
+                mat-flat-button
+                color="accent"
+                type="button"
+                class="m-l-8"
+                (click)="resetISSPP1OrgProfileS3Form()"
+                [disabled]="!iSSPP1OrgProfileS3CompForm?.dirty"
+              >
+                Reset
+              </button>
               <button mat-flat-button color="warn" (click)="prevStep()">
                 Previous
               </button>

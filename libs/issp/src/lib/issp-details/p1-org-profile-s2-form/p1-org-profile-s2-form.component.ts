@@ -28,8 +28,6 @@ import {
   SaveEventArgs,
   ToolbarItems,
 } from '@syncfusion/ej2-angular-grids';
-import { Browser } from '@syncfusion/ej2-base';
-import { Dialog } from '@syncfusion/ej2-angular-popups';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({

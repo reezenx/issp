@@ -4,12 +4,14 @@ import {
   ISSPDetails,
   ISSPP1OrgProfileS1Info,
   ISSPP1OrgProfileS2Info,
+  ISSPP1OrgProfileS3Info,
 } from '@issp/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Subscription } from 'rxjs';
 
 import { P1OrgProfileS1FormComponent } from '../issp-details/p1-org-profile-s1-form/p1-org-profile-s1-form.component';
 import { P1OrgProfileS2FormComponent } from '../issp-details/p1-org-profile-s2-form/p1-org-profile-s2-form.component';
+import { P1OrgProfileS3FormComponent } from '../issp-details/p1-org-profile-s3-form/p1-org-profile-s3-form.component';
 
 @UntilDestroy({ arrayName: 'subs' })
 @Component({
@@ -33,6 +35,7 @@ export class IsspItemEditDetailsComponent implements OnInit {
       this.item = item;
       this.iSSPP1OrgProfileS1Info = this.item.p1OrgProfileS1 ?? {};
       this.iSSPP1OrgProfileS2Infos = this.item.p1OrgProfileS2 ?? [];
+      this.iSSPP1OrgProfileS3Info = this.item.p1OrgProfileS3 ?? {};
       this.iSSPP1OrgProfileS1Info.isspId = this.item.id;
     });
     this.subs.push(routeSub);
@@ -69,7 +72,7 @@ export class IsspItemEditDetailsComponent implements OnInit {
     this.iSSPP1OrgProfileS1Comp.save();
   }
 
-  /// B. DEPARTMENT/AGENCY PROFILE (P1S1)
+  /// B. DEPARTMENT/AGENCY PROFILE (P1S2)
   iSSPP1OrgProfileS2Infos: ISSPP1OrgProfileS2Info[] = [];
   @ViewChild(P1OrgProfileS2FormComponent)
   iSSPP1OrgProfileS2Comp: P1OrgProfileS2FormComponent;
@@ -85,5 +88,23 @@ export class IsspItemEditDetailsComponent implements OnInit {
 
   saveISSPP1OrgProfileS2Form() {
     this.iSSPP1OrgProfileS2Comp.save();
+  }
+
+  /// C. THE DEPARTMENT/AGENCY AND ITS ENVIRONMENT (P1S3)
+  iSSPP1OrgProfileS3Info: ISSPP1OrgProfileS3Info = {};
+  @ViewChild(P1OrgProfileS3FormComponent)
+  iSSPP1OrgProfileS3Comp: P1OrgProfileS3FormComponent;
+
+  get iSSPP1OrgProfileS3CompForm() {
+    return this.iSSPP1OrgProfileS3Comp?.form;
+  }
+
+  resetISSPP1OrgProfileS3Form() {
+    this.iSSPP1OrgProfileS3CompForm.patchValue(this.iSSPP1OrgProfileS3Info);
+    this.iSSPP1OrgProfileS3CompForm.markAsPristine();
+  }
+
+  saveISSPP1OrgProfileS3Form() {
+    this.iSSPP1OrgProfileS3Comp.save();
   }
 }
