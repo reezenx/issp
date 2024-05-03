@@ -114,6 +114,10 @@
                         </mat-hint>
                         }
                     </mat-form-field>
+
+                    <issp-item-picker-control placeholder="Search & Select Department" formControlName="departmentId"
+                        fieldName="Department" prefixIcon="building-bank" [required]="true"
+                        [itemsDropdown]="departmentsDropdown"></issp-item-picker-control>
                 </div>
             </div>
         </mat-card-content>
