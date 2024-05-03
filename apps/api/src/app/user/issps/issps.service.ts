@@ -91,7 +91,9 @@ export class IsspService {
         p1OrgProfileS2: {
           select: {
             id: true,
+            isspId: true,
             b1PlannerName: true,
+            b1AgencyHeadName: true,
             b1PlantillaPosition: true,
             b1OrgUnit: true,
             b1Email: true,

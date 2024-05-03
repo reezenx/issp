@@ -32,9 +32,8 @@ export class IsspItemEditDetailsComponent implements OnInit {
     const routeSub = this.route.parent.data.subscribe(({ item }) => {
       this.item = item;
       this.iSSPP1OrgProfileS1Info = this.item.p1OrgProfileS1 ?? {};
-      this.iSSPP1OrgProfileS2Info = this.item.p1OrgProfileS2 ?? {};
+      this.iSSPP1OrgProfileS2Infos = this.item.p1OrgProfileS2 ?? [];
       this.iSSPP1OrgProfileS1Info.isspId = this.item.id;
-      this.iSSPP1OrgProfileS2Info.isspId = this.item.id;
     });
     this.subs.push(routeSub);
   }
@@ -71,7 +70,7 @@ export class IsspItemEditDetailsComponent implements OnInit {
   }
 
   /// B. DEPARTMENT/AGENCY PROFILE (P1S1)
-  iSSPP1OrgProfileS2Info: ISSPP1OrgProfileS2Info = {};
+  iSSPP1OrgProfileS2Infos: ISSPP1OrgProfileS2Info[] = [];
   @ViewChild(P1OrgProfileS2FormComponent)
   iSSPP1OrgProfileS2Comp: P1OrgProfileS2FormComponent;
 
@@ -80,7 +79,7 @@ export class IsspItemEditDetailsComponent implements OnInit {
   }
 
   resetISSPP1OrgProfileS2Form() {
-    this.iSSPP1OrgProfileS2CompForm.patchValue(this.iSSPP1OrgProfileS2Info);
+    this.iSSPP1OrgProfileS2CompForm.patchValue(this.iSSPP1OrgProfileS2Infos);
     this.iSSPP1OrgProfileS2CompForm.markAsPristine();
   }
 

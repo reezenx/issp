@@ -7,6 +7,7 @@ import {
   Environment,
   getAPIURL,
   ISSPP1OrgProfileS2Details,
+  ISSPP1OrgProfileS2Info,
 } from '@issp/common';
 
 @UntilDestroy({ checkProperties: true })
@@ -42,7 +43,7 @@ export class IsspP1OrgProfileS2Service {
   }
 
   updateOne(
-    issp: ISSPP1OrgProfileS2Details
+    issp: ISSPP1OrgProfileS2Info
   ): Observable<ISSPP1OrgProfileS2Details> {
     const uri = `${this.route}/${issp.id}`;
     return this.http.put<ISSPP1OrgProfileS2Details>(uri, issp).pipe(
@@ -59,7 +60,7 @@ export class IsspP1OrgProfileS2Service {
   }
 
   createOne(
-    issp: ISSPP1OrgProfileS2Details
+    issp: ISSPP1OrgProfileS2Info
   ): Observable<ISSPP1OrgProfileS2Details> {
     const uri = `${this.route}`;
     return this.http.post<ISSPP1OrgProfileS2Details>(uri, issp).pipe(

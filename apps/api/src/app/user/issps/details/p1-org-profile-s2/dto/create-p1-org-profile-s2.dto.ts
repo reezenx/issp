@@ -1,16 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsArray,
-  IsInt,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-} from 'class-validator';
+import { IsInt, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateP1OrgProfileS2Dto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
   isspId: string;
+
+  @IsString()
+  @ApiProperty()
+  b1AgencyHeadName: string;
 
   @IsString()
   @IsNotEmpty()
@@ -32,10 +30,10 @@ export class CreateP1OrgProfileS2Dto {
   @ApiProperty()
   b1Email: string;
 
-  @IsArray()
+  @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  b1Contacts: string[];
+  b1Contacts: string;
 
   @IsNumber()
   @IsNotEmpty()
@@ -43,27 +41,22 @@ export class CreateP1OrgProfileS2Dto {
   b2AnnualICTBudget: number;
 
   @IsString()
-  @IsNotEmpty()
   @ApiProperty()
   b2OtherSources: string;
 
   @IsInt()
-  @IsNotEmpty()
   @ApiProperty()
   b3TotalNoEmp: number;
 
   @IsInt()
-  @IsNotEmpty()
   @ApiProperty()
   b3NoRegionalOffices: number;
 
   @IsInt()
-  @IsNotEmpty()
   @ApiProperty()
   b3NoProvOffices: number;
 
   @IsInt()
-  @IsNotEmpty()
   @ApiProperty()
   b3NoOthersOffices: number;
 }

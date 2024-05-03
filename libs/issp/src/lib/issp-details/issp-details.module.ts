@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TablerIconsModule } from 'angular-tabler-icons';
-import { MaterialModule, PipesModule } from '@issp/common';
+import {
+  MaterialModule,
+  PipesModule,
+  SyncfusionGridModule,
+} from '@issp/common';
 import { ControlsModule, RichtextComponent } from '@issp/components';
 import * as TablerIcons from 'angular-tabler-icons/icons';
 
@@ -20,6 +24,7 @@ import { P1OrgProfileS2FormComponent } from './p1-org-profile-s2-form/p1-org-pro
     ReactiveFormsModule,
     ControlsModule,
     RichtextComponent,
+    SyncfusionGridModule,
   ],
   exports: [P1OrgProfileS1FormComponent, P1OrgProfileS2FormComponent],
 })

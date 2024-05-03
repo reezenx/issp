@@ -19,6 +19,9 @@ export class P1OrgProfileS1FormComponent {
   form: FormGroup;
   subs: Subscription[] = [];
 
+  @Input()
+  isspId: string = null;
+
   _item: ISSPP1OrgProfileS1Info;
   @Input()
   get item() {
@@ -55,6 +58,7 @@ export class P1OrgProfileS1FormComponent {
 
   save() {
     if (this.form.valid && this.form.dirty) {
+      this.form.controls.isspId.patchValue(this.isspId);
       const obs = this.form.value.id
         ? this.isspP1OrgProfileS1Service.updateOne(this.form.value)
         : this.isspP1OrgProfileS1Service.createOne(this.form.value);

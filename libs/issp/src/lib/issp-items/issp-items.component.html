@@ -67,6 +67,16 @@
         <e-column headerText="Version" field="version"></e-column>
         <e-column headerText="Author" field="authorName"></e-column>
         <e-column headerText="Agency" field="agencyName"> </e-column>
+        <e-column headerText="Scope" field="scope" [visible]="false">
+          <ng-template #template let-data>
+            {{ data.scope | sentenceCase }}
+          </ng-template></e-column
+        >
+        <e-column headerText="Sub Scope" field="subScope" [visible]="false">
+          <ng-template #template let-data>
+            {{ data.subScope | sentenceCase }}
+          </ng-template></e-column
+        >
         <e-column headerText="Created By" field="createdBy" [visible]="false">
         </e-column>
         <e-column headerText="Created At" field="createdAt" [visible]="false">

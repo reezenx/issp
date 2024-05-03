@@ -80,6 +80,7 @@ export async function createISSPP1OrgProfileS2(prisma: PrismaClient) {
       key,
       {
         id,
+        b1AgencyHeadName,
         b1PlannerName,
         b1PlantillaPosition,
         b1OrgUnit,
@@ -97,6 +98,7 @@ export async function createISSPP1OrgProfileS2(prisma: PrismaClient) {
       const tags = ['new'];
       const item = {
         id,
+        b1AgencyHeadName,
         b1PlannerName,
         b1PlantillaPosition,
         b1OrgUnit,

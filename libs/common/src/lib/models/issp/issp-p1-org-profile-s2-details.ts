@@ -43,7 +43,8 @@ export class ISSPP1OrgProfileS2Details
   b1PlantillaPosition: string;
   b1OrgUnit: string;
   b1Email: string;
-  b1Contacts: string[];
+  b1AgencyHeadName: string;
+  b1Contacts: string;
   b2AnnualICTBudget: number;
   b2OtherSources: string;
   b3TotalNoEmp: number;
@@ -71,6 +72,7 @@ export type ISSPP1OrgProfileS2Info = Partial<
     ISSPP1OrgProfileS2Details,
     | 'id'
     | 'isspId'
+    | 'b1AgencyHeadName'
     | 'b1PlannerName'
     | 'b1PlantillaPosition'
     | 'b1OrgUnit'
